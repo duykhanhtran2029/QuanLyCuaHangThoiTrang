@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Manager/Content/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" id="menu-action"><i class="fa fa-bars"></i><span>Menu</span></a></li>
+        </ul>
+        <ul>
+            <li><a href="#"><i class="fa fa-desktop"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+            <li><a href="#"><i class="fa fa-server"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+            <li><a href="#"><i class="fa fa-envelope-o"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+            <li><a href="#"><i class="fas fa-warehouse"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+        </ul>
+    </div>
+    <!-- Content -->
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                Simple Admin
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    </div>
+    <!-- partial -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Areas/Manager/Scripts/main.js"></script>
+</body>
+</html>
