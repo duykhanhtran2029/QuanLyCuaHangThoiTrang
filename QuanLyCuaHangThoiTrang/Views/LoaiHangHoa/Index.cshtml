@@ -1,0 +1,45 @@
+﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.LoaiHangHoa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenLoaiHangHoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenLoaiHangHoa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaLoaiHangHoa }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaLoaiHangHoa }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaLoaiHangHoa })
+        </td>
+    </tr>
+}
+
+</table>

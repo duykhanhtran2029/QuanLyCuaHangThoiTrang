@@ -1,0 +1,63 @@
+﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.PhieuXuatKho>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayXuatKho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LyDoXuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayChinhSua)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiDung.TenNguoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayXuatKho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LyDoXuat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TongTien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayChinhSua)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SoPhieuXuatKho }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SoPhieuXuatKho }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SoPhieuXuatKho })
+        </td>
+    </tr>
+}
+
+</table>

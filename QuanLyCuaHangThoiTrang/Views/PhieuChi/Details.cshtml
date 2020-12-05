@@ -1,0 +1,74 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.PhieuChi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhieuChi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhieuNhapKho.Ghichu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhieuNhapKho.Ghichu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TongTienChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTienChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayChinhSua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayChinhSua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SoPhieuChi }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
