@@ -8,114 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    public class BaoCaoTonKhoController : Controller
+    public class ChucVuController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: BaoCaoTonKho
+        // GET: ChucVu
         public ActionResult Index()
         {
-            var baoCaoTonKhoes = db.BaoCaoTonKhoes.Include(b => b.NguoiDung);
-            return View(baoCaoTonKhoes.ToList());
+            return View(db.ChucVus.ToList());
         }
 
-        // GET: BaoCaoTonKho/Details/5
+        // GET: ChucVu/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BaoCaoTonKho baoCaoTonKho = db.BaoCaoTonKhoes.Find(id);
-            if (baoCaoTonKho == null)
+            ChucVu chucVu = db.ChucVus.Find(id);
+            if (chucVu == null)
             {
                 return HttpNotFound();
             }
-            return View(baoCaoTonKho);
+            return View(chucVu);
         }
 
-        // GET: BaoCaoTonKho/Create
+        // GET: ChucVu/Create
         public ActionResult Create()
         {
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             return View();
         }
 
-        // POST: BaoCaoTonKho/Create
+        // POST: ChucVu/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaBaoCaoTonKho,Thang,Nam,MaNguoiDung,NgayLap,TongSoHangHoa,IsDeleted")] BaoCaoTonKho baoCaoTonKho)
+        public ActionResult Create([Bind(Include = "MaChucVu,TenChucVu,IsDeleted")] ChucVu chucVu)
         {
             if (ModelState.IsValid)
             {
-                db.BaoCaoTonKhoes.Add(baoCaoTonKho);
+                db.ChucVus.Add(chucVu);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoTonKho.MaNguoiDung);
-            return View(baoCaoTonKho);
+            return View(chucVu);
         }
 
-        // GET: BaoCaoTonKho/Edit/5
+        // GET: ChucVu/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BaoCaoTonKho baoCaoTonKho = db.BaoCaoTonKhoes.Find(id);
-            if (baoCaoTonKho == null)
+            ChucVu chucVu = db.ChucVus.Find(id);
+            if (chucVu == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoTonKho.MaNguoiDung);
-            return View(baoCaoTonKho);
+            return View(chucVu);
         }
 
-        // POST: BaoCaoTonKho/Edit/5
+        // POST: ChucVu/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaBaoCaoTonKho,Thang,Nam,MaNguoiDung,NgayLap,TongSoHangHoa,IsDeleted")] BaoCaoTonKho baoCaoTonKho)
+        public ActionResult Edit([Bind(Include = "MaChucVu,TenChucVu,IsDeleted")] ChucVu chucVu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(baoCaoTonKho).State = EntityState.Modified;
+                db.Entry(chucVu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoTonKho.MaNguoiDung);
-            return View(baoCaoTonKho);
+            return View(chucVu);
         }
 
-        // GET: BaoCaoTonKho/Delete/5
+        // GET: ChucVu/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BaoCaoTonKho baoCaoTonKho = db.BaoCaoTonKhoes.Find(id);
-            if (baoCaoTonKho == null)
+            ChucVu chucVu = db.ChucVus.Find(id);
+            if (chucVu == null)
             {
                 return HttpNotFound();
             }
-            return View(baoCaoTonKho);
+            return View(chucVu);
         }
 
-        // POST: BaoCaoTonKho/Delete/5
+        // POST: ChucVu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BaoCaoTonKho baoCaoTonKho = db.BaoCaoTonKhoes.Find(id);
-            db.BaoCaoTonKhoes.Remove(baoCaoTonKho);
+            ChucVu chucVu = db.ChucVus.Find(id);
+            db.ChucVus.Remove(chucVu);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -8,109 +8,114 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    public class NhaCungCapController : Controller
+    public class PhieuXuatKhoController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: NhaCungCap
+        // GET: PhieuXuatKho
         public ActionResult Index()
         {
-            return View(db.NhaCungCaps.ToList());
+            var phieuXuatKhoes = db.PhieuXuatKhoes.Include(p => p.NguoiDung);
+            return View(phieuXuatKhoes.ToList());
         }
 
-        // GET: NhaCungCap/Details/5
+        // GET: PhieuXuatKho/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            if (nhaCungCap == null)
+            PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
+            if (phieuXuatKho == null)
             {
                 return HttpNotFound();
             }
-            return View(nhaCungCap);
+            return View(phieuXuatKho);
         }
 
-        // GET: NhaCungCap/Create
+        // GET: PhieuXuatKho/Create
         public ActionResult Create()
         {
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             return View();
         }
 
-        // POST: NhaCungCap/Create
+        // POST: PhieuXuatKho/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNhaCungCap,TenNhaCungCap,DiaChi,SoDienThoai,Email,IsDeleted")] NhaCungCap nhaCungCap)
+        public ActionResult Create([Bind(Include = "SoPhieuXuatKho,NgayXuatKho,MaNguoiDung,LyDoXuat,TongTien,IsDeleted,NgayChinhSua")] PhieuXuatKho phieuXuatKho)
         {
             if (ModelState.IsValid)
             {
-                db.NhaCungCaps.Add(nhaCungCap);
+                db.PhieuXuatKhoes.Add(phieuXuatKho);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(nhaCungCap);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            return View(phieuXuatKho);
         }
 
-        // GET: NhaCungCap/Edit/5
+        // GET: PhieuXuatKho/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            if (nhaCungCap == null)
+            PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
+            if (phieuXuatKho == null)
             {
                 return HttpNotFound();
             }
-            return View(nhaCungCap);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            return View(phieuXuatKho);
         }
 
-        // POST: NhaCungCap/Edit/5
+        // POST: PhieuXuatKho/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNhaCungCap,TenNhaCungCap,DiaChi,SoDienThoai,Email,IsDeleted")] NhaCungCap nhaCungCap)
+        public ActionResult Edit([Bind(Include = "SoPhieuXuatKho,NgayXuatKho,MaNguoiDung,LyDoXuat,TongTien,IsDeleted,NgayChinhSua")] PhieuXuatKho phieuXuatKho)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nhaCungCap).State = EntityState.Modified;
+                db.Entry(phieuXuatKho).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nhaCungCap);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            return View(phieuXuatKho);
         }
 
-        // GET: NhaCungCap/Delete/5
+        // GET: PhieuXuatKho/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            if (nhaCungCap == null)
+            PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
+            if (phieuXuatKho == null)
             {
                 return HttpNotFound();
             }
-            return View(nhaCungCap);
+            return View(phieuXuatKho);
         }
 
-        // POST: NhaCungCap/Delete/5
+        // POST: PhieuXuatKho/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            db.NhaCungCaps.Remove(nhaCungCap);
+            PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
+            db.PhieuXuatKhoes.Remove(phieuXuatKho);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

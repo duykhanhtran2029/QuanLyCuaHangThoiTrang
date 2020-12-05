@@ -14,14 +14,14 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: Manager/BaoCaoBanHang
+        // GET: BaoCaoBanHang
         public ActionResult Index()
         {
             var baoCaoBanHangs = db.BaoCaoBanHangs.Include(b => b.NguoiDung);
             return View(baoCaoBanHangs.ToList());
         }
 
-        // GET: Manager/BaoCaoBanHang/Details/5
+        // GET: BaoCaoBanHang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,19 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(baoCaoBanHang);
         }
 
-        // GET: Manager/BaoCaoBanHang/Create
+        // GET: BaoCaoBanHang/Create
         public ActionResult Create()
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             return View();
         }
 
-        // POST: Manager/BaoCaoBanHang/Create
+        // POST: BaoCaoBanHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaBaoCaoBanHang,NgayBatDau,NgayKetThuc,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,TrangThai")] BaoCaoBanHang baoCaoBanHang)
+        public ActionResult Create([Bind(Include = "MaBaoCaoBanHang,NgayBatDau,NgayKetThuc,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,IsDeleted")] BaoCaoBanHang baoCaoBanHang)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(baoCaoBanHang);
         }
 
-        // GET: Manager/BaoCaoBanHang/Edit/5
+        // GET: BaoCaoBanHang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,12 +77,12 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(baoCaoBanHang);
         }
 
-        // POST: Manager/BaoCaoBanHang/Edit/5
+        // POST: BaoCaoBanHang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaBaoCaoBanHang,NgayBatDau,NgayKetThuc,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,TrangThai")] BaoCaoBanHang baoCaoBanHang)
+        public ActionResult Edit([Bind(Include = "MaBaoCaoBanHang,NgayBatDau,NgayKetThuc,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,IsDeleted")] BaoCaoBanHang baoCaoBanHang)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(baoCaoBanHang);
         }
 
-        // GET: Manager/BaoCaoBanHang/Delete/5
+        // GET: BaoCaoBanHang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(baoCaoBanHang);
         }
 
-        // POST: Manager/BaoCaoBanHang/Delete/5
+        // POST: BaoCaoBanHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -8,109 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    public class ChucVuController : Controller
+    public class ThamSoController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: ChucVu
+        // GET: ThamSo
         public ActionResult Index()
         {
-            return View(db.ChucVus.ToList());
+            return View(db.ThamSoes.ToList());
         }
 
-        // GET: ChucVu/Details/5
+        // GET: ThamSo/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChucVu chucVu = db.ChucVus.Find(id);
-            if (chucVu == null)
+            ThamSo thamSo = db.ThamSoes.Find(id);
+            if (thamSo == null)
             {
                 return HttpNotFound();
             }
-            return View(chucVu);
+            return View(thamSo);
         }
 
-        // GET: ChucVu/Create
+        // GET: ThamSo/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ChucVu/Create
+        // POST: ThamSo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaChucVu,TenChucVu,IsDeleted")] ChucVu chucVu)
+        public ActionResult Create([Bind(Include = "MaThamSo,TenThamSo,GiaTri,NgayApDung")] ThamSo thamSo)
         {
             if (ModelState.IsValid)
             {
-                db.ChucVus.Add(chucVu);
+                db.ThamSoes.Add(thamSo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(chucVu);
+            return View(thamSo);
         }
 
-        // GET: ChucVu/Edit/5
+        // GET: ThamSo/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChucVu chucVu = db.ChucVus.Find(id);
-            if (chucVu == null)
+            ThamSo thamSo = db.ThamSoes.Find(id);
+            if (thamSo == null)
             {
                 return HttpNotFound();
             }
-            return View(chucVu);
+            return View(thamSo);
         }
 
-        // POST: ChucVu/Edit/5
+        // POST: ThamSo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaChucVu,TenChucVu,IsDeleted")] ChucVu chucVu)
+        public ActionResult Edit([Bind(Include = "MaThamSo,TenThamSo,GiaTri,NgayApDung")] ThamSo thamSo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(chucVu).State = EntityState.Modified;
+                db.Entry(thamSo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(chucVu);
+            return View(thamSo);
         }
 
-        // GET: ChucVu/Delete/5
+        // GET: ThamSo/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChucVu chucVu = db.ChucVus.Find(id);
-            if (chucVu == null)
+            ThamSo thamSo = db.ThamSoes.Find(id);
+            if (thamSo == null)
             {
                 return HttpNotFound();
             }
-            return View(chucVu);
+            return View(thamSo);
         }
 
-        // POST: ChucVu/Delete/5
+        // POST: ThamSo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ChucVu chucVu = db.ChucVus.Find(id);
-            db.ChucVus.Remove(chucVu);
+            ThamSo thamSo = db.ThamSoes.Find(id);
+            db.ThamSoes.Remove(thamSo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

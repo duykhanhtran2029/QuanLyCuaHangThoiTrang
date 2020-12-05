@@ -8,8 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
-{
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
     public class ChiTietBaoCaoTonKhoController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();

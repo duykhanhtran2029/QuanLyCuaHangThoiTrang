@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.TongDoanhThu)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
+            @Html.DisplayNameFor(model => model.IsDeleted)
         </th>
         <th></th>
     </tr>
@@ -62,7 +62,7 @@
             @Html.DisplayFor(modelItem => item.TongDoanhThu)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
+            @Html.DisplayFor(modelItem => item.IsDeleted)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MaBaoCaoBanHang }) |

@@ -8,109 +8,114 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    public class ThamSoController : Controller
+    public class PhieuDatHangController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: ThamSo
+        // GET: PhieuDatHang
         public ActionResult Index()
         {
-            return View(db.ThamSoes.ToList());
+            var phieuDatHangs = db.PhieuDatHangs.Include(p => p.NguoiDung);
+            return View(phieuDatHangs.ToList());
         }
 
-        // GET: ThamSo/Details/5
+        // GET: PhieuDatHang/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThamSo thamSo = db.ThamSoes.Find(id);
-            if (thamSo == null)
+            PhieuDatHang phieuDatHang = db.PhieuDatHangs.Find(id);
+            if (phieuDatHang == null)
             {
                 return HttpNotFound();
             }
-            return View(thamSo);
+            return View(phieuDatHang);
         }
 
-        // GET: ThamSo/Create
+        // GET: PhieuDatHang/Create
         public ActionResult Create()
         {
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             return View();
         }
 
-        // POST: ThamSo/Create
+        // POST: PhieuDatHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaThamSo,TenThamSo,GiaTri,NgayApDung")] ThamSo thamSo)
+        public ActionResult Create([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,Ghichu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
         {
             if (ModelState.IsValid)
             {
-                db.ThamSoes.Add(thamSo);
+                db.PhieuDatHangs.Add(phieuDatHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(thamSo);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            return View(phieuDatHang);
         }
 
-        // GET: ThamSo/Edit/5
+        // GET: PhieuDatHang/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThamSo thamSo = db.ThamSoes.Find(id);
-            if (thamSo == null)
+            PhieuDatHang phieuDatHang = db.PhieuDatHangs.Find(id);
+            if (phieuDatHang == null)
             {
                 return HttpNotFound();
             }
-            return View(thamSo);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            return View(phieuDatHang);
         }
 
-        // POST: ThamSo/Edit/5
+        // POST: PhieuDatHang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaThamSo,TenThamSo,GiaTri,NgayApDung")] ThamSo thamSo)
+        public ActionResult Edit([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,Ghichu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(thamSo).State = EntityState.Modified;
+                db.Entry(phieuDatHang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(thamSo);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            return View(phieuDatHang);
         }
 
-        // GET: ThamSo/Delete/5
+        // GET: PhieuDatHang/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ThamSo thamSo = db.ThamSoes.Find(id);
-            if (thamSo == null)
+            PhieuDatHang phieuDatHang = db.PhieuDatHangs.Find(id);
+            if (phieuDatHang == null)
             {
                 return HttpNotFound();
             }
-            return View(thamSo);
+            return View(phieuDatHang);
         }
 
-        // POST: ThamSo/Delete/5
+        // POST: PhieuDatHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ThamSo thamSo = db.ThamSoes.Find(id);
-            db.ThamSoes.Remove(thamSo);
+            PhieuDatHang phieuDatHang = db.PhieuDatHangs.Find(id);
+            db.PhieuDatHangs.Remove(phieuDatHang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

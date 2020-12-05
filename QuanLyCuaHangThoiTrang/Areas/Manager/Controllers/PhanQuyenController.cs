@@ -8,114 +8,118 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyCuaHangThoiTrang.Model;
 
-namespace QuanLyCuaHangThoiTrang.Controllers
+namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    public class NguoiDungController : Controller
+    public class PhanQuyenController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
 
-        // GET: NguoiDung
+        // GET: PhanQuyen
         public ActionResult Index()
         {
-            var nguoiDungs = db.NguoiDungs.Include(n => n.ChucVu);
-            return View(nguoiDungs.ToList());
+            var phanQuyens = db.PhanQuyens.Include(p => p.ChucVu).Include(p => p.Quyen);
+            return View(phanQuyens.ToList());
         }
 
-        // GET: NguoiDung/Details/5
+        // GET: PhanQuyen/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
+            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            if (phanQuyen == null)
             {
                 return HttpNotFound();
             }
-            return View(nguoiDung);
+            return View(phanQuyen);
         }
 
-        // GET: NguoiDung/Create
+        // GET: PhanQuyen/Create
         public ActionResult Create()
         {
             ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
+            ViewBag.MaQuyen = new SelectList(db.Quyens, "MaQuyen", "TenQuyen");
             return View();
         }
 
-        // POST: NguoiDung/Create
+        // POST: PhanQuyen/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,IsDeleted,MaChucVu,Avatar")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "MaChucVu,MaQuyen,ChuThich")] PhanQuyen phanQuyen)
         {
             if (ModelState.IsValid)
             {
-                db.NguoiDungs.Add(nguoiDung);
+                db.PhanQuyens.Add(phanQuyen);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
-            return View(nguoiDung);
+            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", phanQuyen.MaChucVu);
+            ViewBag.MaQuyen = new SelectList(db.Quyens, "MaQuyen", "TenQuyen", phanQuyen.MaQuyen);
+            return View(phanQuyen);
         }
 
-        // GET: NguoiDung/Edit/5
+        // GET: PhanQuyen/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
+            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            if (phanQuyen == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
-            return View(nguoiDung);
+            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", phanQuyen.MaChucVu);
+            ViewBag.MaQuyen = new SelectList(db.Quyens, "MaQuyen", "TenQuyen", phanQuyen.MaQuyen);
+            return View(phanQuyen);
         }
 
-        // POST: NguoiDung/Edit/5
+        // POST: PhanQuyen/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,IsDeleted,MaChucVu,Avatar")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "MaChucVu,MaQuyen,ChuThich")] PhanQuyen phanQuyen)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nguoiDung).State = EntityState.Modified;
+                db.Entry(phanQuyen).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
-            return View(nguoiDung);
+            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", phanQuyen.MaChucVu);
+            ViewBag.MaQuyen = new SelectList(db.Quyens, "MaQuyen", "TenQuyen", phanQuyen.MaQuyen);
+            return View(phanQuyen);
         }
 
-        // GET: NguoiDung/Delete/5
+        // GET: PhanQuyen/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
+            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            if (phanQuyen == null)
             {
                 return HttpNotFound();
             }
-            return View(nguoiDung);
+            return View(phanQuyen);
         }
 
-        // POST: NguoiDung/Delete/5
+        // POST: PhanQuyen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            db.NguoiDungs.Remove(nguoiDung);
+            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            db.PhanQuyens.Remove(phanQuyen);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
