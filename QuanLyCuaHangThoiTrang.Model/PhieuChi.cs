@@ -26,7 +26,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public DateTime? NgayChinhSua { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
 

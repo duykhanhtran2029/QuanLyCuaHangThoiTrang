@@ -28,7 +28,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public int TongSoHangHoa { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
 

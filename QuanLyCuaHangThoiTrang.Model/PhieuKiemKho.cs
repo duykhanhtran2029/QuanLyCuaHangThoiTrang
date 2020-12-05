@@ -25,7 +25,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public string GhiChu { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public DateTime? NgayChinhSua { get; set; }
 

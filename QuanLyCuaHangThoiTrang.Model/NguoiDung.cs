@@ -15,7 +15,6 @@ namespace QuanLyCuaHangThoiTrang.Model
             BaoCaoBanHangs = new HashSet<BaoCaoBanHang>();
             BaoCaoTonKhoes = new HashSet<BaoCaoTonKho>();
             PhieuBanHangs = new HashSet<PhieuBanHang>();
-            PhieuBaoHanhs = new HashSet<PhieuBaoHanh>();
             PhieuChis = new HashSet<PhieuChi>();
             PhieuDatHangs = new HashSet<PhieuDatHang>();
             PhieuKiemKhoes = new HashSet<PhieuKiemKho>();
@@ -51,11 +50,10 @@ namespace QuanLyCuaHangThoiTrang.Model
         [StringLength(50)]
         public string PassWord { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public int MaChucVu { get; set; }
 
-        [Required]
         public string Avatar { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -68,9 +66,6 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuBanHang> PhieuBanHangs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuChi> PhieuChis { get; set; }

@@ -11,6 +11,7 @@ namespace QuanLyCuaHangThoiTrang.Model
     {
         [Key]
         [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SoPhieuBaoHanh { get; set; }
 
         [Key]
@@ -21,7 +22,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         public int SoLuong { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Gia { get; set; }
+        public decimal DonGia { get; set; }
 
         [Column(TypeName = "money")]
         public decimal ThanhTien { get; set; }

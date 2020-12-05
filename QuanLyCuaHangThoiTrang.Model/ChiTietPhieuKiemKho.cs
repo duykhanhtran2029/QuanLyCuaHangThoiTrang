@@ -23,6 +23,9 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public int SoLuongKiemTra { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string TinhTrangHangHoa { get; set; }
+
         public virtual HangHoa HangHoa { get; set; }
 
         public virtual PhieuKiemKho PhieuKiemKho { get; set; }

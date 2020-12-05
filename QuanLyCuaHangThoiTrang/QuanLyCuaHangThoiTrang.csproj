@@ -139,6 +139,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Manager\Controllers\BaoCaoBanHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -148,8 +149,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Manager\Content\header.css" />
     <Content Include="Areas\Manager\Content\main.css" />
-    <Content Include="Areas\Manager\Scripts\main.js" />
+    <Content Include="Areas\Manager\Content\sidebar.css" />
+    <Content Include="Areas\Manager\Scripts\header.js" />
+    <Content Include="Areas\Manager\Scripts\sidebar.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -229,6 +233,7 @@
     <Content Include="images\top1.jpg" />
     <Content Include="images\top2.jpg" />
     <Content Include="images\up_arrow.png" />
+    <Content Include="images\vintage.png" />
     <Content Include="images\w1.jpg" />
     <Content Include="images\w2.jpg" />
     <Content Include="images\w3.jpg" />
@@ -252,6 +257,11 @@
     <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manager\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\Delete.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -291,6 +301,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuanLyCuaHangThoiTrang.Model\QuanLyCuaHangThoiTrang.Model.csproj">
+      <Project>{8ebc108a-316a-4379-a8ee-303654e5239a}</Project>
+      <Name>QuanLyCuaHangThoiTrang.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

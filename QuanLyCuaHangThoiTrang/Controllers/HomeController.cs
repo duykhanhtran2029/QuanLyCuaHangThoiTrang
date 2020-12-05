@@ -10,6 +10,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 

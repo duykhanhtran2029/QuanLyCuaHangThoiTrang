@@ -75,7 +75,7 @@ namespace QuanLyCuaHangThoiTrang.Model
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<ChiTietPhieuBaoHanh>()
-                .Property(e => e.Gia)
+                .Property(e => e.DonGia)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<ChiTietPhieuBaoHanh>()
@@ -115,6 +115,10 @@ namespace QuanLyCuaHangThoiTrang.Model
                 .HasMany(e => e.PhanQuyens)
                 .WithRequired(e => e.ChucVu)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HangHoa>()
+                .Property(e => e.GiaNhap)
+                .HasPrecision(19, 4);
 
             modelBuilder.Entity<HangHoa>()
                 .Property(e => e.GiaBan)
@@ -187,22 +191,7 @@ namespace QuanLyCuaHangThoiTrang.Model
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.PhieuBanHangs)
-                .WithRequired(e => e.NguoiDung)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.PhieuBaoHanhs)
-                .WithRequired(e => e.NguoiDung)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NguoiDung>()
                 .HasMany(e => e.PhieuChis)
-                .WithRequired(e => e.NguoiDung)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.PhieuDatHangs)
                 .WithRequired(e => e.NguoiDung)
                 .WillCascadeOnDelete(false);
 
@@ -240,6 +229,11 @@ namespace QuanLyCuaHangThoiTrang.Model
 
             modelBuilder.Entity<PhieuBanHang>()
                 .HasMany(e => e.ChiTietPhieuBanHangs)
+                .WithRequired(e => e.PhieuBanHang)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PhieuBanHang>()
+                .HasMany(e => e.PhieuBaoHanhs)
                 .WithRequired(e => e.PhieuBanHang)
                 .WillCascadeOnDelete(false);
 

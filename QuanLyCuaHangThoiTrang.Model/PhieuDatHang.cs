@@ -21,7 +21,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Column(TypeName = "date")]
         public DateTime NgayDat { get; set; }
 
-        public int MaNguoiDung { get; set; }
+        public int? MaNguoiDung { get; set; }
 
         [Required]
         public string TenKhachHang { get; set; }
@@ -51,7 +51,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public bool DaThanhToan { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public DateTime? NgayChinhSua { get; set; }
 

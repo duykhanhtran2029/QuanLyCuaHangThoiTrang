@@ -263,3 +263,8 @@ E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\obj\Debug\
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.pdb
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.dll.config
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.mdf
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang_log.ldf
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.dll
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.pdb
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.dll.config

@@ -4,35 +4,55 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Areas/Manager/Content/main.css" rel="stylesheet" />
+    <link href="~/Areas/Manager/Content/sidebar.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="~/Areas/Manager/Content/header.css" rel="stylesheet" />
+    <link href="~/Areas/Manager/Content/main.css" rel="stylesheet" />
 </head>
 <body>
     <!-- partial:index.partial.html -->
     <div class="sidebar">
-        <ul>
-            <li><a href="#" id="menu-action"><i class="fa fa-bars"></i><span>Menu</span></a></li>
-        </ul>
-        <ul>
-            <li><a href="#"><i class="fa fa-desktop"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-            <li><a href="#"><i class="fa fa-server"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-            <li><a href="#"><i class="fa fa-calendar"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-            <li><a href="#"><i class="fa fa-envelope-o"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-            <li><a href="#"><i class="fas fa-warehouse"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-        </ul>
+        <div id="menu-action">
+            <a href="#"><i class="fa fa-bars" style="color: black;"></i><img src="~/images/vintage.png" width="150" height="50" style="margin: 0px;" /></a>
+        </div>
+        <div class="sidebar-content">
+            <ul>
+                <li><a href="~/Manager/Home/Index"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
+                <li><a href="~/Manager/HangHoa/Index"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
+                <li><a href="~/Manager/BanHang/Index"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
+                <li><a href="~/Manager/DatHang/Index"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
+                <li><a href="~/Manager/BaoHanh/Index"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
+                <li><a href="~/Manager/DoanhThu/Index"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
+                <li><a href="~/Manager/NhapKho/Index"><i class="fas fa-plus-square"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
+                <li><a href="~/Manager/XuatKho/Index"><i class="fas fa-minus-square"></i><span>Quản Lý Phiếu Xuất Kho</span></a></li>
+                <li><a href="~/Manager/KiemKho/Index"><i class="fas fa-clipboard-check"></i><span>Quản Lý Phiếu Kiểm Kho</span></a></li>
+                <li><a href="~/Manager/TonKho/Index"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
+                <li><a href="~/Manager/Home/Index"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#"><i class="fa fa-user"></i></a>
+            <a href="#"><i class="fa fa-cog"></i></a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
     </div>
     <!-- Content -->
     <div class="main">
         <div class="header">
-            <div class="logo">
-                Simple Admin
+            <div class="page-title-heading">
+                Analytics
+                <div class="page-title-subheading">
+                    This is an example dashboard created using build-in elements and components.
+                </div>
             </div>
         </div>
-        @RenderBody()
-    </div>
+        <div>
+            @RenderBody()
+        </div>
     </div>
     <!-- partial -->
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Areas/Manager/Scripts/main.js"></script>
+    <script src="~/Areas/Manager/Scripts/sidebar.js"></script>
+    <script src="~/Areas/Manager/Scripts/header.js"></script>
 </body>
 </html>

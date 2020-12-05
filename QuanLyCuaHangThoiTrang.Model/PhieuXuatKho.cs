@@ -19,7 +19,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         public int SoPhieuXuatKho { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime NgayXuat { get; set; }
+        public DateTime NgayXuatKho { get; set; }
 
         public int MaNguoiDung { get; set; }
 
@@ -29,7 +29,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Column(TypeName = "money")]
         public decimal TongTien { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public DateTime? NgayChinhSua { get; set; }
 

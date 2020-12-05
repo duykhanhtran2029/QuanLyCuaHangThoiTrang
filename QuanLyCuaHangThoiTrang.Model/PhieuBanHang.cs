@@ -13,6 +13,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         public PhieuBanHang()
         {
             ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
+            PhieuBaoHanhs = new HashSet<PhieuBaoHanh>();
         }
 
         [Key]
@@ -21,7 +22,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Column(TypeName = "date")]
         public DateTime NgayBan { get; set; }
 
-        public int MaNguoiDung { get; set; }
+        public int? MaNguoiDung { get; set; }
 
         [Required]
         public string TenKhachHang { get; set; }
@@ -37,11 +38,14 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public DateTime? NgayChinhSua { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
     }
 }

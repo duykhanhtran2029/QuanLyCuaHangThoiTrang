@@ -35,7 +35,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public int MaNguoiDung { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
 

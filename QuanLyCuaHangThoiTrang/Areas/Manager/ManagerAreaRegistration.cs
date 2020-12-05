@@ -17,7 +17,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager
             context.MapRoute(
                 "Manager_default",
                 "Manager/{controller}/{action}/{id}",
-                new { action = "Index", controller ="Home",  id = UrlParameter.Optional },
+                new { action = "Index",  id = UrlParameter.Optional },
                 namespaces: new string[] { "QuanLyCuaHangThoiTrang.Areas.Manager.Controllers" }
             );
         }

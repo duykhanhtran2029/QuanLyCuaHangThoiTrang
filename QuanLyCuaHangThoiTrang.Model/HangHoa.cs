@@ -28,11 +28,14 @@ namespace QuanLyCuaHangThoiTrang.Model
         public string TenHangHoa { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal GiaBan { get; set; }
+        public decimal GiaNhap { get; set; }
 
         public double GiamGia { get; set; }
 
-        public int SoLuongTon { get; set; }
+        [Column(TypeName = "money")]
+        public decimal? GiaBan { get; set; }
+
+        public int SoLuong { get; set; }
 
         [StringLength(1)]
         public string Size { get; set; }
@@ -44,13 +47,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Required]
         public string MoTa { get; set; }
 
-        [Column(TypeName = "ntext")]
-        [Required]
-        public string ThongSoKyThuat { get; set; }
-
-        [Required]
-        public string XuatXu { get; set; }
-
         public int ThoiGianBaoHanh { get; set; }
 
         [Required]
@@ -60,7 +56,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public int MaLoaiHangHoa { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietBaoCaoTonKho> ChiTietBaoCaoTonKhoes { get; set; }

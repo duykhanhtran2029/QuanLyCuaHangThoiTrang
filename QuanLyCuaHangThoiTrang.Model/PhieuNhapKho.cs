@@ -20,7 +20,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         public int SoPhieuNhapKho { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime NgayNhap { get; set; }
+        public DateTime NgayNhapKho { get; set; }
 
         public int MaNguoiDung { get; set; }
 
@@ -31,9 +31,9 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public string Ghichu { get; set; }
 
-        public bool TrangThai { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public DateTime NgayChinhSua { get; set; }
+        public DateTime? NgayChinhSua { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuNhapKho> ChiTietPhieuNhapKhoes { get; set; }

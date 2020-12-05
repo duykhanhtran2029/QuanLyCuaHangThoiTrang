@@ -1,0 +1,262 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+@import url('../../../Content/font-awesome.css');
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f5f5;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lora', sans-serif;
+}
+
+fa {
+    font-size: 16px;
+}
+
+fas {
+    font-size: 16px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.428571429;
+}
+.sidebar {
+    position: fixed;
+    z-index: 10;
+    left: 10px;
+    right: 10px;
+    margin-top:30px;
+    width: 66px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    height: calc(100% - 60px);
+    overflow:hidden;
+    border-radius: 3px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(31,10,6,0.03),0 0.9375rem 1.40625rem rgba(31,10,6,0.03),0 0.25rem 0.53125rem rgba(31,10,6,0.05),0 0.125rem 0.1875rem rgba(31,10,6,0.03);
+}
+    .sidebar:hover, .sidebar.active, .sidebar.hovered {
+        width: 250px;
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+        .sidebar ul li {
+            display: block;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            color: #444;
+            text-align: left;
+        }
+
+            .sidebar ul li a i, .sidebar-footer a i {
+                display: inline-block;
+                width: 46px;
+                height: 60px;
+                line-height: 60px;
+                text-align: center;
+                -webkit-animation-duration: .7s;
+                -moz-animation-duration: .7s;
+                -o-animation-duration: .7s;
+                animation-duration: .7s;
+                -webkit-animation-fill-mode: both;
+                -moz-animation-fill-mode: both;
+                -o-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+
+            .sidebar ul li a span {
+                display: inline-block;
+                height: 60px;
+                line-height: 60px;
+            }
+
+            .sidebar ul li a:hover {
+                background-color: #eee;
+            }
+
+                .sidebar ul li a:hover i, .sidebar-footer a:hover i {
+                    -webkit-animation-name: swing;
+                    -moz-animation-name: swing;
+                    -o-animation-name: swing;
+                    animation-name: swing;
+                }
+.sidebar-content{
+    overflow: hidden;
+    height: calc(92% - 60px);
+    margin: 0px 10px 0px 10px;
+    border-bottom: #dc3545 solid 1px;
+}
+.sidebar-content:hover{
+    overflow: auto;
+}
+    .sidebar-content::-webkit-scrollbar-track {
+        background-color: white;
+        margin-right:10px;
+    }
+
+    .sidebar-content::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+
+    .sidebar-content::-webkit-scrollbar-thumb {
+        border-radius:50px;
+        background-color: #808080;
+    }
+.sidebar-footer{
+    margin: 0px 10px;
+    text-align:center;
+}
+    .sidebar-footer a {
+        float: left !important;
+        height: 50px;
+        width: 33%;
+        min-width: 48px;
+        text-align: center;
+        line-height: 50px;
+        color: #000;
+    }
+#menu-action {
+    margin: 0px 10px 0px 10px;
+    border-bottom: #dc3545 solid 1px;
+}
+    #menu-action a {
+        display: block;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #444;
+        text-align: left;
+    }
+    #menu-action a i {
+        display: inline-block;
+        width: 46px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        -webkit-animation-duration: .7s;
+        -moz-animation-duration: .7s;
+        -o-animation-duration: .7s;
+        animation-duration: .7s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    #menu-action a span {
+        display: inline-block;
+        height: 60px;
+        line-height: 60px;
+        align-self:end;
+    }
+
+    #menu-action a:hover {
+        background-color: #fff;
+    }
+
+        #menu-action a:hover i {
+            -webkit-animation-name: swing;
+            -moz-animation-name: swing;
+            -o-animation-name: swing;
+            animation-name: swing;
+        }
+
+.main {
+    position: relative;
+    display: block;
+    left: 0;
+    padding: 15px;
+    padding-left: 100px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.main.active {
+    padding-left: 275px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+@-webkit-keyframes swing {
+    20% {
+        -webkit-transform: rotate3d(0,0,1,15deg);
+        transform: rotate3d(0,0,1,15deg);
+    }
+
+    40% {
+        -webkit-transform: rotate3d(0,0,1,-10deg);
+        transform: rotate3d(0,0,1,-10deg);
+    }
+
+    60% {
+        -webkit-transform: rotate3d(0,0,1,5deg);
+        transform: rotate3d(0,0,1,5deg);
+    }
+
+    80% {
+        -webkit-transform: rotate3d(0,0,1,-5deg);
+        transform: rotate3d(0,0,1,-5deg);
+    }
+
+    100% {
+        -webkit-transform: rotate3d(0,0,1,0deg);
+        transform: rotate3d(0,0,1,0deg);
+    }
+}
+
+@keyframes swing {
+    20% {
+        -webkit-transform: rotate3d(0,0,1,15deg);
+        -ms-transform: rotate3d(0,0,1,15deg);
+        transform: rotate3d(0,0,1,15deg);
+    }
+
+    40% {
+        -webkit-transform: rotate3d(0,0,1,-10deg);
+        -ms-transform: rotate3d(0,0,1,-10deg);
+        transform: rotate3d(0,0,1,-10deg);
+    }
+
+    60% {
+        -webkit-transform: rotate3d(0,0,1,5deg);
+        -ms-transform: rotate3d(0,0,1,5deg);
+        transform: rotate3d(0,0,1,5deg);
+    }
+
+    80% {
+        -webkit-transform: rotate3d(0,0,1,-5deg);
+        -ms-transform: rotate3d(0,0,1,-5deg);
+        transform: rotate3d(0,0,1,-5deg);
+    }
+
+    100% {
+        -webkit-transform: rotate3d(0,0,1,0deg);
+        -ms-transform: rotate3d(0,0,1,0deg);
+        transform: rotate3d(0,0,1,0deg);
+    }
+}
+
+.swing {
+    -webkit-transform-origin: top center;
+    -ms-transform-origin: top center;
+    transform-origin: top center;
+    -webkit-animation-name: swing;
+    animation-name: swing;
+}
