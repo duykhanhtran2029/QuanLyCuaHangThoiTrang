@@ -1,0 +1,51 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.NhaCungCap>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-middle table-lilac">
+        <thead>
+            <tr>
+                <th class="text-center">Mã nhà cung cấp</th>
+                <th class="text-center">Tên nhà cung cấp</th>
+                <th class="text-center">Số điện thoại</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Địa chỉ</th>
+                <th class="text-center" style="width: 11%;">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+<tr class="border-warning" style="text-align:center">
+    <td>
+        @item.MaNhaCungCap
+    </td>
+    <td>
+        @item.TenNhaCungCap
+    </td>
+    <td>
+        @item.SoDienThoai
+    </td>
+    <td>
+        @item.Email
+    </td>
+    <td>
+        @item.DiaChi
+    </td>
+
+    <td class="text-center">
+        <a href="@Url.Action("Edit", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fa fa-pencil"></i> Sửa</a>
+    </td>
+</tr>
+       }
+        </tbody>
+    </table>
+</div>
+
+<div class="pull-left" style="padding-top:20px">
+    <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
+</div>
+<div class="pull-right">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

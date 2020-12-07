@@ -268,3 +268,7 @@ E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLy
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.pdb
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\QuanLyCuaHangThoiTrang.Model.dll.config
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.dll
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.dll
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.xml
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.xml
