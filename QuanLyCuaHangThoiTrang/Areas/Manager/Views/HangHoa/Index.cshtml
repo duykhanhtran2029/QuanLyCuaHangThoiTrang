@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.HangHoa>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản Lý Hàng Hóa";
 }
 
 <h2>Index</h2>
@@ -103,3 +103,6 @@
 }
 
 </table>
+<p>
+    @Html.ActionLink("Quản Lý Loại Hàng Hóa", "Index", "LoaiHangHoa")
+</p>
