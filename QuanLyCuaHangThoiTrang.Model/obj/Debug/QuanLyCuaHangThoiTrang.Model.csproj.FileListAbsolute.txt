@@ -7,8 +7,8 @@ E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
-E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CoreCompileInputs.cache
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache

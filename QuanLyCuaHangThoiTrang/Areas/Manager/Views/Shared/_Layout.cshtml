@@ -17,17 +17,18 @@
         </div>
         <div class="sidebar-content">
             <ul>
-                <li><a href="~/Manager/Home/Index"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
-                <li><a href="~/Manager/HangHoa/Index"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
-                <li><a href="~/Manager/PhieuBanHang/Index"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
-                <li><a href="~/Manager/PhieuDatHang/Index"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
-                <li><a href="~/Manager/PhieuBaoHanh/Index"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
-                <li><a href="~/Manager/BaoCaoBanHang/Index"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
-                <li><a href="~/Manager/PhieuNhapKho/Index"><i class="fas fa-plus-square"></i><span>Quản Lý Phiếu Nhập Kho</span></a></li>
-                <li><a href="~/Manager/PhieuXuatKho/Index"><i class="fas fa-minus-square"></i><span>Quản Lý Phiếu Xuất Kho</span></a></li>
-                <li><a href="~/Manager/PhieuKiemKho/Index"><i class="fas fa-clipboard-check"></i><span>Quản Lý Phiếu Kiểm Kho</span></a></li>
-                <li><a href="~/Manager/BaoCaoTonKho/Index"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
-                <li><a href="~/Manager/Home/Index"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
+                <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
+                <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
+                <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
+                <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
+                <li><a onclick="Open('PhieuBaoHanh/Index')"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
+                <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
+                <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
+                <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
+                <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
+                <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
+                <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
+                <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
             </ul>
         </div>
         <div class="sidebar-footer">
@@ -46,13 +47,34 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div id="content">
             @RenderBody()
+        </div>
+        <div id="loading" style="display:none;margin-top:15%;vertical-align:middle; text-align:center;">
+            <img src="~/images/giphy.gif" style="width: 100px; height:100px;margin:auto" />
         </div>
     </div>
     <!-- partial -->
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Areas/Manager/Scripts/sidebar.js"></script>
     <script src="~/Areas/Manager/Scripts/header.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!--control Renderbody-->
+    <script>
+        function Open(url) {
+            url = '@Url.Content("~/Manager/")' + url;
+            $('#content').hide();
+            $('#loading').show();
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    $('#content').html($(response).find('#content'));
+                    $('#content').show();
+                    $('#loading').hide();
+                },
+            });
+}
+    </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
         $(this).find('i').removeClass('fa-close');
     }
 });
+
 //// Add hover feedback on menu
 $('#menu-action').hover(function () {
     $('.sidebar').toggleClass('hovered');

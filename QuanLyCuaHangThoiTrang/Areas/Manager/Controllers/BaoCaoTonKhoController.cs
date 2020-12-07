@@ -17,6 +17,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: BaoCaoTonKho
         public ActionResult Index()
         {
+            System.Threading.Thread.Sleep(2000);
             var baoCaoTonKhoes = db.BaoCaoTonKhoes.Include(b => b.NguoiDung);
             return View(baoCaoTonKhoes.ToList());
         }
