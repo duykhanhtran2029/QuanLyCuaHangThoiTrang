@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Controllers
@@ -10,9 +11,15 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     public class HomeController : Controller
     {
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
+        public string HoTen = "";
         public ActionResult Index()
         {
-            
+            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
+            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ").ToList();
+            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách").ToList();
+            ViewBag.FootWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" || hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" 
+            || hh.LoaiHangHoa.TenLoaiHangHoa == "Dép").ToList();
+            //Load hang hoa
             return View();
         }
 
@@ -34,7 +41,22 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         {
             ViewBag.MenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nam").ToList();
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
+            ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult DangNhap(FormCollection form)
+        {
+            string username = form["username"].ToString();
+            string password = form["password"].ToString();
+
+            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username && n.PassWord == password);
+            if(nguoiDung != null)
+            {
+                Session["Account"] = nguoiDung;
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
