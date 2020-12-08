@@ -16,6 +16,9 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         {
             ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
             ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ").ToList();
+            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách").ToList();
+            ViewBag.FootWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" || hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" 
+            || hh.LoaiHangHoa.TenLoaiHangHoa == "Dép").ToList();
             //Load hang hoa
             return View();
         }
