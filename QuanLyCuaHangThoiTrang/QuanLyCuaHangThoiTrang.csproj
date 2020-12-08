@@ -180,7 +180,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manager\Content\app-creative.min.css" />
+    <Content Include="Areas\Manager\Content\Component.css" />
     <Content Include="Areas\Manager\Content\header.css" />
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />

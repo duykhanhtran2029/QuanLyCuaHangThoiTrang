@@ -19,3 +19,35 @@ $('#menu-action').hover(function () {
     $('.sidebar').toggleClass('hovered');
     $('#menu-action').css('background:#fff');
 });
+function Open(url, replaceheader = true) {
+    url = '/Manager/' + url;
+    $('#content').hide();
+    $('#loading').show();
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            $('#content').html($(response).find('#content'));
+            if (replaceheader)
+                $('#header').html($(response).find('#header'));
+            if (document.getElementById("pageTitle")) {
+                var pageTitle = document.getElementById("pageTitle").innerText;
+                document.title = pageTitle;
+            }
+            console.log(document.html);
+            $('#content').show();
+            $('#loading').hide();
+            window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);
+        },
+    });
+}
+window.onpopstate = function (e) {
+    if (e.state) {
+        $('#content').html($(e.state.html).find('#content'));
+        if (e.state.rHeader)
+            $('#header').html($(e.state.html).find('#header'));
+        console.log(e.state.pageTitle);
+        document.title = e.state.pageTitle;
+        //$('#pageTitle').html($(e.state.html).find('#pageTitle'));
+    }
+};
