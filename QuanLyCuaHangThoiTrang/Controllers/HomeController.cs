@@ -12,7 +12,9 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public ActionResult Index()
         {
-            
+            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
+            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ").ToList();
+            //Load hang hoa
             return View();
         }
 
@@ -34,6 +36,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         {
             ViewBag.MenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nam").ToList();
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
+            ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
         }
     }
