@@ -1,22 +1,37 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.NhaCungCap>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ NHÀ CUNG CẤP";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Nhà Cung Cấp.";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<title id="pageTitle">
+    Quản Lý Nhà Cung Cấp
+</title>
 <div class="card">
-    <div class="card-body">
-        <div class="header">
-            <h4 class="page-title-heading" style="font-size: 26px">Danh Sách Nhà Cung Cấp</h4>
-            <p class="page-title-subheading" style="font-size: 18px">
-                Quản lý chức năng <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Nhà Cung Cấp.
-            </p>
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh sách nhà cung cấp</p>
         </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('NhaCungCap/Create', false)">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm nhà cung cấp</span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        @using (Ajax.BeginForm("DanhSachNhaCungCap", "NhaCungCap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId="loading", HttpMethod = "Get" }, new { id = "filter_div" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên nhà cung cấp, số điện thoại hoặc email" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        }
         <div id="list">
             @{Html.RenderAction("DanhSachNhaCungCap", "NhaCungCap");}
         </div>

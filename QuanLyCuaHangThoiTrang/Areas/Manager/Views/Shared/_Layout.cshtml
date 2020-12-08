@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Areas/Manager/Content/sidebar.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <link href="~/Areas/Manager/Content/header.css" rel="stylesheet" />
-    <link href="~/Areas/Manager/Content/main.css" rel="stylesheet" />
-    <link href="~/Areas/Manager/Content/app-creative.min.css" rel="stylesheet" />
+    <link href="~/Areas/Manager/Content/Component.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- partial:index.partial.html -->
     <div class="sidebar">
         <div id="menu-action">
             <a href="#"><i class="fa fa-bars" style="color: black;"></i><img src="~/images/vintage.png" width="150" height="50" style="margin: 0px;" /></a>
@@ -39,16 +36,16 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="main">
-        <div class="header">
+    <div class="main" id="cc">
+        <div class="header" id="header">
             <div class="page-title-heading">
-                Analytics
+                @ViewBag.Title
                 <div class="page-title-subheading">
-                    This is an example dashboard created using build-in elements and components.
+                    @Html.Raw(@ViewBag.SubTitle)
                 </div>
             </div>
         </div>
-        <div id="content">
+        <div id="content" style="margin-top: 25px">
             @RenderBody()
         </div>
         <div id="loading" style="display:none;margin-top:15%;vertical-align:middle; text-align:center;">
@@ -60,22 +57,5 @@
     <script src="~/Areas/Manager/Scripts/sidebar.js"></script>
     <script src="~/Areas/Manager/Scripts/header.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <!--control Renderbody-->
-    <script>
-        function Open(url) {
-            url = '@Url.Content("~/Manager/")' + url;
-            $('#content').hide();
-            $('#loading').show();
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (response) {
-                    $('#content').html($(response).find('#content'));
-                    $('#content').show();
-                    $('#loading').hide();
-                },
-            });
-        }
-    </script>
 </body>
 </html>

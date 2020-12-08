@@ -362,7 +362,7 @@ E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\
 E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csproj.CopyComplete
 E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.dll
 E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.pdb
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\PagedList.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\PagedList.xml
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.xml
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.dll
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.dll
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.xml
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\PagedList.Mvc.xml
