@@ -21,11 +21,11 @@
         <div class="clearfix"></div>
     </div>
     <div>
-        @using (Ajax.BeginForm("DanhSachNhaCungCap", "NhaCungCap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId="loading", HttpMethod = "Get" }, new { id = "filter_div" }))
+        @using (Ajax.BeginForm("DanhSachNhaCungCap", "NhaCungCap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId="loading", HttpMethod = "Get" }))
         {
             <div class="form-group">
                 <div class="input-group">
-                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên nhà cung cấp, số điện thoại hoặc email" })
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên nhà cung cấp, số điện thoại, địa chỉ hoặc email" })
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </span>

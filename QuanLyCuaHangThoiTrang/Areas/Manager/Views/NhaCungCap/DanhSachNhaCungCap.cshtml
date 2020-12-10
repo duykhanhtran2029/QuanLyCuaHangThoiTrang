@@ -18,24 +18,28 @@
         <tbody>
             @foreach (var item in Model)
             {
-<tr class="border-warning" style="text-align:center">
-    <td>
-        @item.TenNhaCungCap
-    </td>
-    <td>
-        @item.SoDienThoai
-    </td>
-    <td>
-        @item.Email
-    </td>
-    <td>
-        @item.DiaChi
-    </td>
-    <td class="text-center">
-        <a href="@Url.Action("Edit", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-        <a href="@Url.Action("Delete", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
-    </td>
-</tr>}
+                if (!item.IsDeleted)
+                {
+                    <tr class="border-warning" style="text-align:center">
+                        <td>
+                            @item.TenNhaCungCap
+                        </td>
+                        <td>
+                            @item.SoDienThoai
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.DiaChi
+                        </td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
     <div class="pull-left" style="padding-top:20px">

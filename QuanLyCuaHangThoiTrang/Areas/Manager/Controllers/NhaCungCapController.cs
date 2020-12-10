@@ -22,7 +22,15 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachNhaCungCap(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<NhaCungCap> ncc = db.NhaCungCaps.ToList();
+            IList<NhaCungCap> ncc = ncc = db.NhaCungCaps.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ncc = db.NhaCungCaps.Where(
+                nhacungcap => nhacungcap.TenNhaCungCap.Contains(searchString) ||
+                nhacungcap.Email.Contains(searchString) ||
+                nhacungcap.DiaChi.Contains(searchString) ||
+                nhacungcap.SoDienThoai.Contains(searchString)).ToList();
+            }
             //Add search later
             return View(ncc.ToPagedList(page, pageSize));
         }
