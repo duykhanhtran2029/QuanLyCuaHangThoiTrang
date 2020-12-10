@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="~/Content/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/Content/Cart.css">
     <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
@@ -232,6 +233,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     <!-- //Modal1 -->
 
+    <!-- //Shopping cart -->
+    <div class="shopping-cart">
+        <div class="cart_title">
+            Shopping Bag
+        </div>
+        <!-- Product #1 -->
+        <div class="cart_item">
+            <div class="cart_buttons">
+                <button class="cart_delete-btn1">
+                    <i class="fas fa-close" ></i>
+                </button>
+            </div>
+            <div class="cart_image">
+                <img src="~/images/s1.jpg" alt="item" />
+            </div>
+
+            <div class="cart_description">
+                <span>Common Projects</span>
+                <span>Bball High</span>
+                <span>White</span>
+            </div>
+
+            <div class="cart_quantity">
+                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <input type="text" name="cart_input" value="1" id="cart_input">
+                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+
+            <div class="cart_total-price">$549</div>
+        </div>
+    </div>
+    <!-- //Shopping cart -->
     @RenderBody()
     <!-- footer -->
     <div class="footer">
@@ -375,25 +412,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
                                     </div>
                                     @*<div class="sign-up">
-                                        <h4>Họ và tên: </h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Địa chỉ: </h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Số điện thoại :</h4>
-                                        <input type="number" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Email :</h4>
-                                        <input type="email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>CMND :</h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>*@
+                                            <h4>Họ và tên: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Địa chỉ: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Số điện thoại :</h4>
+                                            <input type="number" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Email :</h4>
+                                            <input type="email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>CMND :</h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>*@
                                     <div class="sign-up">
                                         <h4>Password :</h4>
                                         <input id="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
@@ -446,20 +483,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //js -->
     <script src="~/Scripts/modernizr.custom.js"></script>
     <!-- Custom-JavaScript-File-Links -->
-    <!-- cart-js -->
-    <script src="~/Scripts/minicart.min.js"></script>
-    <script>
-        // Mini Cart
-        paypal.minicart.render({
-            action: '#'
-        });
-
-        if (~window.location.search.indexOf('reset=true')) {
-            paypal.minicart.reset();
-        }
-    </script>
-
-    <!-- //cart-js -->
     <!-- script for responsive tabs -->
     <script src="~/Scripts/easy-responsive-tabs.js"></script>
     <script>
@@ -519,6 +542,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
     </script>
+    <!-- //Script from Nam BEGIN -->
+    <script>
+        $('#cart_plus_btn').click(function () {
+            var s = parseInt($('#cart_input').val()) + 1;
+            $('#cart_input').val(parseInt(s));
+        });      
+        $('#cart_minus_btn').click(function () {
+            var s = parseInt($('#cart_input').val()) - 1;
+            if (s < 0) s = 0;
+            $('#cart_input').val(parseInt(s));
+        });
+    </script>
+    <!-- Script from Nam END -->
+    
     <!-- //here ends scrolling icon -->
     <!-- for bootstrap working -->
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
