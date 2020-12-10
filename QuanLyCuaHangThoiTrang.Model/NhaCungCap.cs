@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -18,15 +18,15 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Key]
         public int MaNhaCungCap { get; set; }
 
-        [Required]
+        [Display(Name = "Tên Nhà Cung Cấp"), Required(ErrorMessage = "Tên Nhà Cung Cấp không được trống")]
         [StringLength(50)]
         public string TenNhaCungCap { get; set; }
 
-        [Required]
+        [Display(Name = "Địa Chỉ"), Required(ErrorMessage = "Địa Chỉ không được trống")]
         [StringLength(100)]
         public string DiaChi { get; set; }
 
-        [Required]
+        [Display(Name = "Số Điện Thoại"), Required(ErrorMessage = "Số Điện Thoại không được trống")]
         [StringLength(15)]
         public string SoDienThoai { get; set; }
 

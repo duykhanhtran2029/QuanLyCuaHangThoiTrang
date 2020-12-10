@@ -11,7 +11,7 @@
 <body>
     <div class="sidebar">
         <div id="menu-action">
-            <a href="#"><i class="fa fa-bars" style="color: black;"></i><img src="~/images/vintage.png" width="150" height="50" style="margin: 0px;" /></a>
+            <a><i class="fa fa-bars" style="color: black;"></i><img src="~/images/vintage.png" width="150" height="50" style="margin: 0px;" /></a>
         </div>
         <div class="sidebar-content">
             <ul>
@@ -27,6 +27,15 @@
                 <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
                 <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
                 <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
+                @*<li>
+                    @Ajax.RawActionLink("<i class=\"fas fa-user-lock\"></i><span>Quản Lý Nhà Cung Cấp</span>", "Index", "BaoCaoTonKho", null,
+                        new AjaxOptions
+                        {
+                            HttpMethod = "GET",
+                            UpdateTargetId = "content",
+                            LoadingElementId = "loading"
+                        }, null)
+                </li>*@
             </ul>
         </div>
         <div class="sidebar-footer">
