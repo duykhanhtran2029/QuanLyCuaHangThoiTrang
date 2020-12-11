@@ -12,6 +12,10 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: Manager/Home
         public ActionResult Index()
         {
+            if (Session["Account"] == null)
+            {
+                return RedirectToAction("Index", "/Home");
+            }
             return View();
         }
     }

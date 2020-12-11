@@ -1,7 +1,6 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-
 /QuanLyCuaHangThoiTrang.Model/QuanLyCuaHangThoiTrang.mdf
 /QuanLyCuaHangThoiTrang/App_Data/QuanLyCuaHangThoiTrang_log.ldf
 /QuanLyCuaHangThoiTrang/App_Data/QuanLyCuaHangThoiTrang.mdf
