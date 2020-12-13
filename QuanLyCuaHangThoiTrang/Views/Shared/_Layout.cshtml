@@ -36,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 else
                 {
                     var name = (NguoiDung)Session["Account"];
-                    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+                    <li> <a href="~/Home/UserProfile/" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
                 }
 
                 <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
@@ -44,6 +44,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div style="text-align : center" id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
     <!-- //header -->
     <!-- header-bot -->
     <div class="header-bot">
@@ -197,28 +203,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <input type="submit" value="Sign Up">
                             }
                             @*<form action="#" method="post">
-            <div class="styled-input agile-styled-input-top">
-                <input type="text" name="Name" required="">
-                <label>Name</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="email" name="Email" required="">
-                <label>Email</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="password" name="password" required="">
-                <label>Password</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="password" name="Confirm Password" required="">
-                <label>Confirm Password</label>
-                <span></span>
-            </div>
-            <input type="submit" value="Sign Up">
-        </form>*@
+                                    <div class="styled-input agile-styled-input-top">
+                                        <input type="text" name="Name" required="">
+                                        <label>Name</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="email" name="Email" required="">
+                                        <label>Email</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="password" required="">
+                                        <label>Password</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="Confirm Password" required="">
+                                        <label>Confirm Password</label>
+                                        <span></span>
+                                    </div>
+                                    <input type="submit" value="Sign Up">
+                                </form>*@
                             <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                                 <li>
                                     <a href="#" class="facebook">
@@ -261,7 +267,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- //Modal2 -->
     }
     <!-- //Modal1 -->
-
     <!-- //Shopping cart -->
     <div class="shopping-cart">
         <div class="cart_title">
@@ -271,7 +276,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="cart_item">
             <div class="cart_buttons">
                 <button class="cart_delete-btn1">
-                    <i class="fas fa-close" ></i>
+                    <i class="fas fa-close"></i>
                 </button>
             </div>
             <div class="cart_image">
@@ -576,7 +581,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $('#cart_plus_btn').click(function () {
             var s = parseInt($('#cart_input').val()) + 1;
             $('#cart_input').val(parseInt(s));
-        });      
+        });
         $('#cart_minus_btn').click(function () {
             var s = parseInt($('#cart_input').val()) - 1;
             if (s < 0) s = 0;
@@ -584,23 +589,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- Script from Nam END -->
-    
     <!-- //here ends scrolling icon -->
     <!-- for bootstrap working -->
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
     <script>
         var password = document.getElementById("password")
-        , confirm_password = document.getElementById("confirm_password");
+            , confirm_password = document.getElementById("confirm_password");
 
-        function validatePassword(){
-          if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Mật khẩu không khớp!");
-          } else {
-            confirm_password.setCustomValidity('');
-          }
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Mật khẩu không khớp!");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
         }
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(4000).slideUp(1000);
+        });
     </script>
 </body>
 </html>

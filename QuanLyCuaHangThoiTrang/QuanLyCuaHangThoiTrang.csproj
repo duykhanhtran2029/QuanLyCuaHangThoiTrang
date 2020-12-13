@@ -173,6 +173,7 @@
     <Compile Include="Areas\Manager\Controllers\PhieuXuatKhoController.cs" />
     <Compile Include="Areas\Manager\Controllers\QuyenController.cs" />
     <Compile Include="Areas\Manager\Controllers\ThamSoController.cs" />
+    <Compile Include="Extension\MD5Encode.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -441,6 +442,7 @@
     <Content Include="Areas\Manager\Views\ThamSo\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\ThamSo\Index.cshtml" />
     <Content Include="Views\Shared\NavTopBar.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -451,7 +453,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Manager\Data\" />
+    <Folder Include="Areas\Manager\Views\Base\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
