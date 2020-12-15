@@ -12,6 +12,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     {
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public string HoTen = "";
+        public List<ChiTietPhieuDatHang> Cart;
         public ActionResult Index()
         {
             ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
@@ -43,6 +44,13 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
             ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
+        }
+
+        //Them gio hang
+        [HttpPost]
+        public void AddtoCart()
+        {
+            ChiTietPhieuDatHang c = new ChiTietPhieuDatHang();
         }
 
         [HttpPost]

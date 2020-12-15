@@ -11,6 +11,7 @@
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
     left: 30%;
+    top: 100px;
     z-index: 1;
    
     display: flex;
@@ -20,10 +21,11 @@
   .cart_title {
     height: 60px;
     border-bottom: 5px solid #E1E8EE;
-    padding: 20px 30px;
+    padding: 20px 20px;
     color: #5E6977;
     font-size: 18px;
     font-weight: 400;
+    display:flex;
   }
    
   .cart_item {
@@ -44,12 +46,12 @@
     margin-right: 60px;
   }
 
-  .cart_delete-btn {
-    display: inline-block;
+  .cart_close-btn {
+    display: inline;
     Cursor: pointer;
     width: 18px;
     height: 17px;
-    background: url(&amp;quot;delete-icn.svg&amp;quot;) no-repeat center;
+    margin-left: 550px;
   }
 
   .cart_delete-btn1 {
@@ -145,3 +147,22 @@
     color: #43484D;
     font-weight: 300;
   }
+
+  .cart_submit{
+    background:white;
+    height:40px;
+    margin:0px 20px 5px 500px;
+    font-family: sans-serif;
+    font-weight: 600;
+    border-color: aliceblue;
+    letter-spacing: 1px;
+  }
+  .cart_submit:before {
+		border: #2fdab8 solid 2px;
+	}
+	.cart_submit:hover:before, .cart_submit:focus:before, .cart_submit:active:before {
+		top: -6px;
+		right: -6px;
+		bottom: -6px;
+		left: -6px;
+	}

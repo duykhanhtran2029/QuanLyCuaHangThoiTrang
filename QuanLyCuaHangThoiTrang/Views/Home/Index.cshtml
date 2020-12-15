@@ -104,18 +104,21 @@
                                             <span class="item_price">@String.Format("{0:0.000}", hh.GiaBan) VNĐ</span>
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" method="post">
+                                            <form action="#" class="item" method="post">
                                                 <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
                                                     <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value=" " />
-                                                    <input type="hidden" name="item_name" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="amount" value="30.99" />
-                                                    <input type="hidden" name="discount_amount" value="@String.Format("{0:0.000}", hh.GiaBan)" />
-                                                    <input type="hidden" name="currency_code" value="USD" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                    <input type="hidden" name="Size" value="@hh.Size" />
+                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -191,7 +194,7 @@
                                             <span class="item_price">@String.Format("{0:0.000}", hh.GiaBan) VNĐ</span>
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" method="post">
+                                            <form action="" method="post">
                                                 <fieldset>
                                                     <input type="hidden" name="cmd" value="_cart" />
                                                     <input type="hidden" name="add" value="1" />
@@ -202,7 +205,7 @@
                                                     <input type="hidden" name="currency_code" value="USD" />
                                                     <input type="hidden" name="return" value=" " />
                                                     <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" onclick="ShowCart()"/>
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -277,7 +280,7 @@
                                             <span class="item_price">@String.Format("{0:0.000}", hh.GiaBan) VNĐ</span>
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" method="post">
+                                            <form action="" method="post">
                                                 <fieldset>
                                                     <input type="hidden" name="cmd" value="_cart" />
                                                     <input type="hidden" name="add" value="1" />
@@ -288,7 +291,7 @@
                                                     <input type="hidden" name="currency_code" value="USD" />
                                                     <input type="hidden" name="return" value=" " />
                                                     <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" onclick="ShowCart()"/>
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -360,7 +363,7 @@
                                             <span class="item_price">@String.Format("{0:0.000}", hh.GiaBan) VNĐ</span>
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" method="post">
+                                            <form action="" method="post">
                                                 <fieldset>
                                                     <input type="hidden" name="cmd" value="_cart" />
                                                     <input type="hidden" name="add" value="1" />
@@ -371,7 +374,7 @@
                                                     <input type="hidden" name="currency_code" value="USD" />
                                                     <input type="hidden" name="return" value=" " />
                                                     <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" onclick="ShowCart()"/>
                                                 </fieldset>
                                             </form>
                                         </div>

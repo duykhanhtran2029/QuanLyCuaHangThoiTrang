@@ -197,28 +197,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <input type="submit" value="Sign Up">
                             }
                             @*<form action="#" method="post">
-            <div class="styled-input agile-styled-input-top">
-                <input type="text" name="Name" required="">
-                <label>Name</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="email" name="Email" required="">
-                <label>Email</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="password" name="password" required="">
-                <label>Password</label>
-                <span></span>
-            </div>
-            <div class="styled-input">
-                <input type="password" name="Confirm Password" required="">
-                <label>Confirm Password</label>
-                <span></span>
-            </div>
-            <input type="submit" value="Sign Up">
-        </form>*@
+                                    <div class="styled-input agile-styled-input-top">
+                                        <input type="text" name="Name" required="">
+                                        <label>Name</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="email" name="Email" required="">
+                                        <label>Email</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="password" required="">
+                                        <label>Password</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="Confirm Password" required="">
+                                        <label>Confirm Password</label>
+                                        <span></span>
+                                    </div>
+                                    <input type="submit" value="Sign Up">
+                                </form>*@
                             <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                                 <li>
                                     <a href="#" class="facebook">
@@ -261,41 +261,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- //Modal2 -->
     }
     <!-- //Modal1 -->
-
     <!-- //Shopping cart -->
-    <div class="shopping-cart">
+    <div class="shopping-cart" id="shopping-cart-div" style="display:none">
         <div class="cart_title">
             Shopping Bag
+            <div>
+                <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
+                    <i class="fas fa-close"></i>
+                </button>
+            </div>
         </div>
-        <!-- Product #1 -->
-        <div class="cart_item">
-            <div class="cart_buttons">
-                <button class="cart_delete-btn1">
-                    <i class="fas fa-close" ></i>
-                </button>
-            </div>
-            <div class="cart_image">
-                <img src="~/images/s1.jpg" alt="item" />
-            </div>
+        <div id="item-container">
+            <!-- Product #1 -->
+            <div class="cart_item">
+                <div class="cart_buttons">
+                    <button id="cart_delete_btn" class="cart_delete-btn1">
+                        <i class="fas fa-close"></i>
+                    </button>
+                </div>
+                <div class="cart_image">
+                    <img src="~/images/s1.jpg" alt="item" />
+                </div>
 
-            <div class="cart_description">
-                <span>Common Projects</span>
-                <span>Bball High</span>
-                <span>White</span>
-            </div>
+                <div class="cart_description">
+                    <span>Common Projects</span>
+                    <span>Bball High</span>
+                    <span>White</span>
+                </div>
 
-            <div class="cart_quantity">
-                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <input type="text" name="cart_input" value="1" id="cart_input">
-                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
+                <div class="cart_quantity">
+                    <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <input type="text" name="cart_input" value="1" id="cart_input">
+                    <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
 
-            <div class="cart_total-price">$549</div>
+                <div class="cart_total-price">$549</div>
+            </div>
         </div>
+        <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
     </div>
     <!-- //Shopping cart -->
     @RenderBody()
@@ -572,32 +579,89 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- //Script from Nam BEGIN -->
-    <script>
-        $('#cart_plus_btn').click(function () {
+    <script type="text/javascript">
+        $('#cart_plus-btn').click(function () {
             var s = parseInt($('#cart_input').val()) + 1;
             $('#cart_input').val(parseInt(s));
-        });      
+        });
         $('#cart_minus_btn').click(function () {
             var s = parseInt($('#cart_input').val()) - 1;
             if (s < 0) s = 0;
             $('#cart_input').val(parseInt(s));
         });
+
+        function ShowCart() {
+            var x = document.getElementById("shopping-cart-div");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function ShowAddToCart() {
+            var x = document.getElementById("shopping-cart-div");
+                x.style.display = "block";
+        }
+
+
+        $("form.item").one("submit", function (event) { //this is for the first time click
+            event.preventDefault();
+            var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+            var mota = $(this).find('input[name ="MoTa"]').val();
+            var gia = $(this).find('input[name ="Gia"]').val();
+            var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+            var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+            var size = $(this).find('input[name ="Size"]').val();
+
+            $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham" value="' + mahanghoa +'"></input><input type="text" name="cart_input" value="1" id="cart_input"><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + gia + ' VNĐ</div ></div > ');
+            ShowAddToCart();
+
+            $.ajax({
+                url: 'AddtoCart',
+                success: function () {
+                    alert("Value Added");  // or any other indication if you want to show
+                }
+
+            });
+        });
+
+        $("form.item").on("submit", function (event) { //every other clicks will + 1 to the cart
+            event.preventDefault();
+            var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+            var mota = $(this).find('input[name ="MoTa"]').val();
+            var gia = $(this).find('input[name ="Gia"]').val();
+            var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+            var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+            var size = $(this).find('input[name ="Size"]').val();
+
+            var oldvalue = $('input[name=id-sanpham][value=' + mahanghoa + ']').siblings('input[name = "cart-input"]').val();
+            $('input[name=id-sanpham][value=' + mahanghoa + ']').siblings('input[name = "cart-input"]').attr("value", oldvalue + 1);
+                ShowAddToCart();
+
+            $.ajax({
+                url: 'AddtoCart',
+                success: function () {
+                    alert("Value Added");  // or any other indication if you want to show
+                }
+
+            });
+        });
     </script>
     <!-- Script from Nam END -->
-    
     <!-- //here ends scrolling icon -->
     <!-- for bootstrap working -->
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
     <script>
         var password = document.getElementById("password")
-        , confirm_password = document.getElementById("confirm_password");
+            , confirm_password = document.getElementById("confirm_password");
 
-        function validatePassword(){
-          if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Mật khẩu không khớp!");
-          } else {
-            confirm_password.setCustomValidity('');
-          }
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Mật khẩu không khớp!");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
         }
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;

@@ -293,6 +293,7 @@
     <Content Include="Areas\Manager\Views\Home\Index.cshtml" />
     <Content Include="Areas\Manager\Views\NhaCungCap\DanhSachNhaCungCap.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
