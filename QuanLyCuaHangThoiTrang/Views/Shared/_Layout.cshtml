@@ -268,40 +268,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     <!-- //Modal1 -->
     <!-- //Shopping cart -->
-    <div class="shopping-cart">
-        <div class="cart_title">
-            Shopping Bag
-        </div>
-        <!-- Product #1 -->
-        <div class="cart_item">
-            <div class="cart_buttons">
-                <button class="cart_delete-btn1">
-                    <i class="fas fa-close"></i>
-                </button>
-            </div>
-            <div class="cart_image">
-                <img src="~/images/s1.jpg" alt="item" />
-            </div>
-
-            <div class="cart_description">
-                <span>Common Projects</span>
-                <span>Bball High</span>
-                <span>White</span>
-            </div>
-
-            <div class="cart_quantity">
-                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <input type="text" name="cart_input" value="1" id="cart_input">
-                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-
-            <div class="cart_total-price">$549</div>
+<div class="shopping-cart" id="shopping-cart-div" style="display:none">
+    <div class="cart_title">
+        Shopping Bag
+        <div>
+            <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
+                <i class="fas fa-close"></i>
+            </button>
         </div>
     </div>
+    <div id="item-container">
+        <!-- Product-->
+    </div>
+    <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
+</div>
     <!-- //Shopping cart -->
     @RenderBody()
     <!-- footer -->
@@ -519,9 +499,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Custom-JavaScript-File-Links -->
     <!-- script for responsive tabs -->
     <script src="~/Scripts/easy-responsive-tabs.js"></script>
-    <script>
+    <script> 
         $(document).ready(function () {
             $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#horizontalTab-sale').easyResponsiveTabs({
                 type: 'default', //Types: default, vertical, accordion
                 width: 'auto', //auto or any width like 600px
                 fit: true,   // 100% fit in a container
@@ -577,15 +570,67 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- //Script from Nam BEGIN -->
-    <script>
-        $('#cart_plus_btn').click(function () {
-            var s = parseInt($('#cart_input').val()) + 1;
-            $('#cart_input').val(parseInt(s));
+    <script type="text/javascript">
+        $('button.cart_plus-btn').click(function () {
+            alert('ok');
+            var s = parseInt($(this).val()) + 1;
+            $(this).val(parseInt(s));
         });
-        $('#cart_minus_btn').click(function () {
+        $('button.cart_minus_btn').click(function () {
             var s = parseInt($('#cart_input').val()) - 1;
             if (s < 0) s = 0;
             $('#cart_input').val(parseInt(s));
+        });
+
+        function ShowCart() {
+            var x = document.getElementById("shopping-cart-div");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function ShowAddToCart() {
+            var x = document.getElementById("shopping-cart-div");
+            x.style.display = "block";
+        }
+
+        $("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
+            event.preventDefault();
+            var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+            var mota = $(this).find('input[name ="MoTa"]').val();
+            var gia = $(this).find('input[name ="Gia"]').val();
+            var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+            var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+            var giamgia = $(this).find('input[name ="GiamGia"]').val();
+            var size = $(this).find('input[name ="Size"]').val();
+            var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
+            
+            if (oldvalue != null) { //if already have item then + 1
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
+                //update Gia
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
+                ShowAddToCart();
+            }
+            else //them vao cart
+            {
+                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"></input><input type="text" name="cart_input" value="1" id="cart_input"><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1-giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+                ShowAddToCart();
+            }
+
+            if(oldvalue != null)
+            {
+
+                $.ajax({
+                    url: 'AddtoCart',
+                    success: function () {
+                        alert("Value Added");  
+                    }
+
+                });
+            }
+            
         });
     </script>
     <!-- Script from Nam END -->
