@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using QuanLyCuaHangThoiTrang.Extension;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Controllers
@@ -12,7 +13,18 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     {
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public string HoTen = "";
-        public List<ChiTietPhieuDatHang> Cart;
+
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
+
         public ActionResult Index()
         {
             ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
@@ -38,6 +50,20 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return View();
         }
 
+        [Authorize(Roles = "KhachHang")]
+        public ActionResult UserProfile()
+        {
+            if(Session["Account"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.UserProfile = (NguoiDung)Session["Account"];
+            }
+            return View();
+        }
+
         public ActionResult NavTopBar()
         {
             ViewBag.MenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nam").ToList();
@@ -46,37 +72,30 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return PartialView();
         }
 
-        //Them gio hang
-        [HttpPost]
-        public void AddtoCart()
-        {
-            ChiTietPhieuDatHang c = new ChiTietPhieuDatHang();
-        }
-
         [HttpPost]
         public ActionResult DangNhap(FormCollection form)
         {
             string username = form["username"].ToString();
-            string password = form["password"].ToString();
+            string password = MD5Encode.CreateMD5(form["password"].ToString()); 
 
             var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username && n.PassWord == password);
             if(nguoiDung != null)
             {
-                //IEnumerable<PhanQuyen> listQuyen = db.PhanQuyens.Where(n => n.MaChucVu == nguoiDung.MaChucVu);
-                //string quyen = "";
-                //foreach (var item in listQuyen)
-                //{
-                //    quyen += item.Quyen.TenQuyen + ",";
-                //    Console.WriteLine(quyen);
-                //}
-               // quyen = quyen.Substring(0, quyen.Length - 1);
-               // PhanQuyen(nguoiDung.UserName.ToString(), quyen);
+                IEnumerable<ChucVu> listQuyen = db.ChucVus.Where(n => n.MaChucVu == nguoiDung.MaChucVu);
+                string quyen = "";
+                foreach (var item in listQuyen)
+                {
+                    quyen += item.TenChucVu + ",";
+                }
+                quyen = quyen.Substring(0, quyen.Length - 1);
+                PhanQuyen(nguoiDung.UserName.ToString(), quyen);
                 Session["Account"] = nguoiDung;
                 HoTen = nguoiDung.TenNguoiDung;
                 if (nguoiDung.ChucVu.TenChucVu != "KhachHang")
                     return RedirectToAction("Index", "Manager/Home");
                 return RedirectToAction("Index", "Home");
             }
+            SetAlert("Sai tài khoản hoặc mật khẩu!", "error");
             return RedirectToAction("Index", "Home"); // Need add notification login not success
         }
 
@@ -96,7 +115,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             Response.Cookies.Add(cookies);
         }
 
-        [Authorize(Roles = "QuanLyPhanQuyen")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DangXuat()
         {
             Session["Account"] = null;
@@ -104,10 +123,11 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         public ActionResult DangKy(FormCollection form)
         {
             string username = form["username"].ToString();
-            string password = form["password"].ToString();
+            string password = MD5Encode.CreateMD5(form["password"].ToString());
             string phone = form["phone"].ToString();
             string name = form["name"].ToString();
             var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username);
@@ -127,8 +147,45 @@ namespace QuanLyCuaHangThoiTrang.Controllers
                     Avatar = ""
                 }) ;
                 db.SaveChanges();
+                SetAlert("Tạo tài khoản thành công!", "success");
+            }
+            else
+            {
+                SetAlert("Tài khoản này đã có người sử dụng!", "error");
             }
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "KhachHang")]
+        public ActionResult CapNhat(FormCollection form)
+        {
+            var user = (NguoiDung)Session["Account"];
+            string name = form["name"].ToString();
+            string phone = form["phone"].ToString();
+            string email = form["email"].ToString();
+            string address = form["address"].ToString();
+            string password = form["password"].ToString();
+
+            var nguoidung = db.NguoiDungs.SingleOrDefault(n => n.UserName == user.UserName);
+            if (nguoidung != null)
+            {
+                nguoidung.TenNguoiDung = name;
+                nguoidung.SoDienThoai = phone;
+                nguoidung.Email = email;
+                nguoidung.DiaChi = address;
+                if (!String.IsNullOrEmpty(password))
+                {               
+                    nguoidung.PassWord = MD5Encode.CreateMD5(password);
+                }
+                db.SaveChanges();
+                SetAlert("Cập nhật thông tin thành công!", "success");
+                Session["Account"] = nguoidung;
+            }
+            else
+            {
+                SetAlert("Không thể cập nhật thông tin", "error");
+            }
+            return RedirectToAction("UserProfile");
         }
     }
 }
