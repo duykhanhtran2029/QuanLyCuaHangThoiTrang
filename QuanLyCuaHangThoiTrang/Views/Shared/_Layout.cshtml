@@ -275,10 +275,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
                 <i class="fas fa-close"></i>
             </button>
+
         </div>
     </div>
     <div id="item-container">
         <!-- Product-->
+        <div class="cart_item">
+            <div class="cart_buttons">
+                <button id="cart_delete_btn" class="cart_delete-btn1">
+                    <i class="fas fa-close"></i>
+                </button>
+            </div>
+            <div class="cart_image">
+                <img src="~/images/s1.jpg" alt="item" />
+            </div>
+
+            <div class="cart_description">
+                <span>Common Projects</span>
+                <span>Bball High</span>
+                <span>White</span>
+            </div>
+
+            <div class="cart_quantity">
+                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <input type="text" name="cart_input" value="1" id="cart_input">
+                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+
+            <div class="cart_total-price">$549</div>
+        </div>
     </div>
     <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
 </div>
@@ -571,17 +600,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- //Script from Nam BEGIN -->
     <script type="text/javascript">
-        $('button.cart_plus-btn').click(function () {
-            alert('ok');
-            var s = parseInt($(this).val()) + 1;
-            $(this).val(parseInt(s));
-        });
-        $('button.cart_minus_btn').click(function () {
-            var s = parseInt($('#cart_input').val()) - 1;
-            if (s < 0) s = 0;
-            $('#cart_input').val(parseInt(s));
-        });
-
         function ShowCart() {
             var x = document.getElementById("shopping-cart-div");
             if (x.style.display === "none") {
@@ -611,11 +629,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
                 //update Gia
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
+                /*$('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(oldvalue + 1) * parseInt(gia) * parseFloat(1 - giamgia));*/ //update biến tổng tiền
                 ShowAddToCart();
             }
             else //them vao cart
             {
-                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"></input><input type="text" name="cart_input" value="1" id="cart_input"><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1-giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia*(1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input"><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
                 ShowAddToCart();
             }
 
@@ -630,8 +649,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 });
             }
-            
         });
+
+        //+ button on cart (fix bug on dynamically added-append elements)
+        $(document).on("click", "button.cart_plus-btn", function () {
+            var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+            soluong += 1;
+            $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+            //update gia:
+            var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+            var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+            $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
+            $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+        });
+
+        //- button on cart 
+        $(document).on("click", "button.cart_minus-btn", function () {
+            var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+            if (soluong != 0) {
+                soluong -= 1;
+                $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+                //update gia
+                var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+                var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+                $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
+                $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+            }
+        });
+
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->
