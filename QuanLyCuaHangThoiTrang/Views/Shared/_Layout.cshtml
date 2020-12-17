@@ -309,6 +309,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="cart_total-price">$549</div>
         </div>
     </div>
+    <div class="order-price">
+        <b>Tổng tiền: </b>
+        <span> 0 </span>
+    </div>
     <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
 </div>
     <!-- //Shopping cart -->
@@ -629,7 +633,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
                 //update Gia
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
-                /*$('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(oldvalue + 1) * parseInt(gia) * parseFloat(1 - giamgia));*/ //update biến tổng tiền
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
                 ShowAddToCart();
             }
             else //them vao cart
@@ -661,12 +665,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
             $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
             $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+            //
+            
         });
 
         //- button on cart 
         $(document).on("click", "button.cart_minus-btn", function () {
             var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
-            if (soluong != 0) {
+            if (soluong > 1) {
                 soluong -= 1;
                 $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
                 //update gia
@@ -677,6 +683,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         });
 
+        function SetOrderPrice() {
+            var orderprice = 0;
+            var prices = $('.cart_total_price');
+            prices.forEach(function (item, index, array) {
+                orderprice += parseFloat(item.val()); 
+            });
+            alert(orderprice);
+        }
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->

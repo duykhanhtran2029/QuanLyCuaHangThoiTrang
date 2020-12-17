@@ -149,7 +149,7 @@
   .cart_submit{
     background:white;
     height:40px;
-    margin:0px 20px 5px 500px;
+    margin:20px 20px 5px 550px;
     font-family: sans-serif;
     font-weight: 600;
     border-color: aliceblue;
@@ -163,4 +163,17 @@
 		right: -6px;
 		bottom: -6px;
 		left: -6px;
-	}
+  }
+  
+  .order-price{
+    display: flex;
+    float: right;
+    margin-right: 15%;
+  }
+
+  .order-price b{
+    margin-right: 10px;
+  }
+  .order-price span{
+    float: right;
+  }
