@@ -4,66 +4,54 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhieuNhapKho.Ghichu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTienChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th></th>
-    </tr>
+<title id="pageTitle">
+    Quản Lý Phiếu Chi
+</title>
+<div class="card">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh sách phiếu chi</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NguoiDung.TenNguoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhieuNhapKho.Ghichu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTienChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GhiChu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayChinhSua)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SoPhieuChi }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SoPhieuChi }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SoPhieuChi })
-        </td>
-    </tr>
-}
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('PhieuChi/Create', false)">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm phiếu chi</span>
 
-</table>
+            </button>
+
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    <div>
+        @using (Ajax.BeginForm("DanhSachPhieuChi", "PhieuChi", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo ..." })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachPhieuChi", "PhieuChi");}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#AlertBox').removeClass('hide');
+        $('#AlertBox').delay(4000).slideUp(1000);
+    });
+</script>
