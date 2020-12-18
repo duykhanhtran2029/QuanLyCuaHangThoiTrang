@@ -665,7 +665,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
             $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
             $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
-            //
+            
             
         });
 
@@ -683,14 +683,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         });
 
-        function SetOrderPrice() {
-            var orderprice = 0;
-            var prices = $('.cart_total_price');
-            prices.forEach(function (item, index, array) {
-                orderprice += parseFloat(item.val()); 
-            });
-            alert(orderprice);
-        }
+        
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->
