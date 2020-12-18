@@ -127,6 +127,9 @@
                 bottom: 0;
             }
 
+    .table tbody tr.border-warning:hover {
+        background: #f5f5f5;
+    }
     .table tbody tr.border-warning td {
         background: inherit !important;
     }
@@ -193,7 +196,7 @@
     }
 
         .table tbody tr td > a {
-            margin-right: 5px;
+
         }
 
             .table tbody tr td > a i {
@@ -238,7 +241,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 .table-primary thead tr th {
     background-color: #00B1E1 !important;
     border-color: #00c5fb #00c5fb #0095bd !important;
-    color: #fff;
+    color: #fff;    
 }
 
 .table-primary tbody tr td.sorting_1 {
@@ -544,10 +547,30 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
     padding: 10px;
     box-shadow: 0 0.46875rem 2.1875rem rgba(31,10,6,0.03),0 0.9375rem 1.40625rem rgba(31,10,6,0.03),0 0.25rem 0.53125rem rgba(31,10,6,0.05),0 0.125rem 0.1875rem rgba(31,10,6,0.03);
 }
+.popupcontent {
+    margin: auto;
+    margin-top: 50px;
+    padding: 15px 30px 20px 30px;
+    width: fit-content;
+}
 .pagination {
     margin: 15px 0 0 0 !important;
 }
 #large-button
 {
     padding: 5px 10px !important;
+}
+.required::after {
+    content: " * ";
+    font-weight: bold;
+    color: red;
+}
+hr {
+    margin-top: 0 !important
+}
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left !important;
+    padding-left: 50px;
 }
