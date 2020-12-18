@@ -18,6 +18,7 @@
     opacity: .6;
     font-weight: 300;
     display: block;
+    margin: 10px;
 }
 
 .header .page-title-heading, header .page-title-subheading {
@@ -25,9 +26,12 @@
     padding: 0;
 }
 .card-title-heading {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     position: relative;
     z-index: 5;
-    color: darkslateblue;
+    color: darkslateblue;   
+}
+code {
+    font-weight: 600 !important;
 }

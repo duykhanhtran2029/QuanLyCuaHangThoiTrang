@@ -34,20 +34,20 @@ function Open(url, replaceheader = true) {
                 var pageTitle = document.getElementById("pageTitle").innerText;
                 document.title = pageTitle;
             }
-            console.log(document.html);
             $('#content').show();
             $('#loading').hide();
-            window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);
-        },
+            window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);        },
     });
 }
 window.onpopstate = function (e) {
+    console.log(e);
     if (e.state) {
         $('#content').html($(e.state.html).find('#content'));
         if (e.state.rHeader)
             $('#header').html($(e.state.html).find('#header'));
-        console.log(e.state.pageTitle);
+        console.log(e.state.html);
         document.title = e.state.pageTitle;
-        //$('#pageTitle').html($(e.state.html).find('#pageTitle'));
     }
+    else
+        Open('Home/Index');
 };

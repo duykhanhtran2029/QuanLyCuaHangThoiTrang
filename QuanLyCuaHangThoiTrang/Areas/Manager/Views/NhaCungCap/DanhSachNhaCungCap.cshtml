@@ -1,44 +1,67 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.NhaCungCap>
-@{ 
-    Layout = null;
-}
-
+@{ Layout = null; }
 <div class="table-responsive">
-    <table class="table table-bordered table-middle table-lilac">
+    <table class="table table-bordered table-middle table-lilac" id="datatable">
         <thead>
             <tr>
+                <th class="text-center" style="width: 10%;">Mã số</th>
                 <th class="text-center" style="width: 15%;">Tên nhà cung cấp</th>
                 <th class="text-center" style="width: 15%;">Số điện thoại</th>
                 <th class="text-center" style="width: 25%;">Email</th>
-                <th class="text-center" style="width: 35%;">Địa chỉ</th>
+                <th class="text-center" style="width: 25%;">Địa chỉ</th>
                 <th class="text-center" style="width: 10%;">Hành động</th>
             </tr>
-        </thead>    
+        </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 if (!item.IsDeleted)
                 {
-                    <tr class="border-warning" style="text-align:center">
-                        <td>
-                            @item.TenNhaCungCap
-                        </td>
-                        <td>
-                            @item.SoDienThoai
-                        </td>
-                        <td>
-                            @item.Email
-                        </td>
-                        <td>
-                            @item.DiaChi
-                        </td>
-                        <td class="text-center">
-                            <a href="@Url.Action("Edit", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-                            <a href="@Url.Action("Delete", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                }
+<tr class="border-warning" style="text-align:center">
+    <td>
+        @item.MaNhaCungCap
+    </td>
+    <td>
+        @item.TenNhaCungCap
+    </td>
+    <td>
+        @item.SoDienThoai
+    </td>
+    <td>
+        @item.Email
+    </td>
+    <td>
+        @item.DiaChi
+    </td>
+    <td class="text-center">
+        <a href="@Url.Action("Edit", new { id = item.MaNhaCungCap })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+        @Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete", "NhaCungCap",
+                          new { id = item.MaNhaCungCap },
+                          new AjaxOptions
+                          {
+                              HttpMethod = "GET",
+                              UpdateTargetId = "Modal",
+                              LoadingElementId = "loading"
+                          },
+                          new
+                          {
+                              @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                          })
+        @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "NhaCungCap",
+                          new { id = item.MaNhaCungCap },
+                          new AjaxOptions
+                          {
+                              HttpMethod = "GET",
+                              UpdateTargetId = "Modal",
+                              LoadingElementId = "loading"
+                          },
+                          new
+                          {
+                              @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                          })
+    </td>
+</tr>}
             }
         </tbody>
     </table>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <link href="~/Areas/Manager/Content/header.css" rel="stylesheet" />
     <link href="~/Areas/Manager/Content/Component.css" rel="stylesheet" />
+    <title id="mainTitle">Quản Lý Cửa Hàng Thời Trang</title>
 </head>
 <body>
     <div class="sidebar">
@@ -28,14 +29,14 @@
                 <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
                 <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
                 @*<li>
-                    @Ajax.RawActionLink("<i class=\"fas fa-user-lock\"></i><span>Quản Lý Nhà Cung Cấp</span>", "Index", "BaoCaoTonKho", null,
-                        new AjaxOptions
-                        {
-                            HttpMethod = "GET",
-                            UpdateTargetId = "content",
-                            LoadingElementId = "loading"
-                        }, null)
-                </li>*@
+                        @Ajax.RawActionLink("<i class=\"fas fa-user-lock\"></i><span>Quản Lý Nhà Cung Cấp</span>", "Index", "BaoCaoTonKho", null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                UpdateTargetId = "content",
+                                LoadingElementId = "loading"
+                            }, null)
+                    </li>*@
             </ul>
         </div>
         <div class="sidebar-footer">
@@ -66,5 +67,9 @@
     <script src="~/Areas/Manager/Scripts/sidebar.js"></script>
     <script src="~/Areas/Manager/Scripts/header.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Areas/Manager/Scripts/main.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
 </body>
 </html>
