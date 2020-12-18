@@ -1,85 +1,66 @@
-﻿@model QuanLyCuaHangThoiTrang.Model.PhieuChi
-
+﻿@*@model QuanLyCuaHangThoiTrang.Model.PhieuChi*@
+@using QuanLyCuaHangThoiTrang.Model;
 @{
     ViewBag.Title = "Create";
+    var user = (NguoiDung)Session["Account"];
+
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PhieuChi</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayChi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayChi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayChi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaNguoiDung, "MaNguoiDung", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoPhieuNhapKho, "SoPhieuNhapKho", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SoPhieuNhapKho", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SoPhieuNhapKho, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TongTienChi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TongTienChi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TongTienChi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayChinhSua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+<div class="col-md-6">
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">Tạo phiếu chi</h5>
+            @using (Html.BeginForm("TaoPhieuChi", "PhieuChi", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="position-relative form-group">
+                    <label for="NgayChi" class="">Ngày chi</label>
+                    <input value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayChi" id="Ngaychi" placeholder="" type="text" class="form-control" readonly>
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <div class="position-relative form-group">
+                    <label for="Nguoidung" class="">Tên người dùng</label>
+                    <input value="@user.TenNguoiDung" name="Nguoidung" id="Nguoidung" placeholder="" type="text" class="form-control" readonly>
+                </div>
+                <div class="position-relative form-group">
+                    <label for="Sophieunhapkho" class="">Số phiếu nhập kho</label>
+                    @Html.DropDownList("Sophieunhapkho", new SelectList(ViewBag.SoPhieuNhapKho, "Value", "Text"), "", new { @id = "Sophieunhapkho", @class = "form-control", @required = "required" })
+                </div>
+                <div class="position-relative form-group">
+                    <label for="Tongtienchi" class="">Tổng tiền chi</label>
+                    <input name="Tongtienchi" id="Tongtienchi" placeholder="" type="text" class="form-control" readonly>
+                </div>
+                <div class="position-relative form-group">
+                    <label for="Ghichu" class="">Ghi chú</label>
+                    <textarea name="Ghichu" id="Ghichu" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="mt-1 btn btn-primary">Submit</button>
+            }
         </div>
     </div>
-}
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Sophieunhapkho').change(function () {
+            $('#Sophieunhapkho').change(function () {
+                if ($('#Sophieunhapkho').val() == '')
+                    $('#Tongtienchi').val('');
+                else {
 
+                    $.getJSON('/PhieuChi/TongTienChi', { id: $('#Sophieunhapkho').val() }, function (data) {
+                        $.each(JSON.parse(data), function (i, row) {
+                            console.log(data);
+                            console.log(i);
+                            console.log(row);
+                            $('#Tongtienchi').val(row)
+                        });
+                    });
+                }
+
+            });
+        });
+    });
+</script>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

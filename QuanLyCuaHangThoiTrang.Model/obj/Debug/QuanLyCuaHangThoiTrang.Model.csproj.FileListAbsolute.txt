@@ -7,49 +7,8 @@ E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CoreCompileInputs.cache
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
 E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.mdf
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang_log.ldf
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll.config
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CoreCompileInputs.cache
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\Học vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.mdf
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang_log.ldf
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll.config
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.dll
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CoreCompileInputs.cache
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.mdf
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang_log.ldf
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll.config
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\QuanLyCuaHangThoiTrang.Model.pdb
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.dll
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
-E:\UIT 2020-2021\SE100_OOAD\fix2\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb

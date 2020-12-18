@@ -7,21 +7,24 @@
 <title id="pageTitle">
     Quản Lý Nhà Cung Cấp
 </title>
+<div id="Modal" class="modal fade" role="dialog">
+</div>
 <div class="card">
     <div>
         <div class="pull-left">
             <p class="card-title-heading">Danh sách nhà cung cấp</p>
         </div>
         <div class="pull-right">
-            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('NhaCungCap/Create', false)">
+            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('NhaCungCap/Create')">
                 <i class="fas fa-plus"></i>
-                <span style="margin: 15px 0 !important;">Thêm nhà cung cấp</span>
+                <span style="margin: 15px 0 !important;">Thêm Nhà Cung Cấp</span>
             </button>
         </div>
         <div class="clearfix"></div>
     </div>
+    <hr/>
     <div>
-        @using (Ajax.BeginForm("DanhSachNhaCungCap", "NhaCungCap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId="loading", HttpMethod = "Get" }))
+        @using (Ajax.BeginForm("DanhSachNhaCungCap", "NhaCungCap", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
         {
             <div class="form-group">
                 <div class="input-group">

@@ -185,6 +185,7 @@
     <Content Include="Areas\Manager\Content\header.css" />
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
+    <Content Include="Areas\Manager\Scripts\main.js" />
     <Content Include="Areas\Manager\Scripts\sidebar.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -293,6 +294,7 @@
     <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manager\Views\Home\Index.cshtml" />
     <Content Include="Areas\Manager\Views\NhaCungCap\DanhSachNhaCungCap.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuChi\DanhSachPhieuChi.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />
