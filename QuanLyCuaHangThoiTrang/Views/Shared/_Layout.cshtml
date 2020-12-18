@@ -268,7 +268,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     <!-- //Modal1 -->
     <!-- //Shopping cart -->
-<div class="shopping-cart" id="shopping-cart-div" style="display:none">
+<div class="shopping-cart" id="shopping-cart-div" @*style="display:none*@">
     <div class="cart_title">
         Shopping Bag
         <div>
@@ -680,6 +680,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
                 $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
                 $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+            }
+        });
+
+        // delete button on cart cart_delete-btn1
+        $(document).on("click", "button.cart_delete-btn1", function () {
+            this.parent().parent('div[name=cart_item]').remove();
+            //update gia
+                //var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+                //var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+                //$(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
+                //$(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
             }
         });
 
