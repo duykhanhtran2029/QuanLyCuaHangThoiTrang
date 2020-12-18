@@ -184,6 +184,7 @@
     <Content Include="Areas\Manager\Content\header.css" />
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
+    <Content Include="Areas\Manager\Scripts\main.js" />
     <Content Include="Areas\Manager\Scripts\sidebar.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
