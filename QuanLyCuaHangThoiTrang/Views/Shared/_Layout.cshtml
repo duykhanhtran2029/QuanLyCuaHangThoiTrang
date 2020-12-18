@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/Content/font-awesome.css" rel="stylesheet">
     <link href="~/Content/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/Content/Cart.css">
     <!-- //for bootstrap working -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
@@ -35,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 else
                 {
                     var name = (NguoiDung)Session["Account"];
-                    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+                    <li> <a href="~/Home/UserProfile/" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
                 }
 
                 <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
@@ -43,6 +44,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div style="text-align : center" id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
     <!-- //header -->
     <!-- header-bot -->
     <div class="header-bot">
@@ -166,29 +173,58 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="modal-body modal-body-sub_agile">
                         <div class="col-md-8 modal_body_left modal_body_left1">
                             <h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
-                            <form action="#" method="post">
+                            @using (Html.BeginForm("DangKy", "Home", FormMethod.Post))
+                            {
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="Name" required="">
-                                    <label>Name</label>
+                                    <input type="text" name="username" required>
+                                    <label>Username</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input agile-styled-input-top">
+                                    <input type="text" name="name" required>
+                                    <label>Họ và tên</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    <input type="email" name="Email" required="">
-                                    <label>Email</label>
+                                    <input type="text" name="phone" required>
+                                    <label>Số điện thoại</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    <input type="password" name="password" required="">
+                                    <input id="password" type="password" name="password" required>
                                     <label>Password</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    <input type="password" name="Confirm Password" required="">
+                                    <input id="confirm_password" type="password" name="confirm_password" onchange="validatePassword()" required>
                                     <label>Confirm Password</label>
                                     <span></span>
                                 </div>
                                 <input type="submit" value="Sign Up">
-                            </form>
+                            }
+                            @*<form action="#" method="post">
+                                    <div class="styled-input agile-styled-input-top">
+                                        <input type="text" name="Name" required="">
+                                        <label>Name</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="email" name="Email" required="">
+                                        <label>Email</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="password" required="">
+                                        <label>Password</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="Confirm Password" required="">
+                                        <label>Confirm Password</label>
+                                        <span></span>
+                                    </div>
+                                    <input type="submit" value="Sign Up">
+                                </form>*@
                             <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                                 <li>
                                     <a href="#" class="facebook">
@@ -231,7 +267,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- //Modal2 -->
     }
     <!-- //Modal1 -->
+    <!-- //Shopping cart -->
+<div class="shopping-cart" id="shopping-cart-div" style="display:none">
+    <div class="cart_title">
+        Shopping Bag
+        <div>
+            <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
+                <i class="fas fa-close"></i>
+            </button>
 
+        </div>
+    </div>
+    <div id="item-container">
+        <!-- Product-->
+        <div class="cart_item">
+            <div class="cart_buttons">
+                <button id="cart_delete_btn" class="cart_delete-btn1">
+                    <i class="fas fa-close"></i>
+                </button>
+            </div>
+            <div class="cart_image">
+                <img src="~/images/s1.jpg" alt="item" />
+            </div>
+
+            <div class="cart_description">
+                <span>Common Projects</span>
+                <span>Bball High</span>
+                <span>White</span>
+            </div>
+
+            <div class="cart_quantity">
+                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <input type="text" name="cart_input" value="1" id="cart_input">
+                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+
+            <div class="cart_total-price">$549</div>
+        </div>
+    </div>
+    <div class="order-price">
+        <b>Tổng tiền: </b>
+        <span> 0 </span>
+    </div>
+    <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
+</div>
+    <!-- //Shopping cart -->
     @RenderBody()
     <!-- footer -->
     <div class="footer">
@@ -375,25 +459,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
                                     </div>
                                     @*<div class="sign-up">
-                                        <h4>Họ và tên: </h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Địa chỉ: </h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Số điện thoại :</h4>
-                                        <input type="number" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>Email :</h4>
-                                        <input type="email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>
-                                    <div class="sign-up">
-                                        <h4>CMND :</h4>
-                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                    </div>*@
+                                            <h4>Họ và tên: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Địa chỉ: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Số điện thoại :</h4>
+                                            <input type="number" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Email :</h4>
+                                            <input type="email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>CMND :</h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>*@
                                     <div class="sign-up">
                                         <h4>Password :</h4>
                                         <input id="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
@@ -446,25 +530,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //js -->
     <script src="~/Scripts/modernizr.custom.js"></script>
     <!-- Custom-JavaScript-File-Links -->
-    <!-- cart-js -->
-    <script src="~/Scripts/minicart.min.js"></script>
-    <script>
-        // Mini Cart
-        paypal.minicart.render({
-            action: '#'
-        });
-
-        if (~window.location.search.indexOf('reset=true')) {
-            paypal.minicart.reset();
-        }
-    </script>
-
-    <!-- //cart-js -->
     <!-- script for responsive tabs -->
     <script src="~/Scripts/easy-responsive-tabs.js"></script>
-    <script>
+    <script> 
         $(document).ready(function () {
             $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#horizontalTab-sale').easyResponsiveTabs({
                 type: 'default', //Types: default, vertical, accordion
                 width: 'auto', //auto or any width like 600px
                 fit: true,   // 100% fit in a container
@@ -519,8 +602,119 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
     </script>
+    <!-- //Script from Nam BEGIN -->
+    <script type="text/javascript">
+        function ShowCart() {
+            var x = document.getElementById("shopping-cart-div");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function ShowAddToCart() {
+            var x = document.getElementById("shopping-cart-div");
+            x.style.display = "block";
+        }
+
+        $("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
+            event.preventDefault();
+            var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+            var mota = $(this).find('input[name ="MoTa"]').val();
+            var gia = $(this).find('input[name ="Gia"]').val();
+            var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+            var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+            var giamgia = $(this).find('input[name ="GiamGia"]').val();
+            var size = $(this).find('input[name ="Size"]').val();
+            var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
+            
+            if (oldvalue != null) { //if already have item then + 1
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
+                //update Gia
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
+                $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
+                ShowAddToCart();
+            }
+            else //them vao cart
+            {
+                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia*(1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input"><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+                ShowAddToCart();
+            }
+
+            if(oldvalue != null)
+            {
+
+                $.ajax({
+                    url: 'AddtoCart',
+                    success: function () {
+                        alert("Value Added");  
+                    }
+
+                });
+            }
+        });
+
+        //+ button on cart (fix bug on dynamically added-append elements)
+        $(document).on("click", "button.cart_plus-btn", function () {
+            var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+            soluong += 1;
+            $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+            //update gia:
+            var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+            var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+            $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
+            $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+            //
+            
+        });
+
+        //- button on cart 
+        $(document).on("click", "button.cart_minus-btn", function () {
+            var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+            if (soluong > 1) {
+                soluong -= 1;
+                $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+                //update gia
+                var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+                var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+                $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
+                $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+            }
+        });
+
+        function SetOrderPrice() {
+            var orderprice = 0;
+            var prices = $('.cart_total_price');
+            prices.forEach(function (item, index, array) {
+                orderprice += parseFloat(item.val()); 
+            });
+            alert(orderprice);
+        }
+    </script>
+    <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->
     <!-- for bootstrap working -->
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script>
+        var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Mật khẩu không khớp!");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(4000).slideUp(1000);
+        });
+    </script>
 </body>
 </html>

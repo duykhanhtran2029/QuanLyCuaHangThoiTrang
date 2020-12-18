@@ -173,6 +173,7 @@
     <Compile Include="Areas\Manager\Controllers\PhieuXuatKhoController.cs" />
     <Compile Include="Areas\Manager\Controllers\QuyenController.cs" />
     <Compile Include="Areas\Manager\Controllers\ThamSoController.cs" />
+    <Compile Include="Extension\MD5Encode.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +191,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cart.css" />
     <Content Include="Content\easy-responsive-tabs.css" />
     <Content Include="Content\flexslider.css" />
     <Content Include="Content\font-awesome.css" />
@@ -293,6 +295,8 @@
     <Content Include="Areas\Manager\Views\Home\Index.cshtml" />
     <Content Include="Areas\Manager\Views\NhaCungCap\DanhSachNhaCungCap.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Cart.js" />
+    <Content Include="Scripts\easy-responsive-tabs.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -304,6 +308,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\minicart.js" />
+    <Content Include="Scripts\minicart.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -439,6 +445,8 @@
     <Content Include="Areas\Manager\Views\ThamSo\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\ThamSo\Index.cshtml" />
     <Content Include="Views\Shared\NavTopBar.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Shared\MainItemList.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -449,7 +457,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Manager\Data\" />
+    <Folder Include="Areas\Manager\Views\Base\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
