@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -16,18 +16,18 @@ namespace QuanLyCuaHangThoiTrang.Model
         }
 
         [Key]
+        [Display(Name = "Mã Báo Cáo Tồn Kho")]
         public int MaBaoCaoTonKho { get; set; }
-
+        [Display(Name = "Tháng"), Required(ErrorMessage = "Tháng không được trống")]
         public int Thang { get; set; }
-
+        [Display(Name = "Năm"), Required(ErrorMessage = "Năm không được trống")]
         public int Nam { get; set; }
-
+        [Display(Name = "Mã Người Dùng"), Required(ErrorMessage = "Mã Người Dùng không được trống")]
         public int MaNguoiDung { get; set; }
-
+        [Display(Name = "Ngày Lập"), Required(ErrorMessage = "Ngày Lập không được trống")]
         public DateTime NgayLap { get; set; }
-
+        [Display(Name = "Tổng Số Hàng Hóa"), Required(ErrorMessage = "Tổng Số Hàng Hóa không được trống")]
         public int TongSoHangHoa { get; set; }
-
         public bool IsDeleted { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }

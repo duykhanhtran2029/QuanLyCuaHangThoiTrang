@@ -8,9 +8,10 @@
     <meta charset="UTF-8">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Areas/Manager/Content/sidebar.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <link href="~/Areas/Manager/Content/header.css" rel="stylesheet" />
     <link href="~/Areas/Manager/Content/Component.css" rel="stylesheet" />
+    <title id="mainTitle">Quản Lý Cửa Hàng Thời Trang</title>
 </head>
 <body>
     <div class="sidebar">
@@ -19,82 +20,7 @@
         </div>
         <div class="sidebar-content">
             @*@if (Menu != null)
-        {
-        <ul>
-            <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
-            @foreach (string item in Menu)
-            {
-
-                switch (item)
                 {
-                    case "QuanLyPhanQuyen":
-                        {
-                            <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
-                            break;
-                        }
-
-                    case "QuanLyHangHoa":
-                        {
-                            <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
-                            break;
-                        }
-
-                    case "QuanLyBanHang":
-                        {
-                            <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
-                            break;
-                        }
-
-                    case "QuanLyDatHang":
-                        {
-                            <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
-                            break;
-                        }
-
-                    case "QuanLyBaoHanh":
-                        {
-                            <li><a onclick="Open('PhieuBaoHanh/Index')"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
-                            break;
-                        }
-
-                    case "QuanLyBaoCaoBanHang":
-                        {
-                            <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
-                            break;
-                        }
-                    case "QuanLyNhaCungCap":
-                        {
-                            <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
-                            break;
-                        }
-                    case "QuanLyNhapKho":
-                        {
-                            <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
-                            break;
-                        }
-                    case "QuanLyXuatKho":
-                        {
-                            <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
-                            break;
-                        }
-                    case "QuanLyKiemKho":
-                        {
-                            <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
-                            break;
-                        }
-                    case "QuanLyBaoCaoTonKho":
-                        {
-                            <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
-                            break;
-                        }
-                    case "QuanLyPhieuChi":
-                        {
-                            <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
-                            break;
-                        }
-
-                }
-
                 <ul>
                     <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
                     @foreach (string item in Menu)
@@ -169,35 +95,110 @@
                                 }
 
                         }
-                        @*<li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
-                            <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
-                            <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
-                            <li><a onclick="Open('PhieuBaoHanh/Index')"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
-                            <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
-                            <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
-                            <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
-                            <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
-                            <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
-                            <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
-                            <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
-                            <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>*@
-                        @*<li>
-                                @Ajax.RawActionLink("<i class=\"fas fa-user-lock\"></i><span>Quản Lý Nhà Cung Cấp</span>", "Index", "BaoCaoTonKho", null,
-                                    new AjaxOptions
-                                    {
-                                        HttpMethod = "GET",
-                                        UpdateTargetId = "content",
-                                        LoadingElementId = "loading"
-                                    }, null)
-                            </li>*@
 
-                    @*}
+                        <ul>
+                            <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
+                            @foreach (string item in Menu)
+                            {
+
+                                switch (item)
+                                {
+                                    case "QuanLyPhanQuyen":
+                                        {
+                                            <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
+                                            break;
+                                        }
+
+                                    case "QuanLyHangHoa":
+                                        {
+                                            <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
+                                            break;
+                                        }
+
+                                    case "QuanLyBanHang":
+                                        {
+                                            <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
+                                            break;
+                                        }
+
+                                    case "QuanLyDatHang":
+                                        {
+                                            <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
+                                            break;
+                                        }
+
+                                    case "QuanLyBaoHanh":
+                                        {
+                                            <li><a onclick="Open('PhieuBaoHanh/Index')"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
+                                            break;
+                                        }
+
+                                    case "QuanLyBaoCaoBanHang":
+                                        {
+                                            <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyNhaCungCap":
+                                        {
+                                            <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyNhapKho":
+                                        {
+                                            <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyXuatKho":
+                                        {
+                                            <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyKiemKho":
+                                        {
+                                            <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyBaoCaoTonKho":
+                                        {
+                                            <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
+                                            break;
+                                        }
+                                    case "QuanLyPhieuChi":
+                                        {
+                                            <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
+                                            break;
+                                        }
+
+                                }
+                                @*<li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
+                                    <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
+                                    <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
+                                    <li><a onclick="Open('PhieuBaoHanh/Index')"><i class="fas fa-exchange-alt"></i><span>Quản Lý Bảo Hành</span></a></li>
+                                    <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
+                                    <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
+                                    <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
+                                    <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
+                                    <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
+                                    <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
+                                    <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
+                                    <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>*@
+            @*<li>
+                    @Ajax.RawActionLink("<i class=\"fas fa-user-lock\"></i><span>Quản Lý Nhà Cung Cấp</span>", "Index", "BaoCaoTonKho", null,
+                        new AjaxOptions
+                        {
+                            HttpMethod = "GET",
+                            UpdateTargetId = "content",
+                            LoadingElementId = "loading"
+                        }, null)
+                </li>*@
+
+            @*}
+                        </ul>
+                    }
+
+                    }
                 </ul>
-            }
-
-            }
-        </ul>
-        }*@
+                }*@
             <ul>
                 <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
                 <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
@@ -242,5 +243,8 @@
     <script src="~/Areas/Manager/Scripts/sidebar.js"></script>
     <script src="~/Areas/Manager/Scripts/header.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Areas/Manager/Scripts/main.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

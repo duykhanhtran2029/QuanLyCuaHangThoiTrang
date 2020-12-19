@@ -1,5 +1,7 @@
+using QuanLyCuaHangThoiTrang.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
@@ -19,8 +21,8 @@ namespace QuanLyCuaHangThoiTrang
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Database.SetInitializer<QuanLyCuaHangThoiTrangDbContext>(new DropCreateDatabaseIfModelChanges<QuanLyCuaHangThoiTrangDbContext>());
 
-        
         }
       
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
