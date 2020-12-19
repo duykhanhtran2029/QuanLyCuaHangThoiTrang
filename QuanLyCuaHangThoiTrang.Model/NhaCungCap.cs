@@ -16,21 +16,22 @@
         }
 
         [Key]
+        [Display(Name = "Mã Nhà Cung Cấp")]
         public int MaNhaCungCap { get; set; }
 
         [Display(Name = "Tên Nhà Cung Cấp"), Required(ErrorMessage = "Tên Nhà Cung Cấp không được trống")]
-        [StringLength(50)]
         public string TenNhaCungCap { get; set; }
 
         [Display(Name = "Địa Chỉ"), Required(ErrorMessage = "Địa Chỉ không được trống")]
-        [StringLength(100)]
         public string DiaChi { get; set; }
 
         [Display(Name = "Số Điện Thoại"), Required(ErrorMessage = "Số Điện Thoại không được trống")]
-        [StringLength(15)]
+        [StringLength(11, ErrorMessage = "Số Điện Thoại không được quá 11 chữ số")]
+        [RegularExpression(@"[0-9]{7,11}", ErrorMessage = "Số Điện Thoại không hợp lệ")]
         public string SoDienThoai { get; set; }
 
-        [StringLength(30)]
+        [StringLength(200)]
+        [EmailAddress]
         public string Email { get; set; }
 
         public bool IsDeleted { get; set; }
