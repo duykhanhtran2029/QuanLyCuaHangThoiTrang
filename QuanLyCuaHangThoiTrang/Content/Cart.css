@@ -59,6 +59,14 @@
     height: 17px;
   }
 
+  .shopping-cart input[type=submit]{
+    background-color: white;
+  border: #5E6977;
+  color: #2fdab8;
+  text-decoration: none;
+  cursor: pointer;
+}
+
   i {
     font-family:'FontAwesome';
   }
