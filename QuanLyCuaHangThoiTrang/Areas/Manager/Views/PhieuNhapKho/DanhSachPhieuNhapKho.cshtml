@@ -1,0 +1,78 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.PhieuNhapKho>
+@{ Layout = null; }
+<div class="table-responsive">
+    <table class="table table-bordered table-middle table-lilac" id="datatable">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 10%;">Số Phiếu</th>
+                <th class="text-center" style="width: 15%;">Ngày Nhập Kho</th>
+                <th class="text-center" style="width: 15%;">Người Lập</th>
+                <th class="text-center" style="width: 20%;">Nhà Cung Cấp</th>
+                <th class="text-center" style="width: 15%;">Tổng Tiền</th>
+                <th class="text-center" style="width: 15%;">Ghi Chú</th>
+                <th class="text-center" style="width: 10%;">Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (!item.IsDeleted)
+                {
+            <tr class="border-warning" style="text-align:center">
+                <td>
+                    @item.SoPhieuNhapKho
+                </td>
+                <td>
+                    @item.NgayNhapKho
+                </td>
+                <td>
+                    @item.NguoiDung.TenNguoiDung
+                </td>
+                <td>
+                    @item.NhaCungCap.TenNhaCungCap
+                </td>
+                <td>
+                    @item.TongTien
+                </td>
+                <td>
+                    @item.Ghichu
+                </td>
+                <td class="text-center">
+                    <a href="@Url.Action("Edit", new { id = item.SoPhieuNhapKho })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+                    @Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete", "PhieuNhapKho",
+                                                new { id = item.SoPhieuNhapKho },
+                                                new AjaxOptions
+                                                {
+                                                    HttpMethod = "GET",
+                                                    UpdateTargetId = "Modal",
+                                                    LoadingElementId = "loading"
+                                                },
+                                                new
+                                                {
+                                                    @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                })
+                    @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "PhieuNhapKho",
+                                                new { id = item.SoPhieuNhapKho },
+                                                new AjaxOptions
+                                                {
+                                                    HttpMethod = "GET",
+                                                    UpdateTargetId = "Modal",
+                                                    LoadingElementId = "loading"
+                                                },
+                                                new
+                                                {
+                                                    @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                })
+                </td>
+            </tr>}
+            }
+        </tbody>
+    </table>
+    <div class="pull-left" style="padding-top:20px">
+        <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
+    </div>
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

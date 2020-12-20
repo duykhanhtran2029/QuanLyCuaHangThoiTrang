@@ -40,7 +40,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Create()
         {
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu");
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "SoPhieuNhapKho");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SoPhieuNhapKho,MaHangHoa,SoLuong,GiaNhap,MaNhaCungCap,ThanhTien")] ChiTietPhieuNhapKho chiTietPhieuNhapKho)
+        public ActionResult Create([Bind(Include = "SoPhieuNhapKho,MaHangHoa,SoLuong,GiaNhap,ThanhTien")] ChiTietPhieuNhapKho chiTietPhieuNhapKho)
         {
             if (ModelState.IsValid)
             {

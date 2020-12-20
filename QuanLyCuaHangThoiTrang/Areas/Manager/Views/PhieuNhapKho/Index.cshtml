@@ -1,71 +1,42 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.PhieuNhapKho>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ NHẬP KHO";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Phiếu Nhập Kho.";
 }
-
 <title id="pageTitle">
     Quản Lý Nhập Kho
 </title>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NhaCungCap.TenNhaCungCap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayNhapKho)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ghichu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NguoiDung.TenNguoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NhaCungCap.TenNhaCungCap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayNhapKho)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ghichu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayChinhSua)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SoPhieuNhapKho }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SoPhieuNhapKho }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SoPhieuNhapKho })
-        </td>
-    </tr>
-}
-
-</table>
+<div id="Modal" class="modal fade" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh sách Phiếu nhập kho</p>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('PhieuNhapKho/Create')">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm Phiếu Nhập Kho</span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachPhieuNhapKho", "PhieuNhapKho", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên nhà cung cấp, số điện thoại, địa chỉ hoặc email" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachPhieuNhapKho", "PhieuNhapKho");}
+        </div>
+    </div>
+</div>

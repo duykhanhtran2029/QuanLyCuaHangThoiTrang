@@ -17,48 +17,48 @@
         @Html.HiddenFor(model => model.MaBaoCaoTonKho)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Thang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Thang, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.Thang, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Thang, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nam, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Nam, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.Nam, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nam, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaNguoiDung, "MaNguoiDung", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.MaNguoiDung, "MaNguoiDung", htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
+                @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal" })
                 @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.NgayLap, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NgayLap, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TongSoHangHoa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.TongSoHangHoa, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.TongSoHangHoa, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TongSoHangHoa, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.IsDeleted)
                     @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10 custom-input">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>

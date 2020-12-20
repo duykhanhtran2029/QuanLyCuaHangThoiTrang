@@ -295,6 +295,7 @@
     <Content Include="Areas\Manager\Views\Home\Index.cshtml" />
     <Content Include="Areas\Manager\Views\NhaCungCap\DanhSachNhaCungCap.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuChi\DanhSachPhieuChi.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuNhapKho\DanhSachPhieuNhapKho.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />

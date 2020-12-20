@@ -36,6 +36,7 @@ function Open(url, replaceheader = true) {
             }
             $('#content').show();
             $('#loading').hide();
+            LoadDatatable();
             window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);        },
     });
 }
