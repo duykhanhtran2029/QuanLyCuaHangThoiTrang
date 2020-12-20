@@ -28,7 +28,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal" })
                     @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNhaCungCap, "Nhà Cung Cấp", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaNhaCungCap", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("MaNhaCungCap", null, htmlAttributes: new { @class = "form-control minimal" })
                     @Html.ValidationMessageFor(model => model.MaNhaCungCap, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -80,7 +80,7 @@
             <div class="form-group">
                 <label class="control-label custom-label">Hàng Hóa</label>
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaHangHoa", (SelectList)ViewBag.MaHangHoa, "Chọn Hàng Hóa", new { @class = "form-control" })
+                    @Html.DropDownList("MaHangHoa", (SelectList)ViewBag.MaHangHoa,null, new { @class = "form-control minimal" })
                     @Html.ValidationMessageFor(model => model.NgayNhapKho, "", new { @class = "text-danger" })
                 </div>
             </div>

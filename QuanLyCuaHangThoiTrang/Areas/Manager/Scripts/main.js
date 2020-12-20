@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#datatable').DataTable({
-        "order": []
-    });
+    $('#datatable').DataTable();
     $('.dataTables_length').remove();
     $('.dataTables_info').remove();
     $('#datatable_paginate').remove();
