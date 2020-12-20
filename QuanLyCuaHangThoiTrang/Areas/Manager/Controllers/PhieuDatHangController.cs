@@ -48,7 +48,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,Ghichu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
+        public ActionResult Create([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,GhiChu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,Ghichu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
+        public ActionResult Edit([Bind(Include = "SoPhieuDatHang,NgayDat,MaNguoiDung,TenKhachHang,SoDienThoai,Diachi,Email,TongTien,HinhThucThanhToan,GhiChu,NgayGiao,DaXacNhan,DaThanhToan,IsDeleted,NgayChinhSua")] PhieuDatHang phieuDatHang)
         {
             if (ModelState.IsValid)
             {

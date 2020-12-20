@@ -194,3 +194,4 @@ E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\ob
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csproj.CopyComplete
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.dll
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.pdb
+E:\CODE\CSharp\ASP\DoAn\QuanLyCuaHangThoiTrang\QuanLyCuaHangThoiTrang\bin\App_Data\QuanLyCuaHangThoiTrang.mdf

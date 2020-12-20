@@ -42,7 +42,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Create()
         {
             //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
-            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu");
+            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu");
             var SoPNKinPC = (from pc in db.PhieuChis
                              select new
                              {
@@ -104,7 +104,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", phieuChi.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", phieuChi.SoPhieuNhapKho);
             return View(phieuChi);
         }
 
@@ -121,7 +121,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", phieuChi.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", phieuChi.SoPhieuNhapKho);
             return View(phieuChi);
         }
 
@@ -139,7 +139,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", phieuChi.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", phieuChi.SoPhieuNhapKho);
             return View(phieuChi);
         }
 
@@ -185,7 +185,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             var user = (NguoiDung)Session["Account"];
             string tien = form["Tongtienchi"].ToString();
             string sophieunhap = form["Sophieunhapkho"].ToString();
-            string ghichu = form["Ghichu"].ToString();
+            string ghichu = form["GhiChu"].ToString();
             var phieuChi = db.PhieuChis.SingleOrDefault();
             if (phieuChi == null)
             {

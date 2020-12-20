@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
@@ -36,6 +37,10 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(pnk.ToPagedList(page, pageSize));
         }
 
+        public void LuuChiTietPhieuNhapKho(List<ChiTietPhieuNhapKho> orderItems)
+        {
+            db.ChiTietPhieuNhapKhoes.Add(orderItems[0]);
+        }
         // GET: PhieuNhapKho/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,14 +55,57 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return View(phieuNhapKho);
         }
+        public ActionResult LoadThongTinHangHoa(int id)
+        {
+            var result = db.HangHoas.Where(hh => hh.MaHangHoa == id).FirstOrDefault();
+            return Json(new { TenHangHoa = result.TenHangHoa,
+                DonViTinh = result.DonViTinh,
+                Size = result.Size }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult LuuPhieuNhapKho(NhapKho phieuNhapKho)
+        {
+            PhieuNhapKho pnk = new PhieuNhapKho
+            {
+                NgayNhapKho = phieuNhapKho.NgayNhapKho,
+                MaNguoiDung = phieuNhapKho.MaNguoiDung,
+                MaNhaCungCap = phieuNhapKho.MaNhaCungCap,
+                TongTien = phieuNhapKho.TongTien,
+                GhiChu = phieuNhapKho.GhiChu,
+                IsDeleted = phieuNhapKho.IsDeleted,
+                NgayChinhSua = DateTime.Now.Date
+            };
+            bool status = false;
+            try
+            {
+                db.PhieuNhapKhoes.Add(pnk);
+                db.SaveChanges();
 
+                foreach (var i in phieuNhapKho.chiTietPhieuNhapKhoes)
+                {
+                    i.SoPhieuNhapKho = pnk.SoPhieuNhapKho;
+                    db.ChiTietPhieuNhapKhoes.Add(i);
+                    var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
+                    hanghoa.SoLuong += i.SoLuong;
+                    db.SaveChanges();
+                }
+
+                status = true;
+            }
+            catch
+            {
+                status = false;
+                throw;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
         // GET: PhieuNhapKho/Create
         public ActionResult Create()
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap");
             //ViewBag.HangHoas = db.HangHoas.Where(hh => hh.IsDeleted == false).ToList();
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa" , "TenHangHoa");
             return View();
         }
 
@@ -66,7 +114,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SoPhieuNhapKho,NgayNhapKho,MaNguoiDung,MaNhaCungCap,TongTien,Ghichu,IsDeleted,NgayChinhSua")] PhieuNhapKho phieuNhapKho)
+        public ActionResult Create([Bind(Include = "SoPhieuNhapKho,NgayNhapKho,MaNguoiDung,MaNhaCungCap,TongTien,GhiChu,IsDeleted,NgayChinhSua")] PhieuNhapKho phieuNhapKho)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +125,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuNhapKho.MaNguoiDung);
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View(phieuNhapKho);
         }
 
@@ -94,6 +143,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuNhapKho.MaNguoiDung);
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
             return View(phieuNhapKho);
         }
 
@@ -102,7 +153,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SoPhieuNhapKho,NgayNhapKho,MaNguoiDung,MaNhaCungCap,TongTien,Ghichu,IsDeleted,NgayChinhSua")] PhieuNhapKho phieuNhapKho)
+        public ActionResult Edit([Bind(Include = "SoPhieuNhapKho,NgayNhapKho,MaNguoiDung,MaNhaCungCap,TongTien,GhiChu,IsDeleted,NgayChinhSua")] PhieuNhapKho phieuNhapKho)
         {
             if (ModelState.IsValid)
             {
@@ -112,6 +163,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuNhapKho.MaNguoiDung);
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
             return View(phieuNhapKho);
         }
 
