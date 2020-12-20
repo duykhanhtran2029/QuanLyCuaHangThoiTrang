@@ -574,3 +574,16 @@ hr {
     text-align: left !important;
     padding-left: 50px;
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.custom-label {
+    width: fit-content !important;
+    padding-left: 0 !important;
+    margin: 0px 25px 5px 25px !important;
+}
+.custom-input {
+    margin-left: 10px !important;
+    width: 95% !important;
+}

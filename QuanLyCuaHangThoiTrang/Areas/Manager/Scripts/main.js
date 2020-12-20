@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $('#datatable').DataTable({
         "order": []
     });
@@ -16,6 +15,7 @@ $(document).ajaxComplete(function () {
     $(".btnDel").attr('data-toggle', 'modal');
     $(".btnDel").attr('data-target', '#Modal');
 });
+
 function LoadDatatable() {
     $('#datatable').DataTable({
         "order": []

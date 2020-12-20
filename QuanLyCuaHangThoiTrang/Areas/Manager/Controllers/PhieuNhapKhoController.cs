@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -19,6 +20,20 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             var phieuNhapKhoes = db.PhieuNhapKhoes.Include(p => p.NguoiDung).Include(p => p.NhaCungCap);
             return View(phieuNhapKhoes.ToList());
+        }
+        public ActionResult DanhSachPhieuNhapKho(string searchString, int page = 1, int pageSize = 10)
+        {
+            IList<PhieuNhapKho> pnk = db.PhieuNhapKhoes.ToList();
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    ncc = db.NhaCungCaps.Where(
+            //    nhacungcap => nhacungcap.TenNhaCungCap.Contains(searchString) ||
+            //    nhacungcap.Email.Contains(searchString) ||
+            //    nhacungcap.DiaChi.Contains(searchString) ||
+            //    nhacungcap.SoDienThoai.Contains(searchString)).ToList();
+            //}
+            //Add search later
+            return View(pnk.ToPagedList(page, pageSize));
         }
 
         // GET: PhieuNhapKho/Details/5
@@ -41,6 +56,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap");
+            //ViewBag.HangHoas = db.HangHoas.Where(hh => hh.IsDeleted == false).ToList();
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View();
         }
 
