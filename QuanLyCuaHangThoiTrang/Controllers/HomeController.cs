@@ -172,7 +172,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
                     UserName = username,
                     PassWord = password,
                     IsDeleted = false,
-                    MaChucVu = 6, // Customer
+                    MaChucVu = 2, // Customer
                     Avatar = ""
                 }) ;
                 db.SaveChanges();

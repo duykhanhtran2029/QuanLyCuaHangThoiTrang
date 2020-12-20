@@ -36,8 +36,13 @@ function Open(url, replaceheader = true) {
             }
             $('#content').show();
             $('#loading').hide();
+            window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);
+        },
+        complete: function () {
             LoadDatatable();
-            window.history.pushState({ "html": response, "pageTitle": document.title, "rHeader": replaceheader }, "", url);        },
+            if (url.includes("PhieuNhapKho/Create"))
+                PhieuNhapKho();
+        }
     });
 }
 window.onpopstate = function (e) {

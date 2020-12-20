@@ -24,7 +24,7 @@
                     @item.SoPhieuNhapKho
                 </td>
                 <td>
-                    @item.NgayNhapKho
+                    @item.NgayNhapKho.ToString("MM/dd/yyyy")
                 </td>
                 <td>
                     @item.NguoiDung.TenNguoiDung
@@ -36,7 +36,7 @@
                     @item.TongTien
                 </td>
                 <td>
-                    @item.Ghichu
+                    @item.GhiChu
                 </td>
                 <td class="text-center">
                     <a href="@Url.Action("Edit", new { id = item.SoPhieuNhapKho })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>

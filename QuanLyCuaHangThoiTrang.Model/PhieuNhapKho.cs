@@ -20,7 +20,7 @@
         [Display(Name = "Số Phiếu Nhập Kho"), Required(ErrorMessage = "Số Phiếu Nhập Kh không được trống")]
         public int SoPhieuNhapKho { get; set; }
 
-        [Column(TypeName = "date")]
+        [Column(TypeName = "Date")]
         [Display(Name = "Ngày Nhập Kho"), Required(ErrorMessage = "Ngày Nhập Kho không được trống")]
         public DateTime NgayNhapKho { get; set; }
 
@@ -35,7 +35,7 @@
         public decimal TongTien { get; set; }
 
         [Display(Name = "Ghi Chú")]
-        public string Ghichu { get; set; }
+        public string GhiChu { get; set; }
 
         public bool IsDeleted { get; set; }
 

@@ -59,7 +59,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa", chiTietPhieuNhapKho.MaHangHoa);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", chiTietPhieuNhapKho.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", chiTietPhieuNhapKho.SoPhieuNhapKho);
             return View(chiTietPhieuNhapKho);
         }
 
@@ -76,7 +76,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa", chiTietPhieuNhapKho.MaHangHoa);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", chiTietPhieuNhapKho.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", chiTietPhieuNhapKho.SoPhieuNhapKho);
             return View(chiTietPhieuNhapKho);
         }
 
@@ -94,7 +94,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa", chiTietPhieuNhapKho.MaHangHoa);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", chiTietPhieuNhapKho.SoPhieuNhapKho);
+            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", chiTietPhieuNhapKho.SoPhieuNhapKho);
             return View(chiTietPhieuNhapKho);
         }
 
