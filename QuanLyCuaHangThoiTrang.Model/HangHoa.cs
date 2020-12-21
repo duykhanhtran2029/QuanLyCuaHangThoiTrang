@@ -27,9 +27,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Required]
         public string TenHangHoa { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal GiaNhap { get; set; }
-
         public double GiamGia { get; set; }
 
         [Column(TypeName = "money")]
