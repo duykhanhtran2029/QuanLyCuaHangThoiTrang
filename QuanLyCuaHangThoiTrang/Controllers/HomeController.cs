@@ -13,7 +13,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     {
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public string HoTen = "";
-        List<ChiTietPhieuDatHang> Cart;
+        public List<ChiTietPhieuDatHang> Cart = new List<ChiTietPhieuDatHang>();
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
@@ -40,34 +40,6 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0)).ToList();
             //load hang hoa sale
             return View();
-        }
-
-        public ActionResult LoadNewItem()
-        {
-            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
-            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ").ToList();
-            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách").ToList();
-            ViewBag.FootWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" || hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ"
-            || hh.LoaiHangHoa.TenLoaiHangHoa == "Dép").ToList();
-            //Load hang hoa new
-            ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0).ToList();
-            ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0).ToList();
-            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.GiamGia != 0).ToList();
-            ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0)
-            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0) ).ToList();
-            //load hang hoa sale
-            return PartialView("MainItemList");
-        }
-
-        public ActionResult LoadSaleItem()
-        {
-            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia>0).ToList();
-            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0).ToList();
-            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.GiamGia > 0).ToList();
-            ViewBag.FootWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" || hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ"
-            || hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia > 0).ToList();
-            //Load hang hoa
-            return PartialView("MainItemList");
         }
 
         public ActionResult About()
@@ -104,6 +76,29 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
             ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
+        }
+
+        [HttpPost]
+        public void AddToCart(int MAHANGHOA, float GIA, float GIAMGIA)
+        {
+            if (!Cart.Exists(o => o.MaHangHoa == MAHANGHOA))
+            {
+                ChiTietPhieuDatHang ctpdh = new ChiTietPhieuDatHang();
+                ctpdh.MaHangHoa = MAHANGHOA;
+                ctpdh.SoLuong = 1;
+                ctpdh.Gia = (decimal)(GIA * (1 - GIAMGIA));
+                ctpdh.ThanhTien = (decimal)(GIA * (1 - GIAMGIA)); ;
+                Cart.Add(ctpdh);
+            }
+            else
+            {
+                for (int i = 0; i < Cart.Count; i++)
+                {
+                    if (Cart[i].MaHangHoa == MAHANGHOA)
+                        Cart[i].SoLuong += 1;
+                }
+            }
+            
         }
 
         [HttpPost]

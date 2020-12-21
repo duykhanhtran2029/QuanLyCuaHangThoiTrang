@@ -640,7 +640,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             var giamgia = $(this).find('input[name ="GiamGia"]').val();
             var size = $(this).find('input[name ="Size"]').val();
             var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
-            
+
             if (oldvalue != null) { //if already have item then + 1
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
                 //update Gia
@@ -648,23 +648,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
                 SetOrderPrice(); //hiện tổng tiền
                 ShowAddToCart();
+                //gọi controller thêm vào cart:
+                $.ajax({
+                    type: "POST",
+                    url: "Home/AddToCart",
+                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia },
+                    success: function () {
+                        alert("success");
+                    }
+                });
             }
-            else //them vao cart
+            else //them vao cart 
             {
                 $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia*(1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
                 SetOrderPrice(); //hiện tổng tiền
                 ShowAddToCart();
-            }
-
-            if(oldvalue != null)
-            {
-
+                //gọi controller thêm vào cart:
                 $.ajax({
-                    url: 'AddtoCart',
+                    type: "POST",
+                    url: "Home/AddToCart",
+                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia },
                     success: function () {
-                        alert("Value Added");  
+                        alert("success");
                     }
-
                 });
             }
         });
@@ -682,7 +688,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             SetOrderPrice(); //hiện tổng tiền
         });
 
-        //- button on cart 
+        //- button on cart
         $(document).on("click", "button.cart_minus-btn", function () {
             var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
             if (soluong > 1) {
@@ -703,7 +709,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             SetOrderPrice();
         });
 
-        
+
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->
