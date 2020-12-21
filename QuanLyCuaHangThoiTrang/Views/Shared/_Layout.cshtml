@@ -268,55 +268,65 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     <!-- //Modal1 -->
     <!-- //Shopping cart -->
-<div class="shopping-cart" id="shopping-cart-div" style="display:none">
-    <div class="cart_title">
-        Shopping Bag
-        <div>
-            <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
-                <i class="fas fa-close"></i>
-            </button>
-
-        </div>
-    </div>
-    <div id="item-container">
-        <!-- Product-->
-        <div class="cart_item">
-            <div class="cart_buttons">
-                <button id="cart_delete_btn" class="cart_delete-btn1">
+    <div class="shopping-cart" id="shopping-cart-div" style="display:none">
+        <div class="cart_title">
+            Shopping Bag
+            <div>
+                <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
                     <i class="fas fa-close"></i>
                 </button>
+
             </div>
-            <div class="cart_image">
-                <img src="~/images/s1.jpg" alt="item" />
+        </div>
+        <div id="item-container">
+            <!-- Product-->
+        </div>
+        <div class="order-price">
+            <b>Tổng tiền: </b>
+            <span class="order-value"> 0 </span>
+            <span>&nbsp; VNĐ</span>
+        </div>
+        <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
+    </div>
+    <!-- //Shopping cart -->
+
+    <!-- //Popup Submit Order -->
+    <div class="order-submit-popup">
+        <div class="card">
+            <h2>Thông tin đặt hàng</h2>
+            <hr />
+            <div class="input-group">
+                <span>Tên: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Số điện thoại: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Địa chỉ: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Email: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Ghi chú: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Ngày giao: </span>
+                <input type="text" value="" />
+            </div>
+            <div class="input-group">
+                <span>Tổng tiền</span>
+                <input type="text" value="" />
             </div>
 
-            <div class="cart_description">
-                <span>Common Projects</span>
-                <span>Bball High</span>
-                <span>White</span>
-            </div>
-
-            <div class="cart_quantity">
-                <button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <input type="text" name="cart_input" value="1" id="cart_input" readonly>
-                <button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-
-            <div class="cart_total-price">$549</div>
         </div>
     </div>
-    <div class="order-price">
-        <b>Tổng tiền: </b>
-        <span class="order-value"> 0 </span>
-        <span>&nbsp; VNĐ</span>
-    </div>
-    <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
-</div>
-    <!-- //Shopping cart -->
+    <!-- //Popup Submit Order-->
     @RenderBody()
     <!-- footer -->
     <div class="footer">
@@ -533,7 +543,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Custom-JavaScript-File-Links -->
     <!-- script for responsive tabs -->
     <script src="~/Scripts/easy-responsive-tabs.js"></script>
-    <script> 
+    <script>
         $(document).ready(function () {
             $('#horizontalTab').easyResponsiveTabs({
                 type: 'default', //Types: default, vertical, accordion
@@ -652,25 +662,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $.ajax({
                     type: "POST",
                     url: "Home/AddToCart",
-                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia },
-                    success: function () {
-                        alert("success");
-                    }
+                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
                 });
             }
-            else //them vao cart 
+            else //them vao cart
             {
-                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia*(1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia * (1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
                 SetOrderPrice(); //hiện tổng tiền
                 ShowAddToCart();
                 //gọi controller thêm vào cart:
                 $.ajax({
                     type: "POST",
                     url: "Home/AddToCart",
-                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia },
-                    success: function () {
-                        alert("success");
-                    }
+                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
                 });
             }
         });
@@ -683,9 +687,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             //update gia:
             var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
             var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+            var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
             $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
             $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
             SetOrderPrice(); //hiện tổng tiền
+            //gọi controller thêm vào cart:
+            $.ajax({
+                type: "POST",
+                url: "Home/AddToCart",
+                data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+            });
         });
 
         //- button on cart
@@ -697,16 +708,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 //update gia
                 var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
                 var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+                var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
                 $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
                 $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
                 SetOrderPrice(); //hiện tổng tiền
+                //gọi controller -1 số lượng vào cart:
+                $.ajax({
+                    type: "POST",
+                    url: "Home/MinusCart",
+                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+                });
             }
         });
 
         // delete button on cart cart_delete-btn1
         $(document).on("click", "button.cart_delete-btn1", function () {
             $(this).parent().parent("div").remove(".cart_item");
-            SetOrderPrice();
+            SetOrderPrice();//hiện tổng tiền
+            //gọi controller xóa sản phẩm khỏi cart:
+            var mahanghoa = $(this).parent().siblings().find('input[name =id-sanpham-submit]').val();
+            $.ajax({
+                type: "POST",
+                url: "Home/DeleteFromCart",
+                data: { MAHANGHOA: mahanghoa }
+            });
         });
 
 
