@@ -38,40 +38,28 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             //Add search later
             return View(pnk.ToPagedList(page, pageSize));
         }
-
-        // GET: PhieuNhapKho/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhieuNhapKho phieuNhapKho = db.PhieuNhapKhoes.Find(id);
-            if (phieuNhapKho == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
-            ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
-            return View(phieuNhapKho);
-        }
         public ActionResult LoadThongTinHangHoa(int id)
         {
             var result = db.HangHoas.Where(hh => hh.MaHangHoa == id).FirstOrDefault();
-            return Json(new { TenHangHoa = result.TenHangHoa,
+            return Json(new
+            {
+                TenHangHoa = result.TenHangHoa,
                 DonViTinh = result.DonViTinh,
-                Size = result.Size }, JsonRequestBehavior.AllowGet);
+                Size = result.Size
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult LoadChiTietPhieuNhapKho(int id)
         {
             var result = db.ChiTietPhieuNhapKhoes.Where(ct => ct.SoPhieuNhapKho == id)
-                .Select(ct => new { MaHangHoa = ct.MaHangHoa,
-                                    TenHangHoa = ct.HangHoa.TenHangHoa, 
-                                    DonViTinh = ct.HangHoa.DonViTinh,  
-                                    SoLuong = ct.SoLuong,
-                                    GiaNhap = ct.GiaNhap, 
-                                    ThanhTien = ct.ThanhTien }).ToList();
+                .Select(ct => new {
+                    MaHangHoa = ct.MaHangHoa,
+                    TenHangHoa = ct.HangHoa.TenHangHoa,
+                    DonViTinh = ct.HangHoa.DonViTinh,
+                    SoLuong = ct.SoLuong,
+                    GiaNhap = ct.GiaNhap,
+                    ThanhTien = ct.ThanhTien
+                }).ToList();
             var json = JsonConvert.SerializeObject(result);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
@@ -156,6 +144,22 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 throw;
             }
             return new JsonResult { Data = new { status = status } };
+        }
+        // GET: PhieuNhapKho/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PhieuNhapKho phieuNhapKho = db.PhieuNhapKhoes.Find(id);
+            if (phieuNhapKho == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
+            return View(phieuNhapKho);
         }
         // GET: PhieuNhapKho/Create
         public ActionResult Create()

@@ -48,7 +48,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaHangHoa,TenHangHoa,GiaNhap,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
+        public ActionResult Create([Bind(Include = "MaHangHoa,TenHangHoa,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaHangHoa,TenHangHoa,GiaNhap,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
+        public ActionResult Edit([Bind(Include = "MaHangHoa,TenHangHoa,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
         {
             if (ModelState.IsValid)
             {
