@@ -15,9 +15,6 @@
         <hr />
         <div>
             @Html.AntiForgeryToken()
-            <div hidden>
-                @Html.EditorFor(model => model.SoPhieuNhapKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuNhapKho" } })
-            </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayNhapKho, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
@@ -29,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal disabled", @id = "maNguoiDung" })
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung" })
                     @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,7 +42,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control disabled", @id = "tongTien" } })
+                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongTien" } })
                     @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +58,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker disabled", @id = "ngayChinhSua" } })
+                    @Html.EditorFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayChinhSua" } })
                     @Html.ValidationMessageFor(model => model.NgayChinhSua, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -145,13 +142,6 @@
             </table>
             <span id="productItemError" class="messageError" style="color:red"></span>
             <hr style="margin-top: 10px !important" />
-            <div>
-                <div class="pull-left">
-                    <p class="card-title-heading" id="pageTitle">Chi Tiết Phiếu Nhập Kho</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <hr/>
             <div id="orderItems" class="table-responsive"></div>
             <div id="Items" hidden class="table-responsive"></div>
         </form>

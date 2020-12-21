@@ -146,7 +146,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Manager\Dto\XuatKho.cs" />
     <Compile Include="Areas\Manager\Dto\NhapKho.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoBanHangController.cs" />
@@ -344,7 +343,6 @@
     <Content Include="Areas\Manager\Views\NhaCungCap\DanhSachNhaCungCap.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuChi\DanhSachPhieuChi.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuNhapKho\DanhSachPhieuNhapKho.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuXuatKho\DanhSachPhieuXuatKho.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />

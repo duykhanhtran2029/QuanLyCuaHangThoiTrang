@@ -286,45 +286,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <span class="order-value"> 0 </span>
             <span>&nbsp; VNĐ</span>
         </div>
-        <input type="submit" name="cart_submit" value="Make Order" class="cart_submit">
+        <input type="submit" name="cart_submit" value="Đặt Hàng" class="cart_submit">
     </div>
     <!-- //Shopping cart -->
-
     <!-- //Popup Submit Order -->
-    <div class="order-submit-popup">
-        <div class="card">
+    <div id="order-submit-popup" class="order-submit-popup" style="display:none">
+        <div style="display:flex; align-items: center; justify-content: center;">
             <h2>Thông tin đặt hàng</h2>
-            <hr />
-            <div class="input-group">
-                <span>Tên: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Số điện thoại: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Địa chỉ: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Email: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Ghi chú: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Ngày giao: </span>
-                <input type="text" value="" />
-            </div>
-            <div class="input-group">
-                <span>Tổng tiền</span>
-                <input type="text" value="" />
-            </div>
-
+            <button id="order_close" class="order_close-btn">
+                <i class="fas fa-close"></i>
+            </button>
         </div>
+        <hr />
+        <div class="order-container">
+            <div class="order-input">
+                <span>Họ Tên</span>
+                <span>Số Điện Thoại</span>
+                <span>Địa Chỉ</span>
+                <span>Email</span>
+                <span>Ghi Chú</span>
+
+            </div>
+            <div class="order-input">
+                <form>
+                    <input name="order-ten" type="text" placeholder=" Họ Tên" />
+                    <input name="order-sdt" type="text" placeholder="Số Điện Thoại" />
+                    <input name="order-diachi" type="text" placeholder="Địa Chỉ" />
+                    <input name="order-email" type="text" placeholder="Email" />
+                    <input type="text" placeholder="Ghi Chú" />
+                </form>
+            </div>
+            <div class="order-input">
+                <b>Tổng Tiền</b>
+                <span id="order-total">100</span>
+                <span>&nbsp; VNĐ</span>
+            </div>
+            <input id="order" type="submit" value="Đặt Hàng" />
+        </div>
+            
+
     </div>
     <!-- //Popup Submit Order-->
     @RenderBody()
@@ -613,6 +613,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
     </script>
+    <!-- Script for validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript"></script>
     <!-- //Script from Nam BEGIN -->
     <script type="text/javascript">
         function ShowCart() {
@@ -733,6 +735,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 data: { MAHANGHOA: mahanghoa }
             });
         });
+        //popup
+        $(document).on("click", "input.cart_submit", function () {
+            $('.order-submit-popup').fadeIn();
+            //set tong tien
+            var tien = $('span.order-value').text();
+            $('#order-total').text(tien);
+            $("body > *").not("body > .order-submit-popup").css('opacity', '0');
+        });
+
+        $('#order_close').click(function () {
+            $("#order-submit-popup").fadeOut();
+            $("body > *").not("body > .order-submit-popup").css('opacity', '1');
+        });
+
+        $('#order').on("submit", function (event) {
+            //event.preventDefault();
+        });
 
 
     </script>
@@ -760,5 +779,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             $('#AlertBox').delay(4000).slideUp(1000);
         });
     </script>
+
 </body>
 </html>

@@ -9,8 +9,6 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
@@ -38,54 +36,32 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             //Add search later
             return View(pnk.ToPagedList(page, pageSize));
         }
+
+        public void LuuChiTietPhieuNhapKho(List<ChiTietPhieuNhapKho> orderItems)
+        {
+            db.ChiTietPhieuNhapKhoes.Add(orderItems[0]);
+        }
+        // GET: PhieuNhapKho/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PhieuNhapKho phieuNhapKho = db.PhieuNhapKhoes.Find(id);
+            if (phieuNhapKho == null)
+            {
+                return HttpNotFound();
+            }
+            return View(phieuNhapKho);
+        }
         public ActionResult LoadThongTinHangHoa(int id)
         {
             var result = db.HangHoas.Where(hh => hh.MaHangHoa == id).FirstOrDefault();
-            return Json(new
-            {
-                TenHangHoa = result.TenHangHoa,
+            return Json(new { TenHangHoa = result.TenHangHoa,
                 DonViTinh = result.DonViTinh,
-                Size = result.Size
-            }, JsonRequestBehavior.AllowGet);
+                Size = result.Size }, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult LoadChiTietPhieuNhapKho(int id)
-        {
-            var result = db.ChiTietPhieuNhapKhoes.Where(ct => ct.SoPhieuNhapKho == id)
-                .Select(ct => new {
-                    MaHangHoa = ct.MaHangHoa,
-                    TenHangHoa = ct.HangHoa.TenHangHoa,
-                    DonViTinh = ct.HangHoa.DonViTinh,
-                    SoLuong = ct.SoLuong,
-                    GiaNhap = ct.GiaNhap,
-                    ThanhTien = ct.ThanhTien
-                }).ToList();
-            var json = JsonConvert.SerializeObject(result);
-            return Json(json, JsonRequestBehavior.AllowGet);
-        }
-        public void DeleteAllCTPNK(int id)
-        {
-            var result = db.ChiTietPhieuNhapKhoes.Where(ct => ct.SoPhieuNhapKho == id).ToList();
-            foreach (var item in result)
-            {
-                var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == item.MaHangHoa).FirstOrDefault();
-                hanghoa.SoLuong -= item.SoLuong;
-                db.ChiTietPhieuNhapKhoes.Remove(item);
-            }
-            db.SaveChanges();
-        }
-        public void SaveAllCTPNK(ICollection<ChiTietPhieuNhapKho> chiTietPhieuNhapKhoes, int id)
-        {
-            foreach (var i in chiTietPhieuNhapKhoes)
-            {
-                i.SoPhieuNhapKho = id;
-                db.ChiTietPhieuNhapKhoes.Add(i);
-                var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
-                hanghoa.SoLuong += i.SoLuong;
-                db.SaveChanges();
-            }
-        }
-
         [HttpPost]
         public ActionResult LuuPhieuNhapKho(NhapKho phieuNhapKho)
         {
@@ -104,7 +80,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.PhieuNhapKhoes.Add(pnk);
                 db.SaveChanges();
-                SaveAllCTPNK(phieuNhapKho.chiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
+
+                foreach (var i in phieuNhapKho.chiTietPhieuNhapKhoes)
+                {
+                    i.SoPhieuNhapKho = pnk.SoPhieuNhapKho;
+                    db.ChiTietPhieuNhapKhoes.Add(i);
+                    var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
+                    hanghoa.SoLuong += i.SoLuong;
+                    db.SaveChanges();
+                }
+
                 status = true;
             }
             catch
@@ -114,58 +99,12 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-        [HttpPost]
-        public ActionResult SuaPhieuNhapKho(NhapKho phieuNhapKho)
-        {
-            bool status = false;
-            try
-            {
-                var phieunhapkho = db.PhieuNhapKhoes.SingleOrDefault(pnk => pnk.SoPhieuNhapKho == phieuNhapKho.SoPhieuNhapKho);
-                if (phieunhapkho != null)
-                {
-                    phieunhapkho.NgayNhapKho = phieuNhapKho.NgayNhapKho;
-                    phieunhapkho.MaNguoiDung = phieuNhapKho.MaNguoiDung;
-                    phieunhapkho.MaNhaCungCap = phieuNhapKho.MaNhaCungCap;
-                    phieunhapkho.TongTien = phieuNhapKho.TongTien;
-                    phieunhapkho.GhiChu = phieuNhapKho.GhiChu;
-                    phieunhapkho.NgayChinhSua = DateTime.Now.Date;
-                    DeleteAllCTPNK(phieunhapkho.SoPhieuNhapKho);
-                    SaveAllCTPNK(phieuNhapKho.chiTietPhieuNhapKhoes, phieunhapkho.SoPhieuNhapKho);
-                    db.SaveChanges();
-                    status = true;
-                }
-                else
-                    status = false;
-
-            }
-            catch
-            {
-                status = false;
-                throw;
-            }
-            return new JsonResult { Data = new { status = status } };
-        }
-        // GET: PhieuNhapKho/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhieuNhapKho phieuNhapKho = db.PhieuNhapKhoes.Find(id);
-            if (phieuNhapKho == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
-            ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
-            return View(phieuNhapKho);
-        }
         // GET: PhieuNhapKho/Create
         public ActionResult Create()
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
             ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap");
+            //ViewBag.HangHoas = db.HangHoas.Where(hh => hh.IsDeleted == false).ToList();
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa" , "TenHangHoa");
             return View();
         }
@@ -250,7 +189,6 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             PhieuNhapKho phieuNhapKho = db.PhieuNhapKhoes.Find(id);
-            DeleteAllCTPNK(id);
             db.PhieuNhapKhoes.Remove(phieuNhapKho);
             db.SaveChanges();
             return RedirectToAction("Index");
