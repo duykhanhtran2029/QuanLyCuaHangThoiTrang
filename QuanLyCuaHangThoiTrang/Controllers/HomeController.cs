@@ -13,7 +13,6 @@ namespace QuanLyCuaHangThoiTrang.Controllers
     {
         QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public string HoTen = "";
-        public List<ChiTietPhieuDatHang> Cart = new List<ChiTietPhieuDatHang>();
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
@@ -27,6 +26,8 @@ namespace QuanLyCuaHangThoiTrang.Controllers
 
         public ActionResult Index()
         {
+            Session["Cart"] = new List<ChiTietPhieuDatHang>();
+            //
             ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam").ToList();
             ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ").ToList();
             ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách").ToList();
@@ -81,24 +82,42 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         [HttpPost]
         public void AddToCart(int MAHANGHOA, float GIA, float GIAMGIA)
         {
-            if (!Cart.Exists(o => o.MaHangHoa == MAHANGHOA))
+            var currentCart = Session["Cart"] as List<ChiTietPhieuDatHang>; //to check current cart
+            if (!currentCart.Exists(o => o.MaHangHoa == MAHANGHOA))
             {
-                ChiTietPhieuDatHang ctpdh = new ChiTietPhieuDatHang();
-                ctpdh.MaHangHoa = MAHANGHOA;
-                ctpdh.SoLuong = 1;
-                ctpdh.Gia = (decimal)(GIA * (1 - GIAMGIA));
-                ctpdh.ThanhTien = (decimal)(GIA * (1 - GIAMGIA)); ;
-                Cart.Add(ctpdh);
+                ChiTietPhieuDatHang ctpdh = new ChiTietPhieuDatHang
+                {
+                    MaHangHoa = MAHANGHOA,
+                    SoLuong = 1,
+                    Gia = (decimal)(GIA * (1 - GIAMGIA)),
+                    ThanhTien = (decimal)(GIA * (1 - GIAMGIA))
+                };
+                currentCart.Add(ctpdh);
+                Session["Cart"] = currentCart;
             }
             else
             {
-                for (int i = 0; i < Cart.Count; i++)
-                {
-                    if (Cart[i].MaHangHoa == MAHANGHOA)
-                        Cart[i].SoLuong += 1;
-                }
+                ChiTietPhieuDatHang ctpdh = currentCart.Find(o => o.MaHangHoa == MAHANGHOA);
+                ctpdh.SoLuong += 1;
+                ctpdh.ThanhTien += (decimal)(GIA * (1 - GIAMGIA));
             }
-            
+        }
+        [HttpPost]
+        public void MinusCart(int MAHANGHOA, float GIA, float GIAMGIA)
+        {
+            var currentCart = Session["Cart"] as List<ChiTietPhieuDatHang>; //to check current cart
+            ChiTietPhieuDatHang ctpdh = currentCart.Find(o => o.MaHangHoa == MAHANGHOA);
+            ctpdh.SoLuong -= 1;
+            ctpdh.ThanhTien -= (decimal)(GIA * (1 - GIAMGIA));
+        }
+
+        [HttpPost]
+        public void DeleteFromCart(int MAHANGHOA)
+        {
+            var currentCart = Session["Cart"] as List<ChiTietPhieuDatHang>; //to check current cart
+            var removedItem = currentCart.Find(i => i.MaHangHoa == MAHANGHOA);
+            currentCart.Remove(removedItem);
+            Session["Cart"] = currentCart;
         }
 
         [HttpPost]

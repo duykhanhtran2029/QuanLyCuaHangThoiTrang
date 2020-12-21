@@ -185,3 +185,23 @@
   .order-price span{
     float: right;
   }
+  
+  /* hidden submit popup: */
+  .order-submit-popup{
+    background:#86939E;
+    position: fixed;
+    width: 900px;
+    float: top;
+    left: 30%;
+    top: 10%;
+    z-index: 0;
+  }
+
+  .order-submit-popup h2{
+    text-align: center;
+    margin-top: 10px;
+  }
+  .order-submit-popup input{
+    text-align: center;
+    margin-top: 10px;
+  }
