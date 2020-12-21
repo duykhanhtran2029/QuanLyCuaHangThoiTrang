@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manager\Dto\KiemKho.cs" />
     <Compile Include="Areas\Manager\Dto\XuatKho.cs" />
     <Compile Include="Areas\Manager\Dto\NhapKho.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
@@ -192,6 +193,8 @@
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
     <Content Include="Areas\Manager\Scripts\main.js" />
+    <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuKiemKho.js" />
+    <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuXuatKho.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuNhapKho.js" />
     <Content Include="Areas\Manager\Scripts\sidebar.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -345,6 +348,7 @@
     <Content Include="Areas\Manager\Views\PhieuChi\DanhSachPhieuChi.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuNhapKho\DanhSachPhieuNhapKho.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\DanhSachPhieuXuatKho.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuKiemKho\DanhSachPhieuKiemKho.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />
@@ -483,7 +487,6 @@
     <Content Include="Areas\Manager\Views\PhieuNhapKho\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuNhapKho\Index.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Create.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuXuatKho\Delete.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Details.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Index.cshtml" />

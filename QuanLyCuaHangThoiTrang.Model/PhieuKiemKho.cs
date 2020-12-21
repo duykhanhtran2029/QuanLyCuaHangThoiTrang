@@ -20,6 +20,7 @@
         public int SoPhieuKiemKho { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày Kiểm Kho"), Required(ErrorMessage = "Ngày Kiểm Kho không được trống")]
         public DateTime NgayKiemKho { get; set; }
 
@@ -31,7 +32,8 @@
 
         public bool IsDeleted { get; set; }
 
-        [Display(Name = "Mã Người Dùng")]
+        [Display(Name = "Ngày Chỉnh Sửa")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NgayChinhSua { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

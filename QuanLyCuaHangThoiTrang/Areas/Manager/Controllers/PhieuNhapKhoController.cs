@@ -56,6 +56,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     MaHangHoa = ct.MaHangHoa,
                     TenHangHoa = ct.HangHoa.TenHangHoa,
                     DonViTinh = ct.HangHoa.DonViTinh,
+                    Size = ct.HangHoa.Size,
                     SoLuong = ct.SoLuong,
                     GiaNhap = ct.GiaNhap,
                     ThanhTien = ct.ThanhTien

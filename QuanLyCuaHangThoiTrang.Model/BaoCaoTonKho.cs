@@ -24,6 +24,8 @@
         public int Nam { get; set; }
         [Display(Name = "Mã Người Dùng"), Required(ErrorMessage = "Mã Người Dùng không được trống")]
         public int MaNguoiDung { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày Lập"), Required(ErrorMessage = "Ngày Lập không được trống")]
         public DateTime NgayLap { get; set; }
         [Display(Name = "Tổng Số Hàng Hóa"), Required(ErrorMessage = "Tổng Số Hàng Hóa không được trống")]

@@ -57,7 +57,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 .Select(ct => new {
                     MaHangHoa = ct.MaHangHoa,
                     TenHangHoa = ct.HangHoa.TenHangHoa,
-                    DonViTinh = ct.HangHoa.DonViTinh,
+                    Size = ct.HangHoa.Size,
+                    SoLuongTon = ct.HangHoa.SoLuong,
                     SoLuong = ct.SoLuong,
                     Gia= ct.Gia,
                     ThanhTien = ct.ThanhTien
@@ -153,6 +154,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
             if (phieuXuatKho == null)
             {
                 return HttpNotFound();
@@ -164,6 +166,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Create()
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View();
         }
 
@@ -182,6 +185,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View(phieuXuatKho);
         }
 
@@ -198,6 +202,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View(phieuXuatKho);
         }
 
@@ -215,6 +220,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuXuatKho.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa"); 
             return View(phieuXuatKho);
         }
 

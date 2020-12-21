@@ -5,6 +5,8 @@
         EditPhieuNhapKho();
     if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/details"))
         DetailsPhieuNhapKho();
+    if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/delete"))
+        DetailsPhieuNhapKho();
 });
 function CreatePhieuNhapKho() {
     //basic button handler
@@ -30,7 +32,7 @@ function CreatePhieuNhapKho() {
 
         if ($('#tenHangHoa').val() == '') {
             isValidItem = false;
-            $('#productItemError').text('Chưa có sản phẩm nào được chọn!');
+            $('#productItemError').text('Chưa có hàng hóa nào được chọn!');
         }
         else {
             $('#productItemError').hide();
@@ -70,7 +72,7 @@ function CreatePhieuNhapKho() {
                             productIdOfTable = document.getElementById("productTable").rows[i].cells[0].innerHTML;
                             if (productIdOfTable == productID) {
                                 test = false;
-                                $('#productItemError').text('Sản phẩm đã được thêm trước đó!');
+                                $('#productItemError').text('Hàng hóa đã được thêm trước đó!');
                                 $('#productItemError').show();
                                 break;
                             }
@@ -201,7 +203,7 @@ function CreatePhieuNhapKho() {
                 chiTietPhieuNhapKhoes: orderItems
             }
             console.log(data);
-            $(this).val('Please wait...');
+            $(this).val('Xin Chờ.....');
 
             $.ajax({
                 url: "/PhieuNhapKho/LuuPhieuNhapKho",
@@ -354,6 +356,7 @@ function EditPhieuNhapKho() {
             if (data != null) {
                 orderItems = JSON.parse(data);
                 GeneratedItemsTable();
+                $('#tongTien').val(formatNumber(parseFloat($('#tongTien').val())));
             }
         });
 
@@ -362,7 +365,7 @@ function EditPhieuNhapKho() {
 
         if ($('#tenHangHoa').val() == '') {
             isValidItem = false;
-            $('#productItemError').text('Chưa có sản phẩm nào được chọn!');
+            $('#productItemError').text('Chưa có hàng hóa nào được chọn!');
         }
         else {
             $('#productItemError').hide();
@@ -402,7 +405,7 @@ function EditPhieuNhapKho() {
                             productIdOfTable = document.getElementById("productTable").rows[i].cells[0].innerHTML;
                             if (productIdOfTable == productID) {
                                 test = false;
-                                $('#productItemError').text('Sản phẩm đã được thêm trước đó!');
+                                $('#productItemError').text('Hàng hóa đã được thêm trước đó!');
                                 $('#productItemError').show();
                                 break;
                             }
@@ -534,7 +537,7 @@ function EditPhieuNhapKho() {
                 chiTietPhieuNhapKhoes: orderItems
             }
             console.log(data);
-            $(this).val('Please wait...');
+            $(this).val('Xin Chờ.....');
 
             $.ajax({
                 url: "/PhieuNhapKho/SuaPhieuNhapKho",
@@ -688,6 +691,7 @@ function DetailsPhieuNhapKho() {
             if (data != null) {
                 orderItems = JSON.parse(data);
                 GeneratedItemsTable();
+                $('#tongTien').val(formatNumber(parseFloat($('#tongTien').val())));
             }
         });
     $('#print').click(function () {
