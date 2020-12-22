@@ -16,41 +16,54 @@
 
             @Html.AntiForgeryToken()
             <div hidden>
-                @Html.DisplayFor(model => model.SoPhieuXuatKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuXuatKho" } })
+                @Html.EditorFor(model => model.SoPhieuXuatKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuXuatKho" } })
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayXuatKho, htmlAttributes: new { @class = "control-label custom-label" })
-                <div class="col-md-10 custom-input">
+                <div class="col-md-10 custom-input" id="ngayXuatKho">
                     @Html.DisplayFor(model => model.NgayXuatKho, new { htmlAttributes = new { @class = "form-control datetimepicker disabled", @id = "ngayXuatKho" } })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
-                <div class="col-md-10 custom-input">
+                <div class="col-md-10 custom-input" id="maNguoiDung">
                     @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.LyDoXuat, htmlAttributes: new { @class = "control-label custom-label" })
-                <div class="col-md-10 custom-input">
+                <div class="col-md-10 custom-input" id="lyDoXuat">
                     @Html.DisplayFor(model => model.LyDoXuat, new { htmlAttributes = new { @class = "form-control disabled", @id = "lyDoXuat" } })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
-                <div class="col-md-10 custom-input">
+                <div class="col-md-10 custom-input" id="tongTien">
                     @Html.DisplayFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control disabled", @id = "tongTien" } })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label custom-label" })
-                <div class="col-md-10 custom-input">
+                <div class="col-md-10 custom-input" id="ngayChinhSua">
                     @Html.DisplayFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker disabled", @id = "ngayChinhSua" } })
                 </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print">
+                        <i class="fas fa-print"></i>
+                        <span style="margin: 15px 10px !important;">In</span>
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
             </div>
         </div>
     </div>

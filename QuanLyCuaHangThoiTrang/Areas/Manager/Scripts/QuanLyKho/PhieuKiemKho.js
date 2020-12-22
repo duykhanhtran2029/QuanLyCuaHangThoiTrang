@@ -112,81 +112,6 @@ function CreatePhieuKiemKho() {
         }
     });
 
-    $('#print').click(function () {
-        Print();
-    });
-
-    function Print() {
-        var toPrint = document.getElementById('Items');
-        var $table = $('<table id="productTables" style="border: solid; width:100%; text-align:center"/>');
-        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Nhập</th><th>Giá Nhập (VND)</th><th>Thành Tiền (VND)</th></tr></thead>');
-        var $tbody = $('<tbody/>');
-        $.each(orderItems, function (i, val) {
-            var $row = $('<tr style="border:solid">');
-            $row.append($('<td/>').html(val.MaHangHoa));
-            $row.append($('<td/>').html(val.TenHangHoa));
-            $row.append($('<td/>').html(val.DonViTinh));
-            $row.append($('<td/>').html(val.SoLuong));
-            $row.append($('<td/>').html(formatNumber(val.GiaKiem)));
-            $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
-            $tbody.append($row);
-        });
-        console.log("current", orderItems);
-        $table.append($tbody);
-        $('#Items').html($table);
-
-        var popupWin = window.open('', '_blank', 'width=800,height=600'); //create new page     
-        popupWin.document.open(); //open new page
-        popupWin.document.write('<html><body onload="window.print()">')
-
-        popupWin.document.write('<p style="text-align:center"><img src="/Content/image/header.png" class="img-responsive watch-right"  /></p>')
-
-        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Nhập Kho</p>')
-
-        popupWin.document.write('<table style="border:solid; width:100%"; text-align:center">')
-        popupWin.document.write('Thông tin phiếu nhập kho');
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Số phiếu nhập kho: ');
-        popupWin.document.write($('#soPhieuKiemKho').val().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Ngày nhập: ');
-        popupWin.document.write($('#ngayKiemKho').val().trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Nhân viên: ');
-        popupWin.document.write($('#maNguoiDung').val().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Nhà cung cấp: ');
-        popupWin.document.write($('#nhacungcap').find("option:selected").text());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongTien').val().trim() + " VND");
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Ghi chú: ');
-        popupWin.document.write($('#ghiChu').val().trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('</table>')
-
-        popupWin.document.write('<br>');
-        popupWin.document.write('Danh sách hàng hóa');
-        popupWin.document.write(toPrint.innerHTML);
-
-        popupWin.document.write('<p style="text-align:center">')
-        popupWin.document.write('Nhân viên kho')
-        popupWin.document.write('<br>')
-        popupWin.document.write('(Ký tên)')
-        popupWin.document.write('</p>')
-        popupWin.document.write('</html>');
-        popupWin.document.close();
-    }
-
     //Save button click function
     $('#submit').click(function () {
         //validation of inventory ballot detail
@@ -412,81 +337,6 @@ function EditPhieuKiemKho() {
         }
     });
 
-    $('#print').click(function () {
-        Print();
-    });
-
-    function Print() {
-        var toPrint = document.getElementById('Items');
-        var $table = $('<table id="productTables" style="border: solid; width:100%; text-align:center"/>');
-        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Nhập</th><th>Giá Nhập (VND)</th><th>Thành Tiền (VND)</th></tr></thead>');
-        var $tbody = $('<tbody/>');
-        $.each(orderItems, function (i, val) {
-            var $row = $('<tr style="border:solid">');
-            $row.append($('<td/>').html(val.MaHangHoa));
-            $row.append($('<td/>').html(val.TenHangHoa));
-            $row.append($('<td/>').html(val.DonViTinh));
-            $row.append($('<td/>').html(val.SoLuong));
-            $row.append($('<td/>').html(formatNumber(val.GiaKiem)));
-            $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
-            $tbody.append($row);
-        });
-        console.log("current", orderItems);
-        $table.append($tbody);
-        $('#Items').html($table);
-
-        var popupWin = window.open('', '_blank', 'width=800,height=600'); //create new page     
-        popupWin.document.open(); //open new page
-        popupWin.document.write('<html><body onload="window.print()">')
-
-        popupWin.document.write('<p style="text-align:center"><img src="/Content/image/header.png" class="img-responsive watch-right"  /></p>')
-
-        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Nhập Kho</p>')
-
-        popupWin.document.write('<table style="border:solid; width:100%"; text-align:center">')
-        popupWin.document.write('Thông tin phiếu nhập kho');
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Số phiếu nhập kho: ');
-        popupWin.document.write($('#soPhieuKiemKho').val().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Ngày nhập: ');
-        popupWin.document.write($('#ngayKiemKho').val().trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Nhân viên: ');
-        popupWin.document.write($('#maNguoiDung').val().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Nhà cung cấp: ');
-        popupWin.document.write($('#nhacungcap').find("option:selected").text());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongTien').val().trim() + " VND");
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Ghi chú: ');
-        popupWin.document.write($('#ghiChu').val().trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('</table>')
-
-        popupWin.document.write('<br>');
-        popupWin.document.write('Danh sách hàng hóa');
-        popupWin.document.write(toPrint.innerHTML);
-
-        popupWin.document.write('<p style="text-align:center">')
-        popupWin.document.write('Nhân viên kho')
-        popupWin.document.write('<br>')
-        popupWin.document.write('(Ký tên)')
-        popupWin.document.write('</p>')
-        popupWin.document.write('</html>');
-        popupWin.document.close();
-    }
-
     //Save button click function
     $('#submit').click(function () {
         //validation of inventory ballot detail
@@ -619,8 +469,6 @@ function EditPhieuKiemKho() {
 function DetailsPhieuKiemKho() {
     //basic button handler
     var orderItems = [];
-    var tmpIndex = 0;
-
     $.getJSON('/PhieuKiemKho/LoadChiTietPhieuKiemKho', { id: $('#soPhieuKiemKho').val() },
         function (data) {
             if (data != null) {
@@ -635,17 +483,17 @@ function DetailsPhieuKiemKho() {
 
     function Print() {
         var toPrint = document.getElementById('Items');
-        var $table = $('<table id="productTables" style="border: solid; width:100%; text-align:center"/>');
-        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Nhập</th><th>Giá Nhập (VND)</th><th>Thành Tiền (VND)</th></tr></thead>');
+        var $table = $('<table id="productTables" style="border: solid; width:100%;padding:10px;margin-top: 5px; text-align:center "/>');
+        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Tồn</th><th>Số Lượng Kiểm Tra</th><th>Tình Trạng</th></tr></thead>');
         var $tbody = $('<tbody/>');
         $.each(orderItems, function (i, val) {
             var $row = $('<tr style="border:solid">');
             $row.append($('<td/>').html(val.MaHangHoa));
             $row.append($('<td/>').html(val.TenHangHoa));
             $row.append($('<td/>').html(val.DonViTinh));
-            $row.append($('<td/>').html(val.SoLuong));
-            $row.append($('<td/>').html(formatNumber(val.GiaKiem)));
-            $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
+            $row.append($('<td/>').html(val.SoLuongHienTai));
+            $row.append($('<td/>').html(val.SoLuongKiemTra));
+            $row.append($('<td/>').html(val.TinhTrangHangHoa));
             $tbody.append($row);
         });
         console.log("current", orderItems);
@@ -656,46 +504,45 @@ function DetailsPhieuKiemKho() {
         popupWin.document.open(); //open new page
         popupWin.document.write('<html><body onload="window.print()">')
 
-        popupWin.document.write('<p style="text-align:center"><img src="/Content/image/header.png" class="img-responsive watch-right"  /></p>')
+        popupWin.document.write('<p style="text-align:center"><img src="/images/header.png" class="img-responsive watch-right"  /></p>')
 
-        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Nhập Kho</p>')
+        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Kiểm Kho</p>')
 
-        popupWin.document.write('<table style="border:solid; width:100%"; text-align:center">')
-        popupWin.document.write('Thông tin phiếu nhập kho');
+        popupWin.document.write('<b>');
+        popupWin.document.write('Thông tin phiếu kiểm kho');
+        popupWin.document.write('</b>');
+        popupWin.document.write('<table style="border:solid; width:100%; padding: 10px;margin-top: 5px">')
         popupWin.document.write('<tr><td>')
-        popupWin.document.write('Số phiếu nhập kho: ');
+        popupWin.document.write('Số phiếu kiểm kho: ');
         popupWin.document.write($('#soPhieuKiemKho').val().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Ngày nhập: ');
-        popupWin.document.write($('#ngayKiemKho').val().trim());
+        popupWin.document.write('Ngày kiểm kho: ');
+        popupWin.document.write($('#ngayKiemKho').text().trim());
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('<tr><td>')
         popupWin.document.write('Nhân viên: ');
-        popupWin.document.write($('#maNguoiDung').val().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Nhà cung cấp: ');
-        popupWin.document.write($('#nhacungcap').find("option:selected").text());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongTien').val().trim() + " VND");
+        popupWin.document.write($('#maNguoiDung').text().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
         popupWin.document.write('Ghi chú: ');
-        popupWin.document.write($('#ghiChu').val().trim());
+        popupWin.document.write($('#ghiChu').text().trim());
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('</table>')
 
-        popupWin.document.write('<br>');
+        popupWin.document.write('<br/>');
+        popupWin.document.write('<b>');
         popupWin.document.write('Danh sách hàng hóa');
+        popupWin.document.write('</b>');
         popupWin.document.write(toPrint.innerHTML);
 
-        popupWin.document.write('<p style="text-align:center">')
+        popupWin.document.write('<p style="text-align:right; padding-right: 50px">')
+        popupWin.document.write('Thủ Đức, Ngày .... Tháng .... Năm ....')
+        popupWin.document.write('<br>')
+        popupWin.document.write('</p>')
+        popupWin.document.write('<p style="text-align:center;float: right;margin-right: 125px;margin-top: -10px;">')
         popupWin.document.write('Nhân viên kho')
         popupWin.document.write('<br>')
         popupWin.document.write('(Ký tên)')

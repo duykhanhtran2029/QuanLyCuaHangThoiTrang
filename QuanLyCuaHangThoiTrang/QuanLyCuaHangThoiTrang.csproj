@@ -194,7 +194,10 @@
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
     <Content Include="Areas\Manager\Scripts\main.js" />
+    <Content Include="Areas\Manager\Scripts\QuanLyKho\BaoCaoTonKho.js" />
+    <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuKiemKho.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuNhapKho.js" />
+    <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuXuatKho.js" />
     <Content Include="Areas\Manager\Scripts\sidebar.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -288,6 +291,7 @@
     <Content Include="images\d2.jpg" />
     <Content Include="images\d3.jpg" />
     <Content Include="images\giphy.gif" />
+    <Content Include="images\header.png" />
     <Content Include="images\inner1.jpg" />
     <Content Include="images\inner2.jpg" />
     <Content Include="images\log_pic.jpg" />
@@ -361,6 +365,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.table2excel.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -489,7 +494,6 @@
     <Content Include="Areas\Manager\Views\PhieuNhapKho\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuNhapKho\Index.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Create.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuXuatKho\Delete.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Details.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuXuatKho\Index.cshtml" />
