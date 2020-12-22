@@ -148,6 +148,8 @@
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manager\Dto\KiemKho.cs" />
     <Compile Include="Areas\Manager\Dto\NhapKho.cs" />
+    <Compile Include="Areas\Manager\Dto\TonKho.cs" />
+    <Compile Include="Areas\Manager\Dto\XuatKho.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoBanHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoTonKhoController.cs" />
