@@ -24,8 +24,11 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             var phieuNhapKhoes = db.PhieuNhapKhoes.Include(p => p.NguoiDung).Include(p => p.NhaCungCap);
             var dt = phieuNhapKhoes.OrderByDescending(pnk => pnk.NgayNhapKho).FirstOrDefault();
             var df = phieuNhapKhoes.OrderByDescending(pnk => pnk.NgayNhapKho).ToArray().LastOrDefault();
-            ViewBag.dateTo = dt.NgayNhapKho.ToString("MM/dd/yyyy");
-            ViewBag.dateFrom = df.NgayNhapKho.ToString("MM/dd/yyyy");
+            if(dt != null && df != null)
+            {
+                ViewBag.dateTo = dt.NgayNhapKho.ToString("MM/dd/yyyy");
+                ViewBag.dateFrom = df.NgayNhapKho.ToString("MM/dd/yyyy");
+            }
             return View(phieuNhapKhoes.ToList());
         }
         public ActionResult DanhSachPhieuNhapKho(string searchString,string dateFrom, string dateTo, int page = 1, int pageSize = 10)

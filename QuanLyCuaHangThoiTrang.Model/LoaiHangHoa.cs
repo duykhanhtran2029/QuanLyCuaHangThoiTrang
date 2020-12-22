@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -18,12 +18,12 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Key]
         public int MaLoaiHangHoa { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Display(Name = "Tên Loại Hàng Hóa"), Required(ErrorMessage = "Tên Loại Hàng Hóa không được trống")]
+        [StringLength(50, ErrorMessage = "Tên Loại Hàng Hóa không được quá 50 ký tự")]
         public string TenLoaiHangHoa { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Display(Name = "Giới Tính"), Required(ErrorMessage = "Giới Tính không được trống")]
+        [StringLength(50, ErrorMessage = "Giới Tính không được quá 50 ký tự")]
         public string GioiTinh { get; set; }
 
         public bool IsDeleted { get; set; }
