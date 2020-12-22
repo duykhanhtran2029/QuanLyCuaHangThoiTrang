@@ -82,124 +82,128 @@
             <div class="resp-tabs-container">
                 <!--/tab_one-->
                 <div class="tab1">
-                    @{
-                        foreach (HangHoa hh in ViewBag.MenWears)
+                    @{if (ViewBag.MenWears != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.MenWears)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
-                    
+
                     <div class="clearfix"></div>
                 </div>
                 <!--//tab_one-->
                 <!--/tab_two-->
                 <div class="tab2">
-                    @{
-                        foreach (HangHoa hh in ViewBag.WomenWears)
+                    @{if (ViewBag.WomenWears != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.WomenWears)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
                     <div class="clearfix"></div>
@@ -207,122 +211,127 @@
                 <!--//tab_two-->
                 <!--//tab_three-->
                 <div class="tab3">
-                    @{
-                        foreach (HangHoa hh in ViewBag.Bags)
+                    @{if (ViewBag.Bags != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.Bags)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
                     <div class="clearfix"></div>
                 </div>
                 <div class="tab4">
-                    @{
-                        foreach (HangHoa hh in ViewBag.FootWears)
+                    @{if (ViewBag.FoorWears != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.FootWears)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
+
                     }
                     <div class="clearfix"></div>
                 </div>
@@ -354,61 +363,63 @@
             <div class="resp-tabs-container">
                 <!--/tab_one-->
                 <div class="tab1">
-                    @{
-                        foreach (HangHoa hh in ViewBag.MenWears_Sale)
+                    @{if (ViewBag.MenWears_Sale != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.MenWears_Sale)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
 
@@ -417,61 +428,63 @@
                 <!--//tab_one-->
                 <!--/tab_two-->
                 <div class="tab2">
-                    @{
-                        foreach (HangHoa hh in ViewBag.WomenWears_Sale)
+                    @{if (ViewBag.WomenWears_Sale != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.WomenWears_Sale)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
                     <div class="clearfix"></div>
@@ -479,121 +492,125 @@
                 <!--//tab_two-->
                 <!--//tab_three-->
                 <div class="tab3">
-                    @{
-                        foreach (HangHoa hh in ViewBag.Bags_Sale)
+                    @{if (ViewBag.Bags_Sale != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.Bags_Sale)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
                     <div class="clearfix"></div>
                 </div>
                 <div class="tab4">
-                    @{
-                        foreach (HangHoa hh in ViewBag.FootWears_Sale)
+                    @{if (ViewBag.FootWears_Sale != null)
                         {
-                            double Sale = hh.GiamGia * 100; //fix bug % hang hoa
-                            <div class="col-md-3 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
-                                        <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="single.html" class="link-product-add-cart">Quick View</a>
+                            foreach (HangHoa hh in ViewBag.FootWears_Sale)
+                            {
+                                double Sale = hh.GiamGia * 100; //fix bug % hang hoa
+                                <div class="col-md-3 product-men">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-front">
+                                            <img src="~/images/@hh.HinhAnh" alt="" class="pro-image-back">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        @{ //neu co sale thi hien thi len
-                                            if (hh.GiamGia > 0)
-                                            { <span class="product-new-top">-@Sale%</span>}
-                                        else
-                                        { <span class="product-new-top">New</span> }
-                                        }
-
-
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4><a href="single.html">@hh.TenHangHoa</a></h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
-                                            @{
+                                            @{ //neu co sale thi hien thi len
                                                 if (hh.GiamGia > 0)
-                                                { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                { <span class="product-new-top">-@Sale%</span>}
+                                            else
+                                            { <span class="product-new-top">New</span> }
                                             }
+
+
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                            <form action="#" class="item" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
-                                                    <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
-                                                    <input type="hidden" name="Gia" value="@hh.GiaBan" />
-                                                    <input type="hidden" name="Size" value="@hh.Size" />
-                                                    <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
-                                                    <input type="hidden" name="MoTa" value="@hh.MoTa" />
-                                                    <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
-                                                    <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
-                                                    <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
-                                                    <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
-                                                </fieldset>
-                                            </form>
+                                        <div class="item-info-product ">
+                                            <h4><a href="single.html">@hh.TenHangHoa</a></h4>
+                                            <div class="info-product-price">
+                                                <span class="item_price">$@String.Format("{0:0,0}", (float)hh.GiaBan * (1 - hh.GiamGia))</span>
+                                                @{
+                                                    if (hh.GiamGia > 0)
+                                                    { <del>$@String.Format("{0:0,0}", hh.GiaBan)</del>}
+                                                }
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                <form action="#" class="item" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="MaHangHoa" value="@hh.MaHangHoa" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="TenHangHoa" value="@hh.TenHangHoa" />
+                                                        <input type="hidden" name="GiamGia" value="@hh.GiamGia" />
+                                                        <input type="hidden" name="Gia" value="@hh.GiaBan" />
+                                                        <input type="hidden" name="Size" value="@hh.Size" />
+                                                        <input type="hidden" name="DonViTinh" value="@hh.DonViTinh" />
+                                                        <input type="hidden" name="MoTa" value="@hh.MoTa" />
+                                                        <input type="hidden" name="ThoiGianBaoHanh" value="@hh.ThoiGianBaoHanh" />
+                                                        <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
+                                                        <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
+                                                        <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
+                                                        <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                        <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
                     <div class="clearfix"></div>
