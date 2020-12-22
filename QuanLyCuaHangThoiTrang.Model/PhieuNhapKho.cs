@@ -21,8 +21,9 @@
         public int SoPhieuNhapKho { get; set; }
 
         [Column(TypeName = "Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày Nhập Kho"), Required(ErrorMessage = "Ngày Nhập Kho không được trống")]
-        public DateTime NgayNhapKho { get; set; }
+        public DateTime NgayNhapKho { get ; set ; }
 
         [Display(Name = "Mã Người Dùng"), Required(ErrorMessage = "Mã Người Dùng không được trống")]
         public int MaNguoiDung { get; set; }
@@ -40,6 +41,7 @@
         public bool IsDeleted { get; set; }
 
         [Display(Name = "Ngày Chỉnh Sửa")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "date")]
         public DateTime? NgayChinhSua { get; set; }
 

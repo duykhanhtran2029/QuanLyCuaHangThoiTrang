@@ -11,8 +11,10 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
     public class HomeController : Controller
     {
         // GET: Manager/Home
+        private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public ActionResult Index()
         {
+            Session["Account"] = db.NguoiDungs.Find(2);
             return View();
         }
 

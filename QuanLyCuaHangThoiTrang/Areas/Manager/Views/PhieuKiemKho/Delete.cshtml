@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <hr/>
+        <hr />
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -48,6 +48,10 @@
                 <input type="submit" value="Xóa Phiếu Nhập Kho" class="btn btn-danger" />
             </div>
         }
+        <hr />
+        <div class="form-group" style="text-align: center">
+            <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+        </div>
     </div>
 </div>
 <div class="card" style="width: 70%; float: left !important; margin-left: 2%">

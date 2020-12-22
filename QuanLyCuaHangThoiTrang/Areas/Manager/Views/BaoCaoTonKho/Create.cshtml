@@ -25,7 +25,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal disabled", @id = "maNguoiDung" })
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung", @disabled = "disabled" })
                     @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TongSoHangHoa, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.TongSoHangHoa, new { htmlAttributes = new { @class = "form-control disabled", @id = "tongSoHangHoa" } })
+                    @Html.EditorFor(model => model.TongSoHangHoa, new { htmlAttributes = new { @class = "form-control", @id = "tongSoHangHoa", @disabled = "disabled" } })
                     @Html.ValidationMessageFor(model => model.TongSoHangHoa, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -50,6 +50,10 @@
                 <div class="col-md-offset-2 col-md-10 custom-input">
                     <input type="submit" id="submit" value="Lưu" class="btn btn-primary" />
                 </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
             </div>
         </div>
     </div>
