@@ -121,6 +121,71 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         }
 
         [HttpPost]
+        public ActionResult Order(string TENKHACHHANG, string SDT, string DIACHI, string EMAIL, float TONGTIEN)
+        {
+            //them phieu dat hang
+            DateTime ngaydat = DateTime.Now;
+            string tenkhachhang = TENKHACHHANG;
+            string sdt = SDT;
+            string diachi = DIACHI;
+            string email = EMAIL;
+            float tongtien = TONGTIEN*1000; //fixed bug
+            string hinhthucthanhtoan = "Thanh toán khi nhận hàng";
+            bool dathanhtoan = false;
+            bool daxacnhan = false;
+            bool isdeleted = false;
+            PhieuDatHang pdh = new PhieuDatHang
+            {
+                NgayDat = ngaydat,
+                TenKhachHang = tenkhachhang,
+                SoDienThoai = sdt,
+                Diachi = diachi,
+                Email = email,
+                TongTien = (decimal)tongtien,
+                HinhThucThanhToan = hinhthucthanhtoan,
+                DaThanhToan = dathanhtoan,
+                DaXacNhan = daxacnhan,
+                IsDeleted = isdeleted
+            };
+            try {
+                db.PhieuDatHangs.Add(pdh);
+                db.SaveChanges();
+            }
+            catch { throw; }
+            //them chi tiet phieu dat hang
+            int sophieudathang = pdh.SoPhieuDatHang;
+            if (Session["Cart"] != null)
+            {
+                List<ChiTietPhieuDatHang> cart = Session["Cart"] as List<ChiTietPhieuDatHang>;
+                for (int i = 0; i < cart.Count; i++)
+                {
+                    try {
+                        db.ChiTietPhieuDatHangs.Add(new ChiTietPhieuDatHang
+                        {
+                            SoPhieuDatHang = sophieudathang,
+                            MaHangHoa = cart[i].MaHangHoa,
+                            SoLuong = cart[i].SoLuong,
+                            Gia = cart[i].Gia,
+                            ThanhTien = cart[i].ThanhTien
+                        });
+                        db.SaveChanges();
+                        //update so luong hang hoa
+                        HangHoa hh = db.HangHoas.AsEnumerable().SingleOrDefault(o => o.MaHangHoa == cart[i].MaHangHoa);
+                        if(hh!= null)
+                        hh.SoLuong -= cart[i].SoLuong;
+                        db.SaveChanges();
+                    }
+                    catch { throw; }
+                }
+            }
+            //reset gio hang
+            Session["Cart"] = null;
+            SetAlert("Đặt hàng thành công!", "success");
+
+            return Redirect("Home/Index");
+        }
+
+        [HttpPost]
         public ActionResult DangNhap(FormCollection form)
         {
             string username = form["username"].ToString();
