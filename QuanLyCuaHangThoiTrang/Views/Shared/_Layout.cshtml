@@ -755,6 +755,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             else
             {
                 $('.order-submit-popup').fadeIn();
+                $("body > *").not("body > #order-submit-popup").css('opacity', '-2');
             //set tong tien
             updateFinalOrderTotal();
             //hiện thông tin nếu như đã đăng nhập
@@ -779,6 +780,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         $('#order_close').click(function () {
             $("#order-submit-popup").fadeOut();
+            $("body > *").not("body > #order-submit-popup").css('opacity', '1');
         });
 
         $('#order').on("submit", function (event) {
