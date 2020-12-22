@@ -117,6 +117,10 @@ namespace QuanLyCuaHangThoiTrang.Model
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<HangHoa>()
+                .Property(e => e.GiaNhap)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<HangHoa>()
                 .Property(e => e.GiaBan)
                 .HasPrecision(19, 4);
 
