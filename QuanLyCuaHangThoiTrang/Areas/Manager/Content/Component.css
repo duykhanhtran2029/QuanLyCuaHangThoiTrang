@@ -602,8 +602,3 @@ select {
         background-repeat: no-repeat;
     }
 
-.disabled {
-    pointer-events: none;
-    cursor: default;
-}
-

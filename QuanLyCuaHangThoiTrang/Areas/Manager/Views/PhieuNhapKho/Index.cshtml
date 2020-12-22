@@ -7,7 +7,7 @@
 <title id="pageTitle">
     Quản Lý Nhập Kho
 </title>
-<div id="Modal" class="modal fade card" role="dialog">
+<div id="Modal" class="modal fade" role="dialog">
 </div>
 <div class="card">
     <div>
@@ -15,10 +15,10 @@
             <p class="card-title-heading">Danh sách Phiếu nhập kho</p>
         </div>
         <div class="pull-right">
-            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('PhieuNhapKho/Create')">
                 <i class="fas fa-plus"></i>
                 <span style="margin: 15px 0 !important;">Thêm Phiếu Nhập Kho</span>
-            </a>
+            </button>
         </div>
         <div class="clearfix"></div>
     </div>

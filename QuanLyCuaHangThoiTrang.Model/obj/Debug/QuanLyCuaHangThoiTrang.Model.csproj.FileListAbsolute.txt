@@ -21,8 +21,8 @@ E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Mo
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.dll
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.xml
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\bin\Debug\EntityFramework.SqlServer.xml
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CoreCompileInputs.cache
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
+E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache

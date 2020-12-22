@@ -1,5 +1,5 @@
 ﻿@using QuanLyCuaHangThoiTrang.Model;
-@Html.Action("NavTopBar", "Home");
+@Html.Action("NavTopBar", "Home")
 <!-- banner -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -74,10 +74,10 @@
         <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
         <div id="horizontalTab">
             <ul class="resp-tabs-list">
-                <li> Men's</li>
-                <li> Women's</li>
-                <li> Bags</li>
-                <li> Footwear</li>
+                <li> Đồ Nam</li>
+                <li> Đồ Nữ</li>
+                <li> Túi Xách</li>
+                <li> Giày</li>
             </ul>
             <div class="resp-tabs-container">
                 <!--/tab_one-->
@@ -129,7 +129,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -191,7 +192,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -252,7 +254,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -311,7 +314,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -320,44 +324,6 @@
                             </div>
                         }
                     }
-                    <div class="col-md-3 product-men">
-                        <div class="men-pro-item simpleCart_shelfItem">
-                            <div class="men-thumb-item">
-                                <img src="~/images/s8.jpg" alt="" class="pro-image-front">
-                                <img src="~/images/s8.jpg" alt="" class="pro-image-back">
-                                <div class="men-cart-pro">
-                                    <div class="inner-men-cart-pro">
-                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                    </div>
-                                </div>
-                                <span class="product-new-top">New</span>
-
-                            </div>
-                            <div class="item-info-product ">
-                                <h4><a href="single.html">Women BLACK Heels</a></h4>
-                                <div class="info-product-price">
-                                    <span class="item_price">$180.99</span>
-                                    <del>$199.71</del>
-                                </div>
-                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    <form action="#" method="post">
-                                        <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart" />
-                                            <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
-                                            <input type="hidden" name="item_name" value="Women BLACK Heels" />
-                                            <input type="hidden" name="amount" value="30.99" />
-                                            <input type="hidden" name="discount_amount" value="1.00" />
-                                            <input type="hidden" name="currency_code" value="USD" />
-                                            <input type="hidden" name="return" value=" " />
-                                            <input type="hidden" name="cancel_return" value=" " />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -380,10 +346,10 @@
         <h3 class="wthree_text_info">Sale <span>Deals</span></h3>
         <div id="horizontalTab-sale">
             <ul class="resp-tabs-list">
-                <li> Men's</li>
-                <li> Women's</li>
-                <li> Bags</li>
-                <li> Footwear</li>
+                <li> Đồ Nam</li>
+                <li> Đồ Nữ</li>
+                <li> Túi Xách</li>
+                <li> Giày</li>
             </ul>
             <div class="resp-tabs-container">
                 <!--/tab_one-->
@@ -435,7 +401,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -497,7 +464,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -558,7 +526,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -617,7 +586,8 @@
                                                     <input type="hidden" name="HinhAnh" value="@hh.HinhAnh" />
                                                     <input type="hidden" name="ThuongHieu" value="@hh.ThuongHieu" />
                                                     <input type="hidden" name="MaLoaiHangHoa" value="@hh.MaLoaiHangHoa" />
-                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Add to cart" class="button" />
+                                                    <input type="hidden" name="TonKho" value="@hh.SoLuong" />
+                                                    <input type="submit" name="button" id="add-to-cart-btn" value="Thêm Vào Giỏ" class="button" />
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -626,44 +596,6 @@
                             </div>
                         }
                     }
-                    <div class="col-md-3 product-men">
-                        <div class="men-pro-item simpleCart_shelfItem">
-                            <div class="men-thumb-item">
-                                <img src="~/images/s8.jpg" alt="" class="pro-image-front">
-                                <img src="~/images/s8.jpg" alt="" class="pro-image-back">
-                                <div class="men-cart-pro">
-                                    <div class="inner-men-cart-pro">
-                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
-                                    </div>
-                                </div>
-                                <span class="product-new-top">New</span>
-
-                            </div>
-                            <div class="item-info-product ">
-                                <h4><a href="single.html">Women BLACK Heels</a></h4>
-                                <div class="info-product-price">
-                                    <span class="item_price">$180.99</span>
-                                    <del>$199.71</del>
-                                </div>
-                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    <form action="#" method="post">
-                                        <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart" />
-                                            <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
-                                            <input type="hidden" name="item_name" value="Women BLACK Heels" />
-                                            <input type="hidden" name="amount" value="30.99" />
-                                            <input type="hidden" name="discount_amount" value="1.00" />
-                                            <input type="hidden" name="currency_code" value="USD" />
-                                            <input type="hidden" name="return" value=" " />
-                                            <input type="hidden" name="cancel_return" value=" " />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -680,7 +612,7 @@
                 </div>
                 <div class="w3layouts_mail_grid_left2">
                     <h3>FREE SHIPPING</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    <p>Miễn phí Ship nội thành TP.HCM</p>
                 </div>
             </div>
             <div class="col-md-3 w3layouts_mail_grid_left">
@@ -689,7 +621,7 @@
                 </div>
                 <div class="w3layouts_mail_grid_left2">
                     <h3>24/7 SUPPORT</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    <p>Đội ngũ hỗ trợ chuyên nghiệp 24/7</p>
                 </div>
             </div>
             <div class="col-md-3 w3layouts_mail_grid_left">
@@ -698,7 +630,7 @@
                 </div>
                 <div class="w3layouts_mail_grid_left2">
                     <h3>MONEY BACK GUARANTEE</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    <p>Hỗ trợ đổi trả hàng</p>
                 </div>
             </div>
             <div class="col-md-3 w3layouts_mail_grid_left">
@@ -706,8 +638,8 @@
                     <i class="fa fa-gift" aria-hidden="true"></i>
                 </div>
                 <div class="w3layouts_mail_grid_left2">
-                    <h3>FREE GIFT COUPONS</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur</p>
+                    <h3>SALE WEEKLY</h3>
+                    <p>Giảm giá thường niên</p>
                 </div>
             </div>
             <div class="clearfix"> </div>

@@ -45,7 +45,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         public string Ghichu { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? NgayGiao { get; set; }
+        public DateTime NgayGiao { get; set; }
 
         public bool DaXacNhan { get; set; }
 
