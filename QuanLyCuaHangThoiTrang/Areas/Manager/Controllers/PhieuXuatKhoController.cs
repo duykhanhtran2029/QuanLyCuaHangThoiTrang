@@ -22,19 +22,31 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Index()
         {
             var phieuXuatKhoes = db.PhieuXuatKhoes.Include(p => p.NguoiDung);
+            var dt = phieuXuatKhoes.OrderByDescending(pnk => pnk.NgayXuatKho).FirstOrDefault();
+            var df = phieuXuatKhoes.OrderByDescending(pnk => pnk.NgayXuatKho).ToArray().LastOrDefault();
+            if (dt != null && df != null)
+            {
+                ViewBag.dateTo = dt.NgayXuatKho.ToString("MM/dd/yyyy");
+                ViewBag.dateFrom = df.NgayXuatKho.ToString("MM/dd/yyyy");
+            }
             return View(phieuXuatKhoes.ToList());
         }
-        public ActionResult DanhSachPhieuXuatKho(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult DanhSachPhieuXuatKho(string searchString, string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
             IList<PhieuXuatKho> pxk = db.PhieuXuatKhoes.ToList();
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    ncc = db.NhaCungCaps.Where(
-            //    nhacungcap => nhacungcap.TenNhaCungCap.Contains(searchString) ||
-            //    nhacungcap.Email.Contains(searchString) ||
-            //    nhacungcap.DiaChi.Contains(searchString) ||
-            //    nhacungcap.SoDienThoai.Contains(searchString)).ToList();
-            //}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pxk = db.PhieuXuatKhoes.Where(
+                phieuxuatkho => phieuxuatkho.NguoiDung.TenNguoiDung.Contains(searchString) ||
+                phieuxuatkho.LyDoXuat.Contains(searchString)).ToList();
+            }
+            DateTime tungay = Convert.ToDateTime(dateFrom);
+            DateTime denngay = Convert.ToDateTime(dateTo);
+
+            if ((!(tungay == default(DateTime))) && (!(denngay == default(DateTime))))
+            {
+                pxk = pxk.Where(phieuxuatkho => phieuxuatkho.NgayXuatKho >= tungay && phieuxuatkho.NgayXuatKho <= denngay).ToList();
+            }
             //Add search later
             return View(pxk.ToPagedList(page, pageSize));
         }

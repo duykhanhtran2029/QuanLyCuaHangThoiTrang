@@ -347,6 +347,10 @@
     <Content Include="Areas\Manager\Views\PhieuChi\DanhSachPhieuChi.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuNhapKho\DanhSachPhieuNhapKho.cshtml" />
     <Content Include="Areas\Manager\Views\LoaiHangHoa\DanhSachLoaiHangHoa.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuXuatKho\DanhSachPhieuXuatKho.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuKiemKho\DanhSachPhieuKiemKho.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoTonKho\DanhSachBaoCaoTonKho.cshtml" />
+    <Content Include="Areas\Manager\Views\HangHoa\DanhSachHangHoa.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />

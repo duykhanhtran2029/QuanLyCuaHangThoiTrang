@@ -22,21 +22,41 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Index()
         {
             var baoCaoTonKhoes = db.BaoCaoTonKhoes.Include(b => b.NguoiDung);
+            var dt = baoCaoTonKhoes.OrderByDescending(pnk => pnk.Nam).ThenBy(pnk => pnk.Thang).FirstOrDefault();
+            var df = baoCaoTonKhoes.OrderByDescending(pnk => pnk.Nam).ThenBy(pnk => pnk.Thang).ToArray().LastOrDefault();
+            if (dt != null && df != null)
+            {
+                ViewBag.dateTo = dt.Nam + "-" + dt.Thang;
+                ViewBag.dateFrom = df.Nam + "-" + df.Thang;
+            }
             return View(baoCaoTonKhoes.ToList());
         }
-        public ActionResult DanhSachBaoCaoTonKho(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult DanhSachBaoCaoTonKho(string searchString, string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
-            IList<BaoCaoTonKho> bctk = db.BaoCaoTonKhoes.ToList();
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    ncc = db.NhaCungCaps.Where(
-            //    nhacungcap => nhacungcap.TenNhaCungCap.Contains(searchString) ||
-            //    nhacungcap.Email.Contains(searchString) ||
-            //    nhacungcap.DiaChi.Contains(searchString) ||
-            //    nhacungcap.SoDienThoai.Contains(searchString)).ToList();
-            //}
+            IList<BaoCaoTonKho> bctc = db.BaoCaoTonKhoes.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bctc = db.BaoCaoTonKhoes.Where(
+                baocaotonkho => baocaotonkho.NguoiDung.TenNguoiDung.Contains(searchString)).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(dateFrom) && !String.IsNullOrEmpty(dateFrom))
+            {
+                string[] dateFroms = dateFrom.Split('-');
+                string[] dateTos = dateTo.Split('-');
+
+                int tuthang = int.Parse(dateFroms[1]);
+                int tunam = int.Parse(dateFroms[0]);
+
+                int denthang = int.Parse(dateTos[1]);
+                int dennam = int.Parse(dateTos[0]);
+
+                bctc = bctc.Where(baocaotonkho => (baocaotonkho.Nam > tunam && baocaotonkho.Nam < dennam)
+                || (baocaotonkho.Nam == tunam && baocaotonkho.Thang >= tuthang) 
+                || (baocaotonkho.Nam == dennam && baocaotonkho.Thang <= denthang)).ToList();
+            }
             //Add search later
-            return View(bctk.ToPagedList(page, pageSize));
+            return View(bctc.ToPagedList(page, pageSize));
         }
         public ActionResult LoadThongTinHangHoa(int thang, int nam)
         {

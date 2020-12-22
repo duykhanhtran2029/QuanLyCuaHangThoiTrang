@@ -42,7 +42,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Required]
         public string HinhThucThanhToan { get; set; }
 
-        public string Ghichu { get; set; }
+        public string GhiChu { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime NgayGiao { get; set; }
