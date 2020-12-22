@@ -25,3 +25,4 @@ E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Mo
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csproj.CopyComplete
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.dll
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.pdb
+E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang.Model\obj\Debug\QuanLyCuaHangThoiTrang.Model.csprojAssemblyReference.cache
