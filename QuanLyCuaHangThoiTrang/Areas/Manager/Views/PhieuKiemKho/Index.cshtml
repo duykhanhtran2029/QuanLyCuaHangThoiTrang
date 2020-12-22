@@ -12,7 +12,7 @@
 <div class="card">
     <div>
         <div class="pull-left">
-            <p class="card-title-heading">Danh sách Phiếu kiểm kho</p>
+            <p class="card-title-heading">Danh Sách Phiếu Kiểm Kho</p>
         </div>
         <div class="pull-right">
             <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
@@ -26,9 +26,23 @@
     <div>
         @using (Ajax.BeginForm("DanhSachPhieuKiemKho", "PhieuKiemKho", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
         {
-            <div class="form-group">
+            <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
+                <div class="grid-container" style="grid-template-columns: auto auto">
+                    <div>
+                        <label class="control-label col-md-4" style="margin-top: 7px">Từ ngày</label>
+                        <span class="input-group col-md-7">
+                            <input id="dateFrom" required name="dateFrom" class="form-control rounded datetimepicker" value="@ViewBag.dateFrom" />
+                        </span>
+                    </div>
+                    <div>
+                        <label class="control-label col-md-4" style="margin-top: 7px">Đến ngày</label>
+                        <div class="input-group col-md-7">
+                            <input id="dateTo" required name="dateTo" class="form-control datetimepicker rounded" value="@ViewBag.dateTo" />
+                        </div>
+                    </div>
+                </div>
                 <div class="input-group">
-                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiểm theo tên nhà cung cấp, số điện thoại, địa chỉ hoặc email" })
+                    @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên người lập", @required = "required" })
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </span>

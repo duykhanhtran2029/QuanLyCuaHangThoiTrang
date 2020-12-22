@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.LoaiHangHoa>
+@{ Layout = null; }
+<div class="table-responsive">
+    <table class="table table-bordered table-middle table-lilac" id="datatable">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 20%;">Mã Loại Hàng Hóa</th>
+                <th class="text-center" style="width: 30%;">Tên Loại Hàng Hóa</th>
+                <th class="text-center" style="width: 30%;">Giới Tính</th>
+                <th class="text-center" style="width: 20%;">Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (!item.IsDeleted)
+                {
+            <tr class="border-warning" style="text-align:center">
+                <td>
+                    @item.MaLoaiHangHoa
+                </td>
+                <td>
+                    @item.TenLoaiHangHoa
+                </td>
+                <td>
+                    @item.GioiTinh
+                </td>
+                <td class="text-center">
+                    @Ajax.RawActionLink("<i class=\"fas fa-edit\"></i>", "Edit", "LoaiHangHoa",
+                                 new { id = item.MaLoaiHangHoa },
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "GET",
+                                     UpdateTargetId = "Modal",
+                                     LoadingElementId = "loading"
+                                 },
+                                 new
+                                 {
+                                     @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                 })
+                    @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "LoaiHangHoa",
+                                                     new { id = item.MaLoaiHangHoa },
+                                                     new AjaxOptions
+                                                     {
+                                                         HttpMethod = "GET",
+                                                         UpdateTargetId = "Modal",
+                                                         LoadingElementId = "loading"
+                                                     },
+                                                     new
+                                                     {
+                                                         @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                     })
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="pull-left" style="padding-top:20px">
+        <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
+    </div>
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

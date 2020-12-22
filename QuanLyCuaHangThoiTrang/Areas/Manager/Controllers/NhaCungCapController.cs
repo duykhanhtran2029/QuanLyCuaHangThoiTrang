@@ -22,7 +22,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachNhaCungCap(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<NhaCungCap> ncc = ncc = db.NhaCungCaps.ToList();
+            IList<NhaCungCap> ncc = db.NhaCungCaps.ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 ncc = db.NhaCungCaps.Where(

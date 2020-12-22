@@ -34,7 +34,7 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Column(TypeName = "money")]
         public decimal TongTien { get; set; }
 
-        public string Ghichu { get; set; }
+        public string GhiChu { get; set; }
 
         public DateTime? NgayChinhSua { get; set; }
 

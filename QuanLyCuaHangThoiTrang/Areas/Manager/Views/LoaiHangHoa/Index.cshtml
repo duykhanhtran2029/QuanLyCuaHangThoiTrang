@@ -1,49 +1,50 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.LoaiHangHoa>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ LOẠI HÀNG HÓA";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Loại Hàng Hóa.";
 }
-
-<h2>Quản lý loại hàng hóa</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenLoaiHangHoa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GioiTinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenLoaiHangHoa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioiTinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaLoaiHangHoa }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaLoaiHangHoa }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaLoaiHangHoa })
-        </td>
-    </tr>
-}
-
-</table>
-
-<p>
-    @Html.ActionLink("Quay lại ", "Index","HangHoa")
-</p>
+<title id="pageTitle">
+    Quản Lý Nhà Cung Cấp
+</title>
+<div id="Modal" class="modal fade" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Loại Hàng Hóa</p>
+        </div>
+        <div class="pull-right">
+            @Ajax.RawActionLink("<i class=\"fas fa-plus\"></i><span style=\"margin: 15px 0!important; \">Thêm Loại Hàng Hóa</span>", "Create", "LoaiHangHoa",
+             null,
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 UpdateTargetId = "Modal",
+                 LoadingElementId = "loading"
+             },
+             new
+             {
+                 @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+             })
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachLoaiHangHoa", "LoaiHangHoa", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiểm theo tên loại hàng hóa hoặc giới tính" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachLoaiHangHoa", "LoaiHangHoa");}
+        </div>
+    </div>
+</div>
