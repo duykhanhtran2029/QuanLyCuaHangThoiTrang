@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manager\Dto\KiemKho.cs" />
     <Compile Include="Areas\Manager\Dto\NhapKho.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoBanHangController.cs" />
