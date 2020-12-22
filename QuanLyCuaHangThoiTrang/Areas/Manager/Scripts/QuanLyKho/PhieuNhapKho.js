@@ -12,7 +12,7 @@ function CreatePhieuNhapKho() {
     //basic button handler
     if($('#ngayNhapKho').val() === '' || $('#ngayNhapKho').val() === undefined || $('#ngayNhapKho').length === 0)
         $('#ngayNhapKho').val(new Date($.now()).toLocaleDateString('en-US'));
-    console.log($('#ngayNhapKho').val());
+
     var orderItems = [];
     var tmpIndex = 0;
 
@@ -313,13 +313,13 @@ function CreatePhieuNhapKho() {
     });
 
     //this calculates values automatically
-    Multiplica();
+    MultiplicaPNK();
     $("#soLuongNhap").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPNK();
     });
 
     $("#giaNhap").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPNK();
     });
     // paste
     $("#soLuongNhap").on('keyup input propertychange paste change', function () {
@@ -647,13 +647,13 @@ function EditPhieuNhapKho() {
     });
 
     //this calculates values automatically
-    Multiplica();
+    MultiplicaPNK();
     $("#soLuongNhap").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPNK();
     });
 
     $("#giaNhap").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPNK();
     });
     // paste
     $("#soLuongNhap").on('keyup input propertychange paste change', function () {
@@ -860,7 +860,7 @@ function HideErrorGiaNhap() {
     }
 }
 
-function Multiplica() {
+function MultiplicaPNK() {
     if (document.getElementById('soLuongNhap').value == '' || document.getElementById('giaNhap').value == 0) {
         document.getElementById('thanhTien').value = 0;
     }
