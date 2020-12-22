@@ -26,28 +26,30 @@
     <div>
         @using (Ajax.BeginForm("DanhSachPhieuKiemKho", "PhieuKiemKho", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
         {
-            <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
-                <div class="grid-container" style="grid-template-columns: auto auto">
-                    <div>
-                        <label class="control-label col-md-4" style="margin-top: 7px">Từ ngày</label>
-                        <span class="input-group col-md-7">
-                            <input id="dateFrom" required name="dateFrom" class="form-control rounded datetimepicker" value="@ViewBag.dateFrom" />
-                        </span>
-                    </div>
-                    <div>
-                        <label class="control-label col-md-4" style="margin-top: 7px">Đến ngày</label>
-                        <div class="input-group col-md-7">
-                            <input id="dateTo" required name="dateTo" class="form-control datetimepicker rounded" value="@ViewBag.dateTo" />
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group">
-                    @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên người lập", @required = "required" })
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
+            <div class="grid-container" style="grid-template-columns: auto auto">
+                <div>
+                    <label class="control-label col-md-4" style="margin-top: 7px">Từ ngày</label>
+                    <span class="input-group col-md-7">
+                        <input id="dateFrom" required name="dateFrom" class="form-control rounded datetimepicker" value="@ViewBag.dateFrom" />
                     </span>
                 </div>
+                <div>
+                    <label class="control-label col-md-4" style="margin-top: 7px">Đến ngày</label>
+                    <div class="input-group col-md-7">
+                        <input id="dateTo" required name="dateTo" class="form-control datetimepicker rounded" value="@ViewBag.dateTo" />
+                    </div>
+                </div>
             </div>
+            <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
+                <div style="padding: 0px 30px">
+                    @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên người lập" })
+                </div>
+                <div>
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
         }
         <div id="list">
             @{Html.RenderAction("DanhSachPhieuKiemKho", "PhieuKiemKho");}
