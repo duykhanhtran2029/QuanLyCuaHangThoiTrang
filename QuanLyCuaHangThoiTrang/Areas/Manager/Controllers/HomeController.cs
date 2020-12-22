@@ -14,7 +14,23 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
         public ActionResult Index()
         {
-            Session["Account"] = db.NguoiDungs.Find(2);
+            //Session["Account"] = db.NguoiDungs.Find(2);
+            ViewBag.SoPhieuDatHang = db.PhieuDatHangs.Count();
+            ViewBag.SoPhieuBanHang = db.PhieuBanHangs.Count();
+            ViewBag.SoPhieuChi = db.PhieuChis.Count();
+            ViewBag.SoLuongTonKho = db.HangHoas.Sum(hh => (int?)hh.SoLuong) ?? 0;
+
+            ViewBag.PDHXacNhan = db.PhieuDatHangs.Where(pdh => pdh.DaXacNhan).Count();
+            ViewBag.TongTienBanHang = db.PhieuBanHangs.Sum(pbh => (decimal?)pbh.TongTien) ?? 0;
+            ViewBag.TongTienChi = db.PhieuChis.Sum(pc => (decimal?)pc.TongTienChi) ?? 0;
+            ViewBag.SoLuongNhapKho = db.ChiTietPhieuNhapKhoes.Sum(ct => (decimal?)ct.SoLuong) ?? 0;
+            ViewBag.SoLuongXuatKho = db.ChiTietPhieuXuatKhoes.Sum(ct => (decimal?)ct.SoLuong) ?? 0;
+
+            ViewBag.HetHang = db.HangHoas.Where(hh => hh.SoLuong == 0).Count();
+            ViewBag.SapHetHang = db.HangHoas.Where(hh => hh.SoLuong < 5 && hh.SoLuong > 0).Count();
+
+            ViewBag.SanPham = db.HangHoas.Count() + "/" + db.LoaiHangHoas.Count();
+            ViewBag.KinhDoanh = db.HangHoas.Where(hh => hh.IsDeleted == false).Count() + "/" + db.HangHoas.Where(hh => hh.IsDeleted == true).Count();
             return View();
         }
 
