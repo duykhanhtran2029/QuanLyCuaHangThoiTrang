@@ -22,19 +22,28 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Index()
         {
             var phieuNhapKhoes = db.PhieuNhapKhoes.Include(p => p.NguoiDung).Include(p => p.NhaCungCap);
+            var dt = phieuNhapKhoes.OrderByDescending(pnk => pnk.NgayNhapKho).FirstOrDefault();
+            var df = phieuNhapKhoes.OrderByDescending(pnk => pnk.NgayNhapKho).ToArray().LastOrDefault();
+            ViewBag.dateTo = dt.NgayNhapKho.ToString("MM/dd/yyyy");
+            ViewBag.dateFrom = df.NgayNhapKho.ToString("MM/dd/yyyy");
             return View(phieuNhapKhoes.ToList());
         }
-        public ActionResult DanhSachPhieuNhapKho(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult DanhSachPhieuNhapKho(string searchString,string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
             IList<PhieuNhapKho> pnk = db.PhieuNhapKhoes.ToList();
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    ncc = db.NhaCungCaps.Where(
-            //    nhacungcap => nhacungcap.TenNhaCungCap.Contains(searchString) ||
-            //    nhacungcap.Email.Contains(searchString) ||
-            //    nhacungcap.DiaChi.Contains(searchString) ||
-            //    nhacungcap.SoDienThoai.Contains(searchString)).ToList();
-            //}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pnk = db.PhieuNhapKhoes.Where(
+                phieunhapkho => phieunhapkho.NguoiDung.TenNguoiDung.Contains(searchString) ||
+                phieunhapkho.NhaCungCap.TenNhaCungCap.Contains(searchString)).ToList();
+            }
+            DateTime tungay = Convert.ToDateTime(dateFrom); 
+            DateTime denngay = Convert.ToDateTime(dateTo);
+
+            if ((!(tungay == default(DateTime))) && (!(denngay == default(DateTime))))
+            {
+                pnk = pnk.Where(phieunhapkho => phieunhapkho.NgayNhapKho >= tungay && phieunhapkho.NgayNhapKho <= denngay).ToList();
+            }
             //Add search later
             return View(pnk.ToPagedList(page, pageSize));
         }

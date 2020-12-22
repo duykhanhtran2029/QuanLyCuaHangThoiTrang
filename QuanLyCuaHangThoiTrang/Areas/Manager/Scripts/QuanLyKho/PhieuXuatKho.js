@@ -340,13 +340,13 @@ function CreatePhieuXuatKho() {
     });
 
     //this calculates values automatically
-    Multiplica();
+    MultiplicaPXK();
     $("#soLuongXuat").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPXK();
     });
 
     $("#gia").on("keydown keyup", function () {
-        Multiplica();
+        MultiplicaPXK();
     });
     // paste
     $("#soLuongXuat").on('keyup input propertychange paste change', function () {
@@ -521,7 +521,7 @@ function HideErrorSoLuongXuat() {
     }
 }
 
-function Multiplica() {
+function MultiplicaPXK() {
     if (document.getElementById('soLuongXuat').value == '' || document.getElementById('gia').value == 0) {
         document.getElementById('thanhTien').value = 0;
     }

@@ -16,47 +16,47 @@
         <div>
             @Html.AntiForgeryToken()
             <div hidden>
-                @Html.EditorFor(model => model.SoPhieuNhapKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuNhapKho" } })
+                @Html.EditorFor(model => model.SoPhieuNhapKho, new { htmlAttributes = new { @class = "form-control", @id ="soPhieuNhapKho"}})
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayNhapKho, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.NgayNhapKho, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayNhapKho" } })
+                    @Html.DisplayFor(model => model.NgayNhapKho, new { htmlAttributes = new { @class = "form-control datetimepicker"} })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayNhapKho" } })
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNhaCungCap, "Nhà Cung Cấp", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.NhaCungCap.TenNhaCungCap, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayNhapKho" } })
+                    @Html.DisplayFor(model => model.NhaCungCap.TenNhaCungCap, new { htmlAttributes = new { @class = "form-control datetimepicker"} })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongTien" } })
+                    @Html.DisplayFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control"} })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu" } })
+                    @Html.DisplayFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control"} })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DisplayFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayChinhSua" } })
+                    @Html.DisplayFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker"} })
                 </div>
             </div>
         </div>

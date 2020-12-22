@@ -25,6 +25,7 @@
         [Display(Name = "Mã Người Dùng"), Required(ErrorMessage = "Mã Người Dùng không được trống")]
         public int MaNguoiDung { get; set; }
 
+        [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày Lập"), Required(ErrorMessage = "Ngày Lập không được trống")]
         public DateTime NgayLap { get; set; }
