@@ -268,60 +268,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     <!-- //Modal1 -->
     <!-- //Shopping cart -->
-    <div class="shopping-cart" id="shopping-cart-div" style="display:none">
+    <div class="shopping-cart" id="shopping-cart-div">
         <div class="cart_title">
-            Shopping Bag
-            <div>
-                <button id="cart_close" class="cart_close-btn" onclick="ShowCart()">
-                    <i class="fas fa-close"></i>
-                </button>
-
+            <span>GIỎ HÀNG</span>
+            <div id="cart_close" style="color:black !important" class="cart_close-btn pull-right" onclick="ShowCart()">
+                <i class="fas fa-close"></i>
             </div>
+            <div class="clearfix"></div>
         </div>
-        <div id="item-container">
-            <!-- Product-->
-        </div>
-        <div class="order-price">
-            <b>Tổng tiền: </b>
-            <span class="order-value"> 0 </span>
-            <span>&nbsp; VNĐ</span>
+        <div class="cart-content">
+            <div id="item-container">
+                <!-- Product-->
+            </div>
+            <div class="order-price">
+                <b>Tổng tiền: </b>
+                <span class="order-value"> 0 </span>
+                <span>&nbsp; VNĐ</span>
+            </div>
         </div>
         <input type="submit" name="cart_submit" value="Đặt Hàng" class="cart_submit">
     </div>
     <!-- //Shopping cart -->
     <!-- //Popup Submit Order -->
     <div id="order-submit-popup" class="order-submit-popup" style="display:none">
-        <div style="display:flex; align-items: center; justify-content: center;">
-            <h2>Thông tin đặt hàng</h2>
-            <button id="order_close" class="order_close-btn">
+        <div style="align-items: center; justify-content: center;">
+            <h2 class="pull-left">THÔNG TIN ĐẶT HÀNG</h2>
+            <span id="order_close" style="margin-right: 10px" class="pull-right">
                 <i class="fas fa-close"></i>
-            </button>
+            </span>
+            <span class="clearfix">
+
+            </span>
         </div>
         <hr />
-        <div class="order-container">
-            <div class="order-input">
-                <span>Họ Tên</span>
-                <span>Số Điện Thoại</span>
-                <span>Địa Chỉ</span>
-                <span>Email</span>
-                <span>Ghi Chú</span>
-
-            </div>
-            <div class="order-input">
-                <form>
-                    <input name="order-ten" type="text" placeholder=" Họ Tên" />
-                    <input name="order-sdt" type="text" placeholder="Số Điện Thoại" />
-                    <input name="order-diachi" type="text" placeholder="Địa Chỉ" />
-                    <input name="order-email" type="text" placeholder="Email" />
-                    <input type="text" placeholder="Ghi Chú" />
-                </form>
-            </div>
-            <div class="order-input">
-                <b>Tổng Tiền</b>
-                <span id="order-total">100</span>
-                <span>&nbsp; VNĐ</span>
-            </div>
-            <input id="order" type="submit" value="Đặt Hàng" />
+        <div>
+            <form>
+                <div style="padding: 0px 20px 0px 50px">
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Họ Tên</label>
+                        <input name="order-ten" required type="text" class="col-md-9 custom-input" placeholder=" Họ Tên" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Số Điện Thoại</label>
+                        <input name="order-sdt" required type="text" class="col-md-9 custom-input" placeholder="Số Điện Thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Địa Chỉ</label>
+                        <input name="order-diachi" required type="text" class="col-md-9 custom-input" placeholder="Địa Chỉ" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label">Email</label>
+                        <input name="order-email" type="text" class="col-md-9 custom-input" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label">Ghi Chú</label>
+                        <input type="text" class="col-md-9 custom-input" placeholder="Ghi Chú" />
+                    </div>
+                </div>
+                <hr />
+                <div class="order-input" style="margin-left: 55px; display: block">
+                    <b>Tổng Tiền:</b>
+                    <span style="margin-left: 15px" id="order-total">100</span>
+                    <span>&nbsp; VNĐ</span>
+                </div>
+                <input id="order" class="cart_submit" type="submit" value="Đặt Hàng" />
+            </form>
         </div>
             
 
@@ -741,12 +752,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             //set tong tien
             var tien = $('span.order-value').text();
             $('#order-total').text(tien);
-            $("body > *").not("body > .order-submit-popup").css('opacity', '0');
         });
 
         $('#order_close').click(function () {
             $("#order-submit-popup").fadeOut();
-            $("body > *").not("body > .order-submit-popup").css('opacity', '1');
         });
 
         $('#order').on("submit", function (event) {
