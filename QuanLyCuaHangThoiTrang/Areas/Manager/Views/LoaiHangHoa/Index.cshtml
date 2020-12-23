@@ -5,7 +5,7 @@
     ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Loại Hàng Hóa.";
 }
 <title id="pageTitle">
-    Quản Lý Nhà Cung Cấp
+    Quản Lý Loại Hàng Hóa
 </title>
 <div id="Modal" class="modal fade" role="dialog">
 </div>
@@ -15,6 +15,7 @@
             <p class="card-title-heading">Danh Sách Loại Hàng Hóa</p>
         </div>
         <div class="pull-right">
+
             @Ajax.RawActionLink("<i class=\"fas fa-plus\"></i><span style=\"margin: 15px 0!important; \">Thêm Loại Hàng Hóa</span>", "Create", "LoaiHangHoa",
              null,
              new AjaxOptions
@@ -47,4 +48,9 @@
             @{Html.RenderAction("DanhSachLoaiHangHoa", "LoaiHangHoa");}
         </div>
     </div>
+    
 </div>
+<button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('HangHoa/Index')">
+    <i class="fas fa-list"></i>
+    <span style="margin: 15px 0 !important;">Quản Lý Hàng Hóa</span>
+</button>
