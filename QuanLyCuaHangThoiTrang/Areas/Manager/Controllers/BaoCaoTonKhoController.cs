@@ -31,7 +31,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return View(baoCaoTonKhoes.ToList());
         }
-        public ActionResult DanhSachBaoCaoTonKho(string searchString, string dateFrom, string dateTo, int page = 1, int pageSize = 10)
+        public ActionResult DanhSachBaoCaoTonKho(string dateFrom, string dateTo, string searchString, int page = 1, int pageSize = 10)
         {
             IList<BaoCaoTonKho> bctc = db.BaoCaoTonKhoes.ToList();
             if (!String.IsNullOrEmpty(searchString))
@@ -51,9 +51,18 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 int denthang = int.Parse(dateTos[1]);
                 int dennam = int.Parse(dateTos[0]);
 
-                bctc = bctc.Where(baocaotonkho => (baocaotonkho.Nam > tunam && baocaotonkho.Nam < dennam)
-                || (baocaotonkho.Nam == tunam && baocaotonkho.Thang >= tuthang) 
-                || (baocaotonkho.Nam == dennam && baocaotonkho.Thang <= denthang)).ToList();
+                DateTime df = Convert.ToDateTime(tuthang + "/" + "01/" + tunam);
+                DateTime dt = new DateTime();
+                if (denthang == 12)
+                   dt = Convert.ToDateTime(denthang + "/" + "31/" + dennam);
+                else
+                    dt = Convert.ToDateTime((denthang+1) + "/" + "01/" + dennam);
+
+                bctc = bctc.Where(baocaotonkho => Convert.ToDateTime(baocaotonkho.Thang + "/" + "01/" + baocaotonkho.Nam) >= df &&
+                Convert.ToDateTime(baocaotonkho.Thang + "/" + "01/" + baocaotonkho.Nam) < dt).ToList();
+                //bctc = bctc.Where(baocaotonkho => (baocaotonkho.Nam > tunam && baocaotonkho.Nam < dennam)
+                //|| (baocaotonkho.Nam == tunam && baocaotonkho.Thang >= tuthang && baocaotonkho.Thang <= denthang) 
+                //|| (baocaotonkho.Nam == dennam && baocaotonkho.Thang <= denthang && baocaotonkho.Thang >= tuthang)).ToList();
             }
             //Add search later
             return View(bctc.ToPagedList(page, pageSize));

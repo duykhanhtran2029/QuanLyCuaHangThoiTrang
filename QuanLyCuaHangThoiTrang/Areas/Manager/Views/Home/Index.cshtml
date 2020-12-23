@@ -1,52 +1,114 @@
 ﻿@{
-    
-    ViewBag.Title = "Index";
-    
 
+    ViewBag.Title = "TRANG CHÍNH";
 }
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
-<h1>index</h1>
+<div class="grid-container" style="grid-template-columns: 25% 25% 25% 25%">
+    <div class="card" style="text-align: center">
+        <div style="font-size: 18px;font-weight:bold; color: darkslateblue">
+            SỐ PHIẾU ĐẶT HÀNG
+        </div>
+        <div style="font-size: 32px">
+            @ViewBag.SoPhieuDatHang
+        </div>
+        <hr />
+        <div>
+            <span>Xác nhận:</span>
+            <span>@ViewBag.PDHXacNhan</span>
+        </div>
+    </div>
+    <div class="card" style="text-align: center">
+        <div style="font-size: 18px;font-weight:bold; color: darkslateblue">
+            SỐ PHIẾU BÁN HÀNG
+        </div>
+        <div style="font-size: 32px">
+            @ViewBag.SoPhieuBanHang
+        </div>
+        <hr />
+        <div>
+            <span>Tổng tiền:</span>
+            <span>@ViewBag.TongTienBanHang</span>
+        </div>
+    </div>
+    <div class="card" style="text-align: center">
+        <div style="font-size: 18px;font-weight:bold; color: darkslateblue">
+            PHIẾU CHI
+        </div>
+        <div style="font-size: 32px">
+            @ViewBag.SoPhieuChi
+        </div>
+        <hr />
+        <div>
+            <span>Tổng tiền:</span>
+            <span>@ViewBag.TongTienChi</span>
+        </div>
+    </div>
+    <div class="card" style="text-align: center">
+        <div style="font-size: 18px;font-weight:bold; color: darkslateblue">
+            SỐ LƯỢNG TỒN KHO
+        </div>
+        <div style="font-size: 32px">
+            @ViewBag.SoLuongTonKho
+        </div>
+        <hr />
+        <div class="grid-container" style="grid-template-columns: auto auto auto; padding: 0px 20px">
+            <div style="margin-left: 10px">
+                <span>Nhập kho:</span>
+                <span>@ViewBag.SoLuongNhapKho</span>
+            </div>
+            |
+            <div style="margin-right: 10px">
+                <span>Xuất kho:</span>
+                <span>@ViewBag.SoLuongXuatKho</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="grid-container" style="grid-template-columns: 50% 50%">
+    <div class="card" style="text-align: center">
+        <div style="font-size: 20px;font-weight:bold; color: darkslateblue">
+            THÔNG TIN KHO
+        </div>
+        <hr style="margin-bottom: 0px" />
+        <div style="font-size: 16px; margin: 10px">
+            <div class="grid-container" style="grid-template-columns: 75% 10% 15%">
+                <span style="text-align:left">Hết Hàng </span>
+                <span>@ViewBag.HetHang</span>
+                <span>Sản phẩm</span>
+            </div>
+        </div>
+        <hr style="margin-bottom: 0px" />
+        <div style="font-size: 16px; margin: 10px">
+            <div class="grid-container" style="grid-template-columns: 75% 10% 15%">
+                <span style="text-align:left">Sắp Hết Hàng ( Số Lượng Tồn < 5)</span>
+                <span>@ViewBag.SapHetHang</span>
+                <span>Sản phẩm</span>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="text-align: center">
+        <div style="font-size: 20px;font-weight:bold; color: darkslateblue">
+            THÔNG TIN SẢN PHẨM
+        </div>
+        <hr style="margin-bottom: 0px" />
+        <div style="font-size: 16px; margin: 10px">
+            <div class="grid-container" style="grid-template-columns: 80% 15%">
+                <span style="text-align:left">Sản Phẩm / Loại Sản Phẩm </span>
+                <span>@ViewBag.SanPham</span>
+            </div>
+        </div>
+        <hr style="margin-bottom: 0px" />
+        <div style="font-size: 16px; margin: 10px">
+            <div class="grid-container" style="grid-template-columns: 80% 15%">
+                <span style="text-align:left">Đang Kinh Doanh / Ngừng Kinh Doanh </span>
+                <span>@ViewBag.KinhDoanh</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div style="text-align:center">
+    <img src="~/images/vintage.png" width="450" height="150" />
+</div>
