@@ -20,6 +20,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Index()
         {
             var phieuChis = db.PhieuChis;//.Include(p => p.NguoiDung).Include(p => p.PhieuNhapKho);
+            //var phieuChi = db.PhieuChis.Join(db.NguoiDungs,
+            //    p => p.MaNguoiDung,
+            //    nd => nd.MaNguoiDung,
+            //    (p, nd) => new
+            //    {
+            //        NgayChi = p.NgayChi,
+            //        TenNguoiDung = nd.TenNguoiDung,
+            //        TongTienChi = p.TongTienChi,
+            //        GhiChu = p.GhiChu
+            //    });
             return View(phieuChis.ToList());
         }
 
@@ -39,10 +49,23 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
 
         // GET: PhieuChi/Create
+        
         public ActionResult Create()
         {
-            //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
-            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu");
+//            //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
+//<<<<<<< Updated upstream
+//            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu");
+//=======
+//            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu");
+          
+            ViewBag.SoPhieuNhapKho = ListPhieuNhapKho();
+
+            return View();
+        }
+
+        public SelectList ListPhieuNhapKho()
+        {
+//>>>>>>> Stashed changes
             var SoPNKinPC = (from pc in db.PhieuChis
                              select new
                              {
@@ -55,9 +78,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                               Text = pn.SoPhieuNhapKho.ToString(),
                               Value = pn.SoPhieuNhapKho.ToString()
                           });
-            ViewBag.SoPhieuNhapKho = new SelectList(ConLai, "Value", "Text");
-
-            return View();
+            return new SelectList(ConLai, "Value", "Text");
         }
 
         public ActionResult DanhSachPhieuChi(string searchString, int page = 1, int pageSize = 10)
@@ -94,17 +115,56 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SoPhieuChi,NgayChi,MaNguoiDung,SoPhieuNhapKho,TongTienChi,GhiChu,NgayChinhSua,IsDeleted")] PhieuChi phieuChi)
+        public ActionResult Create([Bind(Include = "SoPhieuNhapKho")] PhieuChi phieuChi, FormCollection form)
         {
+            //if (ModelState.IsValid) SoPhieuChi,NgayChi,MaNguoiDung,,TongTienChi,GhiChu,NgayChinhSua,IsDeleted
+            //{
+            //    db.PhieuChis.Add(phieuChi);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
+            //ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "Ghichu", phieuChi.SoPhieuNhapKho);
+
+            string ngaychi = form["NgayChi"].ToString();
+            var user = (NguoiDung)Session["Account"];
+            string tien = form["Tongtienchi"].ToString();
+            string sophieunhap = form["Sophieunhapkho"].ToString();
+            string ghichu = form["Ghichu"].ToString();
             if (ModelState.IsValid)
             {
-                db.PhieuChis.Add(phieuChi);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                var phieu = Int32.Parse(sophieunhap);
+                var phieuChidb = db.PhieuChis.Where(n => n.SoPhieuNhapKho == phieu).ToList();
+                if (phieuChidb.Count() == 0)
+                {
 
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
-            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", phieuChi.SoPhieuNhapKho);
+//<<<<<<< Updated upstream
+//            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuChi.MaNguoiDung);
+//            ViewBag.SoPhieuNhapKho = new SelectList(db.PhieuNhapKhoes, "SoPhieuNhapKho", "GhiChu", phieuChi.SoPhieuNhapKho);
+//=======
+                        db.PhieuChis.Add(new PhieuChi
+                        {
+                            NgayChi = DateTime.ParseExact(ngaychi, "dd/MM/yyyy", null),
+                            MaNguoiDung = user.MaNguoiDung,
+                            SoPhieuNhapKho = Int32.Parse(sophieunhap),
+                            TongTienChi = Decimal.Parse(tien),
+                            GhiChu = ghichu,
+                            NgayChinhSua = DateTime.Now,
+                            IsDeleted = false
+                        });
+                        db.SaveChanges();
+                        SetAlert("Tạo phiếu chi thành công!", "success");
+                        return RedirectToAction("Index");
+                }
+                else
+                {
+                   // ViewBag.SoPhieuNhapKho = ListPhieuNhapKho();
+                    SetAlert("Tạo phiếu chi thất bại, vui lòng kiểm tra lại!", "error");
+                }
+            }
+            ViewBag.SoPhieuNhapKho = ListPhieuNhapKho();
+//>>>>>>> Stashed changes
             return View(phieuChi);
         }
 
@@ -179,6 +239,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             else if (type == "error")
                 TempData["AlertType"] = "alert-danger";
         }
+
+        [ValidateAntiForgeryToken]
         public ActionResult TaoPhieuChi(FormCollection form)
         {
             string ngaychi = form["NgayChi"].ToString();
@@ -189,23 +251,28 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             var phieuChi = db.PhieuChis.SingleOrDefault();
             if (phieuChi == null)
             {
-                db.PhieuChis.Add(new PhieuChi
+                if (ModelState.IsValid)
                 {
-                    NgayChi = DateTime.ParseExact(ngaychi, "dd/MM/yyyy", null),
-                    MaNguoiDung = user.MaNguoiDung,
-                    SoPhieuNhapKho = Int32.Parse(sophieunhap),
-                    TongTienChi = Decimal.Parse(tien),
-                    GhiChu = ghichu,
-                    NgayChinhSua = DateTime.Now,
-                    IsDeleted = false
-                });
-                db.SaveChanges();
-                SetAlert("Tạo phiếu chi thành công!", "success");
+                    db.PhieuChis.Add(new PhieuChi
+                    {
+                        NgayChi = DateTime.ParseExact(ngaychi, "dd/MM/yyyy", null),
+                        MaNguoiDung = user.MaNguoiDung,
+                        SoPhieuNhapKho = Int32.Parse(sophieunhap),
+                        TongTienChi = Decimal.Parse(tien),
+                        GhiChu = ghichu,
+                        NgayChinhSua = DateTime.Now,
+                        IsDeleted = false
+                    });
+                    db.SaveChanges();
+                    SetAlert("Tạo phiếu chi thành công!", "success");
+                } 
             }
             else
             {
                 SetAlert("Tạo phiếu chi thất bại, vui lòng kiểm tra lại!", "error");
+                return View(phieuChi);
             }
+            //return RedirectToAction("Create");
             return RedirectToAction("Index");
         }
 
