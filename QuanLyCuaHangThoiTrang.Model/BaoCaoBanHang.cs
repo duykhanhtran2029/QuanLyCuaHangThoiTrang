@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -18,8 +18,12 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Key]
         public int MaBaoCaoBanHang { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Ngày bắt đầu"), Required(ErrorMessage = "Ngày bắt đầu không được trống")]
         public DateTime NgayBatDau { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Ngày kết thúc"), Required(ErrorMessage = "Ngày kết thúc không được trống")]
         public DateTime NgayKetThuc { get; set; }
 
         public int SoLuongPhieuBanHang { get; set; }

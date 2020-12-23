@@ -66,6 +66,8 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             }
             else
             {
+
+                TempData["avatar"] = "/images/avatar/18.jpg";
                 ViewBag.UserProfile = (NguoiDung)Session["Account"];
             }
             return View();
