@@ -188,6 +188,7 @@
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
     <Content Include="Areas\Manager\Scripts\main.js" />
+    <Content Include="Areas\Manager\Scripts\PhieuDatHang\PhieuDatHang.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\BaoCaoTonKho.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuKiemKho.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuNhapKho.js" />
@@ -349,6 +350,7 @@
     <Content Include="Areas\Manager\Views\PhieuKiemKho\DanhSachPhieuKiemKho.cshtml" />
     <Content Include="Areas\Manager\Views\BaoCaoTonKho\DanhSachBaoCaoTonKho.cshtml" />
     <Content Include="Areas\Manager\Views\HangHoa\DanhSachHangHoa.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuDatHang\DanhSachPhieuDatHang.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />

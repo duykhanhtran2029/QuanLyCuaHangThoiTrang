@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -21,33 +21,37 @@ namespace QuanLyCuaHangThoiTrang.Model
         }
 
         [Key]
+        [Display(Name = "Mã Hàng Hóa")]
         public int MaHangHoa { get; set; }
 
-        [Required]
+        [Display(Name = "Tên Hàng Hóa"), Required(ErrorMessage = "Tên Hàng Hóa không được trống")]
         public string TenHangHoa { get; set; }
 
+        [Display(Name = "Giảm Giá"), Required(ErrorMessage = "Giảm Giá không được trống")]
         public double GiamGia { get; set; }
 
+        [Display(Name = "Giá Bán"), Required(ErrorMessage = "Giá Bán không được trống")]
         [Column(TypeName = "money")]
         public decimal? GiaBan { get; set; }
-
+        [Display(Name = "Số Lượng"), Required(ErrorMessage = "Số Lượng không được trống")]
         public int SoLuong { get; set; }
 
         [StringLength(1)]
         public string Size { get; set; }
 
-        [Required]
+        [Display(Name = "Đơn Vị Tính"), Required(ErrorMessage = "Đơn Vị Tính không được trống")]
         [StringLength(50)]
         public string DonViTinh { get; set; }
 
-        [Required]
+        [Display(Name = "Mô Tả"), Required(ErrorMessage = "Mô Tả không được trống")]
         public string MoTa { get; set; }
 
+        [Display(Name = "Thời Gian Bảo Hành"), Required(ErrorMessage = "Thời Gian Bảo Hành không được trống")]
         public int ThoiGianBaoHanh { get; set; }
 
-        [Required]
+        [Display(Name = "Hình Ảnh"), Required(ErrorMessage = "Hình Ảnh không được trống")]
         public string HinhAnh { get; set; }
-
+        [Display(Name = "Thương Hiệu")]
         public string ThuongHieu { get; set; }
 
         public int MaLoaiHangHoa { get; set; }
