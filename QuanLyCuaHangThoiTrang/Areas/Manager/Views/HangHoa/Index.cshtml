@@ -1,105 +1,54 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.HangHoa>
 
 @{
-    ViewBag.Title = "Quản Lý Hàng Hóa";
+    ViewBag.Title = "QUẢN LÝ HÀNG HÓA";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Hàng Hóa.";
 }
-
-<h2>Index</h2>
 <title id="pageTitle">
-    Quản Lý Nhà Hàng Hóa
+    Quản Lý  Hàng Hóa
 </title>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LoaiHangHoa.TenLoaiHangHoa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TenHangHoa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiamGia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiaBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DonViTinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MoTa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGianBaoHanh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HinhAnh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThuongHieu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiHangHoa.TenLoaiHangHoa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenHangHoa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiamGia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DonViTinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MoTa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhAnh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThuongHieu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaHangHoa }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaHangHoa }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaHangHoa })
-        </td>
-    </tr>
-}
-
-</table>
-<p>
-    @Html.ActionLink("Quản Lý Loại Hàng Hóa", "Index", "LoaiHangHoa")
-</p>
+<div id="Modal" class="modal fade" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Hàng Hóa</p>
+        </div>
+        <div class="pull-right">
+            @Ajax.RawActionLink("<i class=\"fas fa-plus\"></i><span style=\"margin: 15px 0!important; \">Thêm Hàng Hóa</span>", "Create", "HangHoa",
+             null,
+             new AjaxOptions
+             {
+                 HttpMethod = "GET",
+                 UpdateTargetId = "Modal",
+                 LoadingElementId = "loading"
+             },
+             new
+             {
+                 @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+             })
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachHangHoa", "HangHoa", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiểm theo tên hàng hóa hoặc thương hiệu" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </span>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachHangHoa", "HangHoa");}
+        </div>
+    </div>
+</div>
+<button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('LoaiHangHoa/Index')">
+    <i class="fas fa-list"></i>
+    <span style="margin: 15px 0 !important;">Quản Lý Loại Hàng Hóa</span>
+</button>
