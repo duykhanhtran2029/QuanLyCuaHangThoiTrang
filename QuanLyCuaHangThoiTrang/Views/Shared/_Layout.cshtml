@@ -615,200 +615,199 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //Script from Nam BEGIN -->
     <script type="text/javascript">
         function ShowCart() {
-            var x = document.getElementById("shopping-cart-div");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
+    var x = document.getElementById("shopping-cart-div");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
-        function ShowAddToCart() {
-            var x = document.getElementById("shopping-cart-div");
-            x.style.display = "block";
-        }
+function ShowAddToCart() {
+    var x = document.getElementById("shopping-cart-div");
+    x.style.display = "block";
+}
 
-        function SetOrderPrice() { // cập nhật tiền tổng của hóa đơn
-            var orderprice = 0;
-            var prices = document.getElementsByName("tongtien-sanpham-submit");
-            for (i = 0; i < prices.length; i++) {
-                var p = parseFloat(prices.item(i).value);
-                orderprice = parseFloat(orderprice) + p;
-            }
-            $('.order-price span.order-value').text(orderprice.toLocaleString());
-        }
+function SetOrderPrice() { // cập nhật tiền tổng của hóa đơn
+    var orderprice = 0;
+    var prices = document.getElementsByName("tongtien-sanpham-submit");
+    for (i = 0; i < prices.length; i++) {
+        var p = parseFloat(prices.item(i).value);
+        orderprice = parseFloat(orderprice) + p;
+    }
+    $('.order-price span.order-value').text(orderprice.toLocaleString());
+}
 
-        //======================================= CART BUTTON ====================================================================================//
-        $("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
-            event.preventDefault();
-            var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
-            var mota = $(this).find('input[name ="MoTa"]').val();
-            var gia = $(this).find('input[name ="Gia"]').val();
-            var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
-            var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
-            var giamgia = $(this).find('input[name ="GiamGia"]').val();
-            var size = $(this).find('input[name ="Size"]').val();
-            var tonkho = $(this).find('input[name ="TonKho"]').val();
-            var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
+//======================================= CART BUTTON ====================================================================================//
+$("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
+    event.preventDefault();
+    var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+    var mota = $(this).find('input[name ="MoTa"]').val();
+    var gia = $(this).find('input[name ="Gia"]').val();
+    var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+    var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+    var giamgia = $(this).find('input[name ="GiamGia"]').val();
+    var size = $(this).find('input[name ="Size"]').val();
+    var tonkho = $(this).find('input[name ="TonKho"]').val();
+    var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
 
-            if (oldvalue != null) { //if already have item then + 1
-                if (parseFloat(oldvalue) + 1 <= tonkho) {
-                    $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
-                    //update Gia
-                    $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
-                    $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
-                    SetOrderPrice(); //hiện tổng tiền
-                    updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
-                    ShowAddToCart();
-                    //gọi controller thêm vào cart:
-                    $.ajax({
-                        type: "POST",
-                        url: "Home/AddToCart",
-                        data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
-                    });
-                }
-                else
-                    alert("Sản phẩm trong kho đã hết");
-            }
-            else //them vao cart
-            {
-                $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="tonkho-sanpham-submit" value="' + tonkho + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia * (1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
-                SetOrderPrice(); //hiện tổng tiền
-                updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
-                ShowAddToCart();
-                //gọi controller thêm vào cart:
-                $.ajax({
-                    type: "POST",
-                    url: "Home/AddToCart",
-                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
-                });
-            }
-        });
-
-        //+ button on cart (fix bug on dynamically added-append elements)
-        $(document).on("click", "button.cart_plus-btn", function () {
-            var tonkho = $(this).siblings('input[name =tonkho-sanpham-submit]').val();
-            var soluong = parseInt($(this).siblings('input[name =cart_input]').val()); //so luong hien tai trong gio
-            soluong += 1;
-            if (soluong <= tonkho) {
-                $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
-                //update gia:
-                var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
-                var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
-                var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
-                $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
-                $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
-                SetOrderPrice(); //hiện tổng tiền
-                updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
-                //gọi controller thêm vào cart:
-                $.ajax({
-                    type: "POST",
-                    url: "Home/AddToCart",
-                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
-                });
-            }
-            else
-                alert("Sản phẩm trong kho đã hết");
-
-        });
-
-        //- button on cart
-        $(document).on("click", "button.cart_minus-btn", function () {
-            var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
-            if (soluong > 1) {
-                soluong -= 1;
-                $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
-                //update gia
-                var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
-                var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
-                var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
-                $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
-                $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
-                SetOrderPrice(); //hiện tổng tiền
-                updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
-                //gọi controller -1 số lượng vào cart:
-                $.ajax({
-                    type: "POST",
-                    url: "Home/MinusCart",
-                    data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
-                });
-            }
-        });
-
-        // delete button on cart cart_delete-btn1
-        $(document).on("click", "button.cart_delete-btn1", function () {
-            $(this).parent().parent("div").remove(".cart_item");
-            SetOrderPrice();//hiện tổng tiền
+    if (oldvalue != null) { //if already have item then + 1
+        if (parseFloat(oldvalue) + 1 <= tonkho) {
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
+            //update Gia
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
+            SetOrderPrice(); //hiện tổng tiền
             updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
-            //gọi controller xóa sản phẩm khỏi cart:
-            var mahanghoa = $(this).parent().siblings().find('input[name =id-sanpham-submit]').val();
+            ShowAddToCart();
+            //gọi controller thêm vào cart:
             $.ajax({
                 type: "POST",
-                url: "Home/DeleteFromCart",
-                data: { MAHANGHOA: mahanghoa }
+                url: "Home/AddToCart",
+                data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
             });
-        });
-        //==================== pop-up ===============================
-        $(document).on("click", "input.cart_submit", function () {
-            if (parseFloat($('span.order-value').text()) <= 0)
-                alert("Xin hãy chọn hàng trước khi thanh toán");
-            else
-            {
-                $('.order-submit-popup').fadeIn();
-                $("body > *").not("body > #order-submit-popup").css('opacity', '-2');
-            //set tong tien
-            updateFinalOrderTotal();
-            //hiện thông tin nếu như đã đăng nhập
-            @{string tennguoidung = "";
-                string sdt = "";
-                string diachi = "";
-                string email = "";
-                }
-            @if (Session["Account"] != null) {
-                NguoiDung account = (NguoiDung)Session["Account"];
-                        tennguoidung = account.TenNguoiDung;
-                        sdt = account.SoDienThoai;
-                        diachi = account.DiaChi;
-                        email = account.Email;
-             }
-            $('input[name=order-ten]').val("@tennguoidung");
-            $('input[name=order-sdt]').val("@sdt");
-            $('input[name=order-diachi]').val("@diachi");
-            $('input[name=order-email]').val("@email");
-            }
-        });
-
-        $('#order_close').click(function () {
-            $("#order-submit-popup").fadeOut();
-            $("body > *").not("body > #order-submit-popup").css('opacity', '1');
-        });
-
-        $('#order').on("submit", function (event) {
-            event.preventDefault();
-            var tenkhachhang = $('input[name=order-ten]').val();
-            var sdt = $('input[name=order-sdt]').val();
-            var diachi = $('input[name=order-diachi]').val();
-            var email = $('input[name=order-email]').val();
-            var tongtien = parseFloat($('#order-total').text());
-            $.ajax({
-                type: "POST",
-                url: "Home/Order",
-                data: {
-                    TENKHACHHANG: tenkhachhang,
-                    SDT: sdt,
-                    DIACHI: diachi,
-                    EMAIL: email,
-                    TONGTIEN: tongtien
-                }
-            });
-            location.reload();//reload page
-        });
-
-        function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
-            var tien = $('span.order-value').text();
-            $('#order-total').text(tien);
         }
+        else
+            alert("Sản phẩm trong kho đã hết");
+    }
+    else //them vao cart
+    {
+        $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="tonkho-sanpham-submit" value="' + tonkho + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia * (1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        ShowAddToCart();
+        //gọi controller thêm vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/AddToCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+});
 
+//+ button on cart (fix bug on dynamically added-append elements)
+$(document).on("click", "button.cart_plus-btn", function () {
+    var tonkho = $(this).siblings('input[name =tonkho-sanpham-submit]').val();
+    var soluong = parseInt($(this).siblings('input[name =cart_input]').val()); //so luong hien tai trong gio
+    soluong += 1;
+    if (soluong <= tonkho) {
+        $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+        //update gia:
+        var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+        var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+        var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
+        $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
+        $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        //gọi controller thêm vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/AddToCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+    else
+        alert("Sản phẩm trong kho đã hết");
+
+});
+
+//- button on cart
+$(document).on("click", "button.cart_minus-btn", function () {
+    var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+    if (soluong > 1) {
+        soluong -= 1;
+        $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+        //update gia
+        var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+        var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+        var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
+        $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
+        $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        //gọi controller -1 số lượng vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/MinusCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+});
+
+// delete button on cart cart_delete-btn1
+$(document).on("click", "button.cart_delete-btn1", function () {
+    $(this).parent().parent("div").remove(".cart_item");
+    SetOrderPrice();//hiện tổng tiền
+    updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+    //gọi controller xóa sản phẩm khỏi cart:
+    var mahanghoa = $(this).parent().siblings().find('input[name =id-sanpham-submit]').val();
+    $.ajax({
+        type: "POST",
+        url: "Home/DeleteFromCart",
+        data: { MAHANGHOA: mahanghoa }
+    });
+});
+//==================== pop-up ===============================
+$(document).on("click", "input.cart_submit", function () {
+    if (parseFloat($('span.order-value').text()) <= 0)
+        alert("Xin hãy chọn hàng trước khi thanh toán");
+    else {
+        $('.order-submit-popup').fadeIn();
+        $("body > *").not("body > #order-submit-popup").css('opacity', '-2');
+        //set tong tien
+        updateFinalOrderTotal();
+        //hiện thông tin nếu như đã đăng nhập
+        @{
+            string tennguoidung = "";
+            string sdt = "";
+            string diachi = "";
+            string email = "";
+        }
+        @if (Session["Account"] != null) {
+            NguoiDung account = (NguoiDung)Session["Account"];
+            tennguoidung = account.TenNguoiDung;
+            sdt = account.SoDienThoai;
+            diachi = account.DiaChi;
+            email = account.Email;
+        }
+        $('input[name=order-ten]').val("@tennguoidung");
+        $('input[name=order-sdt]').val("@sdt");
+        $('input[name=order-diachi]').val("@diachi");
+        $('input[name=order-email]').val("@email");
+    }
+});
+
+$('#order_close').click(function () {
+    $("#order-submit-popup").fadeOut();
+    $("body > *").not("body > #order-submit-popup").css('opacity', '1');
+});
+
+$('#order').on("submit", function (event) {
+    event.preventDefault();
+    var tenkhachhang = $('input[name=order-ten]').val();
+    var sdt = $('input[name=order-sdt]').val();
+    var diachi = $('input[name=order-diachi]').val();
+    var email = $('input[name=order-email]').val();
+    var tongtien = parseFloat($('#order-total').text());
+    $.ajax({
+        type: "POST",
+        url: "Home/Order",
+        data: {
+            TENKHACHHANG: tenkhachhang,
+            SDT: sdt,
+            DIACHI: diachi,
+            EMAIL: email,
+            TONGTIEN: tongtien
+        }
+    });
+    location.reload();//reload page
+});
+
+function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
+    var tien = $('span.order-value').text();
+    $('#order-total').text(tien);
+}
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->

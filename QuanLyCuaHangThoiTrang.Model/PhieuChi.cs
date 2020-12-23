@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -17,6 +17,7 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         public int MaNguoiDung { get; set; }
 
+        [Display(Name = "Số Phiếu Nhập Kho"), Required(ErrorMessage = "Số Phiếu Nhập Kho không được trống")]
         public int SoPhieuNhapKho { get; set; }
 
         [Column(TypeName = "money")]

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using QuanLyCuaHangThoiTrang.Extension;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -39,7 +41,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: NguoiDung/Create
         public ActionResult Create()
         {
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
+            ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n=>n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu");
             return View();
         }
 
@@ -48,10 +50,31 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,IsDeleted,MaChucVu,Avatar")] NguoiDung nguoiDung)
-        {
+        public ActionResult Create([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,MaChucVu,Avatar")] NguoiDung nguoiDung, HttpPostedFileBase avatar)
+        {                                                                                                           //,IsDeleted
             if (ModelState.IsValid)
             {
+
+                if (avatar != null && avatar.ContentLength > 0)
+                {
+                    try
+                    {
+                        Random random = new Random();
+                        string avatarfile = nguoiDung.UserName + "_" +  random.Next(10000).ToString() + "_"+ Path.GetFileName(avatar.FileName);
+                        string path = Path.Combine(Server.MapPath("~/images/avatar/"), avatarfile);
+                        avatar.SaveAs(path);
+                        nguoiDung.Avatar = avatarfile;
+                    }
+                    catch (Exception ex)
+                    {
+                       //
+                    }
+                }
+                else
+                {
+                    nguoiDung.Avatar = "default.png";
+                }
+                nguoiDung.PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord);
                 db.NguoiDungs.Add(nguoiDung);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -73,7 +96,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+            ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
             return View(nguoiDung);
         }
 
@@ -82,15 +105,36 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,IsDeleted,MaChucVu,Avatar")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "MaNguoiDung,TenNguoiDung,DiaChi,SoDienThoai,Email,CMND,UserName,PassWord,IsDeleted,MaChucVu,Avatar")] NguoiDung nguoiDung, HttpPostedFileBase avatar)
         {
             if (ModelState.IsValid)
             {
+                if (avatar != null && avatar.ContentLength > 0)
+                {
+                    try
+                    {
+                        Random random = new Random();
+                        string avatarfile = nguoiDung.UserName + "_" + random.Next(10000).ToString() + "_" + Path.GetFileName(avatar.FileName);
+                        string path = Path.Combine(Server.MapPath("~/images/avatar/"), avatarfile);
+                        avatar.SaveAs(path);
+                        nguoiDung.Avatar = avatarfile;
+                    }
+                    catch (Exception ex)
+                    {
+                        //
+                    }
+                }
+                else
+                {
+                    nguoiDung.Avatar = "default.png";
+                }
+                nguoiDung.PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord);
+
                 db.Entry(nguoiDung).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+            ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
             return View(nguoiDung);
         }
 

@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -25,28 +25,31 @@ namespace QuanLyCuaHangThoiTrang.Model
         [Key]
         public int MaNguoiDung { get; set; }
 
-        [Required]
+       
         [StringLength(50)]
+        [Display(Name = "Tên người dùng"), Required(ErrorMessage = "Tên người dùng không được trống!")]
         public string TenNguoiDung { get; set; }
 
         [StringLength(100)]
         public string DiaChi { get; set; }
 
-        [Required]
-        [StringLength(15)]
+        [Display(Name = "Số Điện Thoại"), Required(ErrorMessage = "Số Điện Thoại không được trống")]
+        [StringLength(11, ErrorMessage = "Số Điện Thoại không được quá 11 chữ số")]
+        [RegularExpression(@"[0-9]{7,11}", ErrorMessage = "Số Điện Thoại không hợp lệ")]
         public string SoDienThoai { get; set; }
 
         [StringLength(30)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [StringLength(10)]
         public string CMND { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên người dùng không được trống")]
         [StringLength(100)]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mật khẩu không được trống")]
         [StringLength(50)]
         public string PassWord { get; set; }
 

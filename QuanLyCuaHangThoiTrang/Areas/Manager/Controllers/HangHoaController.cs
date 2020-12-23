@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -19,6 +20,18 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             var hangHoas = db.HangHoas.Include(h => h.LoaiHangHoa);
             return View(hangHoas.ToList());
+        }
+        public ActionResult DanhSachHangHoa(string searchString, int page = 1, int pageSize = 10)
+        {
+            IList<HangHoa> hh = db.HangHoas.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hh = db.HangHoas.Where(
+                hanghoa => hanghoa.TenHangHoa.Contains(searchString) ||
+                hanghoa.ThuongHieu.Contains(searchString)).ToList();
+            }
+            //Add search later
+            return View(hh.ToPagedList(page, pageSize));
         }
 
         // GET: HangHoa/Details/5

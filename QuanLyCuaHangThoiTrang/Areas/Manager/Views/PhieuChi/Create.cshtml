@@ -1,4 +1,4 @@
-﻿@*@model QuanLyCuaHangThoiTrang.Model.PhieuChi*@
+﻿@model QuanLyCuaHangThoiTrang.Model.PhieuChi
 @using QuanLyCuaHangThoiTrang.Model;
 @{
     ViewBag.Title = "Create";
@@ -11,6 +11,7 @@
     <div class="main-card mb-3 card">
         <div class="card-body">
             <h5 class="card-title">Tạo phiếu chi</h5>
+@*<<<<<<< Updated upstream
             @using (Html.BeginForm("TaoPhieuChi", "PhieuChi", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
@@ -36,17 +37,53 @@
                 </div>
                 <button type="submit" class="mt-1 btn btn-primary">Submit</button>
             }
+=======*@
+            @using (Html.BeginForm(@*"TaoPhieuChi", "PhieuChi", FormMethod.Post*@))
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="position-relative form-group">
+    <label for="NgayChi" class="">Ngày chi</label>
+    <input value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayChi" id="Ngaychi" placeholder="" type="text" class="form-control" readonly>
+</div>
+<div class="position-relative form-group">
+    <label for="Nguoidung" class="">Tên người dùng</label>
+    <input value="@user.TenNguoiDung" name="Nguoidung" id="Nguoidung" placeholder="" type="text" class="form-control" readonly>
+</div>
+<div class="position-relative form-group">
+    <label for="Sophieunhapkho" class="">Số phiếu nhập kho</label>
+    @Html.DropDownList("Sophieunhapkho", new SelectList(ViewBag.SoPhieuNhapKho, "Value", "Text"), "Vui lòng chọn", new
+{
+   @id = "Sophieunhapkho",
+   @class = "form-control"@*, @required = "required"*@})
+    @Html.ValidationMessageFor(model => model.SoPhieuNhapKho, "", new { @class = "text-danger" })
+</div>
+<div class="position-relative form-group">
+    <label for="Tongtienchi" class="">Tổng tiền chi</label>
+    <input name="Tongtienchi" id="Tongtienchi" placeholder="" type="text" class="form-control" readonly>
+</div>
+<div class="position-relative form-group">
+    <label for="Ghichu" class="">Ghi chú</label>
+    <textarea name="Ghichu" id="Ghichu" class="form-control"></textarea>
+</div>
+<button type="submit" class="mt-1 btn btn-primary">Submit</button>
+}
+@*>>>>>>> Stashed changes*@
         </div>
     </div>
 </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 <script>
+
     $(document).ready(function () {
+    //$(function () {
         $('#Sophieunhapkho').change(function () {
             $('#Sophieunhapkho').change(function () {
                 if ($('#Sophieunhapkho').val() == '')
                     $('#Tongtienchi').val('');
                 else {
-
                     $.getJSON('/PhieuChi/TongTienChi', { id: $('#Sophieunhapkho').val() }, function (data) {
                         $.each(JSON.parse(data), function (i, row) {
                             console.log(data);
@@ -61,6 +98,3 @@
         });
     });
 </script>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

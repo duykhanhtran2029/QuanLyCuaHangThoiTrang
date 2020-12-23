@@ -46,18 +46,116 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // POST: BaoCaoBanHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaBaoCaoBanHang,NgayBatDau,NgayKetThuc,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,IsDeleted")] BaoCaoBanHang baoCaoBanHang)
+        public ActionResult Create([Bind(Include = "NgayBatDau,NgayKetThuc")] BaoCaoBanHang baoCaoBanHang)
         {
             if (ModelState.IsValid)
             {
-                db.BaoCaoBanHangs.Add(baoCaoBanHang);
-                db.SaveChanges();
+                if(baoCaoBanHang.NgayBatDau > baoCaoBanHang.NgayKetThuc)
+                {
+                    SetAlert("Ngày kết thúc phải sau ngày bắt đầu!", "error");
+                    return View(baoCaoBanHang);
+                }
+                var baocao1 = db.PhieuBanHangs.Where(n => n.NgayBan >= baoCaoBanHang.NgayBatDau && n.NgayBan <= baoCaoBanHang.NgayKetThuc);
+
+                var tongpbh = baocao1.Count();
+
+                if(tongpbh == 0)
+                {
+                    SetAlert("Không có thông tin để lập báo cáo!", "warning");
+                    return View(baoCaoBanHang);
+                }
+
+                var tongtien = baocao1.Sum(n => n.TongTien);
+
+
+                var baocao2 = db.PhieuNhapKhoes.Where(n => n.NgayNhapKho >= baoCaoBanHang.NgayBatDau && n.NgayNhapKho <= baoCaoBanHang.NgayKetThuc);
+                decimal tongtiennhap = 0;
+                if (baocao2.Count() == 0)
+                {
+                    tongtiennhap = 0;
+                }
+                else
+                {
+                    tongtiennhap = baocao2.Sum(n => n.TongTien);
+                }
+                
+                var user = (NguoiDung)Session["Account"];
+
+                var res = (from pbh in db.PhieuBanHangs
+                           where (pbh.NgayBan >= baoCaoBanHang.NgayBatDau && pbh.NgayBan <= baoCaoBanHang.NgayKetThuc)
+                           group pbh by pbh.NgayBan into g
+                           select new
+                           {
+                               NgayBan = g.Key,
+                               SoDonHang = g.Count(),
+                               DoanhThu = g.Sum(n => n.TongTien)
+                           }).ToList();
+                decimal TongDT = 0;
+
+                foreach (var i in res)
+                {
+                    TongDT += i.DoanhThu;
+                }
+                if (TongDT == 0)
+                {
+                    SetAlert("Tạo báo cáo bán hàng không thành công!", "error");
+                    return View(baoCaoBanHang);
+                }
+                   
+                var record = new BaoCaoBanHang
+                {
+                    NgayBatDau = baoCaoBanHang.NgayBatDau,
+                    NgayKetThuc = baoCaoBanHang.NgayKetThuc,
+                    SoLuongPhieuBanHang = tongpbh,
+                    TongTienBanHang = tongtien,
+                    TongTienNhapHang = tongtiennhap,
+                    TongDoanhThu = tongtien - tongtiennhap,
+                    MaNguoiDung = user.MaNguoiDung,
+                    IsDeleted = false
+                };
+                db.BaoCaoBanHangs.Add(record);
+                db.SaveChanges();            
+
+                foreach (var i in res)
+                {
+                    db.ChiTietBaoCaoBanHangs.Add(new ChiTietBaoCaoBanHang
+                    {
+                        MaBaoCaoBanHang = record.MaBaoCaoBanHang,
+                        Ngay = i.NgayBan,
+                        SoLuongPhieuBanHang = i.SoDonHang,
+                        DoanhThu = i.DoanhThu,
+                        TiLe = Convert.ToDouble(i.DoanhThu / TongDT)
+                    });
+                    db.SaveChanges();
+                }
+                
+
                 return RedirectToAction("Index");
+                //Done
             }
 
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoBanHang.MaNguoiDung);
+            //if (ModelState.IsValid) MaBaoCaoBanHang,,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,IsDeleted
+            //{
+            //    db.BaoCaoBanHangs.Add(baoCaoBanHang);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoBanHang.MaNguoiDung);
             return View(baoCaoBanHang);
         }
 
