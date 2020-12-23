@@ -14,7 +14,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         {
             ChiTietBaoCaoTonKhoes = new HashSet<ChiTietBaoCaoTonKho>();
             ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
-            ChiTietPhieuBaoHanhs = new HashSet<ChiTietPhieuBaoHanh>();
             ChiTietPhieuDatHangs = new HashSet<ChiTietPhieuDatHang>();
             ChiTietPhieuKiemKhoes = new HashSet<ChiTietPhieuKiemKho>();
             ChiTietPhieuNhapKhoes = new HashSet<ChiTietPhieuNhapKho>();
@@ -60,9 +59,6 @@ namespace QuanLyCuaHangThoiTrang.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietPhieuBaoHanh> ChiTietPhieuBaoHanhs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuDatHang> ChiTietPhieuDatHangs { get; set; }

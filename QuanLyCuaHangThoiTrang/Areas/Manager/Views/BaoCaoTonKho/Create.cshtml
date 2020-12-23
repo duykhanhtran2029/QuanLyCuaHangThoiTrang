@@ -16,9 +16,9 @@
         <div>
             @Html.AntiForgeryToken()
             <div class="form-group">
-                <label class="control-label custom-label">Tháng</label>
+                <label class="control-label custom-label required">Tháng</label>
                 <div class="col-md-10 custom-input">
-                    <input class="form-control" type="month" id="thangNam">
+                    <input required class="form-control" type="month" id="thangNam">
                 </div>
             </div>
 
@@ -39,9 +39,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label custom-label  required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.NgayLap, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayLap" } })
+                    @Html.EditorFor(model => model.NgayLap, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayLap", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.NgayLap, "", new { @class = "text-danger" })
                 </div>
             </div>

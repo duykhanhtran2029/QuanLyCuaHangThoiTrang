@@ -162,7 +162,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult LuuBaoCaoTonKho(TonKho baoCaoTonKho)
+        public ActionResult LuuBaoCaoTonKho(BaoCaoTonKho baoCaoTonKho)
         {
             BaoCaoTonKho bctk = new BaoCaoTonKho
             {
@@ -178,7 +178,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.BaoCaoTonKhoes.Add(bctk);
                 db.SaveChanges();
-                SaveAllCTBCTK(baoCaoTonKho.chiTietBaoCaoTonKhoes, bctk.MaBaoCaoTonKho);
+                SaveAllCTBCTK(baoCaoTonKho.ChiTietBaoCaoTonKhoes, bctk.MaBaoCaoTonKho);
                 status = true;
             }
             catch

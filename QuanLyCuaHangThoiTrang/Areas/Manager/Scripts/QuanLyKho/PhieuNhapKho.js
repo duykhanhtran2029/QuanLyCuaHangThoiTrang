@@ -124,7 +124,7 @@ function CreatePhieuNhapKho() {
                 TongTien: parseFloat($('#tongTien').val().trim().replace(/,/gi, "")),
                 GhiChu: $('#ghiChu').val().trim(),
                 IsDeleted: false,
-                chiTietPhieuNhapKhoes: orderItems
+                ChiTietPhieuNhapKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');
@@ -383,7 +383,7 @@ function EditPhieuNhapKho() {
                 TongTien: parseFloat($('#tongTien').val().trim().replace(/,/gi, "")),
                 GhiChu: $('#ghiChu').val().trim(),
                 IsDeleted: false,
-                chiTietPhieuNhapKhoes: orderItems
+                ChiTietPhieuNhapKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');

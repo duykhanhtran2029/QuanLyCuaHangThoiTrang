@@ -70,7 +70,6 @@
     <Compile Include="ChiTietBaoCaoBanHang.cs" />
     <Compile Include="ChiTietBaoCaoTonKho.cs" />
     <Compile Include="ChiTietPhieuBanHang.cs" />
-    <Compile Include="ChiTietPhieuBaoHanh.cs" />
     <Compile Include="ChiTietPhieuDatHang.cs" />
     <Compile Include="ChiTietPhieuKiemKho.cs" />
     <Compile Include="ChiTietPhieuNhapKho.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="NhaCungCap.cs" />
     <Compile Include="PhanQuyen.cs" />
     <Compile Include="PhieuBanHang.cs" />
-    <Compile Include="PhieuBaoHanh.cs" />
     <Compile Include="PhieuChi.cs" />
     <Compile Include="PhieuDatHang.cs" />
     <Compile Include="PhieuKiemKho.cs" />

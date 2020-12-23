@@ -17,7 +17,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         public virtual DbSet<ChiTietBaoCaoBanHang> ChiTietBaoCaoBanHangs { get; set; }
         public virtual DbSet<ChiTietBaoCaoTonKho> ChiTietBaoCaoTonKhoes { get; set; }
         public virtual DbSet<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
-        public virtual DbSet<ChiTietPhieuBaoHanh> ChiTietPhieuBaoHanhs { get; set; }
         public virtual DbSet<ChiTietPhieuDatHang> ChiTietPhieuDatHangs { get; set; }
         public virtual DbSet<ChiTietPhieuKiemKho> ChiTietPhieuKiemKhoes { get; set; }
         public virtual DbSet<ChiTietPhieuNhapKho> ChiTietPhieuNhapKhoes { get; set; }
@@ -29,7 +28,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
         public virtual DbSet<PhieuBanHang> PhieuBanHangs { get; set; }
-        public virtual DbSet<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
         public virtual DbSet<PhieuChi> PhieuChis { get; set; }
         public virtual DbSet<PhieuDatHang> PhieuDatHangs { get; set; }
         public virtual DbSet<PhieuKiemKho> PhieuKiemKhoes { get; set; }
@@ -71,14 +69,6 @@ namespace QuanLyCuaHangThoiTrang.Model
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<ChiTietPhieuBanHang>()
-                .Property(e => e.ThanhTien)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<ChiTietPhieuBaoHanh>()
-                .Property(e => e.DonGia)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<ChiTietPhieuBaoHanh>()
                 .Property(e => e.ThanhTien)
                 .HasPrecision(19, 4);
 
@@ -127,11 +117,6 @@ namespace QuanLyCuaHangThoiTrang.Model
 
             modelBuilder.Entity<HangHoa>()
                 .HasMany(e => e.ChiTietPhieuBanHangs)
-                .WithRequired(e => e.HangHoa)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<HangHoa>()
-                .HasMany(e => e.ChiTietPhieuBaoHanhs)
                 .WithRequired(e => e.HangHoa)
                 .WillCascadeOnDelete(false);
 
@@ -226,24 +211,6 @@ namespace QuanLyCuaHangThoiTrang.Model
             modelBuilder.Entity<PhieuBanHang>()
                 .HasMany(e => e.ChiTietPhieuBanHangs)
                 .WithRequired(e => e.PhieuBanHang)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<PhieuBanHang>()
-                .HasMany(e => e.PhieuBaoHanhs)
-                .WithRequired(e => e.PhieuBanHang)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<PhieuBaoHanh>()
-                .Property(e => e.SoDienThoai)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PhieuBaoHanh>()
-                .Property(e => e.TongTien)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<PhieuBaoHanh>()
-                .HasMany(e => e.ChiTietPhieuBaoHanhs)
-                .WithRequired(e => e.PhieuBaoHanh)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PhieuChi>()

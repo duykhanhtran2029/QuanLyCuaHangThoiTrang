@@ -146,17 +146,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manager\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Manager\Dto\KiemKho.cs" />
-    <Compile Include="Areas\Manager\Dto\NhapKho.cs" />
-    <Compile Include="Areas\Manager\Dto\TonKho.cs" />
-    <Compile Include="Areas\Manager\Dto\XuatKho.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoBanHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaoCaoTonKhoController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietBaoCaoBanHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietBaoCaoTonKhoController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietPhieuBanHangController.cs" />
-    <Compile Include="Areas\Manager\Controllers\ChiTietPhieuBaoHanhController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietPhieuDatHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietPhieuKiemKhoController.cs" />
     <Compile Include="Areas\Manager\Controllers\ChiTietPhieuNhapKhoController.cs" />
@@ -169,7 +164,6 @@
     <Compile Include="Areas\Manager\Controllers\NhaCungCapController.cs" />
     <Compile Include="Areas\Manager\Controllers\PhanQuyenController.cs" />
     <Compile Include="Areas\Manager\Controllers\PhieuBanHangController.cs" />
-    <Compile Include="Areas\Manager\Controllers\PhieuBaoHanhController.cs" />
     <Compile Include="Areas\Manager\Controllers\PhieuChiController.cs" />
     <Compile Include="Areas\Manager\Controllers\PhieuDatHangController.cs" />
     <Compile Include="Areas\Manager\Controllers\PhieuKiemKhoController.cs" />
@@ -473,11 +467,6 @@
     <Content Include="Areas\Manager\Views\PhieuBanHang\Details.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuBanHang\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuBanHang\Index.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuBaoHanh\Create.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuBaoHanh\Delete.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuBaoHanh\Details.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuBaoHanh\Edit.cshtml" />
-    <Content Include="Areas\Manager\Views\PhieuBaoHanh\Index.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuChi\Create.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuChi\Delete.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuChi\Details.cshtml" />

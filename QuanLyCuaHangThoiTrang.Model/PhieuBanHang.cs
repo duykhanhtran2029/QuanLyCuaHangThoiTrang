@@ -13,7 +13,6 @@ namespace QuanLyCuaHangThoiTrang.Model
         public PhieuBanHang()
         {
             ChiTietPhieuBanHangs = new HashSet<ChiTietPhieuBanHang>();
-            PhieuBaoHanhs = new HashSet<PhieuBaoHanh>();
         }
 
         [Key]
@@ -44,8 +43,5 @@ namespace QuanLyCuaHangThoiTrang.Model
         public virtual ICollection<ChiTietPhieuBanHang> ChiTietPhieuBanHangs { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhieuBaoHanh> PhieuBaoHanhs { get; set; }
     }
 }
