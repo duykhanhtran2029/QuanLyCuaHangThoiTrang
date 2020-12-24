@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -18,7 +19,23 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Index()
         {
             var phieuDatHangs = db.PhieuDatHangs.Include(p => p.NguoiDung);
+
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHangs.ToList());
+        }
+
+        public ActionResult DanhSachPhieuDatHang(string searchString, int page = 1, int pageSize = 10)
+        {
+            IList<PhieuDatHang> pdh = db.PhieuDatHangs.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pdh = db.PhieuDatHangs.Where(
+                phieudathang => phieudathang.NguoiDung.TenNguoiDung.Contains(searchString) ||
+                phieudathang.TenKhachHang.Contains(searchString)).ToList();
+            }
+            //Add search later
+            return View(pdh.ToPagedList(page, pageSize));
         }
 
         // GET: PhieuDatHang/Details/5
@@ -40,6 +57,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Create()
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
+
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View();
         }
 

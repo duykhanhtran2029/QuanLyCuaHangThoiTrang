@@ -128,7 +128,7 @@ function CreatePhieuKiemKho() {
                 MaNguoiDung: $('#maNguoiDung').val().trim(),
                 GhiChu: $('#ghiChu').val().trim(),
                 IsDeleted: false,
-                chiTietPhieuKiemKhoes: orderItems
+                ChiTietPhieuKiemKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');
@@ -354,7 +354,7 @@ function EditPhieuKiemKho() {
                 MaNguoiDung: $('#maNguoiDung').val().trim(),
                 GhiChu: $('#ghiChu').val().trim(),
                 IsDeleted: false,
-                chiTietPhieuKiemKhoes: orderItems
+                ChiTietPhieuKiemKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');

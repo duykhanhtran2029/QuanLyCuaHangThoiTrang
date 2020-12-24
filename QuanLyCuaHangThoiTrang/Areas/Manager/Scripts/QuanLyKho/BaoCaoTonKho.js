@@ -41,7 +41,7 @@ function CreateBaoCaoTonKho() {
                 NgayLap: $('#ngayLap').val().trim(),
                 TongSoHangHoa: $('#tongSoHangHoa').val().trim(),
                 IsDeleted: false,
-                chiTietBaoCaoTonKhoes: orderItems
+                ChiTietBaoCaoTonKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');

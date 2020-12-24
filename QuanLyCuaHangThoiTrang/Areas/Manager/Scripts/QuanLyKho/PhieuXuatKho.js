@@ -211,7 +211,7 @@ function CreatePhieuXuatKho() {
                 LyDoXuat: $('#lyDoXuat').val().trim(),
                 TongTien: parseFloat($('#tongTien').val().trim().replace(/,/gi, "")),
                 IsDeleted: false,
-                chiTietPhieuXuatKhoes: orderItems
+                ChiTietPhieuXuatKhoes: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');

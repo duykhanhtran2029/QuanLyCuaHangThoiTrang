@@ -100,7 +100,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult LuuPhieuNhapKho(NhapKho phieuNhapKho)
+        public ActionResult LuuPhieuNhapKho(PhieuNhapKho phieuNhapKho)
         {
             PhieuNhapKho pnk = new PhieuNhapKho
             {
@@ -117,7 +117,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.PhieuNhapKhoes.Add(pnk);
                 db.SaveChanges();
-                SaveAllCTPNK(phieuNhapKho.chiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
+                SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
                 status = true;
             }
             catch
@@ -128,7 +128,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return new JsonResult { Data = new { status = status } };
         }
         [HttpPost]
-        public ActionResult SuaPhieuNhapKho(NhapKho phieuNhapKho)
+        public ActionResult SuaPhieuNhapKho(PhieuNhapKho phieuNhapKho)
         {
             bool status = false;
             try
@@ -143,7 +143,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     phieunhapkho.GhiChu = phieuNhapKho.GhiChu;
                     phieunhapkho.NgayChinhSua = DateTime.Now.Date;
                     DeleteAllCTPNK(phieunhapkho.SoPhieuNhapKho);
-                    SaveAllCTPNK(phieuNhapKho.chiTietPhieuNhapKhoes, phieunhapkho.SoPhieuNhapKho);
+                    SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, phieunhapkho.SoPhieuNhapKho);
                     db.SaveChanges();
                     status = true;
                 }
