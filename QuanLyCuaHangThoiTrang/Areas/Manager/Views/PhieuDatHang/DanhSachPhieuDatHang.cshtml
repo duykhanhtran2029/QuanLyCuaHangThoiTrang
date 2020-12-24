@@ -6,19 +6,20 @@
         <thead>
             <tr>
                 <th class="text-center" style="width: 5%;">Số Phiếu</th>
-                <th class="text-center" style="width: 10%;">Ngày Đặt</th>
+                <th class="text-center" style="width: 5%;">Ngày Đặt</th>
                 <th class="text-center" style="width: 10%;">Người Dùng</th>
                 <th class="text-center" style="width: 10%;">Tên Khách hàng</th>
-                <th class="text-center" style="width: 15%;">Số Điện Thoại</th>
-                <th class="text-center" style="width: 15%;">Địa Chỉ</th>
+                <th class="text-center" style="width: 10%;">Số Điện Thoại</th>
+                <th class="text-center" style="width: 10%;">Địa Chỉ</th>
                 <th class="text-center" style="width: 10%;">Email</th>
                 <th class="text-center" style="width: 10%;">Tổng Tiền</th>
                 <th class="text-center" style="width: 10%;">Hình Thức Thanh Toán</th>
                 <th class="text-center" style="width: 10%;">Ghi Chú</th>
-                <th class="text-center" style="width: 10%;">Ngày Giao</th>
+                <th class="text-center" style="width: 5%;">Ngày Giao</th>
                 <th class="text-center" style="width: 10%;">Đã Xác Nhận</th>
                 <th class="text-center" style="width: 10%;">Đã Thanh Toán</th>
                 <th class="text-center" style="width: 10%;">Ngày Chỉnh Sửa</th>
+                <th class="text-center" style="width: 10%;">Hành Động</th>
             </tr>
         </thead>
         <tbody>
@@ -33,9 +34,19 @@
                 <td>
                     @item.NgayDat.ToString("MM/dd/yyyy")
                 </td>
-                <td>
-                    @item.NguoiDung.TenNguoiDung
-                </td>
+                @if (item.NguoiDung != null)
+                {
+                    <td>
+                        @item.NguoiDung.TenNguoiDung
+                    </td>
+                }
+                else
+                {
+                    <td>
+                       
+                    </td>
+                }
+
                 <td>
                     @item.TenKhachHang
                 </td>
@@ -69,7 +80,7 @@
                 <td>
                     @item.NgayChinhSua
                 </td>
-                
+
                 @{
                     <td class="text-center">
                         <a href="@Url.Action("Edit", new { id = item.SoPhieuDatHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>

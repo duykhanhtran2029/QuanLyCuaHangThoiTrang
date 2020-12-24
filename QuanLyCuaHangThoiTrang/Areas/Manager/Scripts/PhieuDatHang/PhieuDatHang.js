@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
-    if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/create"))
-        CreatePhieuNhapKho();
-    if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/edit"))
-        EditPhieuNhapKho();
-    if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/details"))
-        DetailsPhieuNhapKho();
-    if (('' + window.location).toLocaleLowerCase().includes("phieunhapkho/delete"))
-        DetailsPhieuNhapKho();
+    if (('' + window.location).toLocaleLowerCase().includes("phieudathang/create"))
+        CreatePhieuDatHang();
+    if (('' + window.location).toLocaleLowerCase().includes("phieudathang/edit"))
+        EditPhieuDatHang();
+    if (('' + window.location).toLocaleLowerCase().includes("phieudathang/details"))
+        DetailsPhieuDatHang();
+    if (('' + window.location).toLocaleLowerCase().includes("phieudathang/delete"))
+        DetailsPhieuDatHang();
 });
 function CreatePhieuDatHang() {
     //basic button handler
@@ -16,7 +16,7 @@ function CreatePhieuDatHang() {
     var orderItems = [];
     var tmpIndex = 0;
 
-    $.getJSON('/PhieuNhapKho/LoadThongTinHangHoa', { id: $('#MaHangHoa').val() },
+    $.getJSON('/PhieuDatHang/LoadThongTinHangHoa', { id: $('#MaHangHoa').val() },
         function (data) {
             if (data != null) {
                 $.each(data, function (index, row) {

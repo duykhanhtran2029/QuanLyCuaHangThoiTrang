@@ -31,11 +31,15 @@
         public double GiamGia { get; set; }
 
         [Display(Name = "Giá Bán"), Required(ErrorMessage = "Giá Bán không được trống")]
+        [RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         [Column(TypeName = "money")]
         public decimal? GiaBan { get; set; }
-        [Display(Name = "Số Lượng"), Required(ErrorMessage = "Số Lượng không được trống")]
+
+        //[Display(Name = "Số Lượng"), Required(ErrorMessage = "Số Lượng không được trống")]
+       // [RegularExpression(@"[0-9]", ErrorMessage = "Số Lượng không hợp lệ")] //
         public int SoLuong { get; set; }
 
+        [Required(ErrorMessage = "Size không được trống")]
         [StringLength(1)]
         public string Size { get; set; }
 
@@ -47,6 +51,7 @@
         public string MoTa { get; set; }
 
         [Display(Name = "Thời Gian Bảo Hành"), Required(ErrorMessage = "Thời Gian Bảo Hành không được trống")]
+        [RegularExpression(@"[0-9]", ErrorMessage = "Thời Gian Bảo Hành không hợp lệ")]
         public int ThoiGianBaoHanh { get; set; }
 
         [Display(Name = "Hình Ảnh"), Required(ErrorMessage = "Hình Ảnh không được trống")]

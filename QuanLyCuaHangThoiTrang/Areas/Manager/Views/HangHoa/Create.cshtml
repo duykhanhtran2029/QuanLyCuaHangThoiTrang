@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "THÊM MỚI HÀNG HÓA";
     ViewBag.SubTitle = "Nhập đầy đủ các trường thông tin yêu cầu ở phía dưới";
-    Layout = null;
 }
 
 <div class="card">
@@ -30,29 +29,37 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TenHangHoa, htmlAttributes: new { @class = "control-label custom-label required" })
             <div class="col-md-10 custom-input">
-                @Html.EditorFor(model => model.TenHangHoa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TenHangHoa, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.TenHangHoa, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaLoaiHangHoa, "Mã Loại Hàng Hóa", htmlAttributes: new { @class = "control-label custom-label required" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaLoaiHangHoa", null, htmlAttributes: new { @class = "form-control minimal" })
+            @Html.LabelFor(model => model.MaLoaiHangHoa, "Loại Hàng Hóa", htmlAttributes: new { @class = "control-label custom-label required" })
+            <div class="col-md-10 custom-input">
+                @Html.DropDownList("MaLoaiHangHoa", null, htmlAttributes: new { @class = "form-control minimal", @required = "required", @id = "maLoaiHangHoa" })
                 @Html.ValidationMessageFor(model => model.MaLoaiHangHoa, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GiaBan, htmlAttributes: new { @class = "control-label custom-label requỉed" })
+            @Html.LabelFor(model => model.GiaBan, htmlAttributes: new { @class = "control-label custom-label required" })
             <div class="col-md-10 custom-input">
-                @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label custom-label required" })
+            @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label custom-label required" })
+            <div class="col-md-10 custom-input">
+                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
@@ -60,15 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label custom-label requỉed" })
-            <div class="col-md-10 custom-input">
-                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label custom-label required" })
+            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
@@ -76,7 +75,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DonViTinh, htmlAttributes: new { @class = "control-label custom-label required" })
+            @Html.LabelFor(model => model.DonViTinh, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.DonViTinh, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DonViTinh, "", new { @class = "text-danger" })
@@ -84,15 +83,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ThuongHieu, htmlAttributes: new { @class = "control-label custom-label" })
-            <div class="col-md-10 custom-input">
-                @Html.EditorFor(model => model.ThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DonViTinh, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label custom-label required" })
+            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
@@ -100,21 +91,36 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ThoiGianBaoHanh, htmlAttributes: new { @class = "control-label custom-label required" })
+            @Html.LabelFor(model => model.ThoiGianBaoHanh, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.ThoiGianBaoHanh, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ThoiGianBaoHanh, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label custom-label required" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
                 @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
             </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control", @id="hinhanh_input", @type = "file", @accept = "image/*" } })
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+            </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThuongHieu, htmlAttributes: new { @class = "control-label custom-label" })
+            <div class="col-md-10 custom-input">
+                @Html.EditorFor(model => model.ThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ThuongHieu, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10 custom-input">
@@ -124,4 +130,3 @@
         }
     </div>
 </div>
-
