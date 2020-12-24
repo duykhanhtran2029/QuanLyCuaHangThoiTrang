@@ -36,11 +36,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 else
                 {
                     var name = (NguoiDung)Session["Account"];
-                    <li> <a href="~/Home/UserProfile/" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+                    if (name.MaChucVu == 6)
+                    {
+                        <li> <a href="~/Home/UserProfile/" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Url.Action("Index", "Manager/Home")" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+
+
+                    }
+                    <li><i class="fa fa-sign-out" aria-hidden="true"></i><a href="@Url.Action("DangXuat", "Home")">Đăng xuất</a></li>
                 }
 
                 <li><i class="fa fa-phone" aria-hidden="true"></i> Gọi : 01234567898</li>
                 <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+
             </ul>
         </div>
     </div>

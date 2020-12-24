@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Extension;
 using QuanLyCuaHangThoiTrang.Model;
 
@@ -43,6 +44,19 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n=>n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu");
             return View();
+        }
+
+        // Get
+        public ActionResult DanhSachNguoiDung(string searchString, int page = 1, int pageSize = 10)
+        {
+
+            IList<NguoiDung> nguoiDung = db.NguoiDungs.ToList();
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                nguoiDung = db.NguoiDungs.Where(n => n.TenNguoiDung.Contains(searchString)).ToList();
+            }
+            return View(nguoiDung.ToPagedList(page, pageSize));
+
         }
 
         // POST: NguoiDung/Create

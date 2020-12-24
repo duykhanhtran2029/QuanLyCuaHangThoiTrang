@@ -350,7 +350,12 @@
     <Content Include="Areas\Manager\Views\PhieuKiemKho\DanhSachPhieuKiemKho.cshtml" />
     <Content Include="Areas\Manager\Views\BaoCaoTonKho\DanhSachBaoCaoTonKho.cshtml" />
     <Content Include="Areas\Manager\Views\HangHoa\DanhSachHangHoa.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Areas\Manager\Views\PhieuDatHang\DanhSachPhieuDatHang.cshtml" />
+=======
+    <Content Include="Areas\Manager\Views\NguoiDung\DanhSachNguoiDung.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\DanhSachBaoCaoBanHang.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />
