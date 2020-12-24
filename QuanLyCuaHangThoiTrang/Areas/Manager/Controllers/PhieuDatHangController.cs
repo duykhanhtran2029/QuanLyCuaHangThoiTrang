@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
@@ -38,6 +39,135 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View(pdh.ToPagedList(page, pageSize));
         }
 
+        public ActionResult LoadThongTinHangHoa(int id)
+        {
+            var result = db.HangHoas.Where(hh => hh.MaHangHoa == id).FirstOrDefault();
+            return Json(new
+            {
+                TenHangHoa = result.TenHangHoa,
+                DonViTinh = result.DonViTinh,
+                Size = result.Size,
+                GiaBan = result.GiaBan,
+                GiamGia=result.GiamGia,
+                SoLuong=result.SoLuong,
+                MoTa=result.MoTa,
+                ThoiGianBaoHanh= result.ThoiGianBaoHanh,
+                ThuongHieu=result.ThuongHieu
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult LoadChiTietPhieuDatHang(int id)
+        {
+            var result = db.ChiTietPhieuDatHangs.Where(ct => ct.SoPhieuDatHang == id)
+                .Select(ct => new {
+                    MaHangHoa = ct.MaHangHoa,
+                    TenHangHoa = ct.HangHoa.TenHangHoa,
+                    DonViTinh = ct.HangHoa.DonViTinh,
+                    Size = ct.HangHoa.Size,
+                    SoLuong = ct.SoLuong,
+                    Gia = ct.Gia,
+                    ThanhTien = ct.ThanhTien
+                }).ToList();
+            var json = JsonConvert.SerializeObject(result);
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        public void DeleteAllCTPDH(int id)
+        {
+            var result = db.ChiTietPhieuDatHangs.Where(ct => ct.SoPhieuDatHang == id).ToList();
+            foreach (var item in result)
+            {
+                db.ChiTietPhieuDatHangs.Remove(item);
+            }
+            db.SaveChanges();
+        }
+
+        public void SaveAllCTPDH(ICollection<ChiTietPhieuDatHang> chiTietPhieuDatHangs, int id)
+        {
+            foreach (var i in chiTietPhieuDatHangs)
+            {
+                i.SoPhieuDatHang = id;
+                db.ChiTietPhieuDatHangs.Add(i);
+                db.SaveChanges();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LuuPhieuDatHang(PhieuDatHang phieuDatHang)
+        {
+            PhieuDatHang pdh = new PhieuDatHang
+            {
+                NgayDat = phieuDatHang.NgayDat,
+                MaNguoiDung = phieuDatHang.MaNguoiDung,
+                TenKhachHang = phieuDatHang.TenKhachHang,
+                TongTien = phieuDatHang.TongTien,
+                SoDienThoai=phieuDatHang.SoDienThoai,
+                Email=phieuDatHang.Email,
+                Diachi=phieuDatHang.Diachi,
+                GhiChu = phieuDatHang.GhiChu,
+                HinhThucThanhToan=phieuDatHang.HinhThucThanhToan,
+                NgayGiao=phieuDatHang.NgayGiao,
+                DaThanhToan=phieuDatHang.DaThanhToan,
+                DaXacNhan=phieuDatHang.DaXacNhan,
+                IsDeleted = phieuDatHang.IsDeleted,
+                NgayChinhSua = DateTime.Now.Date
+            };
+            bool status = false;
+            try
+            {
+                db.PhieuDatHangs.Add(pdh);
+                db.SaveChanges();
+                SaveAllCTPDH(phieuDatHang.ChiTietPhieuDatHangs, pdh.SoPhieuDatHang);
+                status = true;
+            }
+            catch
+            {
+                status = false;
+                throw;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpPost]
+        public ActionResult SuaPhieuDatHang(PhieuDatHang phieuDatHang)
+        {
+            bool status = false;
+            try
+            {
+                var phieudathang = db.PhieuDatHangs.SingleOrDefault(pdh => pdh.SoPhieuDatHang == phieuDatHang.SoPhieuDatHang);
+                if (phieudathang != null)
+                {
+                    phieudathang.NgayDat = phieuDatHang.NgayDat;
+                    phieudathang.MaNguoiDung = phieuDatHang.MaNguoiDung;
+                    phieudathang.TenKhachHang = phieuDatHang.TenKhachHang;
+                    phieudathang.TongTien = phieuDatHang.TongTien;
+                    phieudathang.SoDienThoai = phieuDatHang.SoDienThoai;
+                    phieudathang.Email = phieuDatHang.Email;
+                    phieudathang.Diachi = phieuDatHang.Diachi;
+                    phieudathang.GhiChu = phieuDatHang.GhiChu;
+                    phieudathang.HinhThucThanhToan = phieuDatHang.HinhThucThanhToan;
+                    phieudathang.NgayGiao = phieuDatHang.NgayGiao;
+                    phieudathang.DaThanhToan = phieuDatHang.DaThanhToan;
+                    phieudathang.DaXacNhan = phieuDatHang.DaXacNhan;
+                    phieudathang.IsDeleted = phieuDatHang.IsDeleted;
+                    phieudathang.NgayChinhSua = DateTime.Now.Date;
+                    DeleteAllCTPDH(phieudathang.SoPhieuDatHang);
+                    SaveAllCTPDH(phieuDatHang.ChiTietPhieuDatHangs, phieudathang.SoPhieuDatHang);
+                    db.SaveChanges();
+                    status = true;
+                }
+                else
+                    status = false;
+
+            }
+            catch
+            {
+                status = false;
+                throw;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
         // GET: PhieuDatHang/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,6 +180,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }
 
@@ -77,6 +209,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             return View(phieuDatHang);
         }
 
@@ -93,6 +226,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }
 
@@ -110,6 +245,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }
 
@@ -134,6 +271,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             PhieuDatHang phieuDatHang = db.PhieuDatHangs.Find(id);
+            DeleteAllCTPDH(id);
             db.PhieuDatHangs.Remove(phieuDatHang);
             db.SaveChanges();
             return RedirectToAction("Index");

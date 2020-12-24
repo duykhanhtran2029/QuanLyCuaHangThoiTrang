@@ -1,4 +1,4 @@
-namespace QuanLyCuaHangThoiTrang.Model
+﻿namespace QuanLyCuaHangThoiTrang.Model
 {
     using System;
     using System.Collections.Generic;
@@ -19,18 +19,24 @@ namespace QuanLyCuaHangThoiTrang.Model
         public int SoPhieuBanHang { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày Bán")]
+        [Required(ErrorMessage = "Ngày Bán không được trống")]
         public DateTime NgayBan { get; set; }
 
         public int? MaNguoiDung { get; set; }
 
-        [Required]
+        [Display(Name = "Tên Khách Hàng"), Required(ErrorMessage = "Tên Hàng Hóa không được trống")]
         public string TenKhachHang { get; set; }
 
-        [Required]
-        [StringLength(15)]
+        [Required(ErrorMessage = "Số Điện Thoại không được trống")]
+        [Display(Name = "Số Điện Thoại")]
+        [StringLength(11, ErrorMessage = "Số Điện Thoại không được quá 11 chữ số")]
+        [RegularExpression(@"[0-9]{7,11}", ErrorMessage = "Số Điện Thoại không hợp lệ")]
         public string SoDienThoai { get; set; }
 
         [Column(TypeName = "money")]
+        [Display(Name = "Tổng Tiền"), Required(ErrorMessage = "Tổng Tiền không được trống")]
+        [RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         public decimal TongTien { get; set; }
 
         public string GhiChu { get; set; }

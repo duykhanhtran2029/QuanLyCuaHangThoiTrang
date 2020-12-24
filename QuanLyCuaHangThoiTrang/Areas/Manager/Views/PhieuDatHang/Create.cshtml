@@ -9,7 +9,7 @@
     <div class="form-horizontal">
         <div>
             <div class="pull-left">
-                <p class="card-title-heading" id="pageTitle">Phiếu Nhập Kho</p>
+                <p class="card-title-heading" id="pageTitle">Phiếu Đặt Hàng</p>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -67,7 +67,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongtien" } })
+                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongtien" ,@disabled = "disabled" } })
                     @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -75,7 +75,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.HinhThucThanhToan, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.HinhThucThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "hinhthucthanhtoan" } })
+                    @Html.EditorFor(model => model.HinhThucThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "hinhthucthanhtoan", @disabled = "disabled" } })
                     @Html.ValidationMessageFor(model => model.HinhThucThanhToan, "", new { @class = "text-danger" })
                 </div>
             </div>

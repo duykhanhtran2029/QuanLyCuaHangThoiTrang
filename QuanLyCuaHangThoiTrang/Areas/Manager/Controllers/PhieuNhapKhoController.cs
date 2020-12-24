@@ -11,6 +11,8 @@ using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
@@ -93,6 +95,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 i.SoPhieuNhapKho = id;
                 db.ChiTietPhieuNhapKhoes.Add(i);
+                db.SaveChanges();//cho nay k loi
                 var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
                 hanghoa.SoLuong += i.SoLuong;
                 db.SaveChanges();
@@ -120,10 +123,18 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
                 status = true;
             }
-            catch
+            catch (DbEntityValidationException dbEx)
             {
                 status = false;
-                throw;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
             }
             return new JsonResult { Data = new { status = status } };
         }

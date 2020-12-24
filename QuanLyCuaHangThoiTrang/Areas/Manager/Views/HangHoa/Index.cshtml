@@ -15,18 +15,10 @@
             <p class="card-title-heading">Danh Sách Hàng Hóa</p>
         </div>
         <div class="pull-right">
-            @Ajax.RawActionLink("<i class=\"fas fa-plus\"></i><span style=\"margin: 15px 0!important; \">Thêm Hàng Hóa</span>", "Create", "HangHoa",
-             null,
-             new AjaxOptions
-             {
-                 HttpMethod = "GET",
-                 UpdateTargetId = "Modal",
-                 LoadingElementId = "loading"
-             },
-             new
-             {
-                 @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
-             })
+            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm Hàng Hóa</span>
+            </a>
         </div>
         <div class="clearfix"></div>
     </div>

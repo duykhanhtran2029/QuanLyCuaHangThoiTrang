@@ -230,7 +230,6 @@
     font-weight: bold;
 }
 .order-input{
-    width: fit-content;
 }
   .order_close-btn{
     Cursor: pointer;
@@ -242,3 +241,4 @@
     font-weight: bold;
     color: red;
 }
+

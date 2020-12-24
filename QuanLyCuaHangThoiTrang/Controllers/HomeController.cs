@@ -171,11 +171,11 @@ namespace QuanLyCuaHangThoiTrang.Controllers
                             ThanhTien = cart[i].ThanhTien
                         });
                         db.SaveChanges();
-                        //update so luong hang hoa
-                        HangHoa hh = db.HangHoas.AsEnumerable().SingleOrDefault(o => o.MaHangHoa == cart[i].MaHangHoa);
-                        if(hh!= null)
-                        hh.SoLuong -= cart[i].SoLuong;
-                        db.SaveChanges();
+                        ////update so luong hang hoa
+                        //HangHoa hh = db.HangHoas.AsEnumerable().SingleOrDefault(o => o.MaHangHoa == cart[i].MaHangHoa);
+                        //if(hh!= null)
+                        //hh.SoLuong -= cart[i].SoLuong;
+                        //db.SaveChanges(); loai bo
                     }
                     catch { throw; }
                 }

@@ -63,42 +63,43 @@
                     </td>
                 }
             <td class="text-center">
-                @Ajax.RawActionLink("<i class=\"fas fa-edit\"></i>", "Edit", "HangHoa",
-                                                                                    new { id = item.MaHangHoa },
-                                                                                    new AjaxOptions
-                                                                                    {
-                                                                                        HttpMethod = "GET",
-                                                                                        UpdateTargetId = "Modal",
-                                                                                        LoadingElementId = "loading"
-                                                                                    },
-                                                                                    new
-                                                                                    {
-                                                                                        @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
-                                                                                    })
-                @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "HangHoa",
-                                                                                                        new { id = item.MaHangHoa },
-                                                                                                        new AjaxOptions
-                                                                                                        {
-                                                                                                            HttpMethod = "GET",
-                                                                                                            UpdateTargetId = "Modal",
-                                                                                                            LoadingElementId = "loading"
-                                                                                                        },
-                                                                                                        new
-                                                                                                        {
-                                                                                                            @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
-                                                                                                        })
+                <a href="@Url.Action("Edit", new { id = item.MaHangHoa })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+                @*@Ajax.RawActionLink("<i class=\"fas fa-edit\"></i>", "Edit", "HangHoa",
+                                                                            new { id = item.MaHangHoa },
+                                                                            new AjaxOptions
+                                                                            {
+                                                                                HttpMethod = "GET",
+                                                                                UpdateTargetId = "Modal",
+                                                                                LoadingElementId = "loading"
+                                                                            },
+                                                                            new
+                                                                            {
+                                                                                @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                                            })*@
+        @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "HangHoa",
+                                                                                                new { id = item.MaHangHoa },
+                                                                                                new AjaxOptions
+                                                                                                {
+                                                                                                    HttpMethod = "GET",
+                                                                                                    UpdateTargetId = "Modal",
+                                                                                                    LoadingElementId = "loading"
+                                                                                                },
+                                                                                                new
+                                                                                                {
+                                                                                                    @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                                                                })
                 @*@Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete_ngungkinhdoanh", "HangHoa",
-                          new { id = item.MaHangHoa },
-                          new AjaxOptions
-                          {
-                              HttpMethod = "GET",
-                              UpdateTargetId = "Modal",
-                              LoadingElementId = "loading"
-                          },
-                          new
-                          {
-                              @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
-                          })*@
+        new { id = item.MaHangHoa },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            UpdateTargetId = "Modal",
+            LoadingElementId = "loading"
+        },
+        new
+        {
+            @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+        })*@
             </td>
             </tr>                }
             }
