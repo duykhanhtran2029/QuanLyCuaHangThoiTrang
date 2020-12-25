@@ -230,7 +230,8 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             Response.Cookies.Add(cookies);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public ActionResult DangXuat()
         {
             Session["Account"] = null;
@@ -258,7 +259,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
                     UserName = username,
                     PassWord = password,
                     IsDeleted = false,
-                    MaChucVu = 2, // Customer
+                    MaChucVu = 6, // Customer
                     Avatar = ""
                 }) ;
                 db.SaveChanges();

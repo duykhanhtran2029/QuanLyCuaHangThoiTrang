@@ -10,6 +10,7 @@ using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
+    [Authorize(Roles = "Dev")]
     public class PhanQuyenController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();

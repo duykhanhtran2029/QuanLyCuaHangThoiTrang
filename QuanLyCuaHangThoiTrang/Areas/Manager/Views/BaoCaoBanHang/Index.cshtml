@@ -1,75 +1,59 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.BaoCaoBanHang>
 
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ BÁO CÁO BÁN HÀNG";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> phiếu báo cáo bán hàng.";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayBatDau)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuongPhieuBanHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTienBanHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTienNhapHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongDoanhThu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NguoiDung.TenNguoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayBatDau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayKetThuc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuongPhieuBanHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTienBanHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTienNhapHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongDoanhThu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaBaoCaoBanHang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaBaoCaoBanHang }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaBaoCaoBanHang })
-        </td>
-    </tr>
-}
-
-</table>
+<title id="pageTitle">
+    Quản Lý Người Dùng
+</title>
+<div id="Modal" class="modal fade card" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Báo Cáo Bán Hàng</p>
+        </div>
+        <div class="pull-right">
+            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm báo cáo bán hàng</span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachBaoCaoBanHang", "BaoCaoBanHang", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+            <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
+                <div class="grid-container" style="grid-template-columns: auto auto">
+                    <div>
+                        <label class="control-label col-md-4" style="margin-top: 7px">Từ ngày</label>
+                        <span class="input-group col-md-7">
+                            <input id="dateFrom" required name="dateFrom" class="form-control rounded datetimepicker" value="@ViewBag.dateFrom" />
+                        </span>
+                    </div>
+                    <div>
+                        <label class="control-label col-md-4" style="margin-top: 7px">Đến ngày</label>
+                        <div class="input-group col-md-7">
+                            <input id="dateTo" required name="dateTo" class="form-control datetimepicker rounded" value="@ViewBag.dateTo" />
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
+                    <div style="padding: 0px 30px">
+                        @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo ..." })
+                    </div>
+                    <div>
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachBaoCaoBanHang", "BaoCaoBanHang");}
+        </div>
+    </div>
+</div>

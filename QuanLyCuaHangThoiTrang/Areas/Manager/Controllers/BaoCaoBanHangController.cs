@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -43,10 +44,24 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View();
         }
 
+
+        //Get
+        public ActionResult DanhSachBaoCaoBanHang(string searchString, int page = 1, int pageSize = 10)
+        {
+
+            IList<BaoCaoBanHang> baocao = db.BaoCaoBanHangs.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                baocao = db.BaoCaoBanHangs.Where(n => n.NguoiDung.TenNguoiDung.Contains(searchString)).ToList();
+            }
+            return View(baocao.ToPagedList(page, pageSize));
+
+        }
+
         // POST: BaoCaoBanHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
