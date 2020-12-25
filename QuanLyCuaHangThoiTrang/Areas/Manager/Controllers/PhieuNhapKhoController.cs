@@ -95,7 +95,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 i.SoPhieuNhapKho = id;
                 db.ChiTietPhieuNhapKhoes.Add(i);
-                db.SaveChanges();//cho nay k loi
+                db.SaveChanges();
                 var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
                 hanghoa.SoLuong += i.SoLuong;
                 db.SaveChanges();

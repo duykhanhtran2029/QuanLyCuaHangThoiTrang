@@ -229,6 +229,7 @@ function CreatePhieuNhapKho() {
                         $("#tenHangHoa").val(data.TenHangHoa);
                         $("#donViTinh").val(data.DonViTinh);
                         $("#size").val(data.Size);
+                        
                     });
                 }
             });
