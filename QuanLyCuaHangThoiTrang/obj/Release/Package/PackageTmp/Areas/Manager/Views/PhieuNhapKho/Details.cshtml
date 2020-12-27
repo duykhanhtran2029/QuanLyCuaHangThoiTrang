@@ -1,0 +1,93 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.PhieuNhapKho
+
+@{
+    ViewBag.Title = "THÔNG TIN PHIẾU NHẬP KHO";
+}
+
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Nhập Kho</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.EditorFor(model => model.SoPhieuNhapKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuNhapKho" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayNhapKho, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="ngayNhapKho">
+                    @Html.DisplayFor(model => model.NgayNhapKho, new { htmlAttributes = new { @class = "form-control", @id = "ngayNhapKho" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="maNguoiDung">
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control", @id = "maNguoiDung" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNhaCungCap, "Nhà Cung Cấp", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="nhaCungCap">
+                    @Html.DisplayFor(model => model.NhaCungCap.TenNhaCungCap, new { htmlAttributes = new { @class = "form-control", @id = "nhaCungCap" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="tongTien">
+                    @Html.DisplayFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongTien" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="ghiChu">
+                    @Html.DisplayFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="ngayChinhSua">
+                    @Html.DisplayFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print">
+                        <i class="fas fa-print"></i>
+                        <span style="margin: 15px 10px !important;">In</span>
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <form>
+            @Html.AntiForgeryToken()
+            <div>
+                <div class="pull-left">
+                    <p class="card-title-heading" id="pageTitle">Chi Tiết Phiếu Nhập Kho</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <hr/>
+            <div id="orderItems" class="table-responsive"></div>
+            <div id="Items" hidden class="table-responsive"></div>
+        </form>
+    </div>
+</div>

@@ -350,12 +350,11 @@
     <Content Include="Areas\Manager\Views\PhieuKiemKho\DanhSachPhieuKiemKho.cshtml" />
     <Content Include="Areas\Manager\Views\BaoCaoTonKho\DanhSachBaoCaoTonKho.cshtml" />
     <Content Include="Areas\Manager\Views\HangHoa\DanhSachHangHoa.cshtml" />
-<<<<<<< Updated upstream
     <Content Include="Areas\Manager\Views\PhieuDatHang\DanhSachPhieuDatHang.cshtml" />
-=======
     <Content Include="Areas\Manager\Views\NguoiDung\DanhSachNguoiDung.cshtml" />
     <Content Include="Areas\Manager\Views\BaoCaoBanHang\DanhSachBaoCaoBanHang.cshtml" />
->>>>>>> Stashed changes
+    <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <None Include="Properties\PublishProfiles\QuanLyCuaHangThoiTrang20201225120813 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />
@@ -533,6 +532,9 @@
       <Project>{8ebc108a-316a-4379-a8ee-303654e5239a}</Project>
       <Name>QuanLyCuaHangThoiTrang.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

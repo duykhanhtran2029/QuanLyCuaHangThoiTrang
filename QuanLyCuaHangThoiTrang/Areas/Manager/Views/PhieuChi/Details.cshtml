@@ -2,73 +2,148 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<div class="card popupcontent">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Chi tiết phiếu chi</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
 
-<div>
-    <h4>PhieuChi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </dt>
+        <div class="grid-container" style="grid-template-columns: auto">
+            <div class="form-group">
+                <label for="NgayChi" class="control-label custom-label">Ngày chi</label>
+                <div class="col-md-10 custom-input">
+                    <input value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayChi" id="NgayChi" placeholder="" type="text" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Nguoidung" class="control-label custom-label">Tên người lập</label>
+                <div class="col-md-10 custom-input">
+                    <input value="@Model.NguoiDung.TenNguoiDung" name="NguoiDung" id="NguoiDung" placeholder="" type="text" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Sophieunhapkho" class="control-label custom-label">Số phiếu chi</label>
+                <div class="col-md-10 custom-input">
+                    <input value="@Model.SoPhieuChi" id="SoPhieuChi" name="SoPhieuChi" type="text" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Sophieunhapkho" class="control-label custom-label">Số phiếu nhập kho</label>
+                <div class="col-md-10 custom-input">
+                    <input value="@Model.SoPhieuNhapKho" id="SoPhieuNhapKho" name="SoPhieuNhapKho" type="text" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Tongtienchi" class="control-label custom-label">Tổng tiền chi</label>
+                <div class="col-md-10 custom-input">
+                    
+                    <input value="@String.Format("{0:n0}", Model.TongTienChi)" name="TongTienChi" id="TongTienChi" type="text" class="form-control" readonly>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung)
-        </dd>
+            </div>
+            <div class="form-group">
+                <label for="Ghichu" class="control-label custom-label">Ghi chú</label>
+                <div class="col-md-10 custom-input">
+                    <textarea value="@Model.GhiChu" name="GhiChu" id="GhiChu" class="form-control" readonly></textarea>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhieuNhapKho.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhieuNhapKho.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTienChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTienChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayChinhSua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-    </dl>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print" onclick="Print()">
+                        <i class="fas fa-print"></i>
+                        <span style="margin: 15px 10px !important;">In</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SoPhieuChi }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+<script>
+    function Print() {
+    var DOCSO=function(){var t=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"],r=function(r,n){var o="",a=Math.floor(r/10),e=r%10;return a>1?(o=" "+t[a]+" mươi",1==e&&(o+=" mốt")):1==a?(o=" mười",1==e&&(o+=" một")):n&&e>0&&(o=" lẻ"),5==e&&a>=1?o+=" lăm":4==e&&a>=1?o+=" tư":(e>1||1==e&&0==a)&&(o+=" "+t[e]),o},n=function(n,o){var a="",e=Math.floor(n/100),n=n%100;return o||e>0?(a=" "+t[e]+" trăm",a+=r(n,!0)):a=r(n,!1),a},o=function(t,r){var o="",a=Math.floor(t/1e6),t=t%1e6;a>0&&(o=n(a,r)+" triệu",r=!0);var e=Math.floor(t/1e3),t=t%1e3;return e>0&&(o+=n(e,r)+" ngàn",r=!0),t>0&&(o+=n(t,r)),o};return{doc:function(r){if(0==r)return t[0];var n="",a="";do ty=r%1e9,r=Math.floor(r/1e9),n=r>0?o(ty,!0)+a+n:o(ty,!1)+a+n,a=" tỷ";while(r>0);return n.trim()}}}();
+
+    var popupWin = window.open('', '_blank', 'width=800,height=600'); //create new page     
+    popupWin.document.open(); //open new page
+    popupWin.document.write('<html><body onload="window.print()">')
+
+    popupWin.document.write('<p style="text-align:center"><img src="/images/header.png" class="img-responsive watch-right"  /></p>')
+
+    popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Chi</p>')
+
+    popupWin.document.write('<b>');
+    popupWin.document.write('Thông tin phiếu chi');
+    popupWin.document.write('</b>');
+    popupWin.document.write('<table style="border:solid; width:100%; padding: 10px;margin-top: 5px">')
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Số phiếu chi: ');
+    popupWin.document.write($('#SoPhieuChi').val().trim());
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Ngày chi: ');
+    popupWin.document.write($('#NgayChi').val().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Nhân viên: ');
+    popupWin.document.write($('#NguoiDung').val().trim());
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Ghi chú: ');
+    popupWin.document.write($('#GhiChu').val().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Số phiếu nhập kho: ');
+    popupWin.document.write($('#SoPhieuNhapKho').val().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('</table>')
+
+    popupWin.document.write('<br/>');
+    popupWin.document.write('<b>');
+
+    popupWin.document.write('<b>');
+    var money = $('#TongTienChi').val().trim();
+    popupWin.document.write('Tổng tiền đã chi: ');
+    popupWin.document.write(parseFloat(money).toFixed(0) + " VND")
+    popupWin.document.write('</b>');
+
+    popupWin.document.write('<br/>');
+    popupWin.document.write('<b>');
+
+    popupWin.document.write('<b>');
+    popupWin.document.write('Số tiền bằng chữ: ');
+    
+    function capitalize(s)
+    {
+    return s[0].toUpperCase() + s.slice(1);
+    }
+ 
+    popupWin.document.write(capitalize(DOCSO.doc(parseFloat(money).toFixed(0))) + " Việt Nam Đồng")
+    popupWin.document.write('</b>');
+
+
+    popupWin.document.write('<p style="text-align:right; padding-right: 50px">')
+    popupWin.document.write('Thủ Đức, Ngày .... Tháng .... Năm ....')
+    popupWin.document.write('<br>')
+    popupWin.document.write('</p>')
+    popupWin.document.write('<p style="text-align:center;float: right;margin-right: 125px;margin-top: -10px;">')
+    popupWin.document.write('Kế toán')
+    popupWin.document.write('<br>')
+    popupWin.document.write('(Ký tên)')
+    popupWin.document.write('</p>')
+    popupWin.document.write('</html>');
+    popupWin.document.close();
+}
+</script>

@@ -9,13 +9,14 @@
                 <th class="text-center" style="width: 12.5%;">Ngày bắt đầu</th>
                 <th class="text-center" style="width: 12.5%;">Ngày kết thúc</th>
                 <th class="text-center" style="width: 12.5%;">Số lượng phiếu bán hàng</th>
-                <th class="text-center" style="width: 12.5%;">Tổng tiền bán hàng</th>
-                <th class="text-center" style="width: 12.5%;">Tổng tiền nhập hàng</th>
-                <th class="text-center" style="width: 12.5%;">Tổng doanh thu</th>
+                <th class="text-center" style="width: 12.5%;">Tổng tiền bán hàng (VND)</th>
+                <th class="text-center" style="width: 12.5%;">Tổng tiền nhập hàng (VND)</th>
+                <th class="text-center" style="width: 12.5%;">Tổng doanh thu (VND)</th>
                 <th class="text-center" style="width: 12.5%;">Hành Động</th>
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in Model)
             {
                 if (!item.IsDeleted)
@@ -32,19 +33,48 @@
                 </td>
                 <td>
                     @item.SoLuongPhieuBanHang
+                </td>  
+                <td>
+                    @String.Format("{0:n0}", item.TongTienBanHang)
                 </td>
                 <td>
-                    @item.TongTienBanHang
+                    @String.Format("{0:n0}", item.TongTienNhapHang)
                 </td>
                 <td>
-                    @item.TongTienNhapHang
-                </td>
-                <td>
-                    @item.TongDoanhThu
+                    @String.Format("{0:n0}", item.TongDoanhThu)
                 </td>
                 <td class="text-center">
-                    <a href="@Url.Action("Edit", new { id = item.MaBaoCaoBanHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-                    <a href="@Url.Action("Delete", new { id = item.MaBaoCaoBanHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
+
+
+                    @Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete", "BaoCaoBanHang",
+                    new
+                    {
+                        id = item.MaBaoCaoBanHang
+                                        },
+                    new AjaxOptions
+                    {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "Modal",
+                    LoadingElementId = "loading"
+                    },
+                    new
+                    {
+                    @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                    })
+
+
+                    @*@Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "BaoCaoBanHang",
+            new { id = item.MaBaoCaoBanHang },
+            new AjaxOptions
+            {
+            HttpMethod = "GET",
+            UpdateTargetId = "Modal",
+            LoadingElementId = "loading"
+            },
+            new
+            {
+            @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+            })*@
                     <a href="@Url.Action("Details", new { id = item.MaBaoCaoBanHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>
                 </td>
             </tr>

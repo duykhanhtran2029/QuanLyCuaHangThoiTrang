@@ -1,82 +1,183 @@
 ﻿@model QuanLyCuaHangThoiTrang.Model.BaoCaoBanHang
-
+@using QuanLyCuaHangThoiTrang.Model
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "THÔNG TIN CHI TIẾT";
+    IEnumerable<ChiTietBaoCaoBanHang> chiTiet = ViewData["ChiTiet"] as IEnumerable<ChiTietBaoCaoBanHang>;
 }
 
-<h2>Details</h2>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-<div>
-    <h4>BaoCaoBanHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </dt>
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Báo Cáo Bán Hàng</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.EditorFor(model => model.MaBaoCaoBanHang, new { htmlAttributes = new { @class = "form-control", @id = "MaBaoCaoBanHang" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="maNguoiDung">
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control", @id = "MaNguoiDung" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayBatDau, "Ngày bắt đầu", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="NgayBatDau">
+                    @Html.DisplayFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", @id = "NgayBatDau" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayKetThuc, "Ngày kết thúc", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="NgayKetThuc">
+                    @Html.DisplayFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", @id = "NgayKetThuc" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayBatDau)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoLuongPhieuBanHang, "Số lượng phiếu bán hàng", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="SoLuongPhieuBanHang">
+                    @Html.DisplayFor(model => model.SoLuongPhieuBanHang, new { htmlAttributes = new { @class = "form-control", @id = "SoLuongPhieuBanHang" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayBatDau)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTienBanHang, "Tổng tiền bán hàng (VND)", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="TongTienBanHang">
+                    @String.Format("{0:n0}", Model.TongTienBanHang)
+                    @*@Html.DisplayFor(model => model.TongTienBanHang, new { htmlAttributes = new { @class = "form-control", @id = "TongTienBanHang" } })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTienNhapHang, "Tổng tiền nhập hàng (VND)", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="TongTienNhapHang">
+                    @String.Format("{0:n0}", Model.TongTienNhapHang)
+                    @*@Html.DisplayFor(model => model.TongTienNhapHang, new { htmlAttributes = new { @class = "form-control", @id = "TongTienNhapHang" } })*@
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayKetThuc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SoLuongPhieuBanHang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoLuongPhieuBanHang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTienBanHang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTienBanHang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTienNhapHang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTienNhapHang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongDoanhThu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongDoanhThu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-    </dl>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongDoanhThu, "Tổng doanh thu (VND)", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="TongDoanhThu">
+                    @String.Format("{0:n0}", Model.TongDoanhThu)
+                    @*@Html.DisplayFor(model => model.TongDoanhThu, new { htmlAttributes = new { @class = "form-control", @id = "TongDoanhThu" } })*@
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print">
+                        <i class="fas fa-print"></i>
+                        <span style="margin: 15px 10px !important;">In</span>
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaBaoCaoBanHang }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <form>
+            @Html.AntiForgeryToken()
+            <div>
+                <div class="pull-left">
+                    <p class="card-title-heading" id="pageTitle">Chi Tiết Báo Cáo Bán Hàng</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <hr />
+            <div id="addtoPrint">
+                <div id="chitiet" class="table-responsive">
+                    <table id="detailsTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Mã Báo Cáo Bán Hàng</th>
+                                <th>Ngày bán</th>
+                                <th>Số Lượng Phiếu Bán Hàng</th>
+                                <th>Tổng tiền (VND)</th>
+                                <th>Tỉ lệ (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var item in chiTiet)
+                                {
+                                    <td>@item.MaBaoCaoBanHang</td>
+                                    <td>@item.Ngay.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.SoLuongPhieuBanHang</td>
+                                    <td>@String.Format("{0:n0}", item.DoanhThu)</td>
+                                    <td>@item.TiLe</td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr />
+                <hr />
+
+                <div>
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    <div style="margin-top:16px;color:dimgrey;font-size:9px;font-family: Verdana, Arial, Helvetica, sans-serif;text-decoration:none;"></div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var data = [];
+    function addData(dt) {
+        console.log(dt[0].units);
+        for (var i = 0; i < dt.length; i++) {
+
+            dataPoints.push({
+                x: new Date(parseInt(dt[i].date) * 1000),
+                y: parseInt(dt[i].units)
+
+            });
+        }
+        chart.render();
+    }
+
+    $.ajax({
+        url: "/Manager/BaoCaoBanHang/GetJsonForChart/" + $('#MaBaoCaoBanHang').val(),
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            data.push(JSON.parse(res));
+            addData(data);
+        }
+    });
+
+    var dataPoints = [];
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Biểu đồ doanh thu"
+        },
+        axisY: {
+            title: "Tổng tiền (VND)",
+            titleFontSize: 24,
+            includeZero: true
+        },
+        data: [{
+            type: "column",
+            yValueFormatString: "#,### VND",
+            dataPoints: dataPoints
+        }]
+    });
+</script>

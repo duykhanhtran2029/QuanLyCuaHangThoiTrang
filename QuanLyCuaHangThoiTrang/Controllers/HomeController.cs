@@ -66,9 +66,9 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             }
             else
             {
-
-                TempData["avatar"] = "/images/avatar/18.jpg";
-                ViewBag.UserProfile = (NguoiDung)Session["Account"];
+                var user = (NguoiDung)Session["Account"];
+                TempData["avatar"] = user.Avatar;
+                ViewBag.UserProfile = user;
             }
             return View();
         }
@@ -246,28 +246,46 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             string password = MD5Encode.CreateMD5(form["password"].ToString());
             string phone = form["phone"].ToString();
             string name = form["name"].ToString();
-            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username);
+            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username || n.SoDienThoai == phone);
             if (nguoiDung == null)
             {
-                db.NguoiDungs.Add(new NguoiDung
+                try
                 {
-                    TenNguoiDung = name,
-                    DiaChi = "",
-                    SoDienThoai = phone,
-                    Email = "",
-                    CMND = "",
-                    UserName = username,
-                    PassWord = password,
-                    IsDeleted = false,
-                    MaChucVu = 6, // Customer
-                    Avatar = ""
-                }) ;
-                db.SaveChanges();
-                SetAlert("Tạo tài khoản thành công!", "success");
+                    db.NguoiDungs.Add(new NguoiDung
+                    {
+                        TenNguoiDung = name,
+                        DiaChi = "",
+                        SoDienThoai = phone,
+                        Email = "",
+                        CMND = "",
+                        UserName = username,
+                        PassWord = password,
+                        IsDeleted = false,
+                        MaChucVu = 6, // Customer
+                        Avatar = ""
+                    });
+                    db.SaveChanges();
+                    SetAlert("Tạo tài khoản thành công!", "success");
+                }
+                catch(Exception ex)
+                {
+                    SetAlert(ex.ToString(), "error");
+                    RedirectToAction("Index");
+                }
             }
             else
             {
-                SetAlert("Tài khoản này đã có người sử dụng!", "error");
+                if(username == nguoiDung.UserName)
+                {
+                    SetAlert("Tài khoản này đã có người sử dụng!", "error");
+                    return RedirectToAction("Index");
+                }               
+                if (phone == nguoiDung.SoDienThoai)
+                {
+                    SetAlert("Số điện thoại này đã có người sử dụng!", "error");
+                    return RedirectToAction("Index");
+                }
+                SetAlert("Tạo tài khoản không thành công!", "error");
             }
             return RedirectToAction("Index");
         }

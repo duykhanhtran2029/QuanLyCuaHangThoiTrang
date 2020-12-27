@@ -1,0 +1,137 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.PhieuKiemKho
+
+@{
+    ViewBag.Title = "CHỈNH SỬA PHIẾU KIỂM KHO";
+    ViewBag.SubTitle = "Nhập đầy đủ các trường thông tin yêu cầu ở phía dưới";
+}
+
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Kiểm Kho</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.DisplayFor(model => model.SoPhieuKiemKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuKiemKho" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayKiemKho, htmlAttributes: new { @class = "control-label custom-label required" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.NgayKiemKho, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayKiemKho", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.NgayKiemKho, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu" } })
+                    @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <input type="submit" id="submit" value="Lưu" class="btn btn-primary" />
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Thông Tin Hàng Hóa</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <form>
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="control-label custom-label">Hàng Hóa</label>
+                <div class="col-md-10 custom-input">
+                    @Html.DropDownList("MaHangHoa", (SelectList)ViewBag.MaHangHoa, null, new { @class = "form-control minimal" })
+                </div>
+            </div>
+            <hr />
+            <table>
+                <tr>
+                    <td style="padding: 0px 10px 10px 12px">Hàng Hóa</td>
+                    <td style="padding: 0px 10px 10px 12px">Đơn Vị Tính</td>
+                    <td style="padding: 0px 10px 10px 12px">Size</td>
+                    <td style="padding: 0px 10px 10px 12px">Số Lượng Tồn</td>
+                    <td style="padding: 0px 10px 10px 12px">Số Lượng Kiểm Tra</td>
+                    <td style="padding: 0px 10px 10px 12px">Tình Trạng</td>
+                    <td style="padding: 0px 10px 10px 12px"></td>
+                </tr>
+
+                <tr class="mycontainer" id="mainrow">
+                    <td style="padding: 0px 10px" width="25%">
+                        <input id="tenHangHoa" disabled="disabled" type="text" class="form-control rounded" />
+                    </td>
+                    <td style="padding: 0px 10px" width="15%">
+                        <input type="text" id="donViTinh" class="form-control rounded" disabled="disabled" />
+                    </td>
+                    <td style="padding: 0px 10px" width="10%">
+                        <input type="text" id="size" class="form-control rounded" disabled="disabled" />
+                    </td>
+                    <td style="padding: 0px 10px" width="15%">
+                        <input type="text" id="soLuongHienTai" name="soLuongTon" disabled="disabled" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
+                    </td>
+                    <td style="padding: 0px 10px" width="20%">
+                        <input type="text" id="soLuongKiemTra" name="soLuongKiem" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
+                    </td>
+                    <td style="padding: 0px 10px" width="15%">
+                        <input type="text" id="tinhTrang" class="form-control rounded" />
+                    </td>
+                    <td style="padding: 0px 10px">
+                        <input type="button" id="add" value="Thêm" style="padding:4px" class="btn btn-lg btn-success btn-xs btn-push" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="padding: 10px 10px 0px 12px; color: red">
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity messageErrorinputQuantity">Nhập số lượng!</h5>
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity1 messageErrorinputQuantity1">Nhập số lượng!</h5>
+                    </td>
+                    <td style="padding: 10px 10px 0px 12px; color: red">
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputEmpty messageErrorinputEmpty">Nhập tình trạng!</h5>
+                    </td>
+                </tr>
+            </table>
+            <span id="productItemError" class="messageError" style="color:red"></span>
+            <hr style="margin-top: 10px !important" />
+            <div>
+                <div class="pull-left">
+                    <p class="card-title-heading" id="pageTitle">Chi Tiết Phiếu Kiểm Kho</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <hr />
+            <div id="orderItems" class="table-responsive"></div>
+            <div id="Items" hidden class="table-responsive"></div>
+        </form>
+    </div>
+</div>

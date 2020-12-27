@@ -1,0 +1,74 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.ChiTietBaoCaoTonKho
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChiTietBaoCaoTonKho</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BaoCaoTonKho.MaBaoCaoTonKho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaoCaoTonKho.MaBaoCaoTonKho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HangHoa.TenHangHoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangHoa.TenHangHoa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTonDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTonDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongXuat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongXuat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTonCuoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTonCuoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrangHangHoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangHangHoa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

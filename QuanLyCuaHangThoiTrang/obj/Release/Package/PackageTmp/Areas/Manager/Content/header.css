@@ -1,0 +1,37 @@
+﻿.header{
+    text-align:center;
+}
+.header .page-title-heading {
+    font-size: 32px;
+    font-weight: 500;
+    position: relative;
+    z-index: 5;
+}
+
+.header .page-title-heading, header .page-title-subheading {
+    margin: 0;
+    padding: 0;
+}
+.header .page-title-subheading {
+    padding: 3px 0 0;
+    font-size: 18px;
+    opacity: .6;
+    font-weight: 300;
+    display: block;
+    margin: 10px;
+}
+
+.header .page-title-heading, header .page-title-subheading {
+    margin: 0;
+    padding: 0;
+}
+.card-title-heading {
+    font-size: 24px;
+    font-weight: 500;
+    position: relative;
+    z-index: 5;
+    color: darkslateblue;   
+}
+code {
+    font-weight: 600 !important;
+}

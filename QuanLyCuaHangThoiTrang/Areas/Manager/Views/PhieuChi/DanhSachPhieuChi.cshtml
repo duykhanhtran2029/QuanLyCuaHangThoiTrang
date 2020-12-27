@@ -7,9 +7,11 @@
     <table class="table table-bordered table-middle table-lilac" id="datatable">
         <thead>
             <tr>
-                <th class="text-center" style="width: 17%;">Ngày Chi</th>
-                <th class="text-center" style="width: 20%;">Tên người dùng</th>
-                <th class="text-center" style="width: 20%;">Tổng tiền chi</th>
+                <th class="text-center" style="width: 10%;">Số phiếu chi</th>
+                <th class="text-center" style="width: 10%;">Số phiếu nhập kho</th>
+                <th class="text-center" style="width: 10%;">Ngày Chi</th>
+                <th class="text-center" style="width: 10%;">Tên người lập</th>
+                <th class="text-center" style="width: 17%;">Tổng tiền chi (VND)</th>
                 <th class="text-center" style="width: 25%;">Ghi Chú</th>
                 <th class="text-center" style="width: 18%;">Hành Động</th>
             </tr>
@@ -19,25 +21,55 @@
             {
                 if (!item.IsDeleted)
                 {
-                    <tr class="border-warning" style="text-align:center">
-                        <td>
-                            @item.NgayChi.ToString("MM/dd/yyyy")
-                        </td>
-                        <td>
-                            @item.NguoiDung.TenNguoiDung
-                        </td>
-                        <td>
-                            @item.TongTienChi
-                        </td>
-                        <td>
-                            @item.GhiChu
-                        </td>
-                        <td class="text-center">
-                            <a href="@Url.Action("Edit", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-                            <a href="@Url.Action("Delete", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
-                            <a href="@Url.Action("Details", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>
-                        </td>
-                    </tr>
+            <tr class="border-warning" style="text-align:center">
+                <td>
+                    @item.SoPhieuChi
+                </td>
+                <td>
+                    @item.SoPhieuNhapKho
+                </td>
+                <td>
+                    @item.NgayChi.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    @item.NguoiDung.TenNguoiDung
+                </td>
+                <td>
+                    @String.Format("{0:n0}", item.TongTienChi) 
+                </td>
+                <td>
+                    @item.GhiChu
+                </td>
+                <td class="text-center">
+                    @*<a href="@Url.Action("Edit", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>*@
+                    @*<a href="@Url.Action("Delete", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>*@
+                    @Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete", "PhieuChi",
+                                                 new { id = item.SoPhieuChi },
+                                                 new AjaxOptions
+                                                 {
+                                                     HttpMethod = "GET",
+                                                     UpdateTargetId = "Modal",
+                                                     LoadingElementId = "loading"
+                                                 },
+                                                 new
+                                                 {
+                                                     @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                 })
+                    @*<a href="@Url.Action("Details", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>*@
+                    @Ajax.RawActionLink("<i class=\"fas fa-info-circle\"></i>", "Details", "PhieuChi",
+                                                 new { id = item.SoPhieuChi },
+                                                 new AjaxOptions
+                                                 {
+                                                     HttpMethod = "GET",
+                                                     UpdateTargetId = "Modal",
+                                                     LoadingElementId = "loading"
+                                                 },
+                                                 new
+                                                 {
+                                                     @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                 })
+                </td>
+            </tr>
                 }
             }
         </tbody>
@@ -49,49 +81,3 @@
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
     </div>
 </div>
-
-@*<div class="table-responsive">
-    <table class="table table-bordered table-middle table-lilac">
-        <thead>
-            <tr>
-                <th class="text-center" style="width: 15%;">Ngày Chi</th>
-                <th class="text-center" style="width: 15%;">Tên Người Dùng</th>
-                <th class="text-center" style="width: 25%;">Tổng tiền chi</th>
-                <th class="text-center" style="width: 35%;">Ghi Chú</th>
-                <th class="text-center" style="width: 10%;">Hành động</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                if (!item.IsDeleted)
-                {
-                    <tr class="border-warning" style="text-align:center">
-                        <td>
-                            @item.NgayChi
-                        </td>
-                        <td>
-                            @item.NguoiDung.TenNguoiDung
-                        </td>
-                        <td>
-                            @item.TongTienChi
-                        </td>
-                        <td>
-                            @item.GhiChu
-                        </td>
-                        <td class="text-center">
-                            <a href="@Url.Action("Edit", new { id = item.SoPhieuChi})" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-                            <a href="@Url.Action("Delete", new { id = item.SoPhieuChi })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-    <div class="pull-left" style="padding-top:20px">
-        <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
-    </div>
-    <div class="pull-right">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-    </div>
-</div>*@
