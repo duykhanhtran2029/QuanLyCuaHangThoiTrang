@@ -21,7 +21,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             var phieuDatHangs = db.PhieuDatHangs.Include(p => p.NguoiDung);
 
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHangs.ToList());
         }
@@ -62,11 +62,11 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 .Select(ct => new {
                     MaHangHoa = ct.MaHangHoa,
                     TenHangHoa = ct.HangHoa.TenHangHoa,
-                    DonViTinh = ct.HangHoa.DonViTinh,
+                    GiamGia = ct.HangHoa.GiamGia,
                     Size = ct.HangHoa.Size,
                     SoLuong = ct.SoLuong,
-                    Gia = ct.Gia,
-                    ThanhTien = ct.ThanhTien
+                    ThanhTien = ct.ThanhTien,
+                    GiaBan=(double)ct.HangHoa.GiaBan* (1.0 - ct.HangHoa.GiamGia)
                 }).ToList();
             var json = JsonConvert.SerializeObject(result);
             return Json(json, JsonRequestBehavior.AllowGet);
@@ -190,7 +190,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
 
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             return View();
         }
 
@@ -209,7 +209,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             return View(phieuDatHang);
         }
 
@@ -226,7 +226,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }
@@ -245,7 +245,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }

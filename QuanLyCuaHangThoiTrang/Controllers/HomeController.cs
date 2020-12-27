@@ -27,19 +27,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         public ActionResult Index()
         {
             Session["Cart"] = new List<ChiTietPhieuDatHang>();
-            //
-            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.SoLuong >= 1).ToList();
-            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.SoLuong >= 1).ToList();
-            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.SoLuong >= 1).ToList();
-            ViewBag.FootWears = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.SoLuong >= 1) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.SoLuong >= 1)
-            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.SoLuong >= 1)).ToList();
-            //Load hang hoa
-            ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0 && hh.SoLuong >= 1) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0 && hh.SoLuong >= 1)
-            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0 && hh.SoLuong >= 1)).ToList();
-            //load hang hoa sale
+            
             return View();
         }
 
@@ -79,6 +67,31 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
             ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
+        }
+
+        public ActionResult MainIndex()
+        {
+            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.FootWears = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted)
+            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
+            //Load hang hoa
+            ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)
+            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
+            //load hang hoa sale
+            return PartialView();
+        }
+
+
+        public ActionResult Categories(string tenloaihanghoa)
+        {
+            List<HangHoa> list = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == tenloaihanghoa && hh.SoLuong>0 && !hh.IsDeleted).ToList();
+            ViewBag.TenLoaiHangHoa = tenloaihanghoa;
+            return PartialView(list);
         }
 
         [HttpPost]

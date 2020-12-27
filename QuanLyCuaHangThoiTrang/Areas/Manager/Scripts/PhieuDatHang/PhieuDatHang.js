@@ -12,6 +12,8 @@ function CreatePhieuDatHang() {
     //basic button handler
     if ($('#ngaydat-pdh').val() === '' || $('#ngaydat-pdh').val() === undefined || $('#ngaydat-pdh').length === 0)
         $('#ngaydat-pdh').val(new Date($.now()).toLocaleDateString('en-US'));
+    if ($('#ngaygiao-pdh').val() === '' || $('#ngaygiao-pdh').val() === undefined || $('#ngaygiao-pdh').length === 0)
+        $('#ngaygiao-pdh').val(new Date($.now()).toLocaleDateString('en-US'));
     //default: Thanh Toan Khi Nhan
     $('#hinhthucthanhtoan-pdh').val('Thanh Toán Khi Nhận');
 
@@ -26,6 +28,8 @@ function CreatePhieuDatHang() {
                     $("#giamgia-pdh").val(data.GiamGia);
                     $("#size-pdh").val(data.Size);
                     $('#gia-pdh').val(data.GiaBan * (1 - data.GiamGia));
+                    //
+                    $('#tonkho-pdh').val(data.SoLuong);
                 });
             }
         });
@@ -85,15 +89,18 @@ function CreatePhieuDatHang() {
                     orderItems.push({
                         MaHangHoa: $('#MaHangHoa-pdh').val().trim(),
                         TenHangHoa: $("#tenHangHoa-pdh").val().trim(),
+                        Size: $("#size-pdh").val().trim(),
                         SoLuong: parseInt($('#soLuong-pdh').val().trim()),
                         GiaBan: parseInt($('#gia-pdh').val().trim().replace(/,/gi, "")),
+                        GiamGia: $("#giamgia-pdh").val().trim(),
                         ThanhTien: parseInt($('#soLuong-pdh').val().trim()) * parseInt($('#gia-pdh').val().trim().replace(/,/gi, "")),
                     });
 
                     //Clear fields
                     $('#MaHangHoa-pdh').focus().val('');
                     $('#tenHangHoa-pdh').val('');
-                    $('#donViTinh').val('');
+                    $('#giamgia-pdh').val('');
+                    $('#size-pdh').val('');
                     $('#soLuong-pdh').val('');
                     $('#gia-pdh').val('');
                     $('#thanhTien-pdh').val('');
@@ -115,6 +122,42 @@ function CreatePhieuDatHang() {
             isAllValid = false;
         }
 
+        if ($('#tenkhachhang-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-tenkhachhang').html('<span class="messageError" style="color:red;">Phải nhập tên khách hàng</span>');
+            $('#warning-tenkhachhang').show();
+        }
+        else
+        {
+            $('#warning-tenkhachhang').hide();
+        }
+
+        if ($('#sodienthoai-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-sodienthoai').html('<span class="messageError" style="color:red;">Phải nhập số điện thoại</span>');
+            $('#warning-sodienthoai').show();
+        }
+        else
+        {
+            $('#warning-sodienthoai').hide();
+            if ($('#sodienthoai-pdh').val().length < 7 || $('#sodienthoai-pdh').val().length > 11)
+            {
+                isAllValid = false;
+                $('#warning-sodienthoai').html('<span class="messageError" style="color:red;">Số điện thoại không hợp lệ</span>');
+                $('#warning-sodienthoai').show();
+            }
+        }
+
+        if ($('#diachi-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-diachi').html('<span class="messageError" style="color:red;">Phải nhập địa chỉ giao hàng</span>');
+            $('#warning-diachi').show();
+        }
+        else
+        {
+            $('#warning-diachi').hide();
+        }
+
         //Save if valid
         if (isAllValid) {
             var data = {
@@ -127,8 +170,8 @@ function CreatePhieuDatHang() {
                 HinhThucThanhToan: $('#hinhthucthanhtoan-pdh').val().trim(),
                 GhiChu: $('#ghiChu-pdh').val().trim(),
                 NgayGiao: $('#ngaygiao-pdh').val().trim(),
-                DaXacNhan: $('#daxacnhan-pdh').val().trim(),
-                DaThanhToan: $('#dathanhtoan-pdh').val().trim(),
+                DaXacNhan: $('#daxacnhan-pdh').is(":checked"),
+                DaThanhToan: $('#dathanhtoan-pdh').is(":checked"),
                 TongTien: parseFloat($('#tongtien-pdh').val().trim().replace(/,/gi, "")),
                 IsDeleted: false,
                 chiTietPhieuDatHangs: orderItems
@@ -178,12 +221,13 @@ function CreatePhieuDatHang() {
     function GeneratedItemsTable() {
         if (orderItems.length > 0) {
             var $table = $('<table id="productTable"  class="table table-bordered"/>');
-            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><<th>Số Lượng Nhập</th><th>Giá</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
+            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
             var $tbody = $('<tbody/>');
             $.each(orderItems, function (i, val) {
                 var $row = $('<tr/>');
                 $row.append($('<td/>').html(val.MaHangHoa));
                 $row.append($('<td/>').html(val.TenHangHoa));
+                $row.append($('<td/>').html(val.Size));
                 $row.append($('<td/>').html(val.SoLuong));
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
                 $row.append($('<td/>').html(val.GiamGia));
@@ -228,7 +272,7 @@ function CreatePhieuDatHang() {
         var total = 0.0;
         var row = document.getElementById('productTable').rows.length;
         for (var i = 1; i < row; i++) {
-            amount = document.getElementById("productTable").rows[i].cells[5].innerHTML.replace(/,/gi, "");
+            amount = document.getElementById("productTable").rows[i].cells[6].innerHTML.replace(/,/gi, "");
 
             total += parseFloat(amount);
         }
@@ -245,6 +289,8 @@ function CreatePhieuDatHang() {
                         $("#giamgia-pdh").val(data.GiamGia);
                         $("#size-pdh").val(data.Size);
                         $('#gia-pdh').val(data.GiaBan * (1 - data.GiamGia));
+                        //
+                        $('#tonkho-pdh').val(data.SoLuong);
                     });
                 }
             });
@@ -279,27 +325,41 @@ function CreatePhieuDatHang() {
     function Replace(data) {
         $('#MaHangHoa-pdh').val(data.MaHangHoa);
         $("#tenHangHoa-pdh").val(data.TenHangHoa);
+        $('#size-pdh').val(data.Size);
         $('#soLuong-pdh').val(data.SoLuong);
-        $('#gia-pdh').val(data.GiaBan);
+        $('#gia-pdh').val(data.GiaBan); //gia da ap dung giam gia
+        $('#giamgia-pdh').val(data.GiamGia);
         var unitPrice = $('#gia-pdh').val().replace(/,/gi, "");
-        var sale = $('#giamgia-pdh').val().replace(/,/gi, "");
         var quantity = $('#soLuong-pdh').val();
-        var result = parseFloat(unitPrice) * parseFloat(quantity) * parseFloat(1 - parseFloat(sale));
+        var result = parseFloat(unitPrice) * parseFloat(quantity) ;
         if (!isNaN(result)) {
             $('#thanhTien-pdh').val(formatNumber(result));
         }
     }
 }
 function EditPhieuDatHang() {
+    $.getJSON('/PhieuDatHang/LoadThongTinHangHoa', { id: $('#MaHangHoa-pdh').val() },
+        function (data) {
+            if (data != null) {
+                $.each(data, function (index, row) {
+                    $("#tenHangHoa-pdh").val(data.TenHangHoa);
+                    $("#giamgia-pdh").val(data.GiamGia);
+                    $("#size-pdh").val(data.Size);
+                    $('#gia-pdh').val(data.GiaBan * (1 - data.GiamGia));
+                    //
+                    $('#tonkho-pdh').val(data.SoLuong);
+                });
+            }
+        });
     //basic button handler
     var orderItems = [];
     var tmpIndex = 0;
-    $.getJSON('/PhieuNhapKho/LoadChiTietPhieuNhapKho', { id: $('#soPhieuNhapKho').val() },
+    $.getJSON('/PhieuDatHang/LoadChiTietPhieuDatHang', { id: $('#soPhieuDatHang').val() },
         function (data) {
             if (data != null) {
                 orderItems = JSON.parse(data);
                 GeneratedItemsTable();
-                $('#tongTien').val(formatNumber(parseFloat($('#tongTien').val())));
+                $('#tongtien-pdh').val(formatNumber(parseFloat($('#tongtien-pdh').val())));
             }
         });
 
@@ -315,17 +375,13 @@ function EditPhieuDatHang() {
         }
 
         var errorQuantity = 0;
-        var errorPrice = 0;
-        errorPrice = CheckEmptyForGiaBan(errorPrice);
         errorQuantity = CheckEmptyForSoLuongNhap_pdh(errorQuantity);
 
         var errorQuantity1 = 0;
         errorQuantity1 = CheckQuantityForSoLuongNhap_pdh(errorQuantity1);
 
-        var errorQuantity2 = 0;
-        errorQuantity2 = CheckQuantityForGiaBan(errorQuantity2);
 
-        var error = errorQuantity + errorPrice + errorQuantity1 + errorQuantity2;
+        var error = errorQuantity + errorQuantity1; //gia tri nhap vao valid hay ko
 
         if (isValidItem == true && error == 0) {
 
@@ -356,19 +412,23 @@ function EditPhieuDatHang() {
                         }
                     }
                 }
-                if (test == true) {
+                if (test == true) { //if product is not already added then add to [] or when edit
                     $('#MaHangHoa-pdh').siblings('span.error').css('visibility', 'hidden');
                     orderItems.push({
                         MaHangHoa: $('#MaHangHoa-pdh').val().trim(),
                         TenHangHoa: $("#tenHangHoa-pdh").val().trim(),
+                        Size: $("#size-pdh").val().trim(),
                         SoLuong: parseInt($('#soLuong-pdh').val().trim()),
                         GiaBan: parseInt($('#gia-pdh').val().trim().replace(/,/gi, "")),
+                        GiamGia: $("#giamgia-pdh").val().trim(),
                         ThanhTien: parseInt($('#soLuong-pdh').val().trim()) * parseInt($('#gia-pdh').val().trim().replace(/,/gi, "")),
                     });
 
                     //Clear fields
                     $('#MaHangHoa-pdh').focus().val('');
                     $('#tenHangHoa-pdh').val('');
+                    $('#giamgia-pdh').val('');
+                    $('#size-pdh').val('');
                     $('#soLuong-pdh').val('');
                     $('#gia-pdh').val('');
                     $('#thanhTien-pdh').val('');
@@ -390,17 +450,57 @@ function EditPhieuDatHang() {
             isAllValid = false;
         }
 
+        if ($('#tenkhachhang-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-tenkhachhang').html('<span class="messageError" style="color:red;">Phải nhập tên khách hàng</span>');
+            $('#warning-tenkhachhang').show();
+        }
+        else {
+            $('#warning-tenkhachhang').hide();
+        }
+
+        if ($('#sodienthoai-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-sodienthoai').html('<span class="messageError" style="color:red;">Phải nhập số điện thoại</span>');
+            $('#warning-sodienthoai').show();
+        }
+        else {
+            $('#warning-sodienthoai').hide();
+            if ($('#sodienthoai-pdh').val().length < 7 || $('#sodienthoai-pdh').val().length > 11) {
+                isAllValid = false;
+                $('#warning-sodienthoai').html('<span class="messageError" style="color:red;">Số điện thoại không hợp lệ</span>');
+                $('#warning-sodienthoai').show();
+            }
+        }
+
+        if ($('#diachi-pdh').val() == '') {
+            isAllValid = false;
+            $('#warning-diachi').html('<span class="messageError" style="color:red;">Phải nhập địa chỉ giao hàng</span>');
+            $('#warning-diachi').show();
+        }
+        else {
+            $('#warning-diachi').hide();
+        }
+
+
         //Save if valid
         if (isAllValid) {
             var data = {
-                SoPhieuNhapKho: $('#soPhieuNhapKho').val().trim(),
-                NgayNhapKho: $('#ngayNhapKho').val().trim(),
-                MaNguoiDung: $('#maNguoiDung').val().trim(),
-                MaNhaCungCap: $('#maNhaCungCap').val().trim(),
-                TongTien: parseFloat($('#tongTien').val().trim().replace(/,/gi, "")),
-                GhiChu: $('#ghiChu').val().trim(),
+                SoPhieuDatHang: $('#soPhieuDatHang').val().trim(),
+                NgayDat: $('#ngaydat-pdh').val().trim(),
+                MaNguoiDung: $('#maNguoiDung-pdh').val().trim(),
+                TenKhachHang: $('#tenkhachhang-pdh').val().trim(),
+                SoDienThoai: $('#sodienthoai-pdh').val().trim(),
+                DiaChi: $('#diachi-pdh').val().trim(),
+                Email: $('#email-pdh').val().trim(),
+                HinhThucThanhToan: $('#hinhthucthanhtoan-pdh').val().trim(),
+                GhiChu: $('#ghiChu-pdh').val().trim(),
+                NgayGiao: $('#ngaygiao-pdh').val().trim(),
+                DaXacNhan: $('#daxacnhan-pdh').is(":checked"),
+                DaThanhToan: $('#dathanhtoan-pdh').is(":checked"),
+                TongTien: parseFloat($('#tongtien-pdh').val().trim().replace(/,/gi, "")),
                 IsDeleted: false,
-                chiTietPhieuNhapKhoes: orderItems
+                chiTietPhieuDatHangs: orderItems
             }
             console.log(data);
             $(this).val('Xin Chờ.....');
@@ -417,20 +517,28 @@ function EditPhieuDatHang() {
                         //will send status from server side
                         //clear form
                         orderItems = [];
-                        $('#ngayNhapKho').val(new Date($.now()).toLocaleDateString());
-                        $('#ghiChu').val('');
-                        $('#tongTien').val('');
+                        $('#ngaydat-pdh').val(new Date($.now()).toLocaleDateString());
+                        $('#tenkhachhang-pdh').val('');
+                        $('#sodienthoai-pdh').val('');
+                        $('#diachi-pdh').val('');
+                        $('#email-pdh').val('');
+                        $('#hinhthucthanhtoan-pdh').val('');
+                        $('#ghiChu-pdh').val('');
+                        $('#ngaygiao-pdh').val('');
+                        $('#daxacnhan-pdh').val('');
+                        $('#dathanhtoan-pdh').prop('checked', false);;
+                        $('#tongtien-pdh').prop('checked', false);;
                         $('#orderItems').empty();
-                        window.location.href = '/Manager/PhieuNhapKho/';
+                        window.location.href = '/Manager/PhieuDatHang/';
                     }
                     else {
                         alert("Something wrong! Please try again", "error");
                     }
-                    $('#submit').val('Lưu Phiếu Nhập Kho');
+                    $('#submit').val('Lưu Phiếu Đặt Hàng');
                 },
                 error: function () {
                     alert('Error. Please try again.');
-                    $('#submit').val('Lưu Phiếu Nhập Kho');
+                    $('#submit').val('Lưu Phiếu Đặt Hàng');
                 }
             });
         }
@@ -439,12 +547,13 @@ function EditPhieuDatHang() {
     function GeneratedItemsTable() {
         if (orderItems.length > 0) {
             var $table = $('<table id="productTable"  class="table table-bordered"/>');
-            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Số Lượng</th><th>Giá</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
+            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
             var $tbody = $('<tbody/>');
             $.each(orderItems, function (i, val) {
                 var $row = $('<tr/>');
                 $row.append($('<td/>').html(val.MaHangHoa));
                 $row.append($('<td/>').html(val.TenHangHoa));
+                $row.append($('<td/>').html(val.Size));
                 $row.append($('<td/>').html(val.SoLuong));
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
                 $row.append($('<td/>').html(val.GiamGia));
@@ -459,7 +568,7 @@ function EditPhieuDatHang() {
                     orderItems.splice(i, 1);
                     GeneratedItemsTable();
                     if (orderItems.length == 0) {
-                        $('#tongTien').val(0);
+                        $('#tongtien-pdh').val(0);
                     } else {
                         SumTotalAmount();
                     }
@@ -489,12 +598,13 @@ function EditPhieuDatHang() {
         var total = 0.0;
         var row = document.getElementById('productTable').rows.length;
         for (var i = 1; i < row; i++) {
-            amount = document.getElementById("productTable").rows[i].cells[5].innerHTML.replace(/,/gi, "");
+            amount = document.getElementById("productTable").rows[i].cells[6].innerHTML.replace(/,/gi, "");
 
             total += parseFloat(amount);
         }
-        $('#tongTien').val(formatNumber(parseFloat(total)));
+        $('#tongtien-pdh').val(formatNumber(parseFloat(total)));
     }
+
 
     //on change
     $('#MaHangHoa-pdh').on("change", function () {
@@ -503,15 +613,19 @@ function EditPhieuDatHang() {
                 if (data != null) {
                     $.each(data, function (index, row) {
                         $("#tenHangHoa-pdh").val(data.TenHangHoa);
-                        $("#size").val(data.Size);
-                        $("#gia-pdh").val(parseFloat(data.GiaBan) * (1.0 - parseFloat(GiamGia)));
-                        $("#thanhTien-pdh").val('');
-                        $("#soLuong-pdh").val('');
+                        $("#giamgia-pdh").val(data.GiamGia);
+                        $("#size-pdh").val(data.Size);
+                        $('#gia-pdh').val(data.GiaBan * (1 - data.GiamGia));
+                        //
+                        $('#tonkho-pdh').val(data.SoLuong);
                     });
                 }
             });
         tmpIndex = -1;
         $('#add-pdh').val("Thêm");
+        //reset input
+        $("#soLuong-pdh").val('');
+        $("#thanhTien-pdh").val(0);
     });
 
     //this calculates values automatically
@@ -538,12 +652,13 @@ function EditPhieuDatHang() {
     function Replace(data) {
         $('#MaHangHoa-pdh').val(data.MaHangHoa);
         $("#tenHangHoa-pdh").val(data.TenHangHoa);
+        $('#size-pdh').val(data.Size);
         $('#soLuong-pdh').val(data.SoLuong);
-        $('#gia-pdh').val(data.GiaBan);
+        $('#gia-pdh').val(data.GiaBan ); //
+        $('#giamgia-pdh').val(data.GiamGia);
         var unitPrice = $('#gia-pdh').val().replace(/,/gi, "");
         var quantity = $('#soLuong-pdh').val();
-        var sale = $('#giamgia-pdh').val();
-        var result = parseFloat(unitPrice) * parseFloat(quantity) * parseFloat(1 - parseFloat(sale) );
+        var result = parseFloat(unitPrice) * parseFloat(quantity);
         if (!isNaN(result)) {
             $('#thanhTien-pdh').val(formatNumber(result));
         }
@@ -554,30 +669,31 @@ function DetailsPhieuDatHang() {
     var orderItems = [];
     var tmpIndex = 0;
 
-    $.getJSON('/PhieuDatHang/LoadChiTietPhieuDatHang', { id: $('#soPhieuDatHag').val() },
+    $.getJSON('/PhieuDatHang/LoadChiTietPhieuDatHang', { id: $('#soPhieuDatHang').val() },
         function (data) {
             if (data != null) {
                 orderItems = JSON.parse(data);
                 GeneratedItemsTable();
-                $('#tongTien-pdh').text(formatNumber(parseFloat($('#tongTien-pdh').text())));
+                $('#tongtien-pdh').text(formatNumber(parseFloat($('#tongtien-pdh').text())));
             }
         });
     $('#print').click(function () {
-        Print_pdh();
+        Print();
     });
 
-    function Print_pdh() {
+    function Print() {
         var toPrint = document.getElementById('Items');
         var $table = $('<table id="productTables" style="border: solid; width:100%;padding:10px;margin-top: 5px; text-align:center "/>');
-        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Nhập</th><th>Giá Nhập (VND)</th><th>Thành Tiền (VND)</th></tr></thead>');
+        $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th></tr></thead>');
         var $tbody = $('<tbody/>');
         $.each(orderItems, function (i, val) {
             var $row = $('<tr style="border:solid">');
             $row.append($('<td/>').html(val.MaHangHoa));
             $row.append($('<td/>').html(val.TenHangHoa));
-            $row.append($('<td/>').html(val.DonViTinh));
+            $row.append($('<td/>').html(val.Size));
             $row.append($('<td/>').html(val.SoLuong));
             $row.append($('<td/>').html(formatNumber(val.GiaBan)));
+            $row.append($('<td/>').html(formatNumber(val.GiamGia)));
             $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
             $tbody.append($row);
         });
@@ -591,38 +707,71 @@ function DetailsPhieuDatHang() {
 
         popupWin.document.write('<p style="text-align:center"><img src="/images/header.png" class="img-responsive watch-right"  /></p>')
 
-        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Nhập Kho</p>')
+        popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Phiếu Đặt Hàng</p>')
 
         popupWin.document.write('<b>');
-        popupWin.document.write('Thông tin phiếu nhập kho');
+        popupWin.document.write('Thông tin phiếu đặt hàng');
         popupWin.document.write('</b>');
         popupWin.document.write('<table style="border:solid; width:100%; padding: 10px;margin-top: 5px">')
         popupWin.document.write('<tr><td>')
-        popupWin.document.write('Số phiếu nhập kho: ');
-        popupWin.document.write($('#soPhieuNhapKho').val().trim());
+        popupWin.document.write('Số phiếu đặt hàng: ');
+        popupWin.document.write($('#soPhieuDatHang').val().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Ngày nhập kho: ');
-        popupWin.document.write($('#ngayNhapKho').text().trim());
+        popupWin.document.write('Ngày đặt: ');
+        popupWin.document.write($('#ngaydat-pdh').text().trim());
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('<tr><td>')
         popupWin.document.write('Nhân viên: ');
-        popupWin.document.write($('#maNguoiDung').text().trim());
+        popupWin.document.write($('#maNguoiDung-pdh').text().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Nhà cung cấp: ');
-        popupWin.document.write($('#nhaCungCap').text().trim());
+        popupWin.document.write('Tên khách hàng: ');
+        popupWin.document.write($('#tenkhachhang-pdh').text().trim());
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('<tr><td>')
-        popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongTien').text().trim() + " VND");
+        popupWin.document.write('Số điện thoại: ');
+        popupWin.document.write($('#sodienthoai-pdh').text().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Ghi chú: ');
-        popupWin.document.write($('#ghiChu').text().trim());
+        popupWin.document.write('Địa chỉ: ');
+        popupWin.document.write($('#diachi-pdh').text().trim());
         popupWin.document.write('</td></tr>')
+
+        popupWin.document.write('<tr><td>')
+        popupWin.document.write('Email: ');
+        popupWin.document.write($('#email-pdh').text().trim());
+        popupWin.document.write('</td>')
+        popupWin.document.write('<td>')
+        popupWin.document.write('Tổng tiền: ');
+        popupWin.document.write($('#tongtien-pdh').text().trim());
+        popupWin.document.write('</td></tr>')
+
+        popupWin.document.write('<tr><td>')
+        popupWin.document.write('Hình thức thanh toán: ');
+        popupWin.document.write($('#hinhthucthanhtoan-pdh').text().trim());
+        popupWin.document.write('</td>')
+        popupWin.document.write('<td>')
+        popupWin.document.write('Ghi chú: ');
+        popupWin.document.write($('#ghiChu-pdh').text().trim());
+        popupWin.document.write('</td></tr>')
+
+        popupWin.document.write('<tr><td>')
+        popupWin.document.write('Ngày giao: ');
+        popupWin.document.write($('#ngaygiao-pdh').text().trim());
+        popupWin.document.write('</td>')
+        popupWin.document.write('<td>')
+        popupWin.document.write('Trạng thái xác nhận: ');
+        popupWin.document.write($('#daxacnhan-pdh').is(":checked").trim());
+        popupWin.document.write('</td></tr>')
+
+        popupWin.document.write('<tr><td>')
+        popupWin.document.write('Trạng thái thanh toán: ');
+        popupWin.document.write($('#dathanhtoan-pdh').is(":checked").trim());
+        popupWin.document.write('</td>')
+        popupWin.document.write('</tr>')
 
         popupWin.document.write('</table>')
 
@@ -637,7 +786,7 @@ function DetailsPhieuDatHang() {
         popupWin.document.write('<br>')
         popupWin.document.write('</p>')
         popupWin.document.write('<p style="text-align:center;float: right;margin-right: 125px;margin-top: -10px;">')
-        popupWin.document.write('Nhân viên kho')
+        popupWin.document.write('Nhân viên đặt hàng')
         popupWin.document.write('<br>')
         popupWin.document.write('(Ký tên)')
         popupWin.document.write('</p>')
@@ -645,18 +794,65 @@ function DetailsPhieuDatHang() {
         popupWin.document.close();
     }
 
+    $('#taophieubanhang').click(function () {
+            var data = {
+                NgayBan: new Date($.now()).toLocaleDateString('en-US'),
+                TenKhachHang: $('#tenkhachhang-pdh').text().trim(),
+                SoDienThoai: $('#sodienthoai-pdh').text().trim(),
+                GhiChu: $('#ghiChu-pdh').text().trim(),
+                TongTien: parseFloat($('#tongtien-pdh').text().trim().replace(/,/gi, "")),
+                IsDeleted: false,
+                chiTietPhieuBanHangs: orderItems
+            }
+            console.log(data);
+            $(this).val('Xin Chờ.....');
+
+            $.ajax({
+                url: "/PhieuBanHang/LuuPhieuBanHang",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function (d) {
+                    //check is successfully save to database
+                    if (d.status == true) {
+                        //will send status from server side
+                        //clear form
+                        orderItems = [];
+                        $('#ngayban-pbh').val(new Date($.now()).toLocaleDateString());
+                        $('#tenkhachhang-pbh').val('');
+                        $('#sodienthoai-pbh').val('');
+                        $('#ghiChu-pbh').val('');
+                        $('#tongtien-pbh').val('');
+                        $('#orderItems').empty();
+                        window.location.href = '/Manager/PhieuBanHang/';
+                    }
+                    else {
+                        alert("Số lượng hàng hóa không đủ để tạo phiếu bán hàng!", "error");
+                    }
+                    $('#submit').val('Lưu Phiếu Bán Hàng');
+                },
+                error: function () {
+                    alert('Error. Please try again.');
+                    $('#submit').val('Lưu Phiếu Bán Hàng');
+                }
+            });
+    });
+
+
     function GeneratedItemsTable() {
         if (orderItems.length > 0) {
             var $table = $('<table id="productTable"  class="table table-bordered"/>');
-            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Đơn Vị Tính</th><th>Số Lượng Nhập</th><th>Giá Nhập</th><th>Thành Tiền</th></tr></thead>');
+            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th></tr></thead>');
             var $tbody = $('<tbody/>');
             $.each(orderItems, function (i, val) {
                 var $row = $('<tr/>');
                 $row.append($('<td/>').html(val.MaHangHoa));
                 $row.append($('<td/>').html(val.TenHangHoa));
-                $row.append($('<td/>').html(val.DonViTinh));
+                $row.append($('<td/>').html(val.Size));
                 $row.append($('<td/>').html(val.SoLuong));
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
+                $row.append($('<td/>').html(formatNumber(val.GiamGia)));
                 $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
                 $tbody.append($row);
             });
@@ -744,6 +940,19 @@ function CheckEmptyForSoLuongNhap_pdh(error) {
 
 
 function CheckQuantityForSoLuongNhap_pdh(error) {
+    var soluongtonkho = $('#tonkho-pdh').val().trim();
+    
+    if (parseInt($('#soLuong-pdh').val()) > soluongtonkho) {
+        $(".messageErrorinputQuantity_tonkho").text("Vượt quá số lượng hàng trong kho!");
+        $(".notifyinputQuantity_tonkho").slideDown(250).removeClass("hidden");
+        $("#soLuong-pdh").addClass("error");
+        error++;
+    }
+    else {
+        $(".notifyinputQuantity_tonkho").addClass("hidden");
+        $("#soLuong-pdh").removeClass("error");
+    }
+
     if (($('#soLuong-pdh').val().trim() == '0') || ($('#soLuong-pdh').val().trim() == '00') || ($('#soLuong-pdh').val().trim() == '000') || ($('#soLuong-pdh').val().trim() == '0000')) {
         $(".messageErrorinputQuantity1").text("Nhập số lượng lớn hơn 0!");
         $(".notifyinputQuantity1").slideDown(250).removeClass("hidden");

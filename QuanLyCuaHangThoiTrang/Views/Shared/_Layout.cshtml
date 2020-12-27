@@ -74,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!-- header-bot -->
             <div class="col-md-4 logo_agile">
-                <h1><a href="../Home/Index"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
+                <h1><a class="return-home" href=""><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
             </div>
             <!-- header-bot -->
             <div class="col-md-4 agileits-social top_content">
@@ -321,8 +321,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="form-group">
                         <label style="height: 40px; padding: 5px" class="control-label required">Số Điện Thoại</label>
-                        <input name="order-sdt" required type="text" class="col-md-9 custom-input" placeholder="Số Điện Thoại" />
+                        <input name="order-sdt" required onkeypress="return checkNumber(event, this)" maxlength="11" type="text" class="col-md-9 custom-input" placeholder="Số Điện Thoại" />
                     </div>
+                    <div style="margin-bottom:5px" id="warning-sodienthoai"></div>
                     <div class="form-group">
                         <label style="height: 40px; padding: 5px" class="control-label required">Địa Chỉ</label>
                         <input name="order-diachi" required type="text" class="col-md-9 custom-input" placeholder="Địa Chỉ" />
@@ -342,10 +343,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span style="margin-left: 15px" id="order-total">100</span>
                     <span>&nbsp; VNĐ</span>
                 </div>
-                <input  class="order_submit" type="submit" value="Đặt Hàng" />
+                <input class="order_submit" type="submit" value="Đặt Hàng" />
             </form>
         </div>
-            
+
 
     </div>
     <!-- //Popup Submit Order-->
@@ -455,7 +456,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
             <div class="clearfix"></div>
-            
+
             <p class="copy-right">&copy Elite shoppy. All rights reserved | Design by OOAD <a href=""></a></p>
         </div>
     </div>
@@ -552,6 +553,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- script for responsive tabs -->
     <script src="~/Scripts/easy-responsive-tabs.js"></script>
     <script>
+        $()
         $(document).ready(function () {
             $('#horizontalTab').easyResponsiveTabs({
                 type: 'default', //Types: default, vertical, accordion
@@ -623,6 +625,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- Script for validate -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript"></script>
+    <!-- Script for jquery -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <!-- //Script from Nam BEGIN -->
     <script type="text/javascript">
         function ShowCart() {
@@ -649,8 +653,8 @@ function SetOrderPrice() { // cập nhật tiền tổng của hóa đơn
     $('.order-price span.order-value').text(orderprice.toLocaleString());
 }
 
-//======================================= CART BUTTON ====================================================================================//
-$("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
+        //======================================= CART BUTTON ====================================================================================//
+        $(document).on("submit", "form.item", function (event){ //first click add item to cart,every other clicks will + 1 to the cart
     event.preventDefault();
     var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
     var mota = $(this).find('input[name ="MoTa"]').val();
@@ -678,8 +682,11 @@ $("form.item").on("submit", function (event) { //first click add item to cart,ev
                 data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
             });
         }
-        else
+        else {
+            ShowAddToCart();
             alert("Sản phẩm trong kho đã hết");
+        }
+            
     }
     else //them vao cart
     {
@@ -788,37 +795,110 @@ $(document).on("click", "input.cart_submit", function () {
         $('input[name=order-email]').val("@email");
     }
 });
-
-$('#order_close').click(function () {
+        $(document).on("click", "#order_close", function () {
     $("#order-submit-popup").fadeOut();
+    $('#warning-sodienthoai').hide();
     $("body > *").not("body > #order-submit-popup").css('opacity', '1');
-});
 
-$('#order').on("submit", function (event) {
-    event.preventDefault();
-    var tenkhachhang = $('input[name=order-ten]').val();
-    var sdt = $('input[name=order-sdt]').val();
-    var diachi = $('input[name=order-diachi]').val();
-    var email = $('input[name=order-email]').val();
-    var tongtien = parseFloat($('#order-total').text());
-    $.ajax({
-        type: "POST",
-        url: "Home/Order",
-        data: {
-            TENKHACHHANG: tenkhachhang,
-            SDT: sdt,
-            DIACHI: diachi,
-            EMAIL: email,
-            TONGTIEN: tongtien
-        }
-    });
-    location.reload();//reload page
 });
+        //validate sdt
+        $('input[name=order-sdt]').keydown(function (event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 46 || event.keyCode == 8) {
+            }
+            else {
+                if (event.keyCode < 95) {
+                    if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                    }
+                }
+                else {
+                    if (event.keyCode < 96 || event.keyCode > 105) {
+                        event.preventDefault();
+                    }
+                }
+            }
+        });
+
+        $(document).on("submit", "#order", function () {
+            event.preventDefault();
+            if ($('input[name=order-sdt]').val().length < 7 || $('input[name=order-sdt]').val().length > 11) {
+                $('#warning-sodienthoai').html('<span class="messageError" style="color:red;">Số điện thoại không hợp lệ</span>');
+                $('#warning-sodienthoai').show();
+            }
+            else {
+                $('#warning-sodienthoai').hide();
+                var tenkhachhang = $('input[name=order-ten]').val();
+                var sdt = $('input[name=order-sdt]').val();
+                var diachi = $('input[name=order-diachi]').val();
+                var email = $('input[name=order-email]').val();
+                var tongtien = parseFloat($('#order-total').text());
+                $.ajax({
+                    type: "POST",
+                    url: "Home/Order",
+                    data: {
+                        TENKHACHHANG: tenkhachhang,
+                        SDT: sdt,
+                        DIACHI: diachi,
+                        EMAIL: email,
+                        TONGTIEN: tongtien
+                    }
+                });
+                location.reload();//reload page
+            }
+        });
+        
 
 function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
     var tien = $('span.order-value').text();
     $('#order-total').text(tien);
-}
+        }
+
+        //a link return home
+        $(document).on("click", "a.return-home", function () {
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "Home/MainIndex",
+                //recall function to controll tab
+                success: function (ketqua) {
+                    $("#main_page").html(ketqua);
+                    $('#horizontalTab').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true,   // 100% fit in a container
+                        closed: 'accordion', // Start closed if in accordion view
+                        activate: function (event) { // Callback function if tab is switched
+                            var $tab = $(this);
+                            var $info = $('#tabInfo');
+                            var $name = $('span', $info);
+                            $name.text($tab.text());
+                            $info.show();
+                        }
+                    });
+                    $('#horizontalTab-sale').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true,   // 100% fit in a container
+                        closed: 'accordion', // Start closed if in accordion view
+                        activate: function (event) { // Callback function if tab is switched
+                            var $tab = $(this);
+                            var $info = $('#tabInfo');
+                            var $name = $('span', $info);
+                            $name.text($tab.text());
+                            $info.show();
+                        }
+                    });
+                    $('#verticalTab').easyResponsiveTabs({
+                        type: 'vertical',
+                        width: 'auto',
+                        fit: true
+                    });
+                }
+            });
+        });
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->

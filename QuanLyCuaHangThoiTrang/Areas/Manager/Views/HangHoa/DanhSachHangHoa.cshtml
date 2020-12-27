@@ -22,8 +22,6 @@
         <tbody>
             @foreach (var item in Model)
             {
-                if (!item.IsDeleted)
-                {
             <tr class="border-warning" style="text-align:center">
                 <td>
                     @item.MaHangHoa
@@ -101,7 +99,7 @@
             @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
         })*@
             </td>
-            </tr>                }
+            </tr>                
             }
         </tbody>
     </table>

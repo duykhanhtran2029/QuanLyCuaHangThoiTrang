@@ -27,7 +27,7 @@
         [Display(Name = "Mã Người Dùng")]
         public int? MaNguoiDung { get; set; }
 
-        [Display(Name = "Tên Khách Hàng"), Required(ErrorMessage = "Tên Hàng Hóa không được trống")]
+        [Display(Name = "Tên Khách Hàng"), Required(ErrorMessage = "Tên Khách Hàng không được trống")]
         public string TenKhachHang { get; set; }
 
         [Required(ErrorMessage = "Số Điện Thoại không được trống")]
@@ -66,7 +66,7 @@
         public bool DaXacNhan { get; set; }
 
         [Display(Name = "Trạng Thái Thanh Toán")]
-        [Required(ErrorMessage = "Trạng Thái Xác Nhận không được trống")]
+        [Required(ErrorMessage = "Trạng Thái Thanh Toán không được trống")]
         public bool DaThanhToan { get; set; }
 
         public bool IsDeleted { get; set; }

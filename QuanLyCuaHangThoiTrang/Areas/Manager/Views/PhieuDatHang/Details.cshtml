@@ -1,130 +1,146 @@
 ﻿@model QuanLyCuaHangThoiTrang.Model.PhieuDatHang
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "THÔNG TIN PHIẾU ĐẶT HÀNG";
 }
 
-<h2>Details</h2>
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Đặt Hàng</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.EditorFor(model => model.SoPhieuDatHang, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuDatHang" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayDat, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control ", @id = "ngaydat-pdh" } })
+                </div>
+            </div>
 
-<div>
-    <h4>PhieuDatHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control", @id = "maNguoiDung-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenKhachHang, "Tên Khách Hàng", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control", @id = "tenkhachhang-pdh" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDat)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @id = "sodienthoai-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayDat)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Diachi, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control", @id = "diachi-pdh" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenKhachHang)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control ", @id = "email-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenKhachHang)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control ", @id = "tongtien-pdh" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDienThoai)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.HinhThucThanhToan, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.HinhThucThanhToan, new { htmlAttributes = new { @class = "form-control ", @id = "hinhthucthanhtoan-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control ", @id = "ghiChu-pdh" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Diachi)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayGiao, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control ", @id = "ngaygiao-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diachi)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DaXacNhan, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.DaXacNhan, new { htmlAttributes = new { @class = "form-control checkbox ", @id = "daxacnhan-pdh" } })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DaThanhToan, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.DaThanhToan, new { htmlAttributes = new { @class = "form-control checkbox ", @id = "dathanhtoan-pdh" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhThucThanhToan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HinhThucThanhToan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayGiao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayGiao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DaXacNhan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DaXacNhan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DaThanhToan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DaThanhToan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayChinhSua)
-        </dd>
-
-    </dl>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control ", @id = "ngaychinhsua-pdh" } })
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print">
+                        <i class="fas fa-print"></i>
+                        <span style="margin: 15px 10px !important;">In</span>
+                    </button>
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 5px;" id="taophieubanhang">
+                        <i class="fas fa-first-order"></i>
+                        <span style="margin: 15px 10px !important;">Tạo phiếu bán hàng</span>
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SoPhieuDatHang }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <form>
+            @Html.AntiForgeryToken()
+            <div>
+                <div class="pull-left">
+                    <p class="card-title-heading" id="pageTitle">Chi Tiết Phiếu Đặt Hàng</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <hr />
+            <div id="orderItems" class="table-responsive"></div>
+            <div id="Items" hidden class="table-responsive"></div>
+        </form>
+    </div>
+</div>
