@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="QuanLyCuaHangThoiTrangDbContext-Web.config Connection String" description="QuanLyCuaHangThoiTrangDbContext Connection String used in web.config by the application to access the database." defaultValue="data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\QuanLyCuaHangThoiTrang.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\UIT\ 2020-2021\\SE100_OOAD\\fix3\\QuanLyCuaHangThoiTrang\\QuanLyCuaHangThoiTrang\\obj\\Release\\Package\\PackageTmp\\web\.config$" match="/configuration/connectionStrings/add[@name='QuanLyCuaHangThoiTrangDbContext']/@connectionString" />
+  </parameter>
+</parameters>

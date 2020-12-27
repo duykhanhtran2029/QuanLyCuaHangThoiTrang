@@ -1,0 +1,58 @@
+﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.BaoCaoTonKho>
+
+@{
+    ViewBag.Title = "QUẢN LÝ BÁO CÁO TỒN KHO";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> Báo Cáo Tồn Kho.";
+}
+<title id="pageTitle">
+    Quản Lý  Báo Cáo Tồn Kho
+</title>
+<div id="Modal" class="modal fade card" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Báo Cáo Tồn Kho</p>
+        </div>
+        <div class="pull-right">
+            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm Báo Cáo Tồn Kho</span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachBaoCaoTonKho", "BaoCaoTonKho", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+        <div class="form-group grid-container" style="grid-template-columns: 60% 40%">
+            <div class="grid-container" style="grid-template-columns: auto auto">
+                <div>
+                    <label class="control-label col-md-3" style="margin-top: 7px; width: 30%;">Từ Tháng</label>
+                    <span class="input-group col-md-8">
+                        <input id="dateFrom" required type="month" name="dateFrom" class="form-control rounded" value="@ViewBag.dateFrom" />
+                    </span>
+                </div>
+                <div>
+                    <label class="control-label col-md-3" style="margin-top: 7px; width: 30%;">Đến Tháng</label>
+                    <div class="input-group col-md-8">
+                        <input id="dateTo" required type="month" name="dateTo" class="form-control rounded" value="@ViewBag.dateTo" />
+                    </div>
+                </div>
+            </div>
+            <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
+                <div style="padding: 0px 30px">
+                    @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên người lập" })
+                </div>
+                <div>
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachBaoCaoTonKho", "BaoCaoTonKho");}
+        </div>
+    </div>
+</div>

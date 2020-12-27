@@ -16,6 +16,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
     public class NguoiDungController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
+        private static string current_avatar = "";
 
         // GET: NguoiDung
         public ActionResult Index()
@@ -42,6 +43,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: NguoiDung/Create
         public ActionResult Create()
         {
+            
             ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n=>n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu");
             return View();
         }
@@ -53,7 +55,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             IList<NguoiDung> nguoiDung = db.NguoiDungs.ToList();
             if(!String.IsNullOrEmpty(searchString))
             {
-                nguoiDung = db.NguoiDungs.Where(n => n.TenNguoiDung.Contains(searchString)).ToList();
+                nguoiDung = db.NguoiDungs.Where(n => n.TenNguoiDung.Contains(searchString) 
+                || n.ChucVu.TenChucVu.Contains(searchString)).ToList();
             }
             return View(nguoiDung.ToPagedList(page, pageSize));
 
@@ -79,7 +82,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                         avatar.SaveAs(path);
                         nguoiDung.Avatar = avatarfile;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                        //
                     }
@@ -105,12 +108,23 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
+            NguoiDung nguoiDung = db.NguoiDungs.Find(id);            
+            current_avatar = nguoiDung.Avatar;
             if (nguoiDung == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+            var user = Session["Account"] as NguoiDung;
+
+            if(user.MaNguoiDung == id)
+            {
+                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu == "Admin"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+            }
+           else
+            {
+                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+            }
+            
             return View(nguoiDung);
         }
 
@@ -133,14 +147,14 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                         avatar.SaveAs(path);
                         nguoiDung.Avatar = avatarfile;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        //
+                       
                     }
                 }
                 else
                 {
-                    nguoiDung.Avatar = "default.png";
+                    nguoiDung.Avatar = current_avatar;
                 }
                 nguoiDung.PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord);
 
@@ -173,6 +187,10 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             NguoiDung nguoiDung = db.NguoiDungs.Find(id);
+            if(nguoiDung.ChucVu.TenChucVu == "Admin")
+            {
+                return RedirectToAction("Index");
+            }
             db.NguoiDungs.Remove(nguoiDung);
             db.SaveChanges();
             return RedirectToAction("Index");

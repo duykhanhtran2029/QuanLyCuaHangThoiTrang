@@ -76,25 +76,25 @@
 </div>
 
 <script>
-
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     $(document).ready(function () {
-        //$(function () {
         $('#Sophieunhapkho').change(function () {
-            $('#Sophieunhapkho').change(function () {
-                if ($('#Sophieunhapkho').val() == '')
-                    $('#Tongtienchi').val('');
-                else {
-                    $.getJSON('/PhieuChi/TongTienChi', { id: $('#Sophieunhapkho').val() }, function (data) {
-                        $.each(JSON.parse(data), function (i, row) {
-                            console.log(data);
-                            console.log(i);
-                            console.log(row);
-                            $('#Tongtienchi').val(row)
-                        });
+            if ($('#Sophieunhapkho').val() == '')
+                $('#Tongtienchi').val('');
+            else {
+                $.ajax({
+                    url: "/PhieuChi/TongTienChi/" + $('#Sophieunhapkho').val(),
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (res) {
+                        $.each(JSON.parse(res), function (i, row) {
+                            $('#Tongtienchi').val(numberWithCommas(parseFloat(row).toFixed(0)));
                     });
-                }
-
-            });
+                    }
+                });  
+            }
         });
     });
 </script>

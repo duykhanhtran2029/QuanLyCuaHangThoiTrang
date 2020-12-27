@@ -3,12 +3,12 @@
 
 @{
     ViewBag.Title = "QUẢN LÝ BÁO CÁO BÁN HÀNG";
-    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Chỉnh sửa</code> <code> Xóa</code> phiếu báo cáo bán hàng.";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Xóa</code> phiếu báo cáo bán hàng.";
 }
 <title id="pageTitle">
     Quản Lý Người Dùng
 </title>
-<div id="Modal" class="modal fade card" role="dialog">
+<div id="Modal" class="modal fade" role="dialog">
 </div>
 <div class="card">
     <div>
@@ -29,7 +29,7 @@
         {
             <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
                 <div class="grid-container" style="grid-template-columns: auto auto">
-                    <div>
+                    @*<div>
                         <label class="control-label col-md-4" style="margin-top: 7px">Từ ngày</label>
                         <span class="input-group col-md-7">
                             <input id="dateFrom" required name="dateFrom" class="form-control rounded datetimepicker" value="@ViewBag.dateFrom" />
@@ -40,7 +40,7 @@
                         <div class="input-group col-md-7">
                             <input id="dateTo" required name="dateTo" class="form-control datetimepicker rounded" value="@ViewBag.dateTo" />
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
                     <div style="padding: 0px 30px">

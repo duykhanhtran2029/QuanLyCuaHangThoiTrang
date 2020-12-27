@@ -1,0 +1,43 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.LoaiHangHoa
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<div class="card popupcontent">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Thêm Mới Loại Hàng Hóa</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenLoaiHangHoa, htmlAttributes: new { @class = "control-label custom-label required" })
+                    <div class="col-md-10 custom-input">
+                        @Html.EditorFor(model => model.TenLoaiHangHoa, new { htmlAttributes = new { @class = "form-control" , @required = "required"} })
+                        @Html.ValidationMessageFor(model => model.TenLoaiHangHoa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "control-label custom-label required" })
+                    <div class="col-md-10 custom-input">
+                        @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <hr/>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <input type="submit" value="Thêm Mới" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

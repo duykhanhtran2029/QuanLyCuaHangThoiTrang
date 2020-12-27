@@ -1,0 +1,77 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.BaoCaoTonKho
+
+@{
+    ViewBag.Title = "THÔNG TIN BÁO CÁO TỒN KHO";
+}
+
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Báo Cáo Tồn Kho</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.EditorFor(model => model.MaBaoCaoTonKho, new { htmlAttributes = new { @class = "form-control", @id = "maBaoCaoTonKho" } })
+            </div>
+            <div class="form-group">
+                <label class="control-label custom-label">Tháng</label>
+                <div class="col-md-10 custom-input" id="thangNam">
+                    @ViewBag.ThangNam
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="maNguoiDung">
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongSoHangHoa, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="tongSoHangHoa">
+                    @Html.DisplayFor(model => model.TongSoHangHoa, new { htmlAttributes = new { @class = "form-control disabled", @id = "tongSoHangHoa" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayLap, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input" id="ngayLap">
+                    @Html.DisplayFor(model => model.NgayLap, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayLap" } })
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <button class="btn btn-sm btn-success btn-xs btn-push exportToExcel" style="padding: 5px 10px" id="exportToExcel">
+                        <i class="fas fa-file-excel"></i>
+                        <span style="margin: 15px 10px !important;">Xuất ra Excel</span>
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Chi Tiết Báo Cáo Tồn Kho</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div id="orderItems" class="table-responsive"></div>
+        <div id="Items" hidden class="table-responsive"></div>
+    </div>
+</div>
+

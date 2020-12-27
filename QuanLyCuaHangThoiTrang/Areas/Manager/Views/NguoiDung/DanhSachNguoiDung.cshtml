@@ -18,8 +18,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                if (!item.IsDeleted)
-                {
+               
             <tr class="border-warning" style="text-align:center">
                 <td align="left">
                     <img src="~/images/avatar/@item.Avatar" width="50" height="50" class="img-circle img-bordered-theme">
@@ -37,17 +36,34 @@
                 <td>
                     @item.Email
                 </td>
-                <td>
-                    Đang hoạt động
-                </td>
-
-                <td class="text-center">
-                    <a href="@Url.Action("Edit", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
-                    <a href="@Url.Action("Delete", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
-                    <a href="@Url.Action("Details", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>
-                </td>
-            </tr>
+                @if (!item.IsDeleted)
+                {
+                    <td>Đang hoạt động</td>
                 }
+                else
+                {
+                    <td>Ngừng hoạt động</td>
+                }
+
+            <td class="text-center">
+                <a href="@Url.Action("Edit", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+                @Ajax.RawActionLink("<i class=\"fas fa-trash-alt\"></i>", "Delete", "NguoiDung",
+                                                 new { id = item.MaNguoiDung },
+                                                 new AjaxOptions
+                                                 {
+                                                     HttpMethod = "GET",
+                                                     UpdateTargetId = "Modal",
+                                                     LoadingElementId = "loading"
+                                                 },
+                                                 new
+                                                 {
+                                                     @class = "btn btn-sm btn-success btn-xs btn-push btnDel",
+                                                 })
+                @*<a href="@Url.Action("Delete", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>*@
+                <a href="@Url.Action("Details", new { id = item.MaNguoiDung })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>
+            </td>
+            </tr>
+                
             }
         </tbody>
     </table>

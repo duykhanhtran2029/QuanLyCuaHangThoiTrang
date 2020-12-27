@@ -1,98 +1,94 @@
 ﻿@model QuanLyCuaHangThoiTrang.Model.NguoiDung
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "CHI TIẾT NGƯỜI DÙNG";
 }
 
-<h2>Details</h2>
+<div class="card">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Người dùng</p>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="location.href='@Url.Action("Index")'">
+                    <i class="fas fa-backward"></i>
+                    <span style="margin: 15px 10px !important;">Trở lại</span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div class="grid-container" style="grid-template-columns: auto auto">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenNguoiDung, "Tên người dùng", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.TenNguoiDung, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-<div>
-    <h4>NguoiDung</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ChucVu.TenChucVu)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChucVu.TenChucVu)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DiaChi, "Địa chỉ", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TenNguoiDung)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TenNguoiDung)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoDienThoai, "SĐT", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDienThoai)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CMND, "CMND", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.CMND, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, "Tên người dùng", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CMND)
-        </dt>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CMND)
-        </dd>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="fileinput fileinput-new col-md-10 custom-input" data-provides="fileinput">
+                    <div id="img_preview" class="fileinput-preview thumbnail" name="avatar" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                        <img src="~/images/avatar/@Model.Avatar" style="width: 200px; height: 150px;">
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaChucVu, "Chức Vụ", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.ChucVu.TenChucVu, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PassWord)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PassWord)
-        </dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Avatar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Avatar)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNguoiDung }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

@@ -1,0 +1,48 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.NhaCungCap
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<div class="card popupcontent">
+    <div class="form-horizontal">
+        <div style="text-align:center">
+            <p class="card-title-heading" style="color:darkred" id="pageTitle">Chi Tiết Nhà Cung Cấp</p>
+        </div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenNhaCungCap) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenNhaCungCap)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SoDienThoai) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+</div>

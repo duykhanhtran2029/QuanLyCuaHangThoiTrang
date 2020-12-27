@@ -196,46 +196,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <label>Họ và tên</label>
                                     <span></span>
                                 </div>
-                                <div class="styled-input">
-                                    <input type="text" name="phone" required>
+                                <div class="styled-input agile-styled-input-top">
+                                    <input id="phone_1" type="text" name="phone" required onchange="check()">
                                     <label>Số điện thoại</label>
                                     <span></span>
                                 </div>
-                                <div class="styled-input">
+                                <div class="styled-input agile-styled-input-top">
                                     <input id="password" type="password" name="password" required>
                                     <label>Password</label>
                                     <span></span>
                                 </div>
-                                <div class="styled-input">
+                                <div class="styled-input agile-styled-input-top">
                                     <input id="confirm_password" type="password" name="confirm_password" onchange="validatePassword()" required>
                                     <label>Confirm Password</label>
                                     <span></span>
                                 </div>
                                 <input type="submit" value="Đăng Kí">
                             }
-                            @*<form action="#" method="post">
-                                    <div class="styled-input agile-styled-input-top">
-                                        <input type="text" name="Name" required="">
-                                        <label>Name</label>
-                                        <span></span>
-                                    </div>
-                                    <div class="styled-input">
-                                        <input type="email" name="Email" required="">
-                                        <label>Email</label>
-                                        <span></span>
-                                    </div>
-                                    <div class="styled-input">
-                                        <input type="password" name="password" required="">
-                                        <label>Password</label>
-                                        <span></span>
-                                    </div>
-                                    <div class="styled-input">
-                                        <input type="password" name="Confirm Password" required="">
-                                        <label>Confirm Password</label>
-                                        <span></span>
-                                    </div>
-                                    <input type="submit" value="Sign Up">
-                                </form>*@
+                          
                             <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                                 <li>
                                     <a href="#" class="facebook">
@@ -923,6 +901,17 @@ function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt ha�
             $('#AlertBox').removeClass('hide');
             $('#AlertBox').delay(4000).slideUp(1000);
         });
+    </script>
+    <script>
+        function check() {
+            var phone = document.getElementById("phone_1");
+            if (isNaN(phone.value) || phone.value.length < 9 || phone.value.length > 11) {
+                phone.setCustomValidity("Số điện thoại không hợp lệ!");
+            }
+            else {
+                phone.setCustomValidity("")
+            }
+        }
     </script>
 
 </body>
