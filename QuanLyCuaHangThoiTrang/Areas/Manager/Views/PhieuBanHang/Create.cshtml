@@ -1,93 +1,161 @@
 ﻿@model QuanLyCuaHangThoiTrang.Model.PhieuBanHang
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "LẬP PHIẾU BÁN HÀNG";
+    ViewBag.SubTitle = "Nhập đầy đủ các trường thông tin yêu cầu ở phía dưới";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+<div class="card" style="width: 25%; float: left !important">
     <div class="form-horizontal">
-        <h4>PhieuBanHang</h4>
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Bán Hàng</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayBan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayBan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayBan, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div>
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="tonkho-pbh" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayBan, htmlAttributes: new { @class = "control-label custom-label required" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.NgayBan, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngayban-pbh", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.NgayBan, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaNguoiDung, "MaNguoiDung", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal" })
-                @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenKhachHang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayChinhSua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayChinhSua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayChinhSua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsDeleted)
-                    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung-pbh", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenKhachHang, "Tên Khách hàng", htmlAttributes: new { @class = "control-label custom-label required" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control", @id = "tenkhachhang-pbh", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+                    <div id="warning-tenkhachhang"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label custom-label required" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @required = "required", @id = "sodienthoai-pbh", @onkeypress = "return checkNumber(event, this)", @maxlength = "11", @min = "6" } })
+                    @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                    <div id="warning-sodienthoai"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label required" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongtien-pbh", @disabled = "disabled", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu-pbh" } })
+                    @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 custom-input">
+                    <input type="submit" id="submit" value="Lưu" class="btn btn-primary" />
+                </div>
+            </div>
+            <hr />
+            <div class="form-group" style="text-align: center">
+                <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
             </div>
         </div>
     </div>
-}
+</div>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Thông Tin Hàng Hóa</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <form>
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="control-label custom-label">Hàng Hóa</label>
+                <div class="col-md-10 custom-input">
+                    @Html.DropDownList("MaHangHoa-pbh", (SelectList)ViewBag.MaHangHoa, null, new { @class = "form-control minimal" })
+                </div>
+            </div>
+            <hr />
+            <table>
+                <tr>
+                    <td style="padding: 0px 10px 10px 12px">Sản Phẩm</td>
+                    <td style="padding: 0px 10px 10px 12px">Size</td>
+                    <td style="padding: 0px 10px 10px 12px">Số Lượng </td>
+                    <td style="padding: 0px 10px 10px 12px">Giá (Đã áp dụng giảm giá)</td>
+                    <td style="padding: 0px 10px 10px 12px">Giảm Giá</td>
+                    <td style="padding: 0px 10px 10px 12px">Thành Tiền</td>
+                    <td style="padding: 0px 10px 10px 12px"></td>
+                </tr>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                <tr class="mycontainer" id="mainrow">
+                    <td style="padding: 0px 10px" width="25%">
+                        <input id="tenHangHoa-pbh" disabled="disabled" type="text" class="form-control rounded" />
+                    </td>
+                    <td style="padding: 0px 10px" width="10%">
+                        <input type="text" id="size-pbh" class="form-control rounded" disabled="disabled" />
+                    </td>
+                    <td style="padding: 0px 10px" width="5%">
+                        <input type="text" id="soLuong-pbh" name="soLuongNhap" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
+                    </td>
+                    <td style="padding: 0px 10px">
+                        <input type="text" id="gia-pbh" class="form-control rounded" disabled="disabled" />
+                    </td>
+
+                    <td style="padding: 0px 10px">
+                        <input type="text" id="giamgia-pbh" class="form-control rounded" disabled="disabled" />
+                    </td>
+
+                    <td style="padding: 0px 10px">
+                        <input type="text" id="thanhTien-pbh" disabled="disabled" class="form-control rounded" />
+
+                    </td>
+                    <td style="padding: 0px 10px">
+                        <input type="button" id="add-pbh" value="Thêm" style="padding:4px" class="btn btn-lg btn-success btn-xs btn-push" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+
+                    <td style="padding: 10px 10px 0px 12px; color: red">
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity messageErrorinputQuantity">Nhập số lượng!</h5>
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity1 messageErrorinputQuantity1">Nhập số lượng!</h5>
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity_tonkho messageErrorinputQuantity_tonkho">Nhập số lượng!</h5>
+                    </td>
+                    <td></td>
+                    <td style="padding: 10px 10px 0px 12px; color: red">
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputPrice messageErrorinputPrice">Nhập giá!</h5>
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity2 messageErrorinputQuantity2">Giá nhập phải lớn hơn 0</h5>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <span id="productItemError" class="messageError" style="color:red"></span>
+            <hr style="margin-top: 10px !important" />
+            <div id="orderItems" class="table-responsive"></div>
+            <div id="Items" hidden class="table-responsive"></div>
+        </form>
+    </div>
 </div>

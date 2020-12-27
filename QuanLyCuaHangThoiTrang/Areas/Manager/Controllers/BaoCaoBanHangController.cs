@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
@@ -29,11 +31,34 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             BaoCaoBanHang baoCaoBanHang = db.BaoCaoBanHangs.Find(id);
+            ViewData["ChiTiet"] = db.ChiTietBaoCaoBanHangs.Where(n=>n.MaBaoCaoBanHang == id).ToList();
             if (baoCaoBanHang == null)
             {
                 return HttpNotFound();
             }
             return View(baoCaoBanHang);
+        }
+
+        public JsonResult GetJsonForChart(int? id)
+        {
+            if(id == null)
+            {
+                return  Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
+            }
+            var data = db.ChiTietBaoCaoBanHangs.Where(n => n.MaBaoCaoBanHang == id).ToList();
+            if(data.Count() != 0)
+            {
+                Dictionary<string, string> dt = new Dictionary<string, string>();
+               
+                foreach(var item in data)
+                {
+                    Int32 unixTimestamp = (Int32)(item.Ngay.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                    dt.Add("date", unixTimestamp.ToString());
+                    dt.Add("units", item.DoanhThu.ToString());
+                }
+                return Json(JsonConvert.SerializeObject(dt), JsonRequestBehavior.AllowGet);
+            }
+            return Json(new object[] { new object() }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: BaoCaoBanHang/Create
@@ -43,10 +68,24 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             return View();
         }
 
+
+        //Get
+        public ActionResult DanhSachBaoCaoBanHang(string searchString, int page = 1, int pageSize = 10)
+        {
+
+            IList<BaoCaoBanHang> baocao = db.BaoCaoBanHangs.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                baocao = db.BaoCaoBanHangs.Where(n => n.NguoiDung.TenNguoiDung.Contains(searchString)).ToList();
+            }
+            return View(baocao.ToPagedList(page, pageSize));
+
+        }
+
         // POST: BaoCaoBanHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
@@ -148,14 +187,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 //Done
             }
 
-            //if (ModelState.IsValid) MaBaoCaoBanHang,,SoLuongPhieuBanHang,TongTienBanHang,TongTienNhapHang,TongDoanhThu,MaNguoiDung,IsDeleted
-            //{
-            //    db.BaoCaoBanHangs.Add(baoCaoBanHang);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", baoCaoBanHang.MaNguoiDung);
+          
             return View(baoCaoBanHang);
         }
 
@@ -213,6 +245,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             BaoCaoBanHang baoCaoBanHang = db.BaoCaoBanHangs.Find(id);
+            var res = db.ChiTietBaoCaoBanHangs.Where(n => n.MaBaoCaoBanHang == id);
+            db.ChiTietBaoCaoBanHangs.RemoveRange(res);
             db.BaoCaoBanHangs.Remove(baoCaoBanHang);
             db.SaveChanges();
             return RedirectToAction("Index");

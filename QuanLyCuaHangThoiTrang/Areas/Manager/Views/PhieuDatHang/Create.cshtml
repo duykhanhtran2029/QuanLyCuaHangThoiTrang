@@ -16,66 +16,71 @@
         <hr />
         <div>
             @Html.AntiForgeryToken()
+            <input type="hidden" id="tonkho-pdh"/>
             <div class="form-group">
-                @Html.LabelFor(model => model.NgayDat, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.NgayDat, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngaydat" } })
+                    @Html.EditorFor(model => model.NgayDat, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngaydat-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.NgayDat, "", new { @class = "text-danger" })
+                    
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung", @disabled = "disabled" })
+                    @Html.DropDownList("MaNguoiDung", null, htmlAttributes: new { @class = "form-control minimal", @id = "maNguoiDung-pdh", @disabled = "disabled" })
                     @Html.ValidationMessageFor(model => model.MaNguoiDung, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TenKhachHang, "Tên Khách hàng", htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.TenKhachHang, "Tên Khách hàng", htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control", @id = "tenkhachhang" } })
+                    @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control", @id = "tenkhachhang-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+                    <div id="warning-tenkhachhang"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.SoDienThoai, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @id = "sodienthoai" } })
-                    @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger"})
+                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @required = "required", @id = "sodienthoai-pdh", @onkeypress = "return checkNumber(event, this)", @maxlength = "11", @min = "6" } })
+                    @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                    <div id="warning-sodienthoai"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Diachi, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.Diachi, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control", @id = "diachi" } })
+                    @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control", @id = "diachi-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
+                    <div id="warning-diachi"></div>
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "email" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "email-pdh" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongtien" ,@disabled = "disabled" } })
+                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @id = "tongtien-pdh", @disabled = "disabled", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.HinhThucThanhToan, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.HinhThucThanhToan, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.HinhThucThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "hinhthucthanhtoan", @disabled = "disabled" } })
+                    @Html.EditorFor(model => model.HinhThucThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "hinhthucthanhtoan-pdh", @disabled = "disabled", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.HinhThucThanhToan, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -83,31 +88,31 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu" } })
+                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control", @id = "ghiChu-pdh" } })
                     @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.NgayGiao, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.NgayGiao, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control", @id = "ngaygiao" } })
+                    @Html.EditorFor(model => model.NgayGiao, new { htmlAttributes = new { @class = "form-control datetimepicker", @id = "ngaygiao-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.NgayGiao, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DaXacNhan, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.DaXacNhan, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.DaXacNhan, new { htmlAttributes = new { @class = "form-control", @id = "daxacnhan" } })
+                    @Html.EditorFor(model => model.DaXacNhan, new { htmlAttributes = new { @class = "form-control", @id = "daxacnhan-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.DaXacNhan, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DaThanhToan, htmlAttributes: new { @class = "control-label custom-label" })
+                @Html.LabelFor(model => model.DaThanhToan, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.DaThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "dathanhtoan" } })
+                    @Html.EditorFor(model => model.DaThanhToan, new { htmlAttributes = new { @class = "form-control", @id = "dathanhtoan-pdh", @required = "required" } })
                     @Html.ValidationMessageFor(model => model.DaThanhToan, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -138,7 +143,7 @@
             <div class="form-group">
                 <label class="control-label custom-label">Hàng Hóa</label>
                 <div class="col-md-10 custom-input">
-                    @Html.DropDownList("MaHangHoa", (SelectList)ViewBag.MaHangHoa, null, new { @class = "form-control minimal" })
+                    @Html.DropDownList("MaHangHoa-pdh", (SelectList)ViewBag.MaHangHoa, null, new { @class = "form-control minimal" })
                 </div>
             </div>
             <hr />
@@ -147,41 +152,48 @@
                     <td style="padding: 0px 10px 10px 12px">Sản Phẩm</td>
                     <td style="padding: 0px 10px 10px 12px">Size</td>
                     <td style="padding: 0px 10px 10px 12px">Số Lượng </td>
-                    <td style="padding: 0px 10px 10px 12px">Giá</td>
+                    <td style="padding: 0px 10px 10px 12px">Giá (Đã áp dụng giảm giá)</td>
+                    <td style="padding: 0px 10px 10px 12px">Giảm Giá</td>
                     <td style="padding: 0px 10px 10px 12px">Thành Tiền</td>
                     <td style="padding: 0px 10px 10px 12px"></td>
                 </tr>
 
                 <tr class="mycontainer" id="mainrow">
                     <td style="padding: 0px 10px" width="25%">
-                        <input id="tenHangHoa" disabled="disabled" type="text" class="form-control rounded" />
+                        <input id="tenHangHoa-pdh" disabled="disabled" type="text" class="form-control rounded" />
                     </td>
                     <td style="padding: 0px 10px" width="10%">
-                        <input type="text" id="size" class="form-control rounded" disabled="disabled" />
+                        <input type="text" id="size-pdh" class="form-control rounded" disabled="disabled" />
+                    </td>
+                    <td style="padding: 0px 10px" width="5%">
+                        <input type="text" id="soLuong-pdh" name="soLuongNhap" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
                     </td>
                     <td style="padding: 0px 10px">
-                        <input type="text" id="soLuongNhap" name="soLuongNhap" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
-                    </td>
-                    <td style="padding: 0px 10px">
-                        <input type="text" id="gia" class="form-control rounded" disabled="disabled" />
+                        <input type="text" id="gia-pdh" class="form-control rounded" disabled="disabled" />
                     </td>
 
                     <td style="padding: 0px 10px">
-                        <input type="text" id="thanhTien" disabled="disabled" class="form-control rounded" />
+                        <input type="text" id="giamgia-pdh" class="form-control rounded" disabled="disabled" />
+                    </td>
+
+                    <td style="padding: 0px 10px">
+                        <input type="text" id="thanhTien-pdh" disabled="disabled" class="form-control rounded" />
 
                     </td>
                     <td style="padding: 0px 10px">
-                        <input type="button" id="add" value="Thêm" style="padding:4px" class="btn btn-lg btn-success btn-xs btn-push" />
+                        <input type="button" id="add-pdh" value="Thêm" style="padding:4px" class="btn btn-lg btn-success btn-xs btn-push" />
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
+
                     <td style="padding: 10px 10px 0px 12px; color: red">
                         <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity messageErrorinputQuantity">Nhập số lượng!</h5>
                         <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity1 messageErrorinputQuantity1">Nhập số lượng!</h5>
+                        <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity_tonkho messageErrorinputQuantity_tonkho">Nhập số lượng!</h5>
                     </td>
+                    <td></td>
                     <td style="padding: 10px 10px 0px 12px; color: red">
                         <h5 style="margin-top:-1%" hidden class="messageError  notifyinputPrice messageErrorinputPrice">Nhập giá!</h5>
                         <h5 style="margin-top:-1%" hidden class="messageError  notifyinputQuantity2 messageErrorinputQuantity2">Giá nhập phải lớn hơn 0</h5>

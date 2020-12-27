@@ -16,6 +16,7 @@
         }
 
         [Key]
+        [Display(Name = "Số Phiếu Bán Hàng")]
         public int SoPhieuBanHang { get; set; }
 
         [Column(TypeName = "date")]
@@ -23,6 +24,7 @@
         [Required(ErrorMessage = "Ngày Bán không được trống")]
         public DateTime NgayBan { get; set; }
 
+        [Display(Name = "Mã Người Dùng")]
         public int? MaNguoiDung { get; set; }
 
         [Display(Name = "Tên Khách Hàng"), Required(ErrorMessage = "Tên Hàng Hóa không được trống")]
@@ -39,8 +41,10 @@
         [RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         public decimal TongTien { get; set; }
 
+        [Display(Name = "Ghi Chú")]
         public string GhiChu { get; set; }
 
+        [Display(Name = "Ngày Chỉnh Sửa")]
         public DateTime? NgayChinhSua { get; set; }
 
         public bool IsDeleted { get; set; }

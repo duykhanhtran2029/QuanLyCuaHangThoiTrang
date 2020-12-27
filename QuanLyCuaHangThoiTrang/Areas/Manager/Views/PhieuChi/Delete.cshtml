@@ -2,79 +2,73 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = null;
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PhieuChi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NguoiDung.TenNguoiDung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhieuNhapKho.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhieuNhapKho.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTienChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTienChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayChinhSua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayChinhSua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="card popupcontent">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Bạn có muốn xóa phiếu chi này?</p>
+            </div>
+            <div class="clearfix"></div>
         </div>
-    }
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="grid-container" style="grid-template-columns: auto">
+        <div class="form-group">
+            <label for="NgayChi" class="control-label custom-label">Ngày chi</label>
+            <div class="col-md-10 custom-input">
+                <input value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayChi" id="Ngaychi" placeholder="" type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Nguoidung" class="control-label custom-label">Tên người lập</label>
+            <div class="col-md-10 custom-input">
+                <input value="@Model.NguoiDung.TenNguoiDung" name="Nguoidung" id="Nguoidung" placeholder="" type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Sophieunhapkho" class="control-label custom-label">Số phiếu chi</label>
+            <div class="col-md-10 custom-input">
+                <input value="@Model.SoPhieuChi" placeholder="" type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Sophieunhapkho" class="control-label custom-label ">Số phiếu nhập kho</label>
+            <div class="col-md-10 custom-input">
+                <input value="@Model.SoPhieuNhapKho" placeholder="" type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Tongtienchi" class="control-label custom-label">Tổng tiền chi</label>
+            <div class="col-md-10 custom-input">
+                <input value="@String.Format("{0:n0}", Model.TongTienChi)" name="Tongtienchi" id="Tongtienchi" placeholder="" type="text" class="form-control" readonly>
+            </div>
+
+        </div>
+        <div class="form-group">
+            
+
+        </div>
+        <div class="form-group">
+            <label for="Ghichu" class="control-label custom-label">Ghi chú</label>
+            <div class="col-md-10 custom-input">
+                <textarea value="@Model.GhiChu" name="Ghichu" id="Ghichu" class="form-control" readonly></textarea>
+            </div>
+
+        </div>
+    </div>
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-default" />
+
+            </div>
+        }
+
+    </div>
 </div>

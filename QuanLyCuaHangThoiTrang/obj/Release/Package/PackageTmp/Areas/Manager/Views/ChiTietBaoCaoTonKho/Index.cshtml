@@ -1,0 +1,69 @@
+﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.ChiTietBaoCaoTonKho>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BaoCaoTonKho.MaBaoCaoTonKho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HangHoa.TenHangHoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongTonDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongNhap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongXuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuongTonCuoi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TinhTrangHangHoa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaoCaoTonKho.MaBaoCaoTonKho)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HangHoa.TenHangHoa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuongTonDau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuongNhap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuongXuat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuongTonCuoi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TinhTrangHangHoa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

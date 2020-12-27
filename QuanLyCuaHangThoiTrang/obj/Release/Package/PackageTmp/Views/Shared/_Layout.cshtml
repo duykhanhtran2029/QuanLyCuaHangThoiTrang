@@ -1,0 +1,849 @@
+﻿@using QuanLyCuaHangThoiTrang.Model;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cửa hàng thời trang Elite</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--//tags -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!--<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" media="all"/>-->
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/Content/Cart.css">
+    <!-- //for bootstrap working -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <!-- header -->
+    <div class="header" id="home">
+        <div class="container">
+            <ul>
+                @if (Session["Account"] == null || Session["Account"].ToString().Length == 0)
+                {
+                    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Đăng Nhập </a></li>
+                    <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng Kí </a></li>
+                }
+                else
+                {
+                    var name = (NguoiDung)Session["Account"];
+                    if (name.MaChucVu == 6)
+                    {
+                        <li> <a href="~/Home/UserProfile/" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+                    }
+                    else
+                    {
+                        <li> <a href="@Url.Action("Index", "Manager/Home")" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Chào mừng @name.TenNguoiDung</a></li>
+
+
+                    }
+                    <li><i class="fa fa-sign-out" aria-hidden="true"></i><a href="@Url.Action("DangXuat", "Home")">Đăng xuất</a></li>
+                }
+
+                <li><i class="fa fa-phone" aria-hidden="true"></i> Gọi : 01234567898</li>
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+
+            </ul>
+        </div>
+    </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div style="text-align : center" id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    <!-- //header -->
+    <!-- header-bot -->
+    <div class="header-bot">
+        <div class="header-bot_inner_wthreeinfo_header_mid">
+            <div class="col-md-4 header-middle">
+                <form action="#" method="post">
+                    <input type="search" name="search" placeholder="Tìm kiếm..." required="">
+                    <input type="submit" value=" ">
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <!-- header-bot -->
+            <div class="col-md-4 logo_agile">
+                <h1><a href="../Home/Index"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
+            </div>
+            <!-- header-bot -->
+            <div class="col-md-4 agileits-social top_content">
+                <ul class="social-nav model-3d-0 footer-social w3_agile_social">
+                    <li class="share">Kết nối với chúng tôi : </li>
+                    <li>
+                        <a href="#" class="facebook">
+                            <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter">
+                            <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="instagram">
+                            <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="pinterest">
+                            <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- //header-bot -->
+    <!-- Modal1 -->
+    @if (Session["Account"] == null || Session["Account"].ToString().Length == 0)
+    {
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body modal-body-sub_agile">
+                        <div class="col-md-8 modal_body_left modal_body_left1">
+                            <h3 class="agileinfo_sign">Đăng Nhập <span>Ngay</span></h3>
+                            @using (Html.BeginForm("DangNhap", "Home", FormMethod.Post))
+                            {
+                                <div class="styled-input agile-styled-input-top">
+                                    <input type="text" name="username" required="">
+                                    <label>Username</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    <input type="password" name="password" required="">
+                                    <label>Password</label>
+                                    <span></span>
+                                </div>
+                                <input type="submit" value="Đăng Nhập">
+                            }
+                            <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+                                <li>
+                                    <a href="#" class="facebook">
+                                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter">
+                                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram">
+                                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pinterest">
+                                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal2"> Chưa có tài khoản ?</a></p>
+
+                        </div>
+                        <div class="col-md-4 modal_body_right modal_body_right1">
+                            <img src="~/images/log_pic.jpg" alt="" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- //Modal content-->
+            </div>
+        </div>
+        <!-- Modal2 -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body modal-body-sub_agile">
+                        <div class="col-md-8 modal_body_left modal_body_left1">
+                            <h3 class="agileinfo_sign">Đăng Kí <span>Ngay</span></h3>
+                            @using (Html.BeginForm("DangKy", "Home", FormMethod.Post))
+                            {
+                                <div class="styled-input agile-styled-input-top">
+                                    <input type="text" name="username" required>
+                                    <label>Username</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input agile-styled-input-top">
+                                    <input type="text" name="name" required>
+                                    <label>Họ và tên</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    <input type="text" name="phone" required>
+                                    <label>Số điện thoại</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    <input id="password" type="password" name="password" required>
+                                    <label>Password</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    <input id="confirm_password" type="password" name="confirm_password" onchange="validatePassword()" required>
+                                    <label>Confirm Password</label>
+                                    <span></span>
+                                </div>
+                                <input type="submit" value="Đăng Kí">
+                            }
+                            @*<form action="#" method="post">
+                                    <div class="styled-input agile-styled-input-top">
+                                        <input type="text" name="Name" required="">
+                                        <label>Name</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="email" name="Email" required="">
+                                        <label>Email</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="password" required="">
+                                        <label>Password</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="Confirm Password" required="">
+                                        <label>Confirm Password</label>
+                                        <span></span>
+                                    </div>
+                                    <input type="submit" value="Sign Up">
+                                </form>*@
+                            <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
+                                <li>
+                                    <a href="#" class="facebook">
+                                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="twitter">
+                                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="instagram">
+                                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="pinterest">
+                                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                            <p><a href="#">Tôi chấp nhận tất cả điều khoản khi nhấn đăng kí</a></p>
+
+                        </div>
+                        <div class="col-md-4 modal_body_right modal_body_right1">
+                            <img src="~/images/log_pic.jpg" alt=" " />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- //Modal content-->
+            </div>
+        </div>
+        <!-- //Modal2 -->
+    }
+    <!-- //Modal1 -->
+    <!-- //Shopping cart -->
+    <div class="shopping-cart" id="shopping-cart-div" style="display:none">
+        <div class="cart_title">
+            <span>GIỎ HÀNG</span>
+            <div id="cart_close" style="color:black !important" class="cart_close-btn pull-right" onclick="ShowCart()">
+                <i class="fas fa-close"></i>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="cart-content">
+            <div id="item-container">
+                <!-- Product-->
+            </div>
+            <div class="order-price">
+                <b>Tổng tiền: </b>
+                <span class="order-value"> 0 </span>
+                <span>&nbsp; VNĐ</span>
+            </div>
+        </div>
+        <input type="submit" name="cart_submit" value="Đặt Hàng" class="cart_submit">
+    </div>
+    <!-- //Shopping cart -->
+    <!-- //Popup Submit Order -->
+    <div id="order-submit-popup" class="order-submit-popup" style="display:none">
+        <div style="align-items: center; justify-content: center;">
+            <h2 class="pull-left">THÔNG TIN ĐẶT HÀNG</h2>
+            <span id="order_close" style="margin-right: 10px" class="pull-right">
+                <i class="fas fa-close"></i>
+            </span>
+            <span class="clearfix">
+
+            </span>
+        </div>
+        <hr />
+        <div>
+            <form id="order">
+                <div style="padding: 0px 20px 0px 50px">
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Họ Tên</label>
+                        <input name="order-ten" required type="text" class="col-md-9 custom-input" placeholder=" Họ Tên" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Số Điện Thoại</label>
+                        <input name="order-sdt" required type="text" class="col-md-9 custom-input" placeholder="Số Điện Thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label required">Địa Chỉ</label>
+                        <input name="order-diachi" required type="text" class="col-md-9 custom-input" placeholder="Địa Chỉ" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label">Email</label>
+                        <input name="order-email" type="text" class="col-md-9 custom-input" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label style="height: 40px; padding: 5px" class="control-label">Ghi Chú</label>
+                        <input type="text" class="col-md-9 custom-input" placeholder="Ghi Chú" />
+                    </div>
+                </div>
+                <hr />
+                <div class="order-input" style="margin-left: 55px; display: block">
+                    <b>Tổng Tiền:</b>
+                    <span style="margin-left: 15px" id="order-total">100</span>
+                    <span>&nbsp; VNĐ</span>
+                </div>
+                <input  class="order_submit" type="submit" value="Đặt Hàng" />
+            </form>
+        </div>
+            
+
+    </div>
+    <!-- //Popup Submit Order-->
+    @RenderBody()
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_agile_inner_info_w3l">
+            <div class="col-md-3 footer-left">
+                <h2><a href="index.html"><span>E</span>lite Shoppy </a></h2>
+                <p>
+                    Chúng tôi cam kết cung cấp dịch vụ và sản phẩm tốt nhất thị trường, làm hài lòng khách hàng là sứ mệnh của chúng tôi.
+                </p>
+                <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
+                    <li>
+                        <a href="#" class="facebook">
+                            <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="twitter">
+                            <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="instagram">
+                            <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="pinterest">
+                            <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 footer-right">
+                <div class="sign-grds">
+                    <div class="col-md-4 sign-gd">
+                        <h4>Our <span>Information</span> </h4>
+                        <ul>
+                            <li><a href="index.html">Trang Chủ</a></li>
+                            <li><a href="mens.html">Đồ Nam</a></li>
+                            <li><a href="womens.html">Đồ Nữ</a></li>
+                            <li><a href="about.html">Thông Tin</a></li>
+                            <li><a href="typography.html">Khác</a></li>
+                            <li><a href="contact.html">Liên Hệ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-5 sign-gd-two">
+                        <h4>Store <span>Information</span></h4>
+                        <div class="w3-address">
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Số Hotline</h6>
+                                    <p>+1 234 567 8901</p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Email Liên Hệ</h6>
+                                    <p>Email :<a href="mailto:example@email.com"> mail@example.com</a></p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="w3-address-grid">
+                                <div class="w3-address-left">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </div>
+                                <div class="w3-address-right">
+                                    <h6>Địa Chỉ</h6>
+                                    <p>
+                                        University of Information Technology
+
+                                    </p>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 sign-gd flickr-post">
+                        <h4>Flickr <span>Posts</span></h4>
+                        <ul>
+                            <li><a href="single.html"><img src="~/images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t1.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t3.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t2.jpg" alt=" " class="img-responsive" /></a></li>
+                            <li><a href="single.html"><img src="~/images/t4.jpg" alt=" " class="img-responsive" /></a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            
+            <p class="copy-right">&copy Elite shoppy. All rights reserved | Design by OOAD <a href=""></a></p>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- login -->
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-info">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body modal-spa">
+                    <div class="login-grids">
+                        <div class="login">
+                            <div class="login-bottom">
+                                <h3>Sign up for free</h3>
+                                <form>
+                                    <div class="sign-up">
+                                        <h4>Username :</h4>
+                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                    </div>
+                                    @*<div class="sign-up">
+                                            <h4>Họ và tên: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Địa chỉ: </h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Số điện thoại :</h4>
+                                            <input type="number" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>Email :</h4>
+                                            <input type="email" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>
+                                        <div class="sign-up">
+                                            <h4>CMND :</h4>
+                                            <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                        </div>*@
+                                    <div class="sign-up">
+                                        <h4>Password :</h4>
+                                        <input id="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+                                    </div>
+                                    <div class="sign-up">
+                                        <h4>Re-type Password :</h4>
+                                        <input data-rule-equalTo="#password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+
+                                    </div>
+                                    <div class="sign-up">
+                                        <input type="submit" value="REGISTER NOW">
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="login-right">
+                                <h3>Sign in with your account</h3>
+                                <form>
+                                    <div class="sign-in">
+                                        <h4>Email :</h4>
+                                        <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                    </div>
+                                    <div class="sign-in">
+                                        <h4>Password :</h4>
+                                        <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+                                        <a href="#">Forgot password?</a>
+                                    </div>
+                                    <div class="single-bottom">
+                                        <input type="checkbox" id="brand" value="">
+                                        <label for="brand"><span></span>Remember Me.</label>
+                                    </div>
+                                    <div class="sign-in">
+                                        <input type="submit" value="SIGNIN">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //login -->
+    <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+    <!-- js -->
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <!-- //js -->
+    <script src="~/Scripts/modernizr.custom.js"></script>
+    <!-- Custom-JavaScript-File-Links -->
+    <!-- script for responsive tabs -->
+    <script src="~/Scripts/easy-responsive-tabs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#horizontalTab-sale').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!-- //script for responsive tabs -->
+    <!-- stats -->
+    <script src="~/Scripts/jquery.waypoints.min.js"></script>
+    <script src="~/Scripts/jquery.countup.js"></script>
+    <script>
+        $('.counter').countUp();
+    </script>
+    <!-- //stats -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Scripts/move-top.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.easing.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- Script for validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type="text/javascript"></script>
+    <!-- //Script from Nam BEGIN -->
+    <script type="text/javascript">
+        function ShowCart() {
+    var x = document.getElementById("shopping-cart-div");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function ShowAddToCart() {
+    var x = document.getElementById("shopping-cart-div");
+    x.style.display = "block";
+}
+
+function SetOrderPrice() { // cập nhật tiền tổng của hóa đơn
+    var orderprice = 0;
+    var prices = document.getElementsByName("tongtien-sanpham-submit");
+    for (i = 0; i < prices.length; i++) {
+        var p = parseFloat(prices.item(i).value);
+        orderprice = parseFloat(orderprice) + p;
+    }
+    $('.order-price span.order-value').text(orderprice.toLocaleString());
+}
+
+//======================================= CART BUTTON ====================================================================================//
+$("form.item").on("submit", function (event) { //first click add item to cart,every other clicks will + 1 to the cart
+    event.preventDefault();
+    var mahanghoa = $(this).find('input[name ="MaHangHoa"]').val();
+    var mota = $(this).find('input[name ="MoTa"]').val();
+    var gia = $(this).find('input[name ="Gia"]').val();
+    var tenhanghoa = $(this).find('input[name ="TenHangHoa"]').val();
+    var hinhanh = $(this).find('input[name ="HinhAnh"]').val().toString();
+    var giamgia = $(this).find('input[name ="GiamGia"]').val();
+    var size = $(this).find('input[name ="Size"]').val();
+    var tonkho = $(this).find('input[name ="TonKho"]').val();
+    var oldvalue = $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val();
+
+    if (oldvalue != null) { //if already have item then + 1
+        if (parseFloat(oldvalue) + 1 <= tonkho) {
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "cart_input"]').val(parseInt(parseInt(oldvalue) + 1));
+            //update Gia
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').parent().siblings('div.cart_total-price').text((parseFloat(parseFloat(oldvalue) + 1) * parseFloat(gia * (1 - giamgia))).toLocaleString() + ' VNĐ');
+            $('input[name=id-sanpham-submit][value=' + mahanghoa + ']').siblings('input[name = "tongtien-sanpham-submit"]').val(parseFloat(parseFloat(oldvalue) + 1) * parseInt(gia) * parseFloat(1 - giamgia)); //update biến tổng tiền
+            SetOrderPrice(); //hiện tổng tiền
+            updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+            ShowAddToCart();
+            //gọi controller thêm vào cart:
+            $.ajax({
+                type: "POST",
+                url: "Home/AddToCart",
+                data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+            });
+        }
+        else
+            alert("Sản phẩm trong kho đã hết");
+    }
+    else //them vao cart
+    {
+        $("#item-container").append('<div class="cart_item"><div class="cart_buttons"><button id="cart_delete_btn" class="cart_delete-btn1"><i class="fas fa-close"></i></button></div><div class="cart_image"><img src="/images/' + hinhanh + '" alt="item" /></div><div class="cart_description"><span>' + tenhanghoa + '</span > <span>Mô tả: ' + mota + '</span > <span>Size: ' + size + '</span></div > <div class="cart_quantity"><button class="cart_plus-btn" type="button" name="plus_button" id="cart_plus_btn"><i class="fas fa-plus"></i></button><input type="hidden" name="id-sanpham-submit" value="' + mahanghoa + '"><input type="hidden" name="gia-sanpham-submit" value="' + gia + '"><input type="hidden" name="tonkho-sanpham-submit" value="' + tonkho + '"><input type="hidden" name="giamgia-sanpham-submit" value="' + giamgia + '"><input type="hidden" name="tongtien-sanpham-submit" value="' + gia * (1 - giamgia) + '"></input><input type="text" name="cart_input" value="1" id="cart_input" readonly><button class="cart_minus-btn" type="button" name="minus_button" id="cart_minus_btn"><i class="fas fa-minus"></i></button></div><div class="cart_total-price">' + parseFloat(gia * (1 - giamgia)).toLocaleString() + ' VNĐ </div ></div > ');
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        ShowAddToCart();
+        //gọi controller thêm vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/AddToCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+});
+
+//+ button on cart (fix bug on dynamically added-append elements)
+$(document).on("click", "button.cart_plus-btn", function () {
+    var tonkho = $(this).siblings('input[name =tonkho-sanpham-submit]').val();
+    var soluong = parseInt($(this).siblings('input[name =cart_input]').val()); //so luong hien tai trong gio
+    soluong += 1;
+    if (soluong <= tonkho) {
+        $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+        //update gia:
+        var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+        var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+        var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
+        $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); // hiện giá tiền
+        $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        //gọi controller thêm vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/AddToCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+    else
+        alert("Sản phẩm trong kho đã hết");
+
+});
+
+//- button on cart
+$(document).on("click", "button.cart_minus-btn", function () {
+    var soluong = parseInt($(this).siblings('input[name =cart_input]').val());
+    if (soluong > 1) {
+        soluong -= 1;
+        $(this).siblings('input[name =cart_input]').val(parseInt(soluong));
+        //update gia
+        var gia = $(this).siblings('input[name =gia-sanpham-submit]').val();
+        var giamgia = $(this).siblings('input[name =giamgia-sanpham-submit]').val();
+        var mahanghoa = $(this).siblings('input[name =id-sanpham-submit]').val();
+        $(this).parent().siblings('div.cart_total-price').text(((gia * soluong) * (1 - giamgia)).toLocaleString() + ' VNĐ'); //hiện giá tiền
+        $(this).siblings('input[name =tongtien-sanpham-submit]').val((soluong * gia) * (1 - giamgia)); //update biến tổng tiền
+        SetOrderPrice(); //hiện tổng tiền
+        updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+        //gọi controller -1 số lượng vào cart:
+        $.ajax({
+            type: "POST",
+            url: "Home/MinusCart",
+            data: { MAHANGHOA: mahanghoa, GIA: gia, GIAMGIA: giamgia }
+        });
+    }
+});
+
+// delete button on cart cart_delete-btn1
+$(document).on("click", "button.cart_delete-btn1", function () {
+    $(this).parent().parent("div").remove(".cart_item");
+    SetOrderPrice();//hiện tổng tiền
+    updateFinalOrderTotal();//update tổng tiền cho đơn đặt(chỗ nhập thông tin)
+    //gọi controller xóa sản phẩm khỏi cart:
+    var mahanghoa = $(this).parent().siblings().find('input[name =id-sanpham-submit]').val();
+    $.ajax({
+        type: "POST",
+        url: "Home/DeleteFromCart",
+        data: { MAHANGHOA: mahanghoa }
+    });
+});
+//==================== pop-up ===============================
+$(document).on("click", "input.cart_submit", function () {
+    if (parseFloat($('span.order-value').text()) <= 0)
+        alert("Xin hãy chọn hàng trước khi thanh toán");
+    else {
+        $('.order-submit-popup').fadeIn();
+        $("body > *").not("body > #order-submit-popup").css('opacity', '-2');
+        //set tong tien
+        updateFinalOrderTotal();
+        //hiện thông tin nếu như đã đăng nhập
+        @{
+            string tennguoidung = "";
+            string sdt = "";
+            string diachi = "";
+            string email = "";
+        }
+        @if (Session["Account"] != null) {
+            NguoiDung account = (NguoiDung)Session["Account"];
+            tennguoidung = account.TenNguoiDung;
+            sdt = account.SoDienThoai;
+            diachi = account.DiaChi;
+            email = account.Email;
+        }
+        $('input[name=order-ten]').val("@tennguoidung");
+        $('input[name=order-sdt]').val("@sdt");
+        $('input[name=order-diachi]').val("@diachi");
+        $('input[name=order-email]').val("@email");
+    }
+});
+
+$('#order_close').click(function () {
+    $("#order-submit-popup").fadeOut();
+    $("body > *").not("body > #order-submit-popup").css('opacity', '1');
+});
+
+$('#order').on("submit", function (event) {
+    event.preventDefault();
+    var tenkhachhang = $('input[name=order-ten]').val();
+    var sdt = $('input[name=order-sdt]').val();
+    var diachi = $('input[name=order-diachi]').val();
+    var email = $('input[name=order-email]').val();
+    var tongtien = parseFloat($('#order-total').text());
+    $.ajax({
+        type: "POST",
+        url: "Home/Order",
+        data: {
+            TENKHACHHANG: tenkhachhang,
+            SDT: sdt,
+            DIACHI: diachi,
+            EMAIL: email,
+            TONGTIEN: tongtien
+        }
+    });
+    location.reload();//reload page
+});
+
+function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
+    var tien = $('span.order-value').text();
+    $('#order-total').text(tien);
+}
+    </script>
+    <!-- Script from Nam END -->
+    <!-- //here ends scrolling icon -->
+    <!-- for bootstrap working -->
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script>
+        var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Mật khẩu không khớp!");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(4000).slideUp(1000);
+        });
+    </script>
+
+</body>
+</html>

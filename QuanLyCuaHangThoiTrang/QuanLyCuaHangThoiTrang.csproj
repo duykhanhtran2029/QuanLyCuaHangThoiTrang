@@ -188,6 +188,7 @@
     <Content Include="Areas\Manager\Content\sidebar.css" />
     <Content Include="Areas\Manager\Scripts\header.js" />
     <Content Include="Areas\Manager\Scripts\main.js" />
+    <Content Include="Areas\Manager\Scripts\PhieuDatHang\PhieuBanHang.js" />
     <Content Include="Areas\Manager\Scripts\PhieuDatHang\PhieuDatHang.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\BaoCaoTonKho.js" />
     <Content Include="Areas\Manager\Scripts\QuanLyKho\PhieuKiemKho.js" />
@@ -351,6 +352,9 @@
     <Content Include="Areas\Manager\Views\BaoCaoTonKho\DanhSachBaoCaoTonKho.cshtml" />
     <Content Include="Areas\Manager\Views\HangHoa\DanhSachHangHoa.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuDatHang\DanhSachPhieuDatHang.cshtml" />
+    <Content Include="Areas\Manager\Views\NguoiDung\DanhSachNguoiDung.cshtml" />
+    <Content Include="Areas\Manager\Views\BaoCaoBanHang\DanhSachBaoCaoBanHang.cshtml" />
+    <Content Include="Areas\Manager\Views\PhieuBanHang\DanhSachPhieuBanHang.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />
@@ -500,7 +504,8 @@
     <Content Include="Areas\Manager\Views\ThamSo\Index.cshtml" />
     <Content Include="Views\Shared\NavTopBar.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
-    <Content Include="Views\Shared\MainItemList.cshtml" />
+    <Content Include="Views\Shared\MainIndex.cshtml" />
+    <Content Include="Views\Shared\Categories.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

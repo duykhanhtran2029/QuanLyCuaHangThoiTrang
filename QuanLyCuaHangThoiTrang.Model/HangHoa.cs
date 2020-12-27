@@ -31,12 +31,12 @@
         public double GiamGia { get; set; }
 
         [Display(Name = "Giá Bán"), Required(ErrorMessage = "Giá Bán không được trống")]
-        [RegularExpression(@"^[0-9]*", ErrorMessage = "Giá Bán không hợp lệ")]
+        //[RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         [Column(TypeName = "money")]
         public decimal? GiaBan { get; set; }
 
         [Display(Name = "Số Lượng"), Required(ErrorMessage = "Số Lượng không được trống")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Số Lượng không hợp lệ")]
+        //[RegularExpression(@"^[0-9]*$", ErrorMessage = "Số Lượng không hợp lệ")] 
         public int SoLuong { get; set; }
 
         [Required(ErrorMessage = "Size không được trống")]

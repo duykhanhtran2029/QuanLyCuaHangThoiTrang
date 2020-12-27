@@ -1,0 +1,102 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.PhieuDatHang>
+@{ Layout = null; }
+<div class="table-responsive">
+    <table class="table table-bordered table-middle table-lilac" id="datatable">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 5%;">Số Phiếu</th>
+                <th class="text-center" style="width: 5%;">Ngày Đặt</th>
+                <th class="text-center" style="width: 10%;">Người Dùng</th>
+                <th class="text-center" style="width: 10%;">Tên Khách hàng</th>
+                <th class="text-center" style="width: 10%;">Số Điện Thoại</th>
+                <th class="text-center" style="width: 10%;">Địa Chỉ</th>
+                <th class="text-center" style="width: 10%;">Email</th>
+                <th class="text-center" style="width: 10%;">Tổng Tiền</th>
+                <th class="text-center" style="width: 10%;">Hình Thức Thanh Toán</th>
+                <th class="text-center" style="width: 10%;">Ghi Chú</th>
+                <th class="text-center" style="width: 5%;">Ngày Giao</th>
+                <th class="text-center" style="width: 10%;">Đã Xác Nhận</th>
+                <th class="text-center" style="width: 10%;">Đã Thanh Toán</th>
+                <th class="text-center" style="width: 10%;">Ngày Chỉnh Sửa</th>
+                <th class="text-center" style="width: 10%;">Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (!item.IsDeleted)
+                {
+            <tr class="border-warning" style="text-align:center">
+                <td>
+                    @item.SoPhieuDatHang
+                </td>
+                <td>
+                    @item.NgayDat.ToString("MM/dd/yyyy")
+                </td>
+                @if (item.NguoiDung != null)
+                {
+                    <td>
+                        @item.NguoiDung.TenNguoiDung
+                    </td>
+                }
+                else
+                {
+                    <td>
+                       
+                    </td>
+                }
+
+                <td>
+                    @item.TenKhachHang
+                </td>
+                <td>
+                    @item.SoDienThoai
+                </td>
+                <td>
+                    @item.Diachi
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.TongTien
+                </td>
+                <td>
+                    @item.HinhThucThanhToan
+                </td>
+                <td>
+                    @item.GhiChu
+                </td>
+                <td>
+                    @item.NgayGiao
+                </td>
+                <td>
+                    @item.DaXacNhan
+                </td>
+                <td>
+                    @item.DaThanhToan
+                </td>
+                <td>
+                    @item.NgayChinhSua
+                </td>
+
+                @{
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", new { id = item.SoPhieuDatHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", new { id = item.SoPhieuDatHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-trash-alt"></i></a>
+                        <a href="@Url.Action("Details", new { id = item.SoPhieuDatHang })" class="btn btn-sm btn-success btn-xs btn-push"><i class="fas fa-info-circle"></i></a>
+                    </td>
+                }
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="pull-left" style="padding-top:20px">
+        <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
+    </div>
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

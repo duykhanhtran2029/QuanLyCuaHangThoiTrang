@@ -1,0 +1,58 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.NhaCungCap
+
+@{
+    Layout = null;
+}
+
+
+<div class="card popupcontent">
+    <div class="form-horizontal">
+        <div style="text-align:center">
+            <p class="card-title-heading" style="color:darkred" id="pageTitle">Xóa Nhà Cung Cấp</p>
+        </div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenNhaCungCap) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenNhaCungCap)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SoDienThoai) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email) :
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+        <hr/>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="text-align:center">
+                <input type="submit" value="Xóa Nhà Cung Cấp" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+</div>

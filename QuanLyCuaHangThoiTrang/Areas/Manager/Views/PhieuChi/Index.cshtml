@@ -1,45 +1,50 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.PhieuChi>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ PHIẾU CHI";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code>Chi tiết</code> <code> Xóa</code> Phiếu Chi.";
 }
 
 
 <title id="pageTitle">
     Quản Lý Phiếu Chi
 </title>
+
+<div id="Modal" class="modal fade" role="dialog">
+</div>
 <div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Phiếu Chi</p>
+        </div>
+        <div class="pull-right">
+            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm Phiếu Chi</span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
     @if (TempData["AlertMessage"] != null)
     {
         <div id="AlertBox" class="alert @TempData["AlertType"] hide">
             @TempData["AlertMessage"]
         </div>
     }
+    <hr />
     <div>
-        <div class="pull-left">
-            <p class="card-title-heading">Danh sách phiếu chi</p>
-
-        </div>
-        <div class="pull-right">
-            <button class="btn btn-sm btn-success btn-xs btn-push" id="large-button" onclick="Open('PhieuChi/Create', false)">
-                <i class="fas fa-plus"></i>
-                <span style="margin: 15px 0 !important;">Thêm phiếu chi</span>
-
-            </button>
-
-        </div>
-        <div class="clearfix"></div>
-
-    </div>
-    <div>
-        @using (Ajax.BeginForm("DanhSachPhieuChi", "PhieuChi", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get" }))
+        @using (Ajax.BeginForm("DanhSachPhieuChi", "PhieuChi", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
         {
-            <div class="form-group">
-                <div class="input-group">
-                    @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Tìm kiểm theo ..." })
-                    <span class="input-group-btn">
+            <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
+                <div class="grid-container" style="grid-template-columns: auto auto">
+                </div>
+                <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
+                    <div style="padding: 0px 30px">
+                        @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên người lập, số phiếu nhập kho, số phiếu chi" })
+                    </div>
+                    <div>
                         <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </span>
+                    </div>
                 </div>
             </div>
         }
@@ -48,10 +53,9 @@
         </div>
     </div>
 </div>
-
 <script>
-    $(document).ready(function () {
-        $('#AlertBox').removeClass('hide');
-        $('#AlertBox').delay(4000).slideUp(1000);
-    });
+        $(document).ready(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(4000).slideUp(1000);
+        });
 </script>

@@ -27,19 +27,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         public ActionResult Index()
         {
             Session["Cart"] = new List<ChiTietPhieuDatHang>();
-            //
-            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.SoLuong >= 1).ToList();
-            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.SoLuong >= 1).ToList();
-            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.SoLuong >= 1).ToList();
-            ViewBag.FootWears = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.SoLuong >= 1) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.SoLuong >= 1)
-            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.SoLuong >= 1)).ToList();
-            //Load hang hoa
-            ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi xách" && hh.GiamGia > 0 && hh.SoLuong >= 1).ToList();
-            ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0 && hh.SoLuong >= 1) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0 && hh.SoLuong >= 1)
-            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0 && hh.SoLuong >= 1)).ToList();
-            //load hang hoa sale
+            
             return View();
         }
 
@@ -66,9 +54,9 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             }
             else
             {
-
-                TempData["avatar"] = "/images/avatar/18.jpg";
-                ViewBag.UserProfile = (NguoiDung)Session["Account"];
+                var user = (NguoiDung)Session["Account"];
+                TempData["avatar"] = user.Avatar;
+                ViewBag.UserProfile = user;
             }
             return View();
         }
@@ -79,6 +67,31 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             ViewBag.WomenWears = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh == "Nữ").ToList();
             ViewBag.Other = db.LoaiHangHoas.Where(lhh => lhh.GioiTinh != "Nữ" && lhh.GioiTinh != "Nam").ToList();
             return PartialView();
+        }
+
+        public ActionResult MainIndex()
+        {
+            ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.FootWears = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted)
+            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
+            //Load hang hoa
+            ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)
+            || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
+            //load hang hoa sale
+            return PartialView();
+        }
+
+
+        public ActionResult Categories(string tenloaihanghoa)
+        {
+            List<HangHoa> list = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == tenloaihanghoa && hh.SoLuong>0 && !hh.IsDeleted).ToList();
+            ViewBag.TenLoaiHangHoa = tenloaihanghoa;
+            return PartialView(list);
         }
 
         [HttpPost]
@@ -230,7 +243,8 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             Response.Cookies.Add(cookies);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public ActionResult DangXuat()
         {
             Session["Account"] = null;
@@ -245,28 +259,46 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             string password = MD5Encode.CreateMD5(form["password"].ToString());
             string phone = form["phone"].ToString();
             string name = form["name"].ToString();
-            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username);
+            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username || n.SoDienThoai == phone);
             if (nguoiDung == null)
             {
-                db.NguoiDungs.Add(new NguoiDung
+                try
                 {
-                    TenNguoiDung = name,
-                    DiaChi = "",
-                    SoDienThoai = phone,
-                    Email = "",
-                    CMND = "",
-                    UserName = username,
-                    PassWord = password,
-                    IsDeleted = false,
-                    MaChucVu = 2, // Customer
-                    Avatar = ""
-                }) ;
-                db.SaveChanges();
-                SetAlert("Tạo tài khoản thành công!", "success");
+                    db.NguoiDungs.Add(new NguoiDung
+                    {
+                        TenNguoiDung = name,
+                        DiaChi = "",
+                        SoDienThoai = phone,
+                        Email = "",
+                        CMND = "",
+                        UserName = username,
+                        PassWord = password,
+                        IsDeleted = false,
+                        MaChucVu = 6, // Customer
+                        Avatar = ""
+                    });
+                    db.SaveChanges();
+                    SetAlert("Tạo tài khoản thành công!", "success");
+                }
+                catch(Exception ex)
+                {
+                    SetAlert(ex.ToString(), "error");
+                    RedirectToAction("Index");
+                }
             }
             else
             {
-                SetAlert("Tài khoản này đã có người sử dụng!", "error");
+                if(username == nguoiDung.UserName)
+                {
+                    SetAlert("Tài khoản này đã có người sử dụng!", "error");
+                    return RedirectToAction("Index");
+                }               
+                if (phone == nguoiDung.SoDienThoai)
+                {
+                    SetAlert("Số điện thoại này đã có người sử dụng!", "error");
+                    return RedirectToAction("Index");
+                }
+                SetAlert("Tạo tài khoản không thành công!", "error");
             }
             return RedirectToAction("Index");
         }

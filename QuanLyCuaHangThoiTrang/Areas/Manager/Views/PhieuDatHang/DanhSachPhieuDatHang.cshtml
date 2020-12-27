@@ -7,17 +7,17 @@
             <tr>
                 <th class="text-center" style="width: 5%;">Số Phiếu</th>
                 <th class="text-center" style="width: 5%;">Ngày Đặt</th>
-                <th class="text-center" style="width: 10%;">Người Dùng</th>
-                <th class="text-center" style="width: 10%;">Tên Khách hàng</th>
-                <th class="text-center" style="width: 10%;">Số Điện Thoại</th>
-                <th class="text-center" style="width: 10%;">Địa Chỉ</th>
-                <th class="text-center" style="width: 10%;">Email</th>
+                <th class="text-center" style="width: 8%;">Người Dùng</th>
+                <th class="text-center" style="width: 8%;">Tên Khách hàng</th>
+                <th class="text-center" style="width: 8%;">Số Điện Thoại</th>
+                <th class="text-center" style="width: 5%;">Địa Chỉ</th>
+                <th class="text-center" style="width: 5%;">Email</th>
                 <th class="text-center" style="width: 10%;">Tổng Tiền</th>
                 <th class="text-center" style="width: 10%;">Hình Thức Thanh Toán</th>
                 <th class="text-center" style="width: 10%;">Ghi Chú</th>
                 <th class="text-center" style="width: 5%;">Ngày Giao</th>
-                <th class="text-center" style="width: 10%;">Đã Xác Nhận</th>
-                <th class="text-center" style="width: 10%;">Đã Thanh Toán</th>
+                <th class="text-center" style="width: 5%;">Trạng Thái Xác Nhận</th>
+                <th class="text-center" style="width: 5%;">Trạng Thái Thanh Toán</th>
                 <th class="text-center" style="width: 10%;">Ngày Chỉnh Sửa</th>
                 <th class="text-center" style="width: 10%;">Hành Động</th>
             </tr>
@@ -43,7 +43,6 @@
                 else
                 {
                     <td>
-                       
                     </td>
                 }
 
@@ -71,12 +70,32 @@
                 <td>
                     @item.NgayGiao
                 </td>
-                <td>
-                    @item.DaXacNhan
-                </td>
-                <td>
-                    @item.DaThanhToan
-                </td>
+                @if (item.DaXacNhan)
+                {
+                    <td>
+                        Đã xác nhận
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        Chưa xác nhận
+                    </td>
+                }
+                @if (item.DaThanhToan)
+                {
+                    <td>
+                        Đã Thanh Toán
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        Chưa Thanh Toán
+                    </td>
+                }
                 <td>
                     @item.NgayChinhSua
                 </td>

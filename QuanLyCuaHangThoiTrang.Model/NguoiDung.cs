@@ -25,12 +25,13 @@
         [Key]
         public int MaNguoiDung { get; set; }
 
-       
+
         [StringLength(50)]
         [Display(Name = "Tên người dùng"), Required(ErrorMessage = "Tên người dùng không được trống!")]
         public string TenNguoiDung { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Địa chỉ")]
         public string DiaChi { get; set; }
 
         [Display(Name = "Số Điện Thoại"), Required(ErrorMessage = "Số Điện Thoại không được trống")]
@@ -40,9 +41,11 @@
 
         [StringLength(30)]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "CMND")]
         public string CMND { get; set; }
 
         [Required(ErrorMessage = "Tên người dùng không được trống")]

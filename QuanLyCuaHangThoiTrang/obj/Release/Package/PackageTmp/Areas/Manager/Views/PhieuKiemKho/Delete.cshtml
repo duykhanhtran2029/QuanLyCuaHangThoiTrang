@@ -1,0 +1,72 @@
+﻿@model QuanLyCuaHangThoiTrang.Model.PhieuKiemKho
+
+@{
+    ViewBag.Title = "XÓA PHIẾU KIỂM KHO";
+}
+
+<div class="card" style="width: 25%; float: left !important">
+    <div class="form-horizontal">
+        <div>
+            <div class="pull-left">
+                <p class="card-title-heading" id="pageTitle">Phiếu Kiểm Kho</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <hr />
+        <div>
+            @Html.AntiForgeryToken()
+            <div hidden>
+                @Html.DisplayFor(model => model.SoPhieuKiemKho, new { htmlAttributes = new { @class = "form-control", @id = "soPhieuKiemKho" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayKiemKho, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NgayKiemKho, new { htmlAttributes = new { @class = "form-control datetimepicker disabled", @id = "ngayKiemKho" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaNguoiDung, "Người Lập", htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.NguoiDung.TenNguoiDung, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label custom-label" })
+                <div class="col-md-10 custom-input">
+                    @Html.DisplayFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control disabled", @id = "ghiChu" } })
+                </div>
+            </div>
+        </div>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="text-align:center">
+                <input type="submit" value="Xóa Phiếu Nhập Kho" class="btn btn-danger" />
+            </div>
+        }
+        <hr />
+        <div class="form-group" style="text-align: center">
+            <label style="color:red; font-weight: bold;">(*) Lưu ý tiền được tính theo VNĐ</label>
+        </div>
+    </div>
+</div>
+<div class="card" style="width: 70%; float: left !important; margin-left: 2%">
+    <div class="form-horizontal">
+        <form>
+            <hr style="margin-top: 10px !important" />
+            <div>
+                <div class="pull-left">
+                    <p class="card-title-heading" id="pageTitle">Chi Tiết Phiếu Kiểm Kho</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <hr />
+            <div id="orderItems" class="table-responsive"></div>
+            <div id="Items" hidden class="table-responsive"></div>
+        </form>
+    </div>
+</div>

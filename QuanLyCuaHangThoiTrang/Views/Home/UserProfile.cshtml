@@ -20,26 +20,22 @@
 <hr>
 <div class="container bootstrap snippet">
     <div class="row">
-        <div class="col-sm-10"><h1>User name</h1></div>
+        <div class="col-sm-10"><h1>Trang cá nhân người dùng</h1></div>
         <div class="col-sm-2">
-        <a href="#" class="pull-right">
-
-            <img title="profile image" class="img-circle img-responsive" src="@TempData["avatar"]">
-         </a>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-3">
             <!--left col-->
             <div class="text-center">
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                <img title="profile image" class="avatar img-circle img-thumbnail" src="~/images/avatar/@TempData["avatar"]" alt="avatar">
                 <h6>Upload a different photo...</h6>
                 <input type="file" class="text-center center-block file-upload">
             </div><br>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-                <div class="panel-body"><a href="#">Web thời trang</a></div>
+                <div class="panel-body"><a href="@Url.Action("Index")">Web thời trang</a></div>
             </div>
 
         </div><!--/col-3-->
@@ -56,72 +52,68 @@
                         @TempData["AlertMessage"]
                     </div>
                 }
-            <div class="tab-pane active" id="home">
-                <hr>
-                @if (Session["Account"] != null || Session["Account"].ToString().Length != 0)
-                {
-                    using (Html.BeginForm("CapNhat", "Home", FormMethod.Post))
+            <div class="card" style="width: auto;">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    @if (Session["Account"] != null || Session["Account"].ToString().Length != 0)
                     {
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
+                        using (Html.BeginForm("CapNhat", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="first_name">Họ và tên</label>
-                                <input value="@user.TenNguoiDung" type="text" class="form-control" name="name" id="name" placeholder="Nhập họ và tên" required>
+                                <div class="col-xs-6">
+                                    <label for="first_name">Họ và tên</label>
+                                    <input value="@user.TenNguoiDung" type="text" class="form-control" name="name" id="name" placeholder="Nhập họ và tên" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="phone">Số điện thoại</label>
-                                <input value="@user.SoDienThoai" type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại" required>
+                                <div class="col-xs-6">
+                                    <label for="phone">Số điện thoại</label>
+                                    <input value="@user.SoDienThoai" type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="email">Email</label>
-                                <input value="@user.Email" type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
+                                <div class="col-xs-6">
+                                    <label for="email">Email</label>
+                                    <input value="@user.Email" type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            <div class="col-xs-6">
-                                <label for="address">Địa chỉ</label>
-                                <input value="@user.DiaChi" type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ">
+                                <div class="col-xs-6">
+                                    <label for="address">Địa chỉ</label>
+                                    <input value="@user.DiaChi" type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="password">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="password">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="confirm_password">Confirm Password</label>
-                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="confirm_password" onchange="validatePassword()">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="confirm_password" onchange="validatePassword()">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
-                }
-
-                @*<form class="form" action="##" method="post" id="registrationForm">
-        </form>*@
-                <hr>
-            </div><!--/tab-pane-->
-            </div><!--/tab-pane-->
+                    <hr>
+                </div><!--/tab-pane-->
         </div><!--/tab-content-->
-
     </div><!--/col-9-->
 </div><!--/row-->
 
@@ -164,3 +156,4 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 </script>
+
