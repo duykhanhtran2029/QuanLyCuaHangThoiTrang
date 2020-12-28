@@ -94,6 +94,13 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return PartialView(list);
         }
 
+        public ActionResult SearchView(string searchstring)
+        {
+            List<HangHoa> list = db.HangHoas.Where(hh => hh.SoLuong > 0 && !hh.IsDeleted && hh.TenHangHoa.Contains(searchstring)).ToList();
+            ViewBag.Search = searchstring;
+            return PartialView(list);
+        }
+
         [HttpPost]
         public void AddToCart(int MAHANGHOA, float GIA, float GIAMGIA)
         {
@@ -209,21 +216,32 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username && n.PassWord == password);
             if(nguoiDung != null)
             {
-                IEnumerable<ChucVu> listQuyen = db.ChucVus.Where(n => n.MaChucVu == nguoiDung.MaChucVu);
-                string quyen = "";
-                foreach (var item in listQuyen)
+               if(nguoiDung.IsDeleted == false)
                 {
-                    quyen += item.TenChucVu + ",";
+                    IEnumerable<ChucVu> listQuyen = db.ChucVus.Where(n => n.MaChucVu == nguoiDung.MaChucVu);
+                    string quyen = "";
+                    foreach (var item in listQuyen)
+                    {
+                        quyen += item.TenChucVu + ",";
+                    }
+                    quyen = quyen.Substring(0, quyen.Length - 1);
+                    PhanQuyen(nguoiDung.UserName.ToString(), quyen);
+                    Session["Account"] = nguoiDung;
+                    HoTen = nguoiDung.TenNguoiDung;
+                    if (nguoiDung.ChucVu.TenChucVu != "KhachHang")
+                        return RedirectToAction("Index", "Manager/Home");
+                    return RedirectToAction("Index", "Home");
                 }
-                quyen = quyen.Substring(0, quyen.Length - 1);
-                PhanQuyen(nguoiDung.UserName.ToString(), quyen);
-                Session["Account"] = nguoiDung;
-                HoTen = nguoiDung.TenNguoiDung;
-                if (nguoiDung.ChucVu.TenChucVu != "KhachHang")
-                    return RedirectToAction("Index", "Manager/Home");
-                return RedirectToAction("Index", "Home");
+               else
+                {
+                    SetAlert("Tài khoản của bạn đã bị khóa!", "error");
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            SetAlert("Sai tài khoản hoặc mật khẩu!", "error");
+            else
+            {
+                SetAlert("Sai tài khoản hoặc mật khẩu!", "error");
+            }
             return RedirectToAction("Index", "Home"); // Need add notification login not success
         }
 
@@ -252,55 +270,114 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return RedirectToAction("Index");
         }
 
+        //[AllowAnonymous]     
+        //public ActionResult DangKy(FormCollection form)
+        //{
+        //    string username = form["username"].ToString();
+        //    string password = MD5Encode.CreateMD5(form["password"].ToString());
+        //    string phone = form["phone"].ToString();
+        //    string name = form["name"].ToString();
+        //    var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username || n.SoDienThoai == phone);
+        //    if (nguoiDung == null)
+        //    {
+        //        try
+        //        {
+        //            db.NguoiDungs.Add(new NguoiDung
+        //            {
+        //                TenNguoiDung = name,
+        //                DiaChi = "",
+        //                SoDienThoai = phone,
+        //                Email = "",
+        //                CMND = "",
+        //                UserName = username,
+        //                PassWord = password,
+        //                IsDeleted = false,
+        //                MaChucVu = 6, // Customer
+        //                Avatar = ""
+        //            });
+        //            db.SaveChanges();
+        //            SetAlert("Tạo tài khoản thành công!", "success");
+        //        }
+        //        catch(Exception ex)
+        //        {
+        //            SetAlert(ex.ToString(), "error");
+        //            RedirectToAction("Index");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if(username == nguoiDung.UserName)
+        //        {
+        //            SetAlert("Tài khoản này đã có người sử dụng!", "error");
+        //            return RedirectToAction("Index");
+        //        }               
+        //        if (phone == nguoiDung.SoDienThoai)
+        //        {
+        //            SetAlert("Số điện thoại này đã có người sử dụng!", "error");
+        //            return RedirectToAction("Index");
+        //        }
+        //        SetAlert("Tạo tài khoản không thành công!", "error");
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
         [AllowAnonymous]
-        public ActionResult DangKy(FormCollection form)
-        {
-            string username = form["username"].ToString();
-            string password = MD5Encode.CreateMD5(form["password"].ToString());
-            string phone = form["phone"].ToString();
-            string name = form["name"].ToString();
-            var nguoiDung = db.NguoiDungs.SingleOrDefault(n => n.UserName == username || n.SoDienThoai == phone);
-            if (nguoiDung == null)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DangKy([Bind(Include = "MaNguoiDung,TenNguoiDung,SoDienThoai, Email,UserName,PassWord")] NguoiDung nguoiDung)
+        {                                                                                                           //,IsDeleted
+            if (ModelState.IsValid)
             {
-                try
+                var nd = db.NguoiDungs.SingleOrDefault(n => n.UserName == nguoiDung.UserName || 
+                n.SoDienThoai == nguoiDung.SoDienThoai|| n.Email == nguoiDung.Email);
+                if (nd == null)
                 {
-                    db.NguoiDungs.Add(new NguoiDung
+                    try
                     {
-                        TenNguoiDung = name,
-                        DiaChi = "",
-                        SoDienThoai = phone,
-                        Email = "",
-                        CMND = "",
-                        UserName = username,
-                        PassWord = password,
-                        IsDeleted = false,
-                        MaChucVu = 6, // Customer
-                        Avatar = ""
-                    });
-                    db.SaveChanges();
-                    SetAlert("Tạo tài khoản thành công!", "success");
+                        db.NguoiDungs.Add(new NguoiDung
+                        {
+                            TenNguoiDung = nguoiDung.TenNguoiDung,
+                            DiaChi = "",
+                            SoDienThoai = nguoiDung.SoDienThoai,
+                            Email = nguoiDung.Email,
+                            CMND = "",
+                            UserName = nguoiDung.UserName,
+                            PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord),
+                            IsDeleted = false,
+                            MaChucVu = 6, // Customer
+                            Avatar = "default.png"
+                        });
+                        db.SaveChanges();
+                        SetAlert("Tạo tài khoản thành công!", "success");
+                    }
+                    catch (Exception ex)
+                    {
+                        SetAlert(ex.ToString(), "error");
+                        RedirectToAction("Index");
+                    }
                 }
-                catch(Exception ex)
+                else
                 {
-                    SetAlert(ex.ToString(), "error");
-                    RedirectToAction("Index");
+                    if (nd.UserName == nguoiDung.UserName)
+                    {
+                        SetAlert("Tài khoản này đã có người sử dụng!", "error");
+                        return RedirectToAction("Index");
+                    }
+                    if (nd.SoDienThoai == nguoiDung.SoDienThoai)
+                    {
+                        SetAlert("Số điện thoại này đã có người sử dụng!", "error");
+                        return RedirectToAction("Index");
+                    }
+                    SetAlert("Tạo tài khoản không thành công!", "error");
                 }
+
             }
             else
             {
-                if(username == nguoiDung.UserName)
-                {
-                    SetAlert("Tài khoản này đã có người sử dụng!", "error");
-                    return RedirectToAction("Index");
-                }               
-                if (phone == nguoiDung.SoDienThoai)
-                {
-                    SetAlert("Số điện thoại này đã có người sử dụng!", "error");
-                    return RedirectToAction("Index");
-                }
                 SetAlert("Tạo tài khoản không thành công!", "error");
             }
             return RedirectToAction("Index");
+
         }
 
         [Authorize(Roles = "KhachHang")]

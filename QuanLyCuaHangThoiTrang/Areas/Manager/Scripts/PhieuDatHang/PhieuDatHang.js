@@ -547,7 +547,7 @@ function EditPhieuDatHang() {
     function GeneratedItemsTable() {
         if (orderItems.length > 0) {
             var $table = $('<table id="productTable"  class="table table-bordered"/>');
-            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
+            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th>Trạng Thái Kinh Doanh</th><th> Hành Động</th></tr></thead>');
             var $tbody = $('<tbody/>');
             $.each(orderItems, function (i, val) {
                 var $row = $('<tr/>');
@@ -558,6 +558,10 @@ function EditPhieuDatHang() {
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
                 $row.append($('<td/>').html(val.GiamGia));
                 $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
+                if (val.NgungKinhDoanh)
+                    $row.append($('<td/>').html("Ngừng Kinh Doanh"));
+                else
+                    $row.append($('<td/>').html("Đang Kinh Doanh"));
                 var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
                 var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
                 var $action = $('<div/>');
@@ -575,11 +579,16 @@ function EditPhieuDatHang() {
                     ClearValue();
                 });
                 $edit.click(function (e) {
-                    e.preventDefault();
-                    console.log(orderItems[i]);
-                    $('#add-pdh').val("Lưu");
-                    Replace(orderItems[i]);
-                    tmpIndex = i;
+                    if (!orderItems[i].NgungKinhDoanh)
+                    {
+                        e.preventDefault();
+                        console.log(orderItems[i]);
+                        $('#add-pdh').val("Lưu");
+                        Replace(orderItems[i]);
+                        tmpIndex = i;
+                    }
+                    else
+                        alert("Sản phẩm đã ngừng kinh doanh")
                 });
                 $row.append($('<td width="14%"/>').html($action));
                 $tbody.append($row);
@@ -746,7 +755,7 @@ function DetailsPhieuDatHang() {
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
         popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongtien-pdh').text().trim());
+        popupWin.document.write($('#tongtien-pdh').text().trim() + " VND");
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('<tr><td>')
@@ -764,12 +773,14 @@ function DetailsPhieuDatHang() {
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
         popupWin.document.write('Trạng thái xác nhận: ');
-        popupWin.document.write($('#daxacnhan-pdh').is(":checked").trim());
+        if ($('#daxacnhan-pdh').find('input').is(":checked")) { popupWin.document.write('Đã xác nhận'); }
+        else { popupWin.document.write('Chưa xác nhận');}
         popupWin.document.write('</td></tr>')
-
         popupWin.document.write('<tr><td>')
         popupWin.document.write('Trạng thái thanh toán: ');
-        popupWin.document.write($('#dathanhtoan-pdh').is(":checked").trim());
+        if ($('#dathanhtoan-pdh').find('input').is(":checked")) { popupWin.document.write('Đã thanh toán'); }
+        else { popupWin.document.write('Chưa thanh toán');}
+        
         popupWin.document.write('</td>')
         popupWin.document.write('</tr>')
 
@@ -808,7 +819,7 @@ function DetailsPhieuDatHang() {
             $(this).val('Xin Chờ.....');
 
             $.ajax({
-                url: "/PhieuBanHang/LuuPhieuBanHang",
+                url: "/PhieuBanHang/LuuPhieuBanHangTuPhieuDatHang",
                 type: "POST",
                 data: JSON.stringify(data),
                 dataType: "JSON",
@@ -818,23 +829,21 @@ function DetailsPhieuDatHang() {
                     if (d.status == true) {
                         //will send status from server side
                         //clear form
-                        orderItems = [];
-                        $('#ngayban-pbh').val(new Date($.now()).toLocaleDateString());
-                        $('#tenkhachhang-pbh').val('');
-                        $('#sodienthoai-pbh').val('');
-                        $('#ghiChu-pbh').val('');
-                        $('#tongtien-pbh').val('');
-                        $('#orderItems').empty();
+                        //orderItems = [];
+                        //$('#ngayban-pbh').val(new Date($.now()).toLocaleDateString());
+                        //$('#tenkhachhang-pbh').val('');
+                        //$('#sodienthoai-pbh').val('');
+                        //$('#ghiChu-pbh').val('');
+                        //$('#tongtien-pbh').val('');
+                        //$('#orderItems').empty();
                         window.location.href = '/Manager/PhieuBanHang/';
                     }
                     else {
                         alert("Số lượng hàng hóa không đủ để tạo phiếu bán hàng!", "error");
                     }
-                    $('#submit').val('Lưu Phiếu Bán Hàng');
                 },
                 error: function () {
                     alert('Error. Please try again.');
-                    $('#submit').val('Lưu Phiếu Bán Hàng');
                 }
             });
     });

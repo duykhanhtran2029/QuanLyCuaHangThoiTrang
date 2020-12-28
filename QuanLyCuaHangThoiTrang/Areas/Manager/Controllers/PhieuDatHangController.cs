@@ -62,6 +62,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 .Select(ct => new {
                     MaHangHoa = ct.MaHangHoa,
                     TenHangHoa = ct.HangHoa.TenHangHoa,
+                    NgungKinhDoanh = ct.HangHoa.IsDeleted,
                     GiamGia = ct.HangHoa.GiamGia,
                     Size = ct.HangHoa.Size,
                     SoLuong = ct.SoLuong,

@@ -74,7 +74,7 @@
             <hr />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10 custom-input">
-                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print">
+                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print" onclick="printbc()">
                         <i class="fas fa-print"></i>
                         <span style="margin: 15px 10px !important;">In</span>
                     </button>
@@ -111,19 +111,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @foreach (var item in chiTiet)
-                                {
+
+                            @foreach (var item in chiTiet)
+                            {
+                                <tr>
                                     <td>@item.MaBaoCaoBanHang</td>
                                     <td>@item.Ngay.ToString("dd/MM/yyyy")</td>
                                     <td>@item.SoLuongPhieuBanHang</td>
                                     <td>@String.Format("{0:n0}", item.DoanhThu)</td>
-                                    <td>@item.TiLe</td>
-                                }
-                            </tr>
+                                    @{
+                                        var tile = item.TiLe * 100;
+                                        <td>@string.Format("{0:0.00}", tile)</td>
+                                    }
+                                </tr>
+                            }
+
                         </tbody>
                     </table>
+                    <div id="table1" hidden></div>
+
                 </div>
+
                 <hr />
                 <hr />
 
@@ -139,16 +147,17 @@
 <script>
     var data = [];
     function addData(dt) {
-        console.log(dt[0].units);
-        for (var i = 0; i < dt.length; i++) {
+        
+        for (var i = 0; i < dt[0].length; i++) {
 
             dataPoints.push({
-                x: new Date(parseInt(dt[i].date) * 1000),
-                y: parseInt(dt[i].units)
+                x: new Date(parseInt(dt[0][i].date) * 1000),
+                y: parseInt(dt[0][i].units)
 
             });
         }
         chart.render();
+        //console.log(dataPoints.length);
     }
 
     $.ajax({
@@ -156,7 +165,9 @@
         type: 'GET',
         dataType: 'json',
         success: function (res) {
+            //console.log(res);
             data.push(JSON.parse(res));
+            console.log(data);
             addData(data);
         }
     });
@@ -167,7 +178,7 @@
         animationEnabled: true,
         theme: "light2",
         title: {
-            text: "Biểu đồ doanh thu"
+            text: "Biểu đồ báo cáo"
         },
         axisY: {
             title: "Tổng tiền (VND)",
@@ -180,4 +191,94 @@
             dataPoints: dataPoints
         }]
     });
+</script>
+<script>
+    function printbc() {
+    var toPrint = document.getElementById('table1');
+    var $table = $('<table id="hiddentable" style="border: solid; width:100%;padding:10px;margin-top: 5px; text-align:center "/>');
+    $table.append('<thead><tr><th>Mã Báo Cáo Bán Hàng</th><th>Ngày bán</th><th>Số lượng phiếu bán hàng</th><th>Tổng tiền</th><th>Tỉ lệ</th></tr></thead>');
+    var $tbody = $('<tbody/>');
+    var ele = document.querySelectorAll("tbody > tr > td");
+    for(var i = 0; i < ele.length; i+=5)
+    {
+        var $row = $('<tr style="border:solid">');
+        $row.append($('<td/>').html(ele[i].innerText));
+        $row.append($('<td/>').html(ele[i+1].innerText));
+        $row.append($('<td/>').html(ele[i+2].innerText));
+        $row.append($('<td/>').html(ele[i+3].innerText));
+        $row.append($('<td/>').html(ele[i+4].innerText));
+        $tbody.append($row);
+    }
+
+    $table.append($tbody);
+    $('#table1').html($table);
+
+    var popupWin = window.open('', '_blank', 'width=800,height=600'); //create new page
+    popupWin.document.open(); //open new page
+    popupWin.document.write('<html><body onload="window.print()">')
+
+    popupWin.document.write('<p style="text-align:center"><img src="/images/header.png" class="img-responsive watch-right"  /></p>')
+
+    popupWin.document.write('<p style="text-align:center; font-weight: bold; font-size: 30px">Báo cáo bán hàng</p>')
+
+    popupWin.document.write('<b>');
+    popupWin.document.write('Thông tin phiếu báo cáo bán hàng');
+    popupWin.document.write('</b>');
+    popupWin.document.write('<table style="border:solid; width:100%; padding: 10px;margin-top: 5px">')
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Số phiếu nhập kho: ');
+    popupWin.document.write($('#MaBaoCaoBanHang').val().trim());
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Nhân viên: ');
+    popupWin.document.write($('#maNguoiDung').text().trim());
+    popupWin.document.write('</td></tr>')
+    
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Ngày bắt đầu: ');
+    popupWin.document.write($('#NgayBatDau').text().trim());
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Ngày kết thúc: ');
+    popupWin.document.write($('#NgayKetThuc').text().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Số lượng phiếu bán hàng: ');
+    popupWin.document.write($('#SoLuongPhieuBanHang').text().trim() + " VND");
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Tổng tiền bán hàng: ');
+    popupWin.document.write($('#TongTienBanHang').text().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('<tr><td>')
+    popupWin.document.write('Tổng tiền nhập hàng: ');
+    popupWin.document.write($('#TongTienNhapHang').text().trim() + " VND");
+    popupWin.document.write('</td>')
+    popupWin.document.write('<td>')
+    popupWin.document.write('Tổng doanh thu: ');
+    popupWin.document.write($('#TongDoanhThu').text().trim());
+    popupWin.document.write('</td></tr>')
+
+    popupWin.document.write('</table>')
+
+    popupWin.document.write('<br/>');
+    popupWin.document.write('<b>');
+    popupWin.document.write('Chi tiết báo cáo');
+    popupWin.document.write('</b>');
+    popupWin.document.write(toPrint.innerHTML);
+    
+    popupWin.document.write('<p style="text-align:right; padding-right: 50px">')
+    popupWin.document.write('Thủ Đức, Ngày .... Tháng .... Năm ....')
+    popupWin.document.write('<br>')
+    popupWin.document.write('</p>')
+    popupWin.document.write('<p style="text-align:center;float: right;margin-right: 125px;margin-top: -10px;">')
+    popupWin.document.write('Kế toán')
+    popupWin.document.write('<br>')
+    popupWin.document.write('(Ký tên)')
+    popupWin.document.write('</p>')
+    popupWin.document.write('</html>');
+    popupWin.document.close();
+}
 </script>

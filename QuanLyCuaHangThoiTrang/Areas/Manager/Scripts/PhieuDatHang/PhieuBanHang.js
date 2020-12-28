@@ -623,12 +623,12 @@ function DetailsPhieuBanHang() {
         popupWin.document.write('</b>');
         popupWin.document.write('<table style="border:solid; width:100%; padding: 10px;margin-top: 5px">')
         popupWin.document.write('<tr><td>')
-        popupWin.document.write('Số phiếu đặt hàng: ');
-        popupWin.document.write($('#soPhieuDatHang').val().trim());
+        popupWin.document.write('Số phiếu bán hàng: ');
+        popupWin.document.write($('#soPhieuBanHang').val().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Ngày đặt: ');
-        popupWin.document.write($('#ngaydat-pbh').text().trim());
+        popupWin.document.write('Ngày bán: ');
+        popupWin.document.write($('#ngayban-pbh').text().trim());
         popupWin.document.write('</td></tr>')
 
         popupWin.document.write('<tr><td>')
@@ -645,42 +645,16 @@ function DetailsPhieuBanHang() {
         popupWin.document.write($('#sodienthoai-pbh').text().trim());
         popupWin.document.write('</td>')
         popupWin.document.write('<td>')
-        popupWin.document.write('Địa chỉ: ');
-        popupWin.document.write($('#diachi-pbh').text().trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Email: ');
-        popupWin.document.write($('#email-pbh').text().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
         popupWin.document.write('Tổng tiền: ');
-        popupWin.document.write($('#tongtien-pbh').text().trim());
+        popupWin.document.write($('#tongtien-pbh').text().trim() + " VND");
         popupWin.document.write('</td></tr>')
 
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Hình thức thanh toán: ');
-        popupWin.document.write($('#hinhthucthanhtoan-pbh').text().trim());
-        popupWin.document.write('</td>')
+
+        popupWin.document.write('<tr>')
         popupWin.document.write('<td>')
         popupWin.document.write('Ghi chú: ');
         popupWin.document.write($('#ghiChu-pbh').text().trim());
         popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Ngày giao: ');
-        popupWin.document.write($('#ngaygiao-pbh').text().trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('<td>')
-        popupWin.document.write('Trạng thái xác nhận: ');
-        popupWin.document.write($('#daxacnhan-pbh').is(":checked").trim());
-        popupWin.document.write('</td></tr>')
-
-        popupWin.document.write('<tr><td>')
-        popupWin.document.write('Trạng thái thanh toán: ');
-        popupWin.document.write($('#dathanhtoan-pbh').is(":checked").trim());
-        popupWin.document.write('</td>')
-        popupWin.document.write('</tr>')
 
         popupWin.document.write('</table>')
 

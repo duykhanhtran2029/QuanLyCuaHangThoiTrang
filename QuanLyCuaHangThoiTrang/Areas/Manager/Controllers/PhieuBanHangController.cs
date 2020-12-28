@@ -85,21 +85,35 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             foreach (var i in chiTietPhieuBanHangs)
             {
+                var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
                 i.SoPhieuBanHang = id;
                 db.ChiTietPhieuBanHangs.Add(i);
                 db.SaveChanges();
-                var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
-                if(hanghoa != null)
+
+                if (hanghoa != null)
                 {
                     hanghoa.SoLuong -= i.SoLuong;
                     db.SaveChanges();
-                }    
-                
+                }
             }
         }
 
+        public bool CheckSoLuong(PhieuBanHang pbh)
+        {
+            foreach (var i in pbh.ChiTietPhieuBanHangs)
+            {
+                var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
+                if (i.SoLuong > hanghoa.SoLuong)
+                {
+                    return false;
+                }
+   
+            }
+            return true;
+        }
+
         [HttpPost]
-        public ActionResult LuuPhieubanHang(PhieuBanHang phieuBanHang)
+        public ActionResult LuuPhieuBanHang(PhieuBanHang phieuBanHang)
         {
             PhieuBanHang pbh = new PhieuBanHang
             {
@@ -126,6 +140,79 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 throw;
             }
             return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpPost]
+        public ActionResult LuuPhieuBanHangTuPhieuDatHang(PhieuBanHang phieuBanHang)
+        {
+            var idnguoidung = -1;
+            if (Session["Account"] != null)
+            {
+                if (!CheckSoLuong(phieuBanHang))
+                {
+                    return new JsonResult { Data = new { status = false } };
+                }
+                NguoiDung a = Session["Account"] as NguoiDung;
+                idnguoidung = a.MaNguoiDung;
+                PhieuBanHang pbh = new PhieuBanHang
+                {
+                    NgayBan = phieuBanHang.NgayBan,
+                    MaNguoiDung = idnguoidung,
+                    TenKhachHang = phieuBanHang.TenKhachHang,
+                    TongTien = phieuBanHang.TongTien,
+                    SoDienThoai = phieuBanHang.SoDienThoai,
+                    GhiChu = phieuBanHang.GhiChu,
+                    IsDeleted = phieuBanHang.IsDeleted,
+                    NgayChinhSua = DateTime.Now.Date
+                };
+                bool status = false;
+                try
+                {
+                    db.PhieuBanHangs.Add(pbh);
+                    db.SaveChanges();
+                    SaveAllCTPBH(phieuBanHang.ChiTietPhieuBanHangs, pbh.SoPhieuBanHang);
+                    status = true;
+                }
+                catch
+                {
+                    status = false;
+                    throw;
+                }
+                return new JsonResult { Data = new { status = status } };
+            }
+            else //NO SESSION
+            {
+                if (!CheckSoLuong(phieuBanHang))
+                {
+                    return new JsonResult { Data = new { status = false } };
+                }
+                PhieuBanHang pbh = new PhieuBanHang
+                {
+                    NgayBan = phieuBanHang.NgayBan,
+                    MaNguoiDung = phieuBanHang.MaNguoiDung,
+                    TenKhachHang = phieuBanHang.TenKhachHang,
+                    TongTien = phieuBanHang.TongTien,
+                    SoDienThoai = phieuBanHang.SoDienThoai,
+                    GhiChu = phieuBanHang.GhiChu,
+                    IsDeleted = phieuBanHang.IsDeleted,
+                    NgayChinhSua = DateTime.Now.Date
+                };
+                bool status = false;
+                try
+                {
+                    db.PhieuBanHangs.Add(pbh);
+                    db.SaveChanges();
+                    SaveAllCTPBH(phieuBanHang.ChiTietPhieuBanHangs, pbh.SoPhieuBanHang);
+                    status = true;
+                }
+                catch
+                {
+                    status = false;
+                    throw;
+                }
+                return new JsonResult { Data = new { status = status } };
+            }
+            
         }
 
         [HttpPost]
@@ -183,6 +270,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
 
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
+
             return View();
         }
 
@@ -264,6 +352,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             DeleteAllCTPBH(id);
             PhieuBanHang phieuBanHang = db.PhieuBanHangs.Find(id);
+            DeleteAllCTPBH(id);
             db.PhieuBanHangs.Remove(phieuBanHang);
             db.SaveChanges();
             return RedirectToAction("Index");
