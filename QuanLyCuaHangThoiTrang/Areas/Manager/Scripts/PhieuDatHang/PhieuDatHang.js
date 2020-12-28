@@ -547,7 +547,7 @@ function EditPhieuDatHang() {
     function GeneratedItemsTable() {
         if (orderItems.length > 0) {
             var $table = $('<table id="productTable"  class="table table-bordered"/>');
-            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th> Hành Động</th></tr></thead>');
+            $table.append('<thead><tr><th>Mã Hàng Hóa</th><th>Tên Hàng Hóa</th><th>Size</th><th>Số Lượng</th><th>Giá (Đã áp dụng giảm giá)</th><th>Giảm Giá</th><th>Thành Tiền</th><th>Trạng Thái Kinh Doanh</th><th> Hành Động</th></tr></thead>');
             var $tbody = $('<tbody/>');
             $.each(orderItems, function (i, val) {
                 var $row = $('<tr/>');
@@ -558,6 +558,10 @@ function EditPhieuDatHang() {
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
                 $row.append($('<td/>').html(val.GiamGia));
                 $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
+                if (val.NgungKinhDoanh)
+                    $row.append($('<td/>').html("Ngừng Kinh Doanh"));
+                else
+                    $row.append($('<td/>').html("Đang Kinh Doanh"));
                 var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
                 var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
                 var $action = $('<div/>');
