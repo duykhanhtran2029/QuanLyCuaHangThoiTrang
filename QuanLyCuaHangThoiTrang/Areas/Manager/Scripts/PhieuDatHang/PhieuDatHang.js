@@ -575,11 +575,16 @@ function EditPhieuDatHang() {
                     ClearValue();
                 });
                 $edit.click(function (e) {
-                    e.preventDefault();
-                    console.log(orderItems[i]);
-                    $('#add-pdh').val("Lưu");
-                    Replace(orderItems[i]);
-                    tmpIndex = i;
+                    if (!orderItems[i].NgungKinhDoanh)
+                    {
+                        e.preventDefault();
+                        console.log(orderItems[i]);
+                        $('#add-pdh').val("Lưu");
+                        Replace(orderItems[i]);
+                        tmpIndex = i;
+                    }
+                    else
+                        alert("Sản phẩm đã ngừng kinh doanh")
                 });
                 $row.append($('<td width="14%"/>').html($action));
                 $tbody.append($row);
