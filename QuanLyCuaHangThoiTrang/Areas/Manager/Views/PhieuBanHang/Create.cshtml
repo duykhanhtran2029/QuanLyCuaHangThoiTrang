@@ -16,7 +16,7 @@
         <hr />
         <div>
             @Html.AntiForgeryToken()
-            <input type="hidden" id="tonkho-pbh" />
+            
             <div class="form-group">
                 @Html.LabelFor(model => model.NgayBan, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
@@ -103,6 +103,7 @@
                     <td style="padding: 0px 10px 10px 12px">Sản Phẩm</td>
                     <td style="padding: 0px 10px 10px 12px">Size</td>
                     <td style="padding: 0px 10px 10px 12px">Số Lượng </td>
+                    <td style="padding: 0px 10px 10px 12px">Tồn Kho </td>
                     <td style="padding: 0px 10px 10px 12px">Giá (Đã áp dụng giảm giá)</td>
                     <td style="padding: 0px 10px 10px 12px">Giảm Giá</td>
                     <td style="padding: 0px 10px 10px 12px">Thành Tiền</td>
@@ -118,6 +119,9 @@
                     </td>
                     <td style="padding: 0px 10px" width="5%">
                         <input type="text" id="soLuong-pbh" name="soLuongNhap" class="form-control rounded" required onkeypress="return checkNumber(event, this)" maxlength="4" min="1" />
+                    </td>
+                    <td style="padding: 0px 10px" width="5%">
+                        <input type="text" id="tonkho-pbh" class="form-control rounded" disabled="disabled" />
                     </td>
                     <td style="padding: 0px 10px">
                         <input type="text" id="gia-pbh" class="form-control rounded" disabled="disabled" />
