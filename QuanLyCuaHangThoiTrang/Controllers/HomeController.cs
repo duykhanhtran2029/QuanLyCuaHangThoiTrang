@@ -94,6 +94,13 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return PartialView(list);
         }
 
+        public ActionResult SearchView(string searchstring)
+        {
+            List<HangHoa> list = db.HangHoas.Where(hh => hh.SoLuong > 0 && !hh.IsDeleted && hh.TenHangHoa.Contains(searchstring)).ToList();
+            ViewBag.Search = searchstring;
+            return PartialView(list);
+        }
+
         [HttpPost]
         public void AddToCart(int MAHANGHOA, float GIA, float GIAMGIA)
         {

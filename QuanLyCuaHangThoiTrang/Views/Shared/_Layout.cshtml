@@ -66,8 +66,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="header-bot">
         <div class="header-bot_inner_wthreeinfo_header_mid">
             <div class="col-md-4 header-middle">
-                <form action="#" method="post">
-                    <input type="search" name="search" placeholder="Tìm kiếm..." required="">
+                <form id="searchbar" action="" method="post">
+                    <input id="search-input" type="search" placeholder="Tìm kiếm..." required="">
                     <input type="submit" value=" ">
                     <div class="clearfix"></div>
                 </form>
@@ -828,10 +828,9 @@ $(document).on("click", "input.cart_submit", function () {
             }
         });
         
-
-function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
-    var tien = $('span.order-value').text();
-    $('#order-total').text(tien);
+        function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
+            var tien = $('span.order-value').text();
+            $('#order-total').text(tien);
         }
 
         //a link return home
@@ -877,6 +876,24 @@ function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt ha�
                 }
             });
         });
+
+        //search 
+        $(document).on("submit", "#searchbar", function () {
+            event.preventDefault();
+            var S = $("#search-input").val();
+            $.ajax({
+                type: "POST",
+                url: "Home/SearchView",
+                data: {
+                    searchstring: S
+                },
+                success: function (ketqua) {
+                    $("#main_page").html(ketqua);
+                    
+                }
+            });
+        });
+
     </script>
     <!-- Script from Nam END -->
     <!-- //here ends scrolling icon -->
