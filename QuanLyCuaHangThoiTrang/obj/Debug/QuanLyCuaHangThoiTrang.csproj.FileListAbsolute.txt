@@ -92,8 +92,8 @@ E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bi
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\System.Web.Http.xml
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\System.Web.Http.WebHost.xml
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csprojAssemblyReference.cache
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csproj.CoreCompileInputs.cache
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csproj.CopyComplete
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.dll
 E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.pdb
+E:\Hoc vl\OOAD\ASP MVC QuanLyCuaHangThoiTrang_DoAnTeam\QuanLyCuaHangThoiTrang\obj\Debug\QuanLyCuaHangThoiTrang.csprojAssemblyReference.cache
