@@ -98,6 +98,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.SaveChanges();
                 var hanghoa = db.HangHoas.Where(hh => hh.MaHangHoa == i.MaHangHoa).FirstOrDefault();
                 hanghoa.SoLuong += i.SoLuong;
+                var ctpnk = db.PhieuNhapKhoes.Where(ct => ct.SoPhieuNhapKho == id).ToList();
                 db.SaveChanges();
             }
         }
@@ -123,18 +124,10 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
                 status = true;
             }
-            catch (DbEntityValidationException dbEx)
+            catch
             {
                 status = false;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}",
-                                                validationError.PropertyName,
-                                                validationError.ErrorMessage);
-                    }
-                }
+                throw;
             }
             return new JsonResult { Data = new { status = status } };
         }
