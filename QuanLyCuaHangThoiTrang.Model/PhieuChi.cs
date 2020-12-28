@@ -13,6 +13,7 @@
         public int SoPhieuChi { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime NgayChi { get; set; }
 
         public int MaNguoiDung { get; set; }
@@ -25,6 +26,7 @@
 
         public string GhiChu { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NgayChinhSua { get; set; }
 
         public bool IsDeleted { get; set; }

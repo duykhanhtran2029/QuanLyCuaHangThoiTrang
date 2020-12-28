@@ -22,6 +22,7 @@
         [Column(TypeName = "date")]
         [Display(Name = "Ngày Đặt")]
         [Required(ErrorMessage = "Ngày Đặt không được trống")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime NgayDat { get; set; }
 
         [Display(Name = "Mã Người Dùng")]

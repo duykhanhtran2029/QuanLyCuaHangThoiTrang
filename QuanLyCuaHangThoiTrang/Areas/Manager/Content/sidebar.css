@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 @import url('../../../Content/font-awesome.css');
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
@@ -10,7 +10,9 @@ body {
     background: #fff;
     padding: 0;
     margin: auto;
-    font-family: 'Lora', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Saira', serif;
 }
 
 fa {
@@ -33,6 +35,7 @@ p {
     margin-top:30px;
     width: 66px;
     background: #fff;
+    font-weight: 600;
     border-right: 1px solid #ddd;
     text-align: center;
     -webkit-transition: all .2s ease-in-out;
@@ -126,7 +129,7 @@ p {
     .sidebar-footer a {
         float: left !important;
         height: 50px;
-        width: 33%;
+        width: 50%;
         min-width: 48px;
         text-align: center;
         line-height: 50px;
