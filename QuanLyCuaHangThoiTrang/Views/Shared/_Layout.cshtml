@@ -184,25 +184,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="modal-body modal-body-sub_agile">
                         <div class="col-md-8 modal_body_left modal_body_left1">
                             <h3 class="agileinfo_sign">Đăng Kí <span>Ngay</span></h3>
+                            @model QuanLyCuaHangThoiTrang.Model.NguoiDung
                             @using (Html.BeginForm("DangKy", "Home", FormMethod.Post))
                             {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="username" required>
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @*<input type="text" name="username" required>*@
                                     <label>Username</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="name" required>
+                                    @*<input type="text" name="name" required>*@
+                                    @Html.EditorFor(model => model.TenNguoiDung, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     <label>Họ và tên</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input id="phone_1" type="text" name="phone" required onchange="check()">
+                                    @*<input id="phone_1" type="text" name="phone" required onchange="check()">*@
+                                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control", @required = "required", @onchange = "check()" } })
                                     <label>Số điện thoại</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input id="password" type="password" name="password" required>
+                                    @*<input id="phone_1" type="text" name="phone" required onchange="check()">*@
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required", @type="email" } })
+                                    <label>Email</label>
+                                    <span></span>
+                                </div>
+                                <div class="styled-input agile-styled-input-top">
+                                    @*<input id="password" type="password" name="password" required>*@
+                                    @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "password" } })
                                     <label>Password</label>
                                     <span></span>
                                 </div>
@@ -213,7 +226,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                                 <input type="submit" value="Đăng Kí">
                             }
-                          
+
                             <ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
                                 <li>
                                     <a href="#" class="facebook">
@@ -664,7 +677,7 @@ function SetOrderPrice() { // cập nhật tiền tổng của hóa đơn
             ShowAddToCart();
             alert("Sản phẩm trong kho đã hết");
         }
-            
+
     }
     else //them vao cart
     {
@@ -827,10 +840,18 @@ $(document).on("click", "input.cart_submit", function () {
                 location.reload();//reload page
             }
         });
+<<<<<<< Updated upstream
         
         function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
             var tien = $('span.order-value').text();
             $('#order-total').text(tien);
+=======
+
+
+function updateFinalOrderTotal() { // cập nhật giá cho đơn đặt hàng(chỗ điền thông tin cá nhân)
+    var tien = $('span.order-value').text();
+    $('#order-total').text(tien);
+>>>>>>> Stashed changes
         }
 
         //a link return home
@@ -900,7 +921,7 @@ $(document).on("click", "input.cart_submit", function () {
     <!-- for bootstrap working -->
     <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
     <script>
-        var password = document.getElementById("password")
+        var password = document.getElementById("PassWord")
             , confirm_password = document.getElementById("confirm_password");
 
         function validatePassword() {
@@ -921,7 +942,7 @@ $(document).on("click", "input.cart_submit", function () {
     </script>
     <script>
         function check() {
-            var phone = document.getElementById("phone_1");
+            var phone = document.getElementById("SoDienThoai");
             if (isNaN(phone.value) || phone.value.length < 9 || phone.value.length > 11) {
                 phone.setCustomValidity("Số điện thoại không hợp lệ!");
             }

@@ -107,6 +107,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 {
                     return false;
                 }
+   
             }
             return true;
         }
@@ -269,6 +270,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
 
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
+
             return View();
         }
 
@@ -350,6 +352,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             DeleteAllCTPBH(id);
             PhieuBanHang phieuBanHang = db.PhieuBanHangs.Find(id);
+            DeleteAllCTPBH(id);
             db.PhieuBanHangs.Remove(phieuBanHang);
             db.SaveChanges();
             return RedirectToAction("Index");
