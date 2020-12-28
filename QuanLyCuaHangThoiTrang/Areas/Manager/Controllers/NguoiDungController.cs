@@ -187,7 +187,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if(nguoiDung.ChucVu.TenChucVu == "Admin")
+            if(nguoiDung.ChucVu.TenChucVu == "Admin" || nguoiDung.ChucVu.TenChucVu == "ChuCuaHang")
             {
                 return RedirectToAction("Index");
             }

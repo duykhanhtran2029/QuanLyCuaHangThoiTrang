@@ -48,13 +48,12 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             var data = db.ChiTietBaoCaoBanHangs.Where(n => n.MaBaoCaoBanHang == id).ToList();
             if(data.Count() != 0)
             {
-                Dictionary<string, string> dt = new Dictionary<string, string>();
+                List<object> dt = new List<object>();
                
                 foreach(var item in data)
                 {
                     Int32 unixTimestamp = (Int32)(item.Ngay.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                    dt.Add("date", unixTimestamp.ToString());
-                    dt.Add("units", item.DoanhThu.ToString());
+                    dt.Add(new { date = unixTimestamp.ToString(), units = item.DoanhThu.ToString() });
                 }
                 return Json(JsonConvert.SerializeObject(dt), JsonRequestBehavior.AllowGet);
             }

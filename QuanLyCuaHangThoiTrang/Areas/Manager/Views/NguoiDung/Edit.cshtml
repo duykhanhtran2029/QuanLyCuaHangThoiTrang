@@ -98,21 +98,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IsDeleted, "Ngừng hoạt động", htmlAttributes: new { @class = "control-label custom-label" })
             <div class="col-md-10 custom-input">
-                <div class="col-md-10 checkbox">
+                @*<div class="col-md-10 checkbox">*@
                     @{
                         var user = Session["Account"] as NguoiDung;
                         if (user.MaNguoiDung == Model.MaNguoiDung)
                         {
-                            @Html.EditorFor(model => model.IsDeleted , new { htmlAttributes = new { @disabled = "disabled" } })
+                            @Html.EditorFor(model => model.IsDeleted , new { htmlAttributes = new {@class = "form-control", @disabled = "disabled" } })
                         }
                         else
                         {
-                            @Html.EditorFor(model => model.IsDeleted)
+                            @Html.EditorFor(model => model.IsDeleted , new { htmlAttributes = new { @class = "form-control" } })
                         }
                     }
 
                     @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
-                </div>
+                @*</div>*@
             </div>
         </div>
 
