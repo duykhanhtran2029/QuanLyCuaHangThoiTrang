@@ -31,6 +31,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return View(baoCaoTonKhoes.ToList());
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachBaoCaoTonKho(string dateFrom, string dateTo, string searchString, int page = 1, int pageSize = 10)
         {
             IList<BaoCaoTonKho> bctc = db.BaoCaoTonKhoes.ToList();
@@ -230,11 +240,13 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.BaoCaoTonKhoes.Add(baoCaoTonKho);
                 db.SaveChanges();
+                SetAlert("Tạo báo cáo thành công!", "success");
                 return RedirectToAction("Index");
             }
             ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); return View(baoCaoTonKho);
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            return View(baoCaoTonKho);
         }
 
         // GET: BaoCaoTonKho/Edit/5
@@ -303,6 +315,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             DeleteAllCTBCTK(id);
             BaoCaoTonKho baoCaoTonKho = db.BaoCaoTonKhoes.Find(id);
             db.BaoCaoTonKhoes.Remove(baoCaoTonKho);
+            SetAlert("Xóa báo cáo thành công!", "success");
             db.SaveChanges();
             return RedirectToAction("Index");
         }

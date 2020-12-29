@@ -232,8 +232,8 @@ function CreatePhieuDatHang() {
                 $row.append($('<td/>').html(formatNumber(val.GiaBan)));
                 $row.append($('<td/>').html(val.GiamGia));
                 $row.append($('<td/>').html(formatNumber(val.ThanhTien)));
-                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
-                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
+                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 3px" class="btn-danger"/>');
+                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 3px" class="btn-primary"/>');
                 var $action = $('<div/>');
                 $action.append($remove);
                 $action.append($edit);
@@ -562,8 +562,8 @@ function EditPhieuDatHang() {
                     $row.append($('<td/>').html("Ngừng Kinh Doanh"));
                 else
                     $row.append($('<td/>').html("Đang Kinh Doanh"));
-                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
-                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
+                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 3px" class="btn-danger"/>');
+                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 3px" class="btn-primary"/>');
                 var $action = $('<div/>');
                 $action.append($remove);
                 $action.append($edit);

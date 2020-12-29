@@ -33,6 +33,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return View(phieuNhapKhoes.ToList());
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachPhieuNhapKho(string searchString,string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
             IList<PhieuNhapKho> pnk = db.PhieuNhapKhoes.Where(nc => nc.IsDeleted != true).ToList();
@@ -123,6 +133,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.SaveChanges();
                 SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, pnk.SoPhieuNhapKho);
                 status = true;
+                SetAlert("Tạo phiếu nhập kho thành công!", "success");
             }
             catch
             {
@@ -150,6 +161,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     SaveAllCTPNK(phieuNhapKho.ChiTietPhieuNhapKhoes, phieunhapkho.SoPhieuNhapKho);
                     db.SaveChanges();
                     status = true;
+                    SetAlert("Sửa phiếu nhập kho thành công!", "success");
                 }
                 else
                     status = false;
@@ -199,6 +211,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.PhieuNhapKhoes.Add(phieuNhapKho);
                 db.SaveChanges();
+                SetAlert("Tạo phiếu nhập kho thành công!", "success");
                 return RedirectToAction("Index");
             }
 
@@ -240,6 +253,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.Entry(phieuNhapKho).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Sửa phiếu nhập kho thành công!", "success");
                 return RedirectToAction("Index");
             }
             var user = (NguoiDung)Session["Account"];
@@ -273,6 +287,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             DeleteAllCTPNK(id);
             db.PhieuNhapKhoes.Remove(phieuNhapKho);
             db.SaveChanges();
+            SetAlert("Xóa phiếu nhập kho thành công!", "success");
             return RedirectToAction("Index");
         }
 

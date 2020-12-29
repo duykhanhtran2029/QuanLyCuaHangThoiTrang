@@ -23,12 +23,18 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
     <hr />
     <div>
         @using (Ajax.BeginForm("DanhSachBaoCaoBanHang", "BaoCaoBanHang", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
         {
             <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
-                <div class="grid-container" style="grid-template-columns: auto auto">          
+                <div class="grid-container" style="grid-template-columns: auto auto">
                 </div>
                 <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
                     <div style="padding: 0px 30px">

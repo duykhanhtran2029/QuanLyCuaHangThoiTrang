@@ -21,6 +21,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             var hangHoas = db.HangHoas.Include(h => h.LoaiHangHoa);
             return View(hangHoas.ToList());
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachHangHoa(string searchString, int page = 1, int pageSize = 10)
         {
             IList<HangHoa> hh = db.HangHoas.Where(nc => nc.IsDeleted != true).ToList();
@@ -67,6 +77,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.HangHoas.Add(hangHoa);
                 db.SaveChanges();
+                SetAlert("Thêm hàng hóa thành công!", "success");
                 return RedirectToAction("Index");
             }
 
@@ -101,6 +112,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.Entry(hangHoa).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Sửa hàng hóa thành công!", "success");
                 return RedirectToAction("Index");
             }
             ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
@@ -130,6 +142,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             HangHoa hangHoa = db.HangHoas.Find(id);
             hangHoa.IsDeleted = true;
             db.SaveChanges();
+            SetAlert("Ngừng kinh doanh hàng hóa thành công!", "success");
             return RedirectToAction("Index");
         }
 

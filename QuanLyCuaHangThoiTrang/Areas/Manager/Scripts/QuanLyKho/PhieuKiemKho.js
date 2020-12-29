@@ -176,8 +176,8 @@ function CreatePhieuKiemKho() {
                 $row.append($('<td/>').html(val.SoLuongHienTai));
                 $row.append($('<td/>').html(val.SoLuongKiemTra));
                 $row.append($('<td/>').html(val.TinhTrangHangHoa));
-                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
-                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
+                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 3px" class="btn-danger"/>');
+                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 3px" class="btn-primary"/>');
                 var $action = $('<div/>');
                 $action.append($remove);
                 $action.append($edit);
@@ -402,8 +402,8 @@ function EditPhieuKiemKho() {
                 $row.append($('<td/>').html(val.SoLuongHienTai));
                 $row.append($('<td/>').html(val.SoLuongKiemTra));
                 $row.append($('<td/>').html(val.TinhTrangHangHoa));
-                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 5px" class="btn-danger"/>');
-                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 5px" class="btn-primary"/>');
+                var $remove = $('<input type="button" value="Xóa" style="padding:1px 5px; margin: 0px 3px" class="btn-danger"/>');
+                var $edit = $('<input type="button" value="Sửa" style="padding:1px 5px; margin: 0px 3px" class="btn-primary"/>');
                 var $action = $('<div/>');
                 $action.append($remove);
                 $action.append($edit);

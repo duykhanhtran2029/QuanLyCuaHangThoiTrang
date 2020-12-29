@@ -24,74 +24,74 @@
         <div class="sidebar-content">
             @if (Menu != null)
             {
-            <ul>
-                <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
-                @foreach (string item in Menu)
-                {
-                    switch (item)
+                <ul>
+                    <li><a onclick="Open('Home/Index')"><i class="fa fa-desktop"></i><span>Trang Chủ</span></a></li>
+                    @foreach (string item in Menu)
                     {
+                        switch (item)
+                        {
 
-                        case "QuanLyHangHoa":
-                            {
-                                <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
-                                break;
-                            }
+                            case "QuanLyHangHoa":
+                                {
+                                    <li><a onclick="Open('HangHoa/Index')"><i class="fas fa-boxes"></i><span>Quản Lý Hàng Hóa</span></a></li>
+                                    break;
+                                }
 
-                        case "QuanLyBanHang":
-                            {
-                                <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
-                                break;
-                            }
+                            case "QuanLyBanHang":
+                                {
+                                    <li><a onclick="Open('PhieuBanHang/Index')"><i class="fas fa-store"></i><span>Quản Lý Bán Hàng</span></a></li>
+                                    break;
+                                }
 
-                        case "QuanLyDatHang":
-                            {
-                                <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
-                                break;
-                            }
-                        case "QuanLyPhieuChi":
-                            {
-                                <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
-                                break;
-                            }
-                        case "QuanLyBaoCaoBanHang":
-                            {
-                                <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
-                                break;
-                            }
-                        case "QuanLyNhaCungCap":
-                            {
-                                <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
-                                break;
-                            }
-                        case "QuanLyNhapKho":
-                            {
-                                <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
-                                break;
-                            }
-                        case "QuanLyXuatKho":
-                            {
-                                <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
-                                break;
-                            }
-                        case "QuanLyKiemKho":
-                            {
-                                <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
-                                break;
-                            }
-                        case "QuanLyBaoCaoTonKho":
-                            {
-                                <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
-                                break;
-                            }
-                        case "QuanLyPhanQuyen":
-                            {
-                                <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
-                                break;
-                            }
+                            case "QuanLyDatHang":
+                                {
+                                    <li><a onclick="Open('PhieuDatHang/Index')"><i class="fas fa-shopping-cart"></i><span>Quản Lý Đặt Hàng</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyPhieuChi":
+                                {
+                                    <li><a onclick="Open('PhieuChi/Index')"><i class="fas fa-file-excel-o"></i><span>Quản Lý Phiếu Chi</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyBaoCaoBanHang":
+                                {
+                                    <li><a onclick="Open('BaoCaoBanHang/Index')"><i class="fas fa-dollar-sign"></i><span>Quản Lý Doanh Thu</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyNhaCungCap":
+                                {
+                                    <li><a onclick="Open('NhaCungCap/Index')"><i class="fas fa-parachute-box"></i><span>Quản Lý Nhà Cung Cấp</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyNhapKho":
+                                {
+                                    <li><a onclick="Open('PhieuNhapKho/Index')"><i class="fas fa-plus-square"></i><span>Quản Lý Nhập Kho</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyXuatKho":
+                                {
+                                    <li><a onclick="Open('PhieuXuatKho/Index')"><i class="fas fa-minus-square"></i><span>Quản Lý Xuất Kho</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyKiemKho":
+                                {
+                                    <li><a onclick="Open('PhieuKiemKho/Index')"><i class="fas fa-clipboard-check"></i><span>Quản Lý Kiểm Kho</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyBaoCaoTonKho":
+                                {
+                                    <li><a onclick="Open('BaoCaoTonKho/Index')"><i class="fas fa-file-medical-alt"></i><span>Quản Lý Tồn Kho</span></a></li>
+                                    break;
+                                }
+                            case "QuanLyPhanQuyen":
+                                {
+                                    <li><a onclick="Open('PhanQuyen/Index')"><i class="fas fa-user-lock"></i><span>Quản Lý Phân Quyền</span></a></li>
+                                    break;
+                                }
 
+                        }
                     }
-                }
-            </ul>
+                </ul>
             }
 
         </div>
@@ -117,6 +117,12 @@
             <img src="~/images/giphy.gif" style="width: 200px; height:200px;margin:auto" />
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(4000).slideUp(1000);
+        });
+    </script>
     <!-- partial -->
     @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
     <script src="~/Areas/Manager/Scripts/sidebar.js"></script>

@@ -22,6 +22,12 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
     <hr />
     <div>
         @using (Ajax.BeginForm("DanhSachPhieuDatHang", "PhieuDathang", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
@@ -36,7 +42,7 @@
             </div>
         }
     </div>
-        <div id="list">
-            @{Html.RenderAction("DanhSachPhieuDatHang", "PhieuDatHang");}
-        </div>
+    <div id="list">
+        @{Html.RenderAction("DanhSachPhieuDatHang", "PhieuDatHang");}
     </div>
+</div>

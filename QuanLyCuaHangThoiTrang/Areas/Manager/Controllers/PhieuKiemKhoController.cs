@@ -31,6 +31,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             return View(phieuKiemKhoes.ToList());
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachPhieuKiemKho(string searchString, string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
             IList<PhieuKiemKho> pkk = db.PhieuKiemKhoes.Where(nc => nc.IsDeleted != true).ToList();
@@ -188,6 +198,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.PhieuKiemKhoes.Add(phieuKiemKho);
                 db.SaveChanges();
+                SetAlert("Tạo phiếu kiểm kho thành công!", "success");
                 return RedirectToAction("Index");
             }
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
@@ -225,6 +236,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.Entry(phieuKiemKho).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Sửa phiếu kiểm kho thành công!", "success");
                 return RedirectToAction("Index");
             }
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
@@ -263,6 +275,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             DeleteAllCTPKK(id);
             db.PhieuKiemKhoes.Remove(phieuKiemKho);
             db.SaveChanges();
+            SetAlert("Xóa phiếu kiểm kho thành công!", "success");
             return RedirectToAction("Index");
         }
 
