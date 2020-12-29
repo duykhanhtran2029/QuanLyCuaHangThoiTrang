@@ -507,6 +507,8 @@
     <Content Include="Views\Shared\MainIndex.cshtml" />
     <Content Include="Views\Shared\Categories.cshtml" />
     <Content Include="Views\Shared\SearchView.cshtml" />
+    <Content Include="Views\Shared\AjaxAbout.cshtml" />
+    <Content Include="Views\Shared\AjaxContact.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
