@@ -40,11 +40,11 @@
         public int SoLuong { get; set; }
 
         [Required(ErrorMessage = "Size không được trống")]
-        [StringLength(1)]
+        [StringLength(5, ErrorMessage = "Size không hợp lệ")]
         public string Size { get; set; }
 
         [Display(Name = "Đơn Vị Tính"), Required(ErrorMessage = "Đơn Vị Tính không được trống")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Đơn Vị Tính không quá 50 ký tự")]
         public string DonViTinh { get; set; }
 
         [Display(Name = "Mô Tả"), Required(ErrorMessage = "Mô Tả không được trống")]

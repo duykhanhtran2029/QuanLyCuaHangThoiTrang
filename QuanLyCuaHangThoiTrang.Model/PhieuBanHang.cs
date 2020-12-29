@@ -20,6 +20,7 @@
         public int SoPhieuBanHang { get; set; }
 
         [Column(TypeName = "date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày Bán")]
         [Required(ErrorMessage = "Ngày Bán không được trống")]
         public DateTime NgayBan { get; set; }
@@ -45,6 +46,7 @@
         public string GhiChu { get; set; }
 
         [Display(Name = "Ngày Chỉnh Sửa")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NgayChinhSua { get; set; }
 
         public bool IsDeleted { get; set; }

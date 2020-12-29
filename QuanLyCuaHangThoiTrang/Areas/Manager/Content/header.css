@@ -1,9 +1,9 @@
-﻿.header{
-    text-align:center;
+﻿.header {
+    text-align: center;
+    font-weight: 600;
 }
 .header .page-title-heading {
     font-size: 32px;
-    font-weight: 500;
     position: relative;
     z-index: 5;
 }
@@ -27,11 +27,11 @@
 }
 .card-title-heading {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 600;
     position: relative;
     z-index: 5;
-    color: darkslateblue;   
+    color: darkslateblue;
 }
 code {
-    font-weight: 600 !important;
+    font-weight: 500 !important;
 }
