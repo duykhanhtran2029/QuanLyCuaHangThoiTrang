@@ -72,7 +72,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DanhSachBaoCaoBanHang(string searchString, int page = 1, int pageSize = 10)
         {
 
-            IList<BaoCaoBanHang> baocao = db.BaoCaoBanHangs.ToList();
+            IList<BaoCaoBanHang> baocao = db.BaoCaoBanHangs.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 baocao = db.BaoCaoBanHangs.Where(n => n.NguoiDung.TenNguoiDung.Contains(searchString)).ToList();

@@ -23,7 +23,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachHangHoa(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<HangHoa> hh = db.HangHoas.ToList();
+            IList<HangHoa> hh = db.HangHoas.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 hh = db.HangHoas.Where(
@@ -52,7 +52,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: HangHoa/Create
         public ActionResult Create()
         {
-            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas, "MaLoaiHangHoa", "TenLoaiHangHoa");
+            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas, "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
+            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
             return View(hangHoa);
         }
 
@@ -86,7 +86,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas, "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
+            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
             return View(hangHoa);
         }
 
@@ -103,7 +103,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas, "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
+            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
             return View(hangHoa);
         }
 
@@ -128,7 +128,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             HangHoa hangHoa = db.HangHoas.Find(id);
-            db.HangHoas.Remove(hangHoa);
+            hangHoa.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

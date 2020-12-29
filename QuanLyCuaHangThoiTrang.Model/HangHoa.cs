@@ -28,6 +28,7 @@
         public string TenHangHoa { get; set; }
 
         [Display(Name = "Giảm Giá"), Required(ErrorMessage = "Giảm Giá không được trống")]
+        [Range(0,1, ErrorMessage = "Giảm Giá phải lớn hơn hoặc bằng 0, nhỏ hơn 1")]
         public double GiamGia { get; set; }
 
         [Display(Name = "Giá Bán"), Required(ErrorMessage = "Giá Bán không được trống")]
@@ -51,7 +52,7 @@
         public string MoTa { get; set; }
 
         [Display(Name = "Thời Gian Bảo Hành"), Required(ErrorMessage = "Thời Gian Bảo Hành không được trống")]
-        [RegularExpression(@"[0-9]", ErrorMessage = "Thời Gian Bảo Hành không hợp lệ")]
+        [RegularExpression(@"^[0-9]*", ErrorMessage = "Thời Gian Bảo Hành không hợp lệ")]
         public int ThoiGianBaoHanh { get; set; }
 
         [Display(Name = "Hình Ảnh"), Required(ErrorMessage = "Hình Ảnh không được trống")]

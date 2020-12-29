@@ -33,7 +33,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachPhieuXuatKho(string searchString, string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
-            IList<PhieuXuatKho> pxk = db.PhieuXuatKhoes.ToList();
+            IList<PhieuXuatKho> pxk = db.PhieuXuatKhoes.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 pxk = db.PhieuXuatKhoes.Where(
@@ -167,7 +167,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             PhieuXuatKho phieuXuatKho = db.PhieuXuatKhoes.Find(id);
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); if (phieuXuatKho == null)
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            if (phieuXuatKho == null)
             {
                 return HttpNotFound();
             }
@@ -178,7 +179,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult Create()
         {
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             return View();
         }
 
@@ -197,7 +199,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             return View(phieuXuatKho);
         }
 
@@ -214,7 +217,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             return View(phieuXuatKho);
         }
 
@@ -232,7 +236,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return RedirectToAction("Index");
             }
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa"); 
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa"); 
             return View(phieuXuatKho);
         }
 

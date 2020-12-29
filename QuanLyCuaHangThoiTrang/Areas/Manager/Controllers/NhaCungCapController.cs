@@ -22,7 +22,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachNhaCungCap(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<NhaCungCap> ncc = db.NhaCungCaps.ToList();
+            IList<NhaCungCap> ncc = db.NhaCungCaps.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 ncc = db.NhaCungCaps.Where(
@@ -125,7 +125,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            db.NhaCungCaps.Remove(nhaCungCap);
+            nhaCungCap.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

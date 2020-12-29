@@ -28,7 +28,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 
         public ActionResult DanhSachPhieuDatHang(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<PhieuDatHang> pdh = db.PhieuDatHangs.ToList();
+            IList<PhieuDatHang> pdh = db.PhieuDatHangs.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 pdh = db.PhieuDatHangs.Where(
@@ -181,7 +181,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHang);
         }
