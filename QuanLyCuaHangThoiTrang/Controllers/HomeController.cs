@@ -101,6 +101,16 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             return PartialView(list);
         }
 
+        public ActionResult AjaxAbout()
+        {
+            return PartialView();
+        }
+
+        public ActionResult AjaxContact()
+        {
+            return PartialView();
+        }
+
         [HttpPost]
         public void AddToCart(int MAHANGHOA, float GIA, float GIAMGIA)
         {
