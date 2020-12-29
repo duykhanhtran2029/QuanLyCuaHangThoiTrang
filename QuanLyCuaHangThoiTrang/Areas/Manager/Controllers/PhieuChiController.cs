@@ -69,7 +69,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 
         public ActionResult DanhSachPhieuChi(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<PhieuChi> phieuchi = db.PhieuChis.ToList();
+            IList<PhieuChi> phieuchi = db.PhieuChis.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 phieuchi = db.PhieuChis.Where(n => n.NguoiDung.TenNguoiDung.Contains(searchString) 

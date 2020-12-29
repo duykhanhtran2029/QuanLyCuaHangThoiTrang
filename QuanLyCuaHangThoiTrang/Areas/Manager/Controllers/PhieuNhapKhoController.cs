@@ -35,7 +35,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachPhieuNhapKho(string searchString,string dateFrom, string dateTo, int page = 1, int pageSize = 10)
         {
-            IList<PhieuNhapKho> pnk = db.PhieuNhapKhoes.ToList();
+            IList<PhieuNhapKho> pnk = db.PhieuNhapKhoes.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 pnk = db.PhieuNhapKhoes.Where(
@@ -174,7 +174,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
             return View(phieuNhapKho);
         }
@@ -183,8 +183,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             var user = (NguoiDung)Session["Account"];
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung");
-            ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap");
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa" , "TenHangHoa");
+            ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps.Where(i => i.IsDeleted != true), "MaNhaCungCap", "TenNhaCungCap");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa" , "TenHangHoa");
             return View();
         }
 
@@ -203,8 +203,9 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
 
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps.Where(i => i.IsDeleted != true), "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             return View(phieuNhapKho);
         }
 
@@ -221,8 +222,9 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             var user = (NguoiDung)Session["Account"];
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); 
+            ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps.Where(i => i.IsDeleted != true), "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
             return View(phieuNhapKho);
         }
@@ -242,7 +244,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             }
             var user = (NguoiDung)Session["Account"];
             ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung"); ViewBag.MaNhaCungCap = new SelectList(db.NhaCungCaps, "MaNhaCungCap", "TenNhaCungCap", phieuNhapKho.MaNhaCungCap);
-            ViewBag.MaHangHoa = new SelectList(db.HangHoas, "MaHangHoa", "TenHangHoa");
+            ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(i => i.IsDeleted != true), "MaHangHoa", "TenHangHoa");
             ViewBag.ChiTietPhieuNhapKho = db.ChiTietPhieuNhapKhoes.ToList();
             return View(phieuNhapKho);
         }

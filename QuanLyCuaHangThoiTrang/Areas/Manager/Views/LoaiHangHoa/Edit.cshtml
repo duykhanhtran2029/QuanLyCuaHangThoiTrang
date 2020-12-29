@@ -29,7 +29,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.GioiTinh, htmlAttributes: new { @class = "control-label custom-label required" })
                 <div class="col-md-10 custom-input">
-                    @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.DropDownListFor(model => model.GioiTinh, new List<SelectListItem> { new SelectListItem { Text = "Nữ", Value = "Nữ" }, new SelectListItem { Text = "Nam", Value = "Nam" }, new SelectListItem { Text = "Unisex", Value = "Unisex" } }, null, new { @class = "form-control minimal", @required = "required" })
                     @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -52,7 +52,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DanhSachNguoiDung(string searchString, int page = 1, int pageSize = 10)
         {
 
-            IList<NguoiDung> nguoiDung = db.NguoiDungs.ToList();
+            IList<NguoiDung> nguoiDung = db.NguoiDungs.Where(nc => nc.IsDeleted != true).ToList();
             if(!String.IsNullOrEmpty(searchString))
             {
                 nguoiDung = db.NguoiDungs.Where(n => n.TenNguoiDung.Contains(searchString) 

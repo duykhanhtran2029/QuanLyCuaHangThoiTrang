@@ -22,7 +22,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachLoaiHangHoa(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<LoaiHangHoa> lhh  = db.LoaiHangHoas.ToList();
+            IList<LoaiHangHoa> lhh  = db.LoaiHangHoas.Where(nc => nc.IsDeleted != true).ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 lhh = db.LoaiHangHoas.Where(
@@ -60,6 +60,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaLoaiHangHoa,TenLoaiHangHoa,GioiTinh,IsDeleted")] LoaiHangHoa loaiHangHoa)
         {
+
             if (ModelState.IsValid)
             {
                 db.LoaiHangHoas.Add(loaiHangHoa);
@@ -122,7 +123,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             LoaiHangHoa loaiHangHoa = db.LoaiHangHoas.Find(id);
-            db.LoaiHangHoas.Remove(loaiHangHoa);
+            loaiHangHoa.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
