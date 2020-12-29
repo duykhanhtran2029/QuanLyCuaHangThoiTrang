@@ -33,7 +33,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
         public ActionResult DanhSachHangHoa(string searchString, int page = 1, int pageSize = 10)
         {
-            IList<HangHoa> hh = db.HangHoas.Where(nc => nc.IsDeleted != true).ToList();
+            IList<HangHoa> hh = db.HangHoas.ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
                 hh = db.HangHoas.Where(
