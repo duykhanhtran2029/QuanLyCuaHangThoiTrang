@@ -820,7 +820,8 @@ $(document).on("click", "input.cart_submit", function () {
                 var sdt = $('input[name=order-sdt]').val();
                 var diachi = $('input[name=order-diachi]').val();
                 var email = $('input[name=order-email]').val();
-                var tongtien = parseFloat($('#order-total').text());
+                var tongtien = $('#order-total').text().replace(/\D/g, '');;
+                tongtien = parseFloat(tongtien);
                 $.ajax({
                     type: "POST",
                     url: "Home/Order",

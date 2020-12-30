@@ -161,7 +161,7 @@ namespace QuanLyCuaHangThoiTrang.Controllers
             string sdt = SDT;
             string diachi = DIACHI;
             string email = EMAIL;
-            float tongtien = TONGTIEN*1000; //fixed bug
+            float tongtien = TONGTIEN; //fixed bug
             string hinhthucthanhtoan = "Thanh toán khi nhận hàng";
             bool dathanhtoan = false;
             bool daxacnhan = false;
