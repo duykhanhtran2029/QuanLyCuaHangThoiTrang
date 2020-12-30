@@ -1,45 +1,48 @@
 ﻿@model IEnumerable<QuanLyCuaHangThoiTrang.Model.PhanQuyen>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "QUẢN LÝ PHÂN QUYỀN";
+    ViewBag.SubTitle = "Quản lý chức năng <code>Thêm mới</code> <code> Xóa</code> quyền.";
 }
+<title id="pageTitle">
+    Quản Lý Phân Quyền
+</title>
+<div id="Modal" class="modal fade" role="dialog">
+</div>
+<div class="card">
+    <div>
+        <div class="pull-left">
+            <p class="card-title-heading">Danh Sách Quyền</p>
+        </div>
+        <div class="pull-right">
+            <a href="@Url.Action("Create")" class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px !important;">
+                <i class="fas fa-plus"></i>
+                <span style="margin: 15px 0 !important;">Thêm quyền</span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr />
+    <div>
+        @using (Ajax.BeginForm("DanhSachPhanQuyen", "PhanQuyen", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "list", LoadingElementId = "loading", HttpMethod = "Get", OnComplete = "LoadDatatable" }))
+        {
+            <div class="form-group grid-container" style="grid-template-columns: 50% 50%">
+                <div class="grid-container" style="grid-template-columns: auto auto">
+              
+                </div>
+                <div class="input-group grid-container" style="grid-template-columns: 80% 20%">
+                    <div style="padding: 0px 30px">
+                        @Html.TextBox("searchString", null, new { @class = "form-control", @placeholder = "Tìm kiếm theo tên quyền hoặc chức vụ" })
+                    </div>
+                    <div>
+                        <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div id="list">
+            @{Html.RenderAction("DanhSachPhanQuyen", "PhanQuyen");}
+        </div>
+    </div>
+</div>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ChucVu.TenChucVu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quyen.TenQuyen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChuThich)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChucVu.TenChucVu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quyen.TenQuyen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChuThich)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>

@@ -20,7 +20,7 @@
             <div class="clearfix"></div>
         </div>
         <hr />
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Create", "HangHoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ThuongHieu, htmlAttributes: new { @class = "control-label custom-label required" })
+                        @Html.LabelFor(model => model.ThuongHieu, htmlAttributes: new { @class = "control-label custom-label " })
                         <div class="col-md-10 custom-input">
                             @Html.EditorFor(model => model.ThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ThuongHieu, "", new { @class = "text-danger" })
@@ -102,13 +102,18 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label custom-label required" })
-                        <div class="col-md-10 custom-input">
-                            @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { onchange = "readURL(this)", @class = "form-control", @id = "hinhanh_input", @type = "file", @accept = "image/*" } })
+                        @*@Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label custom-label required" })*@
+                        <div class="col-md-10 custom-input fileinput fileinput-new" data-provides="fileinput">
+                            <div id="img_preview" class="fileinput-preview thumbnail" name="hinhanh" data-trigger="fileinput" style="width: 210px; height: 160px;">
+                            </div>
+                            <div>
+                                <span class="btn btn-info btn-file">
+                                    <input type="file" name="HinhAnh" id="HinhAnh" accept="image/*">
+                                </span>
+                            </div>
                             @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <img style="margin: 10px" id="hinhanh"/>
                 </div>
             </div>
             <div class="form-group">
@@ -120,6 +125,25 @@
     </div>
 </div>
 <script>
+    $("#HinhAnh").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#img_preview");
+            dvPreview.html("");
+            $($(this)[0].files).each(function () {
+                var file = $(this);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = $("<img />");
+                    img.attr("style", "width: 200px; height:150px");
+                    img.attr("src", e.target.result);
+                    dvPreview.append(img);
+                }
+                reader.readAsDataURL(file[0]);
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    });
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
