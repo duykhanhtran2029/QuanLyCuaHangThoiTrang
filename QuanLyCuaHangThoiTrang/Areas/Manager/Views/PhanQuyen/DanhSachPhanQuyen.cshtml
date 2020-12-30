@@ -1,0 +1,44 @@
+﻿
+
+@using PagedList.Mvc
+@model PagedList.IPagedList<QuanLyCuaHangThoiTrang.Model.PhanQuyen>
+@{ Layout = null; }
+<div class="table-responsive">
+    <table class="table table-bordered table-middle table-lilac" id="datatable">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 25%;">Chức vụ</th>
+                <th class="text-center" style="width: 25%;">Tên quyền</th>
+                <th class="text-center" style="width: 30%;">Chú thích</th>
+                <th class="text-center" style="width: auto">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr class="border-warning" style="text-align:center">
+                    <td>
+                        @item.ChucVu.TenChucVu
+                    </td>
+                    <td>
+                        @item.Quyen.TenQuyen
+                    </td>
+                    <td>
+                        @item.ChuThich
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id1 = item.MaChucVu, id2 = item.MaQuyen })
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <div class="pull-left" style="padding-top:20px">
+        <h3 class="panel-title">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount </h3>
+    </div>
+    <div class="pull-right">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

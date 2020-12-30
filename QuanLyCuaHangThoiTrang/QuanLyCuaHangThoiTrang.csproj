@@ -355,6 +355,8 @@
     <Content Include="Areas\Manager\Views\NguoiDung\DanhSachNguoiDung.cshtml" />
     <Content Include="Areas\Manager\Views\BaoCaoBanHang\DanhSachBaoCaoBanHang.cshtml" />
     <Content Include="Areas\Manager\Views\PhieuBanHang\DanhSachPhieuBanHang.cshtml" />
+    <Content Include="Areas\Manager\Views\PhanQuyen\DanhSachPhanQuyen.cshtml" />
+    <Content Include="Areas\Manager\Views\NguoiDung\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Cart.js" />
     <Content Include="Scripts\easy-responsive-tabs.js" />

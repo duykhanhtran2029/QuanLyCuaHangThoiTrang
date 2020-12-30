@@ -21,8 +21,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: NguoiDung
         public ActionResult Index()
         {
-            var nguoiDungs = db.NguoiDungs.Include(n => n.ChucVu);
-            return View(nguoiDungs.ToList());
+            var nguoiDungs = db.NguoiDungs.Where(n=>n.ChucVu.TenChucVu != "Admin").ToList();
+            return View(nguoiDungs);
         }
 
         // GET: NguoiDung/Details/5
@@ -52,11 +52,11 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         public ActionResult DanhSachNguoiDung(string searchString, int page = 1, int pageSize = 10)
         {
 
-            IList<NguoiDung> nguoiDung = db.NguoiDungs.Where(nc => nc.IsDeleted != true).ToList();
+            IList<NguoiDung> nguoiDung = db.NguoiDungs.Where(nc => nc.IsDeleted != true && nc.ChucVu.TenChucVu != "Admin").ToList();
             if(!String.IsNullOrEmpty(searchString))
             {
                 nguoiDung = db.NguoiDungs.Where(n => n.TenNguoiDung.Contains(searchString) 
-                || n.ChucVu.TenChucVu.Contains(searchString)).ToList();
+                || n.ChucVu.TenChucVu.Contains(searchString) && n.ChucVu.TenChucVu != "Admin").ToList();
             }
             return View(nguoiDung.ToPagedList(page, pageSize));
 
@@ -118,11 +118,11 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 
             if(user.MaNguoiDung == id)
             {
-                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu == "Admin"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu == "ChuCuaHang"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
             }
            else
             {
-                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
+                ViewBag.MaChucVu = new SelectList(db.ChucVus.Where(n => n.TenChucVu != "Admin" && n.TenChucVu != "ChuCuaHang"), "MaChucVu", "TenChucVu", nguoiDung.MaChucVu);
             }
             
             return View(nguoiDung);
@@ -156,7 +156,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 {
                     nguoiDung.Avatar = current_avatar;
                 }
-                nguoiDung.PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord);
+                //nguoiDung.PassWord = MD5Encode.CreateMD5(nguoiDung.PassWord);
 
                 db.Entry(nguoiDung).State = EntityState.Modified;
                 db.SaveChanges();

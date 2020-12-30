@@ -110,14 +110,17 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 var baocao1 = db.PhieuBanHangs.Where(n => n.NgayBan >= baoCaoBanHang.NgayBatDau && n.NgayBan <= baoCaoBanHang.NgayKetThuc);
 
                 var tongpbh = baocao1.Count();
-
-                if(tongpbh == 0)
+                decimal tongtien = 0;
+                if (tongpbh == 0)
                 {
-                    SetAlert("Không có thông tin để lập báo cáo!", "warning");
-                    return View(baoCaoBanHang);
+                    //SetAlert("Không có thông tin để lập báo cáo!", "warning");
+                    //return View(baoCaoBanHang);
+                    tongtien = 0;
                 }
-
-                var tongtien = baocao1.Sum(n => n.TongTien);
+                else
+                {
+                    tongtien = baocao1.Sum(n => n.TongTien);
+                }
 
 
                 var baocao2 = db.PhieuNhapKhoes.Where(n => n.NgayNhapKho >= baoCaoBanHang.NgayBatDau && n.NgayNhapKho <= baoCaoBanHang.NgayKetThuc);
@@ -150,8 +153,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 }
                 if (TongDT == 0)
                 {
-                    SetAlert("Tạo báo cáo bán hàng không thành công!", "error");
-                    return View(baoCaoBanHang);
+                    //SetAlert("Tạo báo cáo bán hàng không thành công!", "error");
+                   // return View(baoCaoBanHang);
                 }
                    
                 var record = new BaoCaoBanHang
@@ -180,13 +183,13 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     });
                     db.SaveChanges();
                 }
-                
 
+                SetAlert("Tạo báo cáo thành công!", "success");
                 return RedirectToAction("Index");
                 //Done
             }
 
-          
+            SetAlert("Tạo báo cáo bán hàng không thành công!, vui lòng kiểm tra lại", "error");
             return View(baoCaoBanHang);
         }
 

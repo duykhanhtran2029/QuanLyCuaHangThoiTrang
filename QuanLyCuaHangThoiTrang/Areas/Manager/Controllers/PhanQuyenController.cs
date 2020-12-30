@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyCuaHangThoiTrang.Model;
 
 namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
 {
-    [Authorize(Roles = "Dev")]
+    //[Authorize(Roles = "Dev")]
     public class PhanQuyenController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
@@ -35,6 +36,19 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return HttpNotFound();
             }
             return View(phanQuyen);
+        }
+
+        public ActionResult DanhSachPhanQuyen(string searchString, int page = 1, int pageSize = 10)
+        {
+
+            IList<PhanQuyen> phanQuyens = db.PhanQuyens.ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                phanQuyens = db.PhanQuyens.Where(n => n.Quyen.TenQuyen.Contains(searchString)
+                || n.ChucVu.TenChucVu.Contains(searchString)).ToList();
+            }
+            return View(phanQuyens.ToPagedList(page, pageSize));
+
         }
 
         // GET: PhanQuyen/Create
@@ -100,13 +114,13 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         }
 
         // GET: PhanQuyen/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id1, int?id2)
         {
-            if (id == null)
+            if (id1 == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            var phanQuyen = db.PhanQuyens.SingleOrDefault(n => n.MaChucVu == id1 && n.MaQuyen == id2);
             if (phanQuyen == null)
             {
                 return HttpNotFound();
@@ -117,9 +131,9 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // POST: PhanQuyen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id1, int? id2)
         {
-            PhanQuyen phanQuyen = db.PhanQuyens.Find(id);
+            var phanQuyen = db.PhanQuyens.SingleOrDefault(n => n.MaChucVu == id1 && n.MaQuyen == id2);
             db.PhanQuyens.Remove(phanQuyen);
             db.SaveChanges();
             return RedirectToAction("Index");
