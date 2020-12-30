@@ -173,6 +173,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     }
                     db.Entry(hangHoa).State = EntityState.Modified;
                     db.SaveChanges();
+                    SetAlert("Sửa hàng hóa thành công!", "success");
                     return RedirectToAction("Index");
                 }
                 ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
