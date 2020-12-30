@@ -215,6 +215,7 @@
     }
 
   .order-submit-popup input{
+    font-family: 'Open Sans';
     height: 35px;
     border: black;
     margin-bottom: 15px;
