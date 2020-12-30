@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,7 +15,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
     public class HangHoaController : Controller
     {
         private QuanLyCuaHangThoiTrangDbContext db = new QuanLyCuaHangThoiTrangDbContext();
-
+        private static string current_hinhanh = "";
         // GET: HangHoa
         public ActionResult Index()
         {
@@ -61,10 +62,24 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaHangHoa,TenHangHoa,GiaNhap,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
+        public ActionResult Create([Bind(Include = "MaHangHoa,TenHangHoa,GiaNhap,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa, HttpPostedFileBase hinhanh)
         {
             if (ModelState.IsValid)
             {
+                if (hinhanh != null && hinhanh.ContentLength > 0)
+                {
+                    try
+                    {
+                        string avatarfile = Path.GetFileName(hinhanh.FileName);
+                        string path = Path.Combine(Server.MapPath("~/images/"), avatarfile);
+                        hinhanh.SaveAs(path);
+                        hangHoa.HinhAnh = avatarfile;
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
                 db.HangHoas.Add(hangHoa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +97,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HangHoa hangHoa = db.HangHoas.Find(id);
+            current_hinhanh = hangHoa.HinhAnh;
             if (hangHoa == null)
             {
                 return HttpNotFound();
@@ -95,16 +111,62 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaHangHoa,TenHangHoa,GiaNhap,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa)
+        public ActionResult Edit([Bind(Include = "MaHangHoa,TenHangHoa,GiamGia,GiaBan,SoLuong,Size,DonViTinh,MoTa,ThoiGianBaoHanh,HinhAnh,ThuongHieu,MaLoaiHangHoa,IsDeleted")] HangHoa hangHoa, HttpPostedFileBase hinhanh)
         {
             if (ModelState.IsValid)
             {
+                if (hinhanh != null && hinhanh.ContentLength > 0)
+                {
+                    try
+                    {
+                        string avatarfile =  Path.GetFileName(hinhanh.FileName);
+                        string path = Path.Combine(Server.MapPath("~/images/"), avatarfile);
+                        hinhanh.SaveAs(path);
+                        hangHoa.HinhAnh = avatarfile;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    hangHoa.HinhAnh = current_hinhanh;
+                }
                 db.Entry(hangHoa).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
-            return View(hangHoa);
+            else //truong hop khong thay doi ma edit luon
+            {
+                if(hangHoa.HinhAnh == null)
+                {
+                    if (hinhanh != null && hinhanh.ContentLength > 0)
+                    {
+                        try
+                        {
+                            string avatarfile = Path.GetFileName(hinhanh.FileName);
+                            string path = Path.Combine(Server.MapPath("~/images/"), avatarfile);
+                            hinhanh.SaveAs(path);
+                            hangHoa.HinhAnh = avatarfile;
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        hangHoa.HinhAnh = current_hinhanh;
+                    }
+                    db.Entry(hangHoa).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.MaLoaiHangHoa = new SelectList(db.LoaiHangHoas.Where(i => i.IsDeleted != true), "MaLoaiHangHoa", "TenLoaiHangHoa", hangHoa.MaLoaiHangHoa);
+                return View(hangHoa);
+            }
+            
         }
 
         // GET: HangHoa/Delete/5

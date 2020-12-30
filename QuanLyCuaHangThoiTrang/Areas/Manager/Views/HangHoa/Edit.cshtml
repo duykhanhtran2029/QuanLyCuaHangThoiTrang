@@ -12,7 +12,7 @@
             <div class="clearfix"></div>
         </div>
         <hr />
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Edit", "HangHoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -95,13 +95,17 @@
                 <div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label custom-label required" })
-                        <div class="col-md-10 custom-input">
-                            @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { onchange = "readURL(this)", @class = "form-control", @id = "hinhanh_input", @type = "file", @accept = "image/*" } })
-                            @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                        <div class="col-md-10 custom-input fileinput fileinput-new" data-provides="fileinput">
+                            <div id="img_preview" class="fileinput-preview thumbnail" name="hinhanh" data-trigger="fileinput" style="width: 210px; height: 160px;">
+                                <img src="~/images/@Model.HinhAnh" style="width: 200px; height: 150px; border: 5px;">
+                            </div>
+                            <div>
+                                <span class="btn btn-info btn-file">
+                                    <input type="file" name="HinhAnh" id="HinhAnh" accept="image/*">
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <img style="margin: 10px; width:255px; height:291px;" id="hinhanh" src="~/images/@Html.Raw(Model.HinhAnh)" />
-                    <input type="hidden" id="hinhanh-onload" value="@Html.Raw(Model.HinhAnh)">
                 </div>
             </div>
             <hr />
@@ -114,24 +118,24 @@
     </div>
 </div>
 <script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#hinhanh')
-                    .attr('src', e.target.result)
-                    .width(340)
-                    .height(300);
-            };
-
-            reader.readAsDataURL(input.files[0]);
+    $("#HinhAnh").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#img_preview");
+            dvPreview.html("");
+            $($(this)[0].files).each(function () {
+                var file = $(this);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var img = $("<img />");
+                    img.attr("style", "width: 200px; height:150px");
+                    img.attr("src", e.target.result);
+                    dvPreview.append(img);
+                }
+                reader.readAsDataURL(file[0]);
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
         }
-    }
-    $(document).ready(function () {
-        var s = $('#hinhanh-onload').val();
-        $('#hinhanh_input').val(s);
-        
     });
 </script>
 
