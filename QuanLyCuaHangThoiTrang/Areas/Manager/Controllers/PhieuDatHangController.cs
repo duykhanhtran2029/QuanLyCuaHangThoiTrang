@@ -200,8 +200,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         // GET: PhieuDatHang/Create
         public ActionResult Create()
         {
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung");
-
+            var user = (NguoiDung)Session["Account"];
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung");
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             return View();
         }
@@ -219,8 +219,8 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs, "MaNguoiDung", "TenNguoiDung", phieuDatHang.MaNguoiDung);
+            var user = (NguoiDung)Session["Account"];
+            ViewBag.MaNguoiDung = new SelectList(db.NguoiDungs.Where(nd => nd.MaNguoiDung == user.MaNguoiDung), "MaNguoiDung", "TenNguoiDung");
             ViewBag.MaHangHoa = new SelectList(db.HangHoas.Where(hh => hh.IsDeleted == false), "MaHangHoa", "TenHangHoa");
             return View(phieuDatHang);
         }

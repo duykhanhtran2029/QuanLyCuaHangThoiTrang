@@ -8,7 +8,7 @@
     margin: 80px auto;
     background: #fafafa;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
-    left: 30%;
+    left: 23%;
     top: 0%;
     z-index: 1;
     display: flex;
@@ -29,7 +29,7 @@
 
 .cart_item {
     margin: 20px 30px;
-    height: 80px;
+    height: 100px;
     display: flex;
     background: #fff;
     border-radius: 6px;
@@ -93,13 +93,14 @@
 
   .cart_image img {
      width: 120px;
-     height: 90px;
+     height: 100px;
   }
 
 .cart_description {
     padding: 5px;
-    margin-right: 60px;
+    margin-right: 20px;
     width: 25%;
+    height: 80px;
 }
    
   .cart_description span {
@@ -120,7 +121,7 @@
 
 .cart_quantity {
     padding-top: 25px;
-    margin-right: 60px;
+    margin-right: 20px;
 }
   
   .cart_quantity input {
@@ -199,7 +200,7 @@
     background: #fafafa;
     position: fixed;
     width: 820px;
-    left: 28%;
+    left: 23%;
     top: 5%;
     z-index: 1;
   }

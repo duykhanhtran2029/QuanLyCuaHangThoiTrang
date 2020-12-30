@@ -6,7 +6,7 @@
     <title>Cửa Hàng Thời Trang Russia</title>
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-16" />
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -775,7 +775,7 @@ $(document).on("click", "input.cart_submit", function () {
             diachi = account.DiaChi;
             email = account.Email;
         }
-        $('input[name=order-ten]').val("@tennguoidung");
+        $('input[name=order-ten]').val("@tennguoidung.ToString()");
         $('input[name=order-sdt]').val("@sdt");
         $('input[name=order-diachi]').val("@diachi");
         $('input[name=order-email]').val("@email");

@@ -10,15 +10,14 @@
                 <th class="text-center" style="width: 8%;">Người Dùng</th>
                 <th class="text-center" style="width: 8%;">Tên Khách hàng</th>
                 <th class="text-center" style="width: 8%;">Số Điện Thoại</th>
-                <th class="text-center" style="width: 5%;">Địa Chỉ</th>
-                <th class="text-center" style="width: 5%;">Email</th>
+                <th class="text-center" style="width: 10%;">Địa Chỉ</th>
+                <th class="text-center" style="width: 10%;">Email</th>
                 <th class="text-center" style="width: 10%;">Tổng Tiền</th>
                 <th class="text-center" style="width: 10%;">Hình Thức Thanh Toán</th>
                 <th class="text-center" style="width: 10%;">Ghi Chú</th>
                 <th class="text-center" style="width: 5%;">Ngày Giao</th>
                 <th class="text-center" style="width: 5%;">Trạng Thái Xác Nhận</th>
                 <th class="text-center" style="width: 5%;">Trạng Thái Thanh Toán</th>
-                <th class="text-center" style="width: 10%;">Ngày Chỉnh Sửa</th>
                 <th class="text-center" style="width: 10%;">Hành Động</th>
             </tr>
         </thead>
@@ -68,7 +67,7 @@
                     @item.GhiChu
                 </td>
                 <td>
-                    @item.NgayGiao
+                    @item.NgayGiao.ToString("MM/dd/yyyy")
                 </td>
                 @if (item.DaXacNhan)
                 {
@@ -96,9 +95,6 @@
                         Chưa Thanh Toán
                     </td>
                 }
-                <td>
-                    @item.NgayChinhSua
-                </td>
 
                 @{
                     <td class="text-center">
