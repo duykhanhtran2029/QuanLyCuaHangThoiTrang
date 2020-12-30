@@ -69,11 +69,11 @@ function CreateBaoCaoTonKho() {
                     else {
                         alert("Something wrong! Please try again", "error");
                     }
-                    $('#submit').val('Lưu Phiếu Nhập Kho');
+                    $('#submit').val('Lưu');
                 },
                 error: function () {
                     alert('Error. Please try again.');
-                    $('#submit').val('Lưu Phiếu Nhập Kho');
+                    $('#submit').val('Lưu');
                 }
             });
         }

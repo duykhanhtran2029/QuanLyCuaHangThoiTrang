@@ -73,13 +73,13 @@ namespace QuanLyCuaHangThoiTrang.Controllers
         {
             ViewBag.MenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
             ViewBag.WomenWears = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
-            ViewBag.Bags = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" || hh.LoaiHangHoa.TenLoaiHangHoa == "Túi") && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
             ViewBag.FootWears = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.SoLuong >= 1 && !hh.IsDeleted)
             || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
             //Load hang hoa
             ViewBag.MenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nam" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
             ViewBag.WomenWears_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.GioiTinh == "Nữ" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
-            ViewBag.Bags_Sale = db.HangHoas.Where(hh => hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
+            ViewBag.Bags_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Túi Xách" || hh.LoaiHangHoa.TenLoaiHangHoa == "Túi") && hh.GiamGia > 0 && hh.SoLuong >= 1 && !hh.IsDeleted).ToList();
             ViewBag.FootWears_Sale = db.HangHoas.Where(hh => (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nam" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted) || (hh.LoaiHangHoa.TenLoaiHangHoa == "Giày Nữ" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)
             || (hh.LoaiHangHoa.TenLoaiHangHoa == "Dép" && hh.GiamGia != 0 && hh.SoLuong >= 1 && !hh.IsDeleted)).ToList();
             //load hang hoa sale

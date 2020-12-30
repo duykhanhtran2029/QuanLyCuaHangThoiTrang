@@ -129,7 +129,6 @@ p {
     .sidebar-footer a {
         float: left !important;
         height: 50px;
-        width: 50%;
         min-width: 48px;
         text-align: center;
         line-height: 50px;

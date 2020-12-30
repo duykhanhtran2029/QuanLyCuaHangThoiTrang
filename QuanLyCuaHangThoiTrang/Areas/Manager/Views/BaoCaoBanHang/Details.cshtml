@@ -72,12 +72,22 @@
                 </div>
             </div>
             <hr />
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10 custom-input">
-                    <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print" onclick="printbc()">
-                        <i class="fas fa-print"></i>
-                        <span style="margin: 15px 10px !important;">In</span>
-                    </button>
+            <div class="grid-container" style="grid-template-columns: auto auto">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 custom-input">
+                        <button class="btn btn-sm btn-success btn-xs btn-push" style="padding: 5px 10px" id="print" onclick="printbc()">
+                            <i class="fas fa-print"></i>
+                            <span style="margin: 15px 10px !important;">In</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 custom-input">
+                        <button class="btn btn-sm btn-success btn-xs btn-push exportToExcel" style="padding: 5px 10px" id="exportToExcel" onclick="excel()">
+                            <i class="fas fa-file-excel"></i>
+                            <span style="margin: 15px 10px !important;">Xuất ra Excel</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <hr />
@@ -280,5 +290,23 @@
     popupWin.document.write('</p>')
     popupWin.document.write('</html>');
     popupWin.document.close();
-}
+    }
+    function excel() {
+            var tb = document.getElementById('chitiet');
+            var table = $(tb).find('#detailsTable');
+            console.log(table);
+            if (table && table.length) {
+                var preserveColors = (table.hasClass('table2excel_with_colors') ? true : false);
+                $(table).table2excel({
+                    exclude: ".noExl",
+                    name: "Excel Document Name",
+                    filename: "BaoCaoDoanhThu" + ".xls",
+                    fileext: ".xls",
+                    exclude_img: true,
+                    exclude_links: true,
+                    exclude_inputs: true,
+                    preserveColors: preserveColors
+                });
+            }
+        };
 </script>
