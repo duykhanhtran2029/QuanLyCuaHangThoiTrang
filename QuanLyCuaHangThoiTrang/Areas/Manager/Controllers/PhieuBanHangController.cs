@@ -24,7 +24,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             ViewBag.ChiTietPhieuBanHang = db.ChiTietPhieuBanHangs.ToList();
             return View(phieuBanHangs.ToList());
         }
-
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachPhieuBanHang(string searchString, int page = 1, int pageSize = 10)
         {
             IList<PhieuBanHang> pbh = db.PhieuBanHangs.Where(nc => nc.IsDeleted != true).ToList();
@@ -132,6 +141,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.PhieuBanHangs.Add(pbh);
                 db.SaveChanges();
                 SaveAllCTPBH(phieuBanHang.ChiTietPhieuBanHangs, pbh.SoPhieuBanHang);
+                SetAlert("Tạo phiếu bán hàng thành công!", "success");
                 status = true;
             }
             catch
@@ -171,6 +181,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     db.PhieuBanHangs.Add(pbh);
                     db.SaveChanges();
                     SaveAllCTPBH(phieuBanHang.ChiTietPhieuBanHangs, pbh.SoPhieuBanHang);
+                    SetAlert("Tạo phiếu bán hàng thành công!", "success");
                     status = true;
                 }
                 catch
@@ -234,6 +245,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     phieubanhang.NgayChinhSua = DateTime.Now.Date;
                     db.SaveChanges();
                     status = true;
+                    SetAlert("Sửa phiếu bán hàng thành công!", "success");
                 }
                 else
                     status = false;
@@ -355,6 +367,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             DeleteAllCTPBH(id);
             db.PhieuBanHangs.Remove(phieuBanHang);
             db.SaveChanges();
+            SetAlert("Xóa phiếu bán hàng thành công!", "success");
             return RedirectToAction("Index");
         }
 

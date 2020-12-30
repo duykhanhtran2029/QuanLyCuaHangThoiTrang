@@ -25,7 +25,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             ViewBag.ChiTietPhieuDatHang = db.ChiTietPhieuDatHangs.ToList();
             return View(phieuDatHangs.ToList());
         }
-
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachPhieuDatHang(string searchString, int page = 1, int pageSize = 10)
         {
             IList<PhieuDatHang> pdh = db.PhieuDatHangs.Where(nc => nc.IsDeleted != true).ToList();
@@ -119,6 +128,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                 db.PhieuDatHangs.Add(pdh);
                 db.SaveChanges();
                 SaveAllCTPDH(phieuDatHang.ChiTietPhieuDatHangs, pdh.SoPhieuDatHang);
+                SetAlert("Tạo phiếu đặt hàng thành công!", "success");
                 status = true;
             }
             catch
@@ -156,6 +166,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
                     SaveAllCTPDH(phieuDatHang.ChiTietPhieuDatHangs, phieudathang.SoPhieuDatHang);
                     db.SaveChanges();
                     status = true;
+                    SetAlert("Sửa phiếu đặt hàng thành công!", "success");
                 }
                 else
                     status = false;
@@ -275,6 +286,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             DeleteAllCTPDH(id);
             db.PhieuDatHangs.Remove(phieuDatHang);
             db.SaveChanges();
+            SetAlert("Xóa phiếu đặt hàng thành công!", "success");
             return RedirectToAction("Index");
         }
 

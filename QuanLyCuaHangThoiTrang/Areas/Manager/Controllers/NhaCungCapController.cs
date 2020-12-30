@@ -20,6 +20,16 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
         {
             return View(db.NhaCungCaps.ToList());
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+                TempData["AlertType"] = "alert-success";
+            else if (type == "warning")
+                TempData["AlertType"] = "alert-warning";
+            else if (type == "error")
+                TempData["AlertType"] = "alert-danger";
+        }
         public ActionResult DanhSachNhaCungCap(string searchString, int page = 1, int pageSize = 10)
         {
             IList<NhaCungCap> ncc = db.NhaCungCaps.Where(nc => nc.IsDeleted != true).ToList();
@@ -67,6 +77,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.NhaCungCaps.Add(nhaCungCap);
                 db.SaveChanges();
+                SetAlert("Tạo nhà cung cấp thành công!", "success");
                 return RedirectToAction("Index");
             }
 
@@ -99,6 +110,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             {
                 db.Entry(nhaCungCap).State = EntityState.Modified;
                 db.SaveChanges();
+                SetAlert("Sửa nhà cung cấp thành công!", "success");
                 return RedirectToAction("Index");
             }
             return View(nhaCungCap);
@@ -127,6 +139,7 @@ namespace QuanLyCuaHangThoiTrang.Areas.Manager.Controllers
             NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
             nhaCungCap.IsDeleted = true;
             db.SaveChanges();
+            SetAlert("Xóa nhà cung cấp thành công!", "success");
             return RedirectToAction("Index");
         }
 
