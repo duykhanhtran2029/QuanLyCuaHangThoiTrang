@@ -39,7 +39,7 @@
 
         [Column(TypeName = "money")]
         [Display(Name = "Tổng Tiền"), Required(ErrorMessage = "Tổng Tiền không được trống")]
-        [RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
+        //[RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         public decimal TongTien { get; set; }
 
         [Display(Name = "Ghi Chú")]

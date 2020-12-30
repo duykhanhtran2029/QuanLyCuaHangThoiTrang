@@ -46,7 +46,7 @@
         public string Email { get; set; }
 
         [Display(Name = "Tổng Tiền"), Required(ErrorMessage = "Tổng Tiền không được trống")]
-        [RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
+        //[RegularExpression(@"[0-9]{1,100}", ErrorMessage = "Giá Bán không hợp lệ")]
         [Column(TypeName = "money")]
         public decimal TongTien { get; set; }
 
